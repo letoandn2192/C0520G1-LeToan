@@ -6,14 +6,13 @@ body {
 }
 
 form div {
-    width: 500px;
-    height: 30px;
+    margin-bottom: 10px;
 }
 
 label {
     font-weight: bold;
-    line-height: 23px;
     float: left;
+    padding: 0px 0px 0px 10px;
 }
 
 form input#yourname {
@@ -23,7 +22,7 @@ form input#yourname {
 form input#email {
     margin-left: 45px;
 }
-form div#head1 {
+form #head1 {
     background: orange;
 }
 form {

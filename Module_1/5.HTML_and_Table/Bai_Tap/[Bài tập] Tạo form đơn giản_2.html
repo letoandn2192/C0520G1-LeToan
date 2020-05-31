@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>[Bài tập] Tạo form đơn giản</title>
+    <link rel="stylesheet" href="[Bài tập] Tạo form đơn giản_2.css">
+</head>
+<body>
+    <form method="get" action="">
+        <h1 align="center" id="head">ĐĂNG KÍ HỌC VIÊN</h1>
+        <div>
+            <label>Họ và Tên</label>
+            <label><input type="text" name="name" size="30" id="name"></label>
+        </div>
+        <div>
+            <label>Ngày Sinh</label>
+            <label><input type="text" name="dateofbirth" id="dateofbirth"></label>
+        </div>
+        <div>
+            <label>Giới Tính</label>
+            <label><input type="radio" name="sex" id="male">Nam</label>
+            <label><input type="radio" name="sex" id="female">Nữ</label>
+        </div>
+        <div>
+            <label>Địa Chỉ</label>
+            <label><textarea cols="30" rows="4" id="address"></textarea></label>
+        </div>
+        <div>
+            <label>Lớp</label>
+            <label><select name="class" id="class">
+                <option value="class">--Chọn Lớp--</option>
+                <option value="morning">Sáng</option>
+                <option value="afternoon">Chiều</option>
+                <option value="night">Tối</option>
+            </select></label>
+        </div>
+        <div>
+            <label>Email</label>
+            <label><input type="text" name="email" id="email"></label>
+        </div>
+        <div>
+            <label>Điện Thoại</label>
+            <label><input type="text" name="phone" id="phone"></label>
+        </div>
+        <div>
+            <label><input type="submit" name="btsubmit" id="submit" value="Đăng Kí"></label>
+            <label><input type="reset" name="reset" id="reset" value="Nhập Lại"></label>
+        </div>
+    </form>
+
+</body>
+</html>
