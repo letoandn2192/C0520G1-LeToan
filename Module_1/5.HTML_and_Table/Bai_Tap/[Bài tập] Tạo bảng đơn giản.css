@@ -1,13 +1,21 @@
 table {
      font-family: arial, sans-serif;
      border-collapse: collapse;
-     width: 25%;
+     width: 50%;
  }
-th{
-    background: yellow;
-}
-td, th {
-    border: 1px solid #dddddd;
-    text-align: center;
-    padding: 8px;
+td {
+       border: 1px solid #dddddd;
+       text-align: left;
+       padding: 8px;
+   }
+th {
+      border: 1px solid #dddddd;
+      text-align: center;
+      padding: 8px;
+      background: orange;
+  }
+div{
+    width: 700px;
+    height: 50px;
+    margin-bottom: 10px;
 }

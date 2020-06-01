@@ -6,28 +6,37 @@ body {
 }
 
 form div {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
-
 label {
     font-weight: bold;
-    float: left;
     padding: 0px 0px 0px 10px;
 }
-
-form input#yourname {
+form input#name {
     margin-left: 19px;
 }
-
 form input#email {
     margin-left: 45px;
 }
-form #head1 {
+form h1#head1 {
     background: orange;
+    align-content: center;
 }
 form {
     width: 500px;
     height: 300px;
     border: black 1px solid;
     background: white;
+}
+form input#button1 {
+     margin-left: 95px;
+ }
+form input#hobby1{
+    margin-left: 25px;
+}
+form input#hobby4{
+      margin-left: 92px;
+  }
+form input#hobby7{
+    margin-left: 92px;
 }
