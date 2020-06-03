@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Đổi Tiền</title>
+</head>
+<body>
+    <form style="background-color: blue; width: 500px; height: 200px; font-family: 'Times New Roman'; font-size: 14px">
+        <div>
+            <h2 align="center">MONEY EXCHANGE</h2>
+        </div>
+        <div style="float: left;">
+            <label>Amount</label><br/>
+            <label><input type="number" name="amount" id="amount"></label>
+        </div>
+        <div style="margin-left: 200px">
+            <label>From Currency</label><br/>
+            <label>
+                <select name="fromcurrency" id="fromcurrency">
+                    <option name="vnd" value="VND">VND</option>
+                    <option name="usd" value="USD">USD</option>
+                    <option name="eur" value="EUR">EUR</option>
+                </select>
+            </label>
+        </div>
+        <div style="margin-left: 400px">
+            <label>To Currency</label><br/>
+            <label>
+                <select name="tocurrency" id="tocurrency">
+                    <option name="usd" value="USD">USD</option>
+                    <option name="vnd" value="VND">VND</option>
+                    <option name="eur" value="EUR">EUR</option>
+                </select>
+            </label>
+        </div>
+        <div>
+            <label><input type="button" onclick="exchangeMoney();" value="Convert"></label>
+        </div>
+        <div>
+            <p id="result0"></p>
+        </div>
+    </form>
+    <script src="%5BExer%5DApp_Currency_Exchange.js"></script>
+</body>
+</html>
