@@ -3,7 +3,5 @@ function insert(number) {
 }
 function equal() {
     let value = document.getElementById('text').value;
-    // if (0){
         document.getElementById('text').value = eval(value);
-    // }
 }

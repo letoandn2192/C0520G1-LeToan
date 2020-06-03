@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CaseStudy</title>
+</head>
+<body>
+    <script>
+        //Task 1:
+        let fullName = prompt('Nhập Họ Và Tên:');
+        let idNumber = prompt('Nhập Số CMND:');
+        let dateofbirth = prompt('Nhập Ngày Tháng Năm Sinh:');
+        let email = prompt('Nhập Email:');
+        let address = prompt('Nhập địa chỉ');
+        let typeCustomer = prompt('Nhập Loại Customer:');
+        let discount = prompt('Nhập % Giảm Giá:');
+        let accPerson = prompt('Nhập Số Người Đi Cùng:');
+        let rentDay = prompt('Nhập Số Ngày Thuê:');
+        let typeService = prompt('Nhập Loại Dịch Vụ:');
+        let typeRoom = prompt('Nhập Loại Phòng Muốn Thuê:');
+        //Task2:
+        const Villa = 500;
+        const House = 300;
+        const Room = 100;
+        let moneyPaid;
+        if(typeService == 'Villa'){
+            moneyPaid = Villa * rentDay * (1-discount/100);
+        }else if(typeService == 'House'){
+            moneyPaid = House * rentDay * (1-discount/100);
+        }else{
+            moneyPaid = Room * rentDay * (1-discount/100);
+        }
+        alert('Họ Và Tên: '+ fullName +
+        'Số CMND: '+ idNumber +
+        'Ngày Tháng Năm Sinh: '+ dateofbirth +
+        'Email: '+ email +
+        'Địa Chỉ: '+address +
+        'Loại Customer: '+typeCustomer +
+        'Giảm Giá: '+ discount +
+        'Số Người Đi cùng: '+accPerson +
+        'Số Ngày Thuê: '+rentDay +
+        'Loại Dịch Vụ: '+typeService +
+        'Loại Phòng Muốn Thuê: '+typeRoom +
+        'Số Tiền Phải Trả: '+moneyPaid);
+    </script>
+</body>
+</html>

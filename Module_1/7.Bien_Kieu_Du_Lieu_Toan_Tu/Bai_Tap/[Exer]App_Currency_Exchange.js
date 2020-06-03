@@ -4,6 +4,8 @@ let toCurrency;
 let rateUSD_VND = 23000;
 let rateEUR_VND = 25000;
 let rateEUR_USD = 1.117;
+let date = new Date().getF
+
 function exchangeMoney() {
     amount = document.getElementById('amount').value;
     fromCurrency = document.getElementById('fromcurrency').value;

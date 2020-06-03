@@ -5,35 +5,35 @@
     <title>Calculator</title>
 </head>
 <body>
-    <form style="height: 500px; width: 500px; background-color: gray">
+    <form style="height: 250px; width: 230px; background-color: gray">
         <label><h2 align="center">CALCULATOR</h2></label>
         <div style="background-color: white; width: 100%; height: 40px">
-            <label><input type="text" name="screen" id="text" style="width: 492px; height: 40px"></label>
+            <label><input type="text" name="screen" id="text" style="width: 222px; height: 35px"></label>
         </div>
             <table>
                 <tr>
-                    <td><input type="reset" id="reset" value="C" style="width: 50px; height: 30px; font-size: 20px"></td>
-                    <td><input type="button" id="reset1" value="C" style="width: 50px; height: 30px; font-size: 20px"></td>
-                    <td><input type="button" onclick="insert('/');" id="div" value="/" style="width: 50px; height: 30px; font-size: 20px"></td>
-                    <td><input type="button" onclick="insert('*');" id="mul" value="X" style="width: 50px; height: 30px; font-size: 20px"></td>
+                    <td><input type="reset" value="C" style="width: 50px; height: 30px; font-size: 20px"></td>
+                    <td><input type="button" value="." onclick="insert('.')" style="width: 50px; height: 30px; font-size: 20px"></td>
+                    <td><input type="button" onclick="insert('/');" value="/" style="width: 50px; height: 30px; font-size: 20px"></td>
+                    <td><input type="button" onclick="insert('*');" value="X" style="width: 50px; height: 30px; font-size: 20px"></td>
                 </tr>
                 <tr>
-                    <td><input type="button" onclick="insert(7);" id="7" value="7" style="width: 50px; height: 30px; font-size: 20px"></td>
-                    <td><input type="button" onclick="insert(8);" id="8" value="8" style="width: 50px; height: 30px; font-size: 20px"></td>
-                    <td><input type="button" onclick="insert(9);" id="9" value="9" style="width: 50px; height: 30px; font-size: 20px"></td>
-                    <td><input type="button" onclick="insert('-');" id="sub" value="-" style="width: 50px; height: 30px; font-size: 20px"></td>
+                    <td><input type="button" onclick="insert('7');" value="7" style="width: 50px; height: 30px; font-size: 20px"></td>
+                    <td><input type="button" onclick="insert('8');" value="8" style="width: 50px; height: 30px; font-size: 20px"></td>
+                    <td><input type="button" onclick="insert('9');" value="9" style="width: 50px; height: 30px; font-size: 20px"></td>
+                    <td><input type="button" onclick="insert('-');" value="-" style="width: 50px; height: 30px; font-size: 20px"></td>
                 </tr>
                 <tr>
-                    <td><input type="button" onclick="insert(4);" id="4" value="4" style="width: 50px; height: 30px; font-size: 20px"></td>
-                    <td><input type="button" onclick="insert(5);" id="5" value="5" style="width: 50px; height: 30px; font-size: 20px"></td>
-                    <td><input type="button" onclick="insert(6);" id="6" value="6" style="width: 50px; height: 30px; font-size: 20px"></td>
-                    <td><input type="button" onclick="insert('+');" id="add" value="+" style="width: 50px; height: 30px; font-size: 20px"></td>
+                    <td><input type="button" onclick="insert('4');" value="4" style="width: 50px; height: 30px; font-size: 20px"></td>
+                    <td><input type="button" onclick="insert('5');" value="5" style="width: 50px; height: 30px; font-size: 20px"></td>
+                    <td><input type="button" onclick="insert('6');" value="6" style="width: 50px; height: 30px; font-size: 20px"></td>
+                    <td><input type="button" onclick="insert('+');" value="+" style="width: 50px; height: 30px; font-size: 20px"></td>
                 </tr>
                 <tr>
-                    <td><input type="button" onclick="insert(1);" id="1" value="1" style="width: 50px; height: 30px; font-size: 20px"></td>
-                    <td><input type="button" onclick="insert(2);" id="2" value="2" style="width: 50px; height: 30px; font-size: 20px"></td>
-                    <td><input type="button" onclick="insert(3);" id="3" value="3" style="width: 50px; height: 30px; font-size: 20px"></td>
-                    <td><input type="button" onclick="equal();" id="=" value="=" style="width: 50px; height: 30px; font-size: 20px"></td>
+                    <td><input type="button" onclick="insert('1');" value="1" style="width: 50px; height: 30px; font-size: 20px"></td>
+                    <td><input type="button" onclick="insert('2');" value="2" style="width: 50px; height: 30px; font-size: 20px"></td>
+                    <td><input type="button" onclick="insert('3');" value="3" style="width: 50px; height: 30px; font-size: 20px"></td>
+                    <td><input type="button" onclick="equal();" value="=" style="width: 50px; height: 30px; font-size: 20px"></td>
                 </tr>
             </table>
     </form>

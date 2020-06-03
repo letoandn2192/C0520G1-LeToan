@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Practice_with_If</title>
+</head>
+<body>
+    <p>What is the “official” name of JavaScript?</p>
+    <label><input type="text" id="text" onkeydown="checkString();"></label>
+    <p id="abc"></p>
+    <script>
+        function checkString() {
+            let textCheck = document.getElementById('text').value;
+            if (textCheck == 'ECMAScript'){
+                document.getElementById('abc').innerHTML = 'Right!';
+            }else{
+                document.getElementById('abc').innerHTML = 'Didn’t know? ECMAScript!';
+            }
+        }
+    </script>
+</body>
+</html>

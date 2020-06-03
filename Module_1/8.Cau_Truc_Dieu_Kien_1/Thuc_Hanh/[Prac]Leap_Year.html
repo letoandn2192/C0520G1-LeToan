@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Check_Leap_Year</title>
+</head>
+<body>
+    <script>
+        let year = prompt('Nhập Năm Bạn Muốn Kiểm Tra: ');
+        let flag = false;
+        if(year%4 == 0){
+            if(year% 100 == 0){
+                if(year%400 == 0){
+                    flag = true;
+                }
+            }else{
+                flag = true;
+            }
+        }
+        if(flag == true){
+            document.write('Đây là năm nhuận.');
+        }else {
+            document.write('Đây không phải là năm nhuận');
+        }
+    </script>
+</body>
+</html>
