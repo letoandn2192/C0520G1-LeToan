@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <title>Practice_with_If</title>
 </head>
-<body>
+<body onload="docReady()">
     <p>What is the “official” name of JavaScript?</p>
-    <label><input type="text" id="text" onkeydown="checkString();"></label>
+    <label><input type="text" id="text"></label>
     <p id="abc"></p>
     <script>
         function checkString() {
@@ -16,6 +16,16 @@
             }else{
                 document.getElementById('abc').innerHTML = 'Didn’t know? ECMAScript!';
             }
+        }
+        function pressEnter(evt) {
+            switch (evt.keyCode) {
+                case 13:
+                    checkString();
+                    break;
+            }
+        }
+        function docReady() {
+            window.addEventListener('keypress', pressEnter);
         }
     </script>
 </body>

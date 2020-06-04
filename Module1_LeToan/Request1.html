@@ -23,25 +23,25 @@
         const House = 300;
         const Room = 100;
         let moneyPaid;
-        if(typeService == 'Villa'){
+        if(typeService === 'Villa'){
             moneyPaid = Villa * rentDay * (1-discount/100);
-        }else if(typeService == 'House'){
+        }else if(typeService === 'House'){
             moneyPaid = House * rentDay * (1-discount/100);
         }else{
             moneyPaid = Room * rentDay * (1-discount/100);
         }
         alert('Họ Và Tên: '+ fullName +
-        'Số CMND: '+ idNumber +
-        'Ngày Tháng Năm Sinh: '+ dateofbirth +
-        'Email: '+ email +
-        'Địa Chỉ: '+address +
-        'Loại Customer: '+typeCustomer +
-        'Giảm Giá: '+ discount +
-        'Số Người Đi cùng: '+accPerson +
-        'Số Ngày Thuê: '+rentDay +
-        'Loại Dịch Vụ: '+typeService +
-        'Loại Phòng Muốn Thuê: '+typeRoom +
-        'Số Tiền Phải Trả: '+moneyPaid);
+        '\n Số CMND: '+ idNumber +
+        '\nNgày Tháng Năm Sinh: '+ dateofbirth +
+        '\n Email: '+ email +
+        '\n Địa Chỉ: '+address +
+        '\n Loại Customer: '+typeCustomer +
+        '\n Giảm Giá: '+ discount +
+        '\n Số Người Đi cùng: '+ accPerson +
+        '\n Số Ngày Thuê: '+ rentDay +
+        '\n Loại Dịch Vụ: '+ typeService +
+        '\n Loại Phòng Muốn Thuê: '+ typeRoom +
+        '\n Số Tiền Phải Trả: '+ moneyPaid);
     </script>
 </body>
 </html>
