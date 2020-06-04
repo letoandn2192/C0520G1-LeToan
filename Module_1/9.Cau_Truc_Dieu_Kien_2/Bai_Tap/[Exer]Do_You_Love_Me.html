@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Do You Love Me ?</title>
+</head>
+<body>
+    <h2>DO YOU LOVE ME ?</h2>
+    <input type="button" id="yes" value="YES" onclick="sayYes();">
+    <input type="button" id="no" value="NO" onmouseover="sayNo();" style="position: absolute">
+    <script>
+        function sayYes() {
+            alert('<3 Love You Too <3');
+        }
+        function sayNo() {
+            // document.write(window.innerWidth);
+            let width = Math.random()*500 + 'px';
+            let height = Math.random()*500 + 'px';
+            if(width>window.innerWidth){
+                document.getElementById('no').style.left = '0px';
+            }else {
+                document.getElementById('no').style.left = width;
+            }
+            if(height>window.innerHeight){
+                document.getElementById('no').style.top = '0px';
+            }else
+                document.getElementById('no').style.top = height;
+        }
+    </script>
+</body>
+</html>

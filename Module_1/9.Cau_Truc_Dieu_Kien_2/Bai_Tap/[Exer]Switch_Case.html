@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Switch_Case</title>
+</head>
+<body>
+    <label><h2>Ứng Dụng Tính Số Ngày Trong Tháng</h2></label>
+    <div>
+        <label><input id="input" type="number"></label>
+        <label><input type="button" id="button" value="Tính" onclick="findDay();"></label>
+    </div>
+    <div>
+        <h2 id="output"></h2>
+    </div>
+    <script>
+        function findDay() {
+            const JAN = 1, FEB = 2, MAR =3 , APR = 4, MAY = 5, JUN = 6, JUL = 7, AUG = 8, SEP = 9, OCT = 10, NOV = 11, DEC = 12;
+            let month = parseInt(document.getElementById('input').value);
+            // document.write(typeof JAN);
+            // document.write(typeof month);
+            switch (month) {
+                case JAN:
+                case MAR:
+                case MAY:
+                case JUL:
+                case AUG:
+                case OCT:
+                case DEC:
+                    document.getElementById('output').innerHTML = ('Tháng ' + month + ' có 31 ngày');
+                    break;
+                case APR:
+                case JUN:
+                case SEP:
+                case NOV:
+                    document.getElementById('output').innerHTML = ('Tháng ' + month + ' có 30 ngày');
+                    break;
+                case FEB:
+                    document.getElementById('output').innerHTML = ('Tháng ' + month + ' có 28 hoặc 29 ngày');
+                    break;
+                default:
+                    document.getElementById('output').innerHTML = ('Giá Trị Không Hợp Lệ');
+            }
+        }
+    </script>
+</body>
+</html>
