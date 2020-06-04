@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Good_Fast_Cheap</title>
+</head>
+<body>
+<div>
+    <label>Good</label>
+    <input type="range" max="1" min="0" id="good" onclick="clickMouse();" value="0">
+</div>
+<div>
+    <label>Fast</label>
+    <input type="range" max="1" min="0" id="fast" onclick="clickMouse();" value="0">
+</div>
+<div>
+    <label>Cheap</label>
+    <input type="range" max="1" min="0" id="cheap" onclick="clickMouse();" value="0">
+</div>
+<div>
+    <p id="1"></p>
+    <p id="2"></p>
+    <p id="3"></p>
+</div>
+<script>
+    function clickMouse() {
+        let good = document.getElementById('good').value;
+        let fast = document.getElementById('fast').value;
+        let cheap = document.getElementById('cheap').value;
+        if ((good == 1) && (cheap == 1)){
+            document.getElementById('fast').value = 0;
+        }
+        if ((fast == 1) && (cheap == 1)){
+            document.getElementById('good').value = 0;
+        }
+        if ((fast == 1) && (cheap == 1)){
+            document.getElementById('cheap').value = 0;
+        }
+    }
+</script>
+</body>
+</html>

@@ -5,14 +5,92 @@
     <title>Game Puzzle</title>
 </head>
 <body>
-    <img src="nobita.png" onclick="changePic();" id="picture">
+    <img src="ball-1.jpg" onclick="changePic1();" id="picture1" style="width: 100px; height: 100px; margin-left: 100px">
+    <img src="ball-2.jpg" onclick="changePic2();" id="picture2" style="width: 100px; height: 100px">
+    <img src="ball-3.jpg" onclick="changePic3();" id="picture3" style="width: 100px; height: 100px">
+    <img src="ball-4.jpg" onclick="changePic4();" id="picture4" style="width: 100px; height: 100px">
+    <img src="ball-2.jpg" onclick="changePic5();" id="picture5" style="width: 100px; height: 100px">
+    <p id="output"></p>
+    <p id="we"></p>
 <script>
-    var counter = 0;
-    function changePic() {
-        // if(counter <= 4){
-        document.getElementById('picture').src ="ball"+".jpg";
-        // }
+    var counter_1 = 1;
+    var counter_2 = 2;
+    var counter_3 = 3;
+    var counter_4 = 4;
+    var counter_5 = 2;
+
+    function changePic1() {
+        if (counter_1 <= 5) {
+            counter_1 += 1;
+            document.getElementById('picture1').src = "ball-" + counter_1 + ".jpg";
+            if (counter_1 === 5) {
+                counter_1 = 0;
+            }
+        }
+        if ((counter_1 == counter_2) && (counter_2 == counter_3) && (counter_3 == counter_4) && (counter_4 == counter_5)){
+            document.getElementById('output').innerHTML= 'CONGRATULATIONS !';
+        }else{
+            document.getElementById('output').innerHTML= 'TRY AGAIN';
+        }
     }
+    function changePic2() {
+        if (counter_2 <= 5) {
+            counter_2 += 1;
+            document.getElementById('picture2').src = "ball-" + counter_2 + ".jpg";
+            if (counter_2 === 5) {
+                counter_2 = 0;
+            }
+        }
+        if ((counter_1 == counter_2) && (counter_2 == counter_3) && (counter_3 == counter_4) && (counter_4 == counter_5)){
+            document.getElementById('output').innerHTML= 'CONGRATULATIONS !';
+        }else{
+            document.getElementById('output').innerHTML= 'TRY AGAIN';
+        }
+    }
+    function changePic3() {
+        if (counter_3 <= 5) {
+            counter_3 += 1;
+            document.getElementById('picture3').src = "ball-" + counter_3 + ".jpg";
+            if (counter_3 === 5) {
+                counter_3 = 0;
+            }
+        }
+        if ((counter_1 == counter_2) && (counter_2 == counter_3) && (counter_3 == counter_4) && (counter_4 == counter_5)){
+            document.getElementById('output').innerHTML= 'CONGRATULATIONS !';
+        }else{
+            document.getElementById('output').innerHTML= 'TRY AGAIN';
+        }
+    }
+    function changePic4() {
+        if (counter_4 <= 5) {
+            counter_4 += 1;
+            document.getElementById('picture4').src = "ball-" + counter_4 + ".jpg";
+            if (counter_4 === 5) {
+                counter_4 = 0;
+            }
+        }
+        if ((counter_1 == counter_2) && (counter_2 == counter_3) && (counter_3 == counter_4) && (counter_4 == counter_5)){
+            document.getElementById('output').innerHTML= 'CONGRATULATIONS !';
+        }else{
+            document.getElementById('output').innerHTML= 'TRY AGAIN';
+        }
+    }
+    function changePic5() {
+        if (counter_5 <= 5) {
+            counter_5 += 1;
+            document.getElementById('picture5').src = "ball-" + counter_5 + ".jpg";
+            if (counter_5 === 5) {
+                counter_5 = 0;
+            }
+        }
+        if ((counter_1 == counter_2) && (counter_2 == counter_3) && (counter_3 == counter_4) && (counter_4 == counter_5)){
+            document.getElementById('output').innerHTML= 'CONGRATULATIONS !';
+        }else {
+            document.getElementById('output').innerHTML= 'TRY AGAIN';
+        }
+    }
+
+
 </script>
 </body>
 </html>
