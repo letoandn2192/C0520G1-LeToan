@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CaseStudy</title>
+</head>
+<body>
+    <script>
+        //Task 1:
+        let fullName = 'Nguyễn Văn A';
+        let idNumber = '201735763';
+        let dateofbirth = '02/09/1990';
+        let email = 'anguyenvan@gmail.com';
+        let address = '100 Nguyễn Tất Thành, Đà Nẵng';
+        let typeCustomer = 'Diamond';
+        let discount ='15';
+        let accPerson = '3';
+        let rentDay = '10';
+        let typeService = 'villa';
+        let typeRoom = 'Vip';
+        let paidMoney = 0;
+        let makeDecision = prompt('1.Show Information Customer.' +
+        '\n2.Edit Information Customer' +
+        '\n3.Show the amount to be paid after discount');
+        function editInformation() {
+            makeDecision = prompt('1.Họ Và Tên: '+ fullName +
+                '\n2.Số CMND: '+ idNumber +
+                '\n3.Ngày Tháng Năm Sinh: '+ dateofbirth +
+                '\n4.Email: '+ email +
+                '\n5.Địa Chỉ: '+address +
+                '\n6.Loại Customer: '+typeCustomer +
+                '\n7.Giảm Giá: '+ discount + '%' +
+                '\n8.Số Người Đi cùng: '+ accPerson +
+                '\n9.Số Ngày Thuê: '+ rentDay +
+                '\n10.Loại Dịch Vụ: '+ typeService +
+                '\n11.Loại Phòng Muốn Thuê: '+ typeRoom);
+        }
+        function showInformation() {
+            alert('1.Họ Và Tên: '+ fullName +
+                '\n2.Số CMND: '+ idNumber +
+                '\n3.Ngày Tháng Năm Sinh: '+ dateofbirth +
+                '\n4.Email: '+ email +
+                '\n5.Địa Chỉ: '+address +
+                '\n6.Loại Customer: '+typeCustomer +
+                '\n7.Giảm Giá: '+ discount + '%' +
+                '\n8.Số Người Đi cùng: '+ accPerson +
+                '\n9.Số Ngày Thuê: '+ rentDay +
+                '\n10.Loại Dịch Vụ: '+ typeService +
+                '\n11.Loại Phòng Muốn Thuê: '+ typeRoom);
+        }
+
+        switch (makeDecision) {
+            case '1':
+                showInformation();
+                break;
+            case '2':
+                editInformation();
+                switch (makeDecision) {
+                    case '1':
+                        fullName = prompt('1.Họ Và Tên:');
+                        showInformation();
+                        break;
+                    case '2':
+                        idNumber = prompt('2.Số CMND:');
+                        showInformation();
+                        break;
+                    case '3':
+                        dateofbirth = prompt('3.Ngày Tháng Năm Sinh:');
+                        showInformation();
+                        break;
+                    case '4':
+                        email = prompt('4.Email:');
+                        showInformation();
+                        break;
+                    case '5':
+                        address = prompt('5.Nhập Địa Chỉ:');
+                        showInformation();
+                        break;
+                    case '6':
+                        typeCustomer = prompt('6.Nhập Loại Customer:');
+                        showInformation();
+                        break;
+                    case '7':
+                        discount = prompt('7.Nhập % Mã Giảm Giá:');
+                        showInformation();
+                        break;
+                    case '8':
+                        accPerson = prompt('Nhập Số Người Đi Cùng:');
+                        showInformation();
+                        break;
+                    case '9':
+                        rentDay = prompt('Nhập Số Ngày Thuê:');
+                        showInformation();
+                        break;
+                    case '10':
+                        typeService = prompt('Nhập Loại Dịch Vụ:');
+                        showInformation();
+                        break;
+                    case '11':
+                        typeRoom = prompt('Nhập Loại Phòng Muốn Thuê:');
+                        showInformation();
+                        break;
+                    default:
+                        alert('Failed');
+                }
+                break;
+            case '3':
+                if (typeService === 'Villa') {
+                    paidMoney = 500 * rentDay / (1 - (discount / 100));
+                } else if (typeService === 'House') {
+                    paidMoney = 300 * rentDay / (1 - (discount / 100));
+                } else {
+                    paidMoney = 100 * rentDay / (1 - (discount / 100));
+                }
+                //Giảm giá theo địa chỉ
+                if (address.match('Đà Nẵng')){
+                    paidMoney = paidMoney - 20;
+                }else if (address.match('Huế')){
+                    paidMoney = paidMoney - 10;
+                }else if (address.match('Quảng Nam')){
+                    paidMoney = paidMoney - 5;
+                }
+                //Giảm giá theo thời gian lưu trú:
+                if (rentDay > 7) {
+                    paidMoney = paidMoney - 30;
+                } else if (rentDay >= 5) {
+                    paidMoney = paidMoney - 20;
+                } else if (rentDay >= 2) {
+                    paidMoney = paidMoney - 10;
+                }
+                //Giảm giá theo loại Customer
+                if (typeCustomer === 'Diamond'){
+                    paidMoney = paidMoney - 15;
+                }else if (typeCustomer === 'Platinum'){
+                    paidMoney = paidMoney - 10;
+                }else if (typeCustomer === 'Gold'){
+                    paidMoney = paidMoney - 5;
+                }else if (typeCustomer === 'Silver'){
+                    paidMoney = paidMoney -2;
+                }
+                //Giảm giá theo độ tuổi và Địa Chỉ
+                let curentYear = new Date().getFullYear();
+                let customerYear = new Date(dateofbirth).getFullYear();
+                let ageCustomer = curentYear - customerYear;
+                if (address.match('Đà Nẵng')) {
+                    if (ageCustomer >= 30) {
+                        paidMoney = paidMoney - 2;
+                    } else if (ageCustomer >= 20) {
+                        paidMoney = paidMoney - 1;
+                    }
+                    alert(paidMoney);
+                }
+                break;
+            default:
+                alert('Giá Trị Không Hợp Lệ.');
+        }
+    </script>
+</body>
+</html>

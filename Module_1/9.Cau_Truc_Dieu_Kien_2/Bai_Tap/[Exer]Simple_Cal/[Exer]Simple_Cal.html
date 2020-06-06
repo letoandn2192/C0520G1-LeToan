@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MÁY TÍNH ĐƠN GIẢN</title>
+</head>
+<body>
+    <div><h2>CALCULATOR</h2></div>
+    <div><table>
+        <tr>
+            <td colspan="4"><input type="text" id="text"></td>
+        </tr>
+        <tr>
+            <td><input type="button" id="1" value="1" onclick="addNumber('1');"></td>
+            <td><input type="button" id="2" value="2" onclick="addNumber('2');"></td>
+            <td><input type="button" id="3" value="3" onclick="addNumber('3');"></td>
+            <td><input type="button" id="+" value="+" onclick="addNumber('+');"></td>
+        </tr>
+        <tr>
+            <td><input type="button" id="4" value="4" onclick="addNumber('4');"></td>
+            <td><input type="button" id="5" value="5" onclick="addNumber('5');"></td>
+            <td><input type="button" id="6" value="6" onclick="addNumber('6');"></td>
+            <td><input type="button" id="-" value="-" onclick="addNumber('-');"></td>
+        </tr>
+        <tr>
+            <td><input type="button" id="7" value="7" onclick="addNumber('7');"></td>
+            <td><input type="button" id="8" value="8" onclick="addNumber('8');"></td>
+            <td><input type="button" id="9" value="9" onclick="addNumber('9');"></td>
+            <td><input type="button" id="x" value="*" onclick="addNumber('*');"></td>
+        </tr>
+        <tr>
+            <td><input type="button" id="C" value="C" onclick="addNumber('C');"></td>
+            <td><input type="button" id="0" value="0" onclick="addNumber('0');"></td>
+            <td><input type="button" id="=" value="=" onclick="doCalculate();"></td>
+            <td><input type="button" id="/" value="/" onclick="addNumber('/');"></td>
+        </tr>
+    </table></div>
+<script src="%5BExer%5DSimple_Cal.js"></script>
+</body>
+</html>

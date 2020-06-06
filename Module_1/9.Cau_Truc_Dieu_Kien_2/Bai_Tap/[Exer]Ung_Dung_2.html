@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>[*Bài tập] Luyện tập cấu trúc điều kiện 02</title>
+</head>
+<body>
+    <script>
+// Bài 6: Giải phương trình bậc 1 (ax + b = 0)
+//     let a = prompt('Nhập a:');
+//     let b = prompt('Nhập b:');
+//     if (a == 0) {
+//         if (b != 0) {
+//             alert('Phương Trình vô nghiệm');
+//         } else {
+//             alert('Phương Trình Có Vô Số Nghiệm');
+//         }
+//     } else {
+//         alert('Phương Trình có 1 nghiệm: ' + (-b / a));
+//     }
+
+//Bài 7: Giải phương trình bậc 2. (ax2 + bx + c =0)
+//         let a = prompt('Nhập a:');
+//         let b = prompt('Nhập b:');
+//         let c = prompt('Nhập c:');
+//         if (a == 0){
+//             if(b == 0){
+//                 alert('Phương Trình Vô Nghiệm.');
+//             }else{
+//                 alert('Phương Trình có 1 nghiệm: '+ (-c/b));
+//             }
+//         }else{
+//             let delta =  b*b - 4*a*c;
+//             if (delta < 0){
+//                 alert('Phương Trình Vô Nghiệm')
+//             }else if(delta == 0){
+//                 alert('Phương Trình có nghiệm kép: '+ (-b/(2*a)));
+//             }else{
+//                 let x1 = (-b + Math.sqrt(delta))/(2*a);
+//                 let x2 = (-b - Math.sqrt(delta))/(2*a);
+//                 alert('Phương Trình Có 2 Nghiệm: ' + x1 + ' và ' + x2);
+//             }
+//         }
+
+//Bài 9: Kiểm tra xem 3 số thực (a,b,c) nhập vào có phải là cạnh của một tam giác. Điều kiện để a,b,c là cạnh của một tam giác là:
+        let a = prompt('Nhập cạnh 1:');
+        let b = prompt('Nhập cạnh 2:');
+        let c = prompt('Nhập cạnh 3:');
+        if ( a > 0 && b > 0 && c > 0){
+            if ((a + b > c) && (b + c > a) && (a + c > b)){
+                alert('a, b, c là 3 cạnh của tam giác.');
+            }else {
+                alert('a, b, c không phải là 3 cạnh của tam giác.');
+            }
+        }else{
+            alert('a, b, c không phải là 3 cạnh của tam giác.');
+        }
+    </script>
+</body>
+</html>

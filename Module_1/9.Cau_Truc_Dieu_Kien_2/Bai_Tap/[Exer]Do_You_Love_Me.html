@@ -7,25 +7,31 @@
 <body>
     <h2>DO YOU LOVE ME ?</h2>
     <input type="button" id="yes" value="YES" onclick="sayYes();">
-    <input type="button" id="no" value="NO" onmouseover="sayNo();" style="position: absolute">
+    <input type="button" id="no" value="NO" onmouseover="sayNo();">
     <script>
         function sayYes() {
             alert('<3 Love You Too <3');
         }
-        function sayNo() {
-            // document.write(window.innerWidth);
-            let width = Math.random()*500 + 'px';
-            let height = Math.random()*500 + 'px';
-            if(width>window.innerWidth){
-                document.getElementById('no').style.left = '0px';
-            }else {
-                document.getElementById('no').style.left = width;
-            }
-            if(height>window.innerHeight){
-                document.getElementById('no').style.top = '0px';
-            }else
-                document.getElementById('no').style.top = height;
+        function init() {
+            let button = document.getElementById('no');
+            document.getElementById('no').style.position = 'absolute';
+            document.getElementById('no').style.top = '67px';
+            document.getElementById('no').style.left = '70px';
         }
+        function sayNo(){
+            let width =  Math.random()*1000;
+            let height =  Math.random()*400;
+            if (width > window.innerWidth){
+                width = 0;
+            }
+            if (height > window.innerHeight){
+                height = 0;
+            }
+            document.getElementById('no').style.left = width + 'px';
+            document.getElementById('no').style.top = height + 'px';
+
+        }
+        window.onload = init;
     </script>
 </body>
 </html>
