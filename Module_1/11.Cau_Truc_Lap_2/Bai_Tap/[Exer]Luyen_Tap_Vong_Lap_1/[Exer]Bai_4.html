@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài_4</title>
+</head>
+<body>
+    <script>
+        //Bài 4: Tìm số đầu tiên trong dãy fibonacci chia hết cho 5.
+        let number = prompt('Số Số Trong Dãy Fibonacci Muốn In ra:');
+        let count = 0;
+        let firstNumber = 1;
+        let secondNumber = 1;
+        let temp;
+        while (count < number){
+            temp = firstNumber;
+            firstNumber = secondNumber + firstNumber;
+            secondNumber = temp;
+            if(secondNumber%5 === 0){
+                document.write('Số Đầu Tiên Trong Dãy Chia Hết 5 là: '+ secondNumber);
+                break;
+            }
+            count++;
+        }
+
+    </script>
+</body>
+</html>

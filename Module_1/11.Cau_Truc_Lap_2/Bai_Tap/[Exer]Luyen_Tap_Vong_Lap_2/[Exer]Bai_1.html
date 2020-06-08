@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 1</title>
+</head>
+<body>
+    <script>
+        //Bài 1: In dãy Finonaci
+        let number = prompt('N là số số của dãy Fibonacy mà bạn muốn in ra. Nhập N.');
+        let temp = 0;
+        let firstNumber = 1;
+        let secondNumber = 1;
+        let count = 0;
+        while (count < number){
+            temp = firstNumber;
+            firstNumber = firstNumber + secondNumber;
+            secondNumber = temp;
+            document.write(secondNumber + ' ');
+            count++;
+        }
+    </script>
+</body>
+</html>

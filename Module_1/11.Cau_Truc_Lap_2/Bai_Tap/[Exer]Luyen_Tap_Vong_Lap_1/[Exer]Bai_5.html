@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 5</title>
+</head>
+<body>
+    <script>
+        //Bài 5: Tính tổng của 20 số đầu tiên trong dãy fibonacci.
+        let number = prompt('Nhập Số Số Nguyên Tố Mà Bạn Muốn Tính Tổng:');
+        let firstNumber = 1;
+        let secondNumber = 1;
+        let temp = 0;
+        let count = 0;
+        let sum = 0;
+        while (count < number){
+            temp = firstNumber;
+            firstNumber = firstNumber + secondNumber;
+            secondNumber = temp;
+            document.write(secondNumber + '&nbsp');
+            sum += secondNumber;
+            count++;
+        }
+        document.write('<br>'+ 'Tổng của '+number + ' số nguyên tố đầu tiên là: ' + sum);
+    </script>
+</body>
+</html>

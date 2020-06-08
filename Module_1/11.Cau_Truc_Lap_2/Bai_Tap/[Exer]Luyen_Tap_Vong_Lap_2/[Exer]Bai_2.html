@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 2</title>
+</head>
+<body>
+    <script>
+        //Bài 2: Tính giai thừa của một số nguyên dương
+        let input = prompt('Nhập số nguyên dương mà bạn muốn tính giai thừa.');
+        let giaithua = 1;
+        if (input < 1) {
+            input = prompt('Giá Trị Không Hợp Lệ.');
+        } else {
+            for (let i = 1; i <= input; i++) {
+                giaithua = giaithua * i;
+            }
+            document.write('Giai thừa của ' + input + ' là ' + giaithua);
+        }
+    </script>
+</body>
+</html>

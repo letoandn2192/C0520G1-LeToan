@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hiển Thị Số Nguyên Tố</title>
+</head>
+<body>
+    <script>
+        let number = prompt('Nhập số số nguyên tố cần hiển thị ra:');
+        let count = 0;
+        let N = 2;
+        let check = 0;
+        while (count < number){
+            for(let i = 1; i <= N; i++){
+                if (N % i == 0){
+                    check = check + 1;
+                }
+            }
+            if (check == 2){
+                count +=1;
+                check = 0;
+                document.write(N + '&nbsp');
+                N++;
+            }else {
+                check = 0;
+                N++;
+            }
+        }
+    </script>
+</body>
+</html>

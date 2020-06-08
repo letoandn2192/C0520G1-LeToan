@@ -6,12 +6,21 @@
 </head>
 <body>
     <script>
-let address = '96 Cao Xuân Huy, Cẩm Lệ, Đà Nẵng.'
-if (address.match('ĐàNẵng')){
-    alert('yes');
-}else {
-    alert('no');
-}
+        let isEmailInvalid = true;
+        let email = prompt('Nhập Email: ');
+        //Địa chỉ Email hợp lệ:
+        //Dấu @ không ở đầu câu.
+        //Sau dấu . có ít nhất 3 kí tự.
+        //Giữa dấu . và dấu @ có ít nhất 3 kí tự.
+        while (isEmailInvalid) {
+            let at = email.indexOf('@');
+            let dot = email.lastIndexOf('.');
+            if ((at < 1) || ((dot + 3) > email.length) || ((at + 3) > dot)) {
+                email = prompt('Nhập lại email.')
+            } else {
+                isEmailInvalid = false;
+            }
+        }
     </script>
 </body>
 </html>

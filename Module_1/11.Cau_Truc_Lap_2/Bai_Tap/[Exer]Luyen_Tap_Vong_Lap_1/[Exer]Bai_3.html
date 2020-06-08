@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bai_3</title>
+</head>
+<body>
+    <script>
+        //Bài 3: Hiển thị ra 20 số trong dãy fibonacci đầu tiên.
+        let number = prompt('Số Số Trong Dãy Fibonacci Muốn In ra:');
+        let count = 0;
+        let firstNumber = 1;
+        let secondNumber = 1;
+        let temp;
+        while (count < number){
+            document.write(secondNumber + '&nbsp');
+            temp = firstNumber;
+            firstNumber = secondNumber + firstNumber;
+            secondNumber = temp;
+            count++;
+        }
+    </script>
+</body>
+</html>
