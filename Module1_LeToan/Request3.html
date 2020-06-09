@@ -10,13 +10,14 @@
         let fullName = prompt('Nhập Họ Và Tên:');
         let idNumber = prompt('Nhập Số CMND:');
         let isIdInvalid = true;
+        let checkId;
         while (isIdInvalid) {
             if (idNumber.length === 8) {
                 for (let i = 0; i <= idNumber.length - 1; i++) {
-                    let check = parseInt(idNumber.substr(i, 1));
-                    if (isNaN(check)) {
+                    checkId = parseInt(idNumber.substr(i, 1));
+                    if (isNaN(checkId)) {
                         isIdInvalid = true;
-                        idNumber = prompt('Nhập Lại Sô CMND1: ');
+                        idNumber = prompt('Nhập Lại Sô CMND: ');
                         break;
                     }
                     isIdInvalid = false;
@@ -25,12 +26,37 @@
                 idNumber = prompt('Nhập Lại Sô CMND: ');
             }
         }
-        let dateofbirth = prompt('Nhập Ngày Tháng Năm Sinh:');
+        let dateofbirth = prompt('Nhập Ngày Tháng Năm Sinh (DD/MM/YYYY):');
+        let isDateInvalid = true;
+        let checkDate, checkMonth, checkYear;
+        while (isDateInvalid) {
+            if (dateofbirth.length != 10) {
+                dateofbirth = prompt('Nhập Lại:');
+            } else {
+                checkDate = dateofbirth.substr(0, 2);
+                checkMonth = dateofbirth.substr(3, 2);
+                checkYear = dateofbirth.substr(6, 4);
+                if(0< checkDate && checkDate <= 31){
+                    if(0 < checkMonth && checkMonth <=12){
+                        if(1940 < checkYear && checkYear < 2020){
+                            isDateInvalid = false;
+                        }else {
+                            dateofbirth = prompt('Nhập Lại:');
+                        }
+                    }else {
+                        dateofbirth = prompt('Nhập Lại:');
+                    }
+                }else {
+                    dateofbirth = prompt('Nhập Lại:');
+                }
+            }
+        }
         let email = prompt('Nhập Email:');
         let isEmailInvalid = true;
+        let at, dot;
         while (isEmailInvalid) {
-            let at = email.indexOf('@');
-            let dot = email.lastIndexOf('.');
+            at = email.indexOf('@');
+            dot = email.lastIndexOf('.');
             if ((at < 1) || ((dot + 3) > email.length) || ((at + 3) > dot)) {
                 email = prompt('Nhập lại email.')
             } else {
@@ -40,8 +66,29 @@
         let address = prompt('Nhập địa chỉ');
         let typeCustomer = prompt('Nhập Loại Customer:');
         let discount = prompt('Nhập % Giảm Giá:');
+        while(1){
+            if(parseInt(discount)>0){
+                break;
+            }else {
+                discount = prompt('Nhập Lại % Giảm Giá:');
+            }
+        }
         let accPerson = prompt('Nhập Số Người Đi Cùng:');
+        while(1){
+            if(parseInt(accPerson)>0){
+                break;
+            }else {
+                accPerson = prompt('Nhập Lại Số Người Đi Cùng:');
+            }
+        }
         let rentDay = prompt('Nhập Số Ngày Thuê:');
+        while(1){
+            if(parseInt(rentDay)>0){
+                break;
+            }else {
+                rentDay = prompt('Nhập Lại Số Ngày Thuê:');
+            }
+        }
         let typeService = prompt('Nhập Loại Dịch Vụ:');
         let typeRoom = prompt('Nhập Loại Phòng Muốn Thuê:');
         //Task2:
