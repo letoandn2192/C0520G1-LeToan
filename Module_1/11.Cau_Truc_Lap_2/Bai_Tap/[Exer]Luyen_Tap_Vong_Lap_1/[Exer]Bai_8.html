@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 8</title>
+</head>
+<body>
+    <input type="button" id="button" onclick="playGame();" value="Play Game">
+<script>
+    function playGame() {
+        let chooseRange = parseInt(prompt('Nhập Khoảng mà bạn muốn đoán:'));
+        let chooseValue = parseInt(prompt('Nhập Số mà bạn muốn đoán:'));
+
+        let value = Math.floor(Math.random() * chooseRange);
+        let isFinish = true;
+        while (isFinish) {
+            if (isNaN(chooseRange)) {
+                chooseRange = prompt('Nhập lại khoảng mà bạn muốn đoán:');
+            } else if (isNaN(chooseValue)) {
+                chooseValue = prompt('Nhập lại Số mà bạn muốn đoán:');
+            } else {
+                if (chooseValue > value) {
+                    alert('Số Bạn Nhập Lớn Hơn.');
+                    chooseValue = prompt('Nhập Lại');
+                } else if (chooseValue < value) {
+                    alert('Số Bạn Nhập Bé Hơn.');
+                    chooseValue = prompt('Nhập Lại.');
+                } else {
+                    alert('Chúc Mừng.');
+                    isFinish = false;
+                }
+            }
+        }
+    }
+</script>
+</body>
+</html>

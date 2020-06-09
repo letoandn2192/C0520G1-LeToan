@@ -9,13 +9,28 @@
         let name = prompt('Nhập Tên');
         //name = name.toLowerCase();
         let checkSpace;
+        let a;
+        let b;
+        let c = '';
         //let checkName;
+        name = name.trim();
         for (let i = 0; i < name.length; i++){
            checkSpace = name.substr(i,1);
-           if(checkSpace == ''){
-               name.slice(i);
+           if(checkSpace == ' '){
+               a = name.slice(0,i);
+               b = name.slice(i);
+               b = b.trim();
+               c += a + ' ';
+               i = 0;
+               name = b;
+               if(b.indexOf(' ') === -1){
+                   c += name;
+               }
            }
            }
+        alert(c);
+        alert(c.length);
+
     </script>
 </body>
 </html>
