@@ -7,7 +7,36 @@
 <body>
     <script>
         //Task 3:
+/////////////////////////////NHẬP TÊN////////////////////////////////////////////////
         let fullName = prompt('Nhập Họ Và Tên:');
+        let checkSpaceName;
+        let partOfName;
+        let tempName = '';
+        fullName = fullName.trim();
+        fullName = fullName.toLowerCase();
+        for (let i = 0; i < fullName.length; i++) {
+            checkSpaceName = fullName.substr(i, 1);
+            if (checkSpaceName === ' ') {
+                partOfName = fullName.slice(0, i);
+                fullName = fullName.slice(i);
+                fullName = fullName.trim();
+                tempName += partOfName + ' ';
+                i = 0;
+                if (fullName.indexOf(' ') === -1) {
+                    tempName += fullName;
+                }
+            }
+        }
+        fullName = tempName;
+
+        fullName = fullName.charAt(0).toUpperCase() + fullName.slice(1);
+        for (let i = 0; i < fullName.length; i++) {
+            checkSpaceName = fullName.substr(i, 1);
+            if (checkSpaceName === ' ') {
+                fullName = fullName.slice(0, i + 1) + fullName.charAt(i + 1).toUpperCase() + fullName.slice(i + 2);
+            }
+        }
+////////////////////////////NHẬP SỐ CMND////////////////////////////////////////////
         let idNumber = prompt('Nhập Số CMND:');
         let isIdInvalid = true;
         let checkId;
@@ -26,31 +55,33 @@
                 idNumber = prompt('Nhập Lại Sô CMND: ');
             }
         }
-        let dateofbirth = prompt('Nhập Ngày Tháng Năm Sinh (DD/MM/YYYY):');
+//////////////////////////NHẬP NGÀY THÁNG NĂM SINH///////////////////////////////////////////////
+        let dateOfBirth = prompt('Nhập Ngày Tháng Năm Sinh (DD/MM/YYYY):');
         let isDateInvalid = true;
         let checkDate, checkMonth, checkYear;
         while (isDateInvalid) {
-            if (dateofbirth.length != 10) {
-                dateofbirth = prompt('Nhập Lại:');
+            if (dateOfBirth.length !== 10) {
+                dateOfBirth = prompt('Nhập Lại:');
             } else {
-                checkDate = dateofbirth.substr(0, 2);
-                checkMonth = dateofbirth.substr(3, 2);
-                checkYear = dateofbirth.substr(6, 4);
+                checkDate = dateOfBirth.substr(0, 2);
+                checkMonth = dateOfBirth.substr(3, 2);
+                checkYear = dateOfBirth.substr(6, 4);
                 if(0< checkDate && checkDate <= 31){
                     if(0 < checkMonth && checkMonth <=12){
                         if(1940 < checkYear && checkYear < 2020){
                             isDateInvalid = false;
                         }else {
-                            dateofbirth = prompt('Nhập Lại:');
+                            dateOfBirth = prompt('Nhập Lại:');
                         }
                     }else {
-                        dateofbirth = prompt('Nhập Lại:');
+                        dateOfBirth = prompt('Nhập Lại:');
                     }
                 }else {
-                    dateofbirth = prompt('Nhập Lại:');
+                    dateOfBirth = prompt('Nhập Lại:');
                 }
             }
         }
+////////////////////////////////Nhập Email////////////////////////////////////////////////////
         let email = prompt('Nhập Email:');
         let isEmailInvalid = true;
         let at, dot;
@@ -63,8 +94,38 @@
                 isEmailInvalid = false;
             }
         }
+/////////////////////////////Nhập Địa Chỉ/////////////////////////////////////////////////////////
         let address = prompt('Nhập địa chỉ');
+        let checkSpaceAddr;
+        let partOfAddr;
+        let tempAddr = '';
+        address = address.trim();
+        address = address.toLowerCase();
+        for (let i = 0; i < address.length; i++) {
+            checkSpaceAddr = address.substr(i, 1);
+            if (checkSpaceAddr === ' ') {
+                partOfAddr = address.slice(0, i);
+                address = address.slice(i);
+                address = address.trim();
+                tempAddr += partOfAddr + ' ';
+                i = 0;
+                if (address.indexOf(' ') === -1) {
+                    tempAddr += address;
+                }
+            }
+        }
+        address = tempAddr;
+
+        address = address.charAt(0).toUpperCase() + address.slice(1);
+        for (let i = 0; i < address.length; i++) {
+            checkSpaceAddr = address.substr(i, 1);
+            if (checkSpaceAddr === ' ') {
+                address = address.slice(0, i + 1) + address.charAt(i + 1).toUpperCase() + address.slice(i + 2);
+            }
+        }
+//////////////////////////////Nhập Loại CUSTOMER/////////////////////////////////////////
         let typeCustomer = prompt('Nhập Loại Customer:');
+/////////////////////////////NHẬP % GIẢM GIÁ///////////////////////////////////////////////////////////
         let discount = prompt('Nhập % Giảm Giá:');
         while(1){
             if(parseInt(discount)>0){
@@ -73,14 +134,16 @@
                 discount = prompt('Nhập Lại % Giảm Giá:');
             }
         }
+ /////////////////////////////NHẬP SỐ NGƯỜI ĐI CÙNG//////////////////////////////////////////////////////////
         let accPerson = prompt('Nhập Số Người Đi Cùng:');
         while(1){
-            if(parseInt(accPerson)>0){
+            if(parseInt(accPerson)>=0){
                 break;
             }else {
                 accPerson = prompt('Nhập Lại Số Người Đi Cùng:');
             }
         }
+///////////////////////////////////////////////////////////////////////////////////////////
         let rentDay = prompt('Nhập Số Ngày Thuê:');
         while(1){
             if(parseInt(rentDay)>0){
@@ -89,23 +152,25 @@
                 rentDay = prompt('Nhập Lại Số Ngày Thuê:');
             }
         }
+////////////////////////////////////////////////////////////////////////////////////////////
         let typeService = prompt('Nhập Loại Dịch Vụ:');
+///////////////////////////////////////////////////////////////////////////////////////////
         let typeRoom = prompt('Nhập Loại Phòng Muốn Thuê:');
         //Task2:
-        const Villa = 500;
-        const House = 300;
-        const Room = 100;
-        let moneyPaid;
-        if(typeService === 'Villa'){
-            moneyPaid = Villa * rentDay * (1-discount/100);
-        }else if(typeService === 'House'){
-            moneyPaid = House * rentDay * (1-discount/100);
-        }else{
-            moneyPaid = Room * rentDay * (1-discount/100);
-        }
+        // const Villa = 500;
+        // const House = 300;
+        // const Room = 100;
+        // let moneyPaid;
+        // if(typeService === 'Villa'){
+        //     moneyPaid = Villa * rentDay * (1-discount/100);
+        // }else if(typeService === 'House'){
+        //     moneyPaid = House * rentDay * (1-discount/100);
+        // }else{
+        //     moneyPaid = Room * rentDay * (1-discount/100);
+        // }
         alert('Họ Và Tên: '+ fullName +
         '\n1.Số CMND: '+ idNumber +
-        '\n2.Ngày Tháng Năm Sinh: '+ dateofbirth +
+        '\n2.Ngày Tháng Năm Sinh: '+ dateOfBirth +
         '\n3.Email: '+ email +
         '\n4.Địa Chỉ: '+address +
         '\n5.Loại Customer: '+typeCustomer +
@@ -113,8 +178,8 @@
         '\n7.Số Người Đi cùng: '+ accPerson +
         '\n8.Số Ngày Thuê: '+ rentDay +
         '\n9.Loại Dịch Vụ: '+ typeService +
-        '\n10.Loại Phòng Muốn Thuê: '+ typeRoom +
-        '\n11.Số Tiền Phải Trả: '+ moneyPaid);
+        '\n10.Loại Phòng Muốn Thuê: '+ typeRoom);
+        // '\n11.Số Tiền Phải Trả: '+ moneyPaid);
     </script>
 </body>
 </html>

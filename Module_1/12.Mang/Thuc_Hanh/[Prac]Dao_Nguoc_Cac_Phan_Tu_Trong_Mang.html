@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>[Thực hành] Đảo ngược các phần tử trong mảng</title>
+</head>
+<body>
+    <script>
+        let array = [-3, 5, 1, 3, 2, 10];
+        let temp;
+        for (let i = 0; i < array.length; i++){
+            temp = array[i];
+            array[i] = array[array.length-1-i];
+            array[array.length-1-i] = temp;
+        }
+        alert(array);
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 2</title>
+</head>
+<body>
+<input type="text" id="text">
+<input type="button" value="Add" onclick="addNumber();">
+<input type="button" value="Display" onclick="showString();">
+    <script>
+        //Bài 2: Viết một chương trình nhận một số nhập vào và chèn dấu (-) giữa 2  số chẵn.
+        // Ví dụ nếu bạn nhập vào 025468 thì kết quả của chương trình sẽ là 0-254-6-8.
+        let value ;
+        let array = [];
+        function addNumber() {
+            value = document.getElementById('text').value;
+            if((value%2==0) && array[array.length-1]%2==0){
+                array.push('-');
+                array.push(value);
+            }else{
+                array.push(value);
+            }
+            document.getElementById('text').value = '';
+        }
+         function showString() {
+            let a = array.join('');
+            alert(a);
+         }
+    </script>
+</body>
+</html>

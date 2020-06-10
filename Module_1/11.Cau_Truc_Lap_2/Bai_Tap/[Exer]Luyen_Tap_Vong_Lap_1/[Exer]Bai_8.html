@@ -15,17 +15,17 @@
         let isFinish = true;
         while (isFinish) {
             if (isNaN(chooseRange)) {
-                chooseRange = prompt('Nhập lại khoảng mà bạn muốn đoán:');
+                chooseRange = parseInt(prompt('Nhập lại khoảng mà bạn muốn đoán:'));
             } else if (isNaN(chooseValue)) {
-                chooseValue = prompt('Nhập lại Số mà bạn muốn đoán:');
+                chooseValue = parseInt(prompt('Nhập lại Số mà bạn muốn đoán:'));
             } else {
                 if (chooseValue > value) {
                     alert('Số Bạn Nhập Lớn Hơn.');
-                    chooseValue = prompt('Nhập Lại');
+                    chooseValue = parseInt(prompt('Nhập Lại'));
                 } else if (chooseValue < value) {
                     alert('Số Bạn Nhập Bé Hơn.');
-                    chooseValue = prompt('Nhập Lại.');
-                } else {
+                    chooseValue = parseInt(prompt('Nhập Lại.'));
+                } else{
                     alert('Chúc Mừng.');
                     isFinish = false;
                 }

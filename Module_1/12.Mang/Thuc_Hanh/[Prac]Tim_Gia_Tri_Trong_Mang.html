@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tìm Giá Trị Trong Mảng</title>
+</head>
+<body>
+        <script>
+            let array = [-3, 5, 10, 3, 2, 10];
+            let print = '';
+            let a = parseInt(prompt('Nhập Giá Trị Muốn Tìm:'));
+            for(let i = 0; i < array.length; i++){
+                if (array[i] === a){
+                    print += i + ',';
+                }
+            }
+            if(print == ''){
+                alert('Không có giá trị này.');
+            }else {
+                alert('Giá trị có ở vị trí: '+print);
+            }
+        </script>
+</body>
+</html>

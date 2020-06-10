@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cờ Caro</title>
+</head>
+<body>
+    <form>
+        <h2>CARO SIMPLE GAME</h2>
+        <input type="button" value="Change Value" onclick="changeValue();">
+        <p id="result"></p>
+    </form>
+<script>
+    let N = parseInt(prompt('Nhập Số Dòng:'));
+    let M = parseInt(prompt('Nhập Số Cột:'));
+    let data = '';
+
+    let array = new Array(M);
+    for (let i = 0; i < N; i++) {
+        array[i] = new Array(M);
+    }
+    for (let i = 0; i < array.length; i++) {
+        data += '<br/>';
+        for (let j = 0; j < array[i].length; j++) {
+            array[i][j] = 0;
+            data += array[i][j] + "&nbsp;&nbsp;";
+        }
+        // document.write('<br/>');
+        document.getElementById('result').innerHTML = data;
+    }
+
+    function changeValue() {
+        let x = parseInt(prompt('Nhập x:'));
+        let y = parseInt(prompt('Nhập y:'));
+        array[x][y] = 'x';
+        showArray();
+    }
+
+    function showArray() {
+        data = '';
+        for (let i = 0; i < array.length; i++) {
+            data += '<br/>';
+            for (let j = 0; j < array[i].length; j++) {
+                data += array[i][j] + "&nbsp;&nbsp;";
+            }
+            document.getElementById('result').innerHTML = data;
+        }
+    }
+
+</script>
+</body>
+</html>

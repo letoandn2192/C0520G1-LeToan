@@ -6,30 +6,36 @@
 </head>
 <body>
     <script>
-        let name = prompt('Nhập Tên');
-        //name = name.toLowerCase();
+        let fullName = prompt('Nhập Tên');
         let checkSpace;
-        let a;
-        let b;
-        let c = '';
-        //let checkName;
-        name = name.trim();
-        for (let i = 0; i < name.length; i++){
-           checkSpace = name.substr(i,1);
-           if(checkSpace == ' '){
-               a = name.slice(0,i);
-               b = name.slice(i);
-               b = b.trim();
-               c += a + ' ';
-               i = 0;
-               name = b;
-               if(b.indexOf(' ') === -1){
-                   c += name;
-               }
-           }
-           }
-        alert(c);
-        alert(c.length);
+        let partOfName;
+        let temp = '';
+        fullName = fullName.trim();
+        fullName = fullName.toLowerCase();
+        for (let i = 0; i < fullName.length; i++) {
+            checkSpace = fullName.substr(i, 1);
+            if (checkSpace == ' ') {
+                partOfName = fullName.slice(0, i);
+                fullName = fullName.slice(i);
+                fullName = fullName.trim();
+                temp += partOfName + ' ';
+                i = 0;
+                if (fullName.indexOf(' ') === -1) {
+                    temp += fullName;
+                }
+            }
+        }
+        fullName = temp;
+
+        fullName = fullName.charAt(0).toUpperCase() + fullName.slice(1);
+        for (let i = 0; i < fullName.length; i++) {
+            checkSpace = fullName.substr(i, 1);
+            if (checkSpace === ' ') {
+                fullName = fullName.slice(0, i + 1) + fullName.charAt(i + 1).toUpperCase() + fullName.slice(i + 2);
+
+            }
+        }
+        alert(fullName);
 
     </script>
 </body>
