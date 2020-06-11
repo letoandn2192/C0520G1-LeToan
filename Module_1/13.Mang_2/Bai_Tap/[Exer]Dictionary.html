@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Từ Điển</title>
+</head>
+<body>
+<h2>OXFORD DICTIONARY</h2>
+<input type="text" id="text">
+<input type="button" value="Search" onclick="searchData();">
+<script>
+    let arrEng = ['hello', 'good', 'dictionary', 'program', 'old', 'computer', 'school'];
+    let arrViet = ['xin chào', 'tốt', 'từ điển', 'chương trình', 'già', 'máy vi tính', 'trường học'];
+    let data = document.getElementById('text');
+
+    function searchData() {
+        let isFind = false;
+        let index;
+        data.value = data.value.toLowerCase();
+        for (let i = 0; i < arrEng.length; i++) {
+            if (arrEng[i] == data.value) {
+                isFind = true;
+                index = i;
+                break;
+            }
+        }
+        if (isFind) {
+            alert(arrViet[index]);
+        } else {
+            alert('Không Tìm Thấy.');
+        }
+    }
+
+</script>
+</body>
+</html>

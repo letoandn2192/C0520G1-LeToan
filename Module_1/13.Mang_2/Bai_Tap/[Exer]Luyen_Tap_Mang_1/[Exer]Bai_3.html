@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 3</title>
+</head>
+<body>
+<script>
+    //Bài 3- Viết chương trình khởi tạo mảng số nguyên. Hiển hiện giá trị lớn nhất trong mảng đó.
+    // In ra giá trị trung bình của các phần tử trong mảng.
+    let N = prompt('Nhập Số Phần Tử Của Mảng.');
+    let array = new Array(N);
+    let max;
+    let sum = 0;
+    for (let i = 0; i < N; i++){
+        array[i] = Math.floor(Math.random() * 100) + 1;
+        max = array[0];
+        sum += sum + array[i];
+        if(max < array[i]){
+            max = array[i];
+        }
+    }
+    alert(array);
+    alert('GTLN là: '+ max);
+    alert('Giá Trị Trung Bình Là: '+sum/N);
+</script>
+</body>
+</html>

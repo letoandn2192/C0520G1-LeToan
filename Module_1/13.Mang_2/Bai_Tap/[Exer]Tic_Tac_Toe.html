@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tic_Tac_Toe</title>
+</head>
+<body>
+    <h2>Tic Tac Toe</h2>
+    <p id="screen"></p>
+    <input type="button" onclick="playGame();" value="Play">
+    <p id="result"></p>
+<script>
+    let array = [];
+    let data = '';
+    let count = 0;
+    for (let i = 0; i < 10; i++) {
+        array[i] = new Array(10);
+        data += '<br>';
+        for (let j = 0; j < 10; j++) {
+            array[i][j] = '.';
+            data += array[i][j] + '&nbsp&nbsp&nbsp';
+        }
+    }
+    document.getElementById('screen').innerHTML = data;
+
+    function showGame() {
+        data = '';
+        for (let i = 0; i < 10; i++) {
+            data += '<br/>';
+            for (let j = 0; j < 10; j++) {
+                data += array[i][j] + '&nbsp&nbsp&nbsp';
+            }
+        }
+        document.getElementById('screen').innerHTML = data;
+    }
+
+    function playGame() {
+        let x = parseInt(prompt('Nhập Tọa Độ x:'));
+        let y = parseInt(prompt('Nhập Tọa Độ y:'));
+        if ((x >= 10 || x < 0) || (y >= 10 || y < 0)) {
+            alert('Giá Trị Không Hợp Lệ.')
+        } else {
+            if (count % 2 == 0 && array[x][y] == '.') {
+                array[x][y] = 'o';
+                showGame();
+                count++;
+                checkResult(x, y);
+            } else if (count % 2 == 1 && array[x][y] == '.') {
+                array[x][y] = 'x';
+                showGame();
+                count++;
+                checkResult(x, y);
+            } else {
+                alert('Vị Trí Này Đã Đi Rồi. Hãy Chọn Ví Trí Khác.');
+            }
+        }
+    }
+
+    function checkResult(arg1, arg2) {
+        if (array[arg1][arg2] === 'o') {
+            if (array[arg1][arg2 - 1] === array[arg1][arg2] && array[arg1][arg2] === array[arg1][arg2 + 1]) {
+                document.getElementById('result').innerHTML = 'Player o Chiến Thắng';
+            } else if (array[arg1][arg2 - 2] === array[arg1][arg2 - 1] && array[arg1][arg2 - 1] === array[arg1][arg2]) {
+                document.getElementById('result').innerHTML = 'Player o Chiến Thắng';
+            } else if (array[arg1][arg2] === array[arg1][arg2 + 1] && array[arg1][arg2 + 1] === array[arg1][arg2 + 2]) {
+                document.getElementById('result').innerHTML = 'Player o Chiến Thắng';
+            }else if(array[arg1 - 2][arg2] === array[arg1 - 1][arg2] && array[arg1 - 1][arg2] === array[arg1][arg2]){
+                document.getElementById('result').innerHTML = 'Player 0 Chiến Thắng';
+            }else if (array[arg1 - 1][arg2] === array[arg1][arg2] && array[arg1][arg2] === array[arg1 + 1][arg2]){
+                document.getElementById('result').innerHTML = 'Player 0 Chiến Thắng';
+            }else if (array[arg1][arg2] === array[arg1 + 1][arg2] && array[arg1 + 1][arg2] === array[arg1 + 2][arg2]){
+                document.getElementById('result').innerHTML = 'Player 0 Chiến Thắng';
+            }
+        }else {
+            if (array[arg1][arg2 - 1] === array[arg1][arg2] && array[arg1][arg2] === array[arg1][arg2 + 1]) {
+                document.getElementById('result').innerHTML = 'Player x Chiến Thắng';
+            } else if (array[arg1][arg2 - 2] === array[arg1][arg2 - 1] && array[arg1][arg2 - 1] === array[arg1][arg2]) {
+                document.getElementById('result').innerHTML = 'Player x Chiến Thắng';
+            } else if (array[arg1][arg2] === array[arg1][arg2 + 1] && array[arg1][arg2 + 1] === array[arg1][arg2 + 2]) {
+                document.getElementById('result').innerHTML = 'Player x Chiến Thắng';
+            }else if(array[arg1 - 2][arg2] === array[arg1 - 1][arg2] && array[arg1 - 1][arg2] === array[arg1][arg2]){
+                document.getElementById('result').innerHTML = 'Player x Chiến Thắng';
+            }else if (array[arg1 - 1][arg2] === array[arg1][arg2] && array[arg1][arg2] === array[arg1 + 1][arg2]){
+                document.getElementById('result').innerHTML = 'Player x Chiến Thắng';
+            }else if (array[arg1][arg2] === array[arg1 + 1][arg2] && array[arg1 + 1][arg2] === array[arg1 + 2][arg2]){
+                document.getElementById('result').innerHTML = 'Player x Chiến Thắng';
+            }
+        }
+    }
+</script>
+</body>
+</html>

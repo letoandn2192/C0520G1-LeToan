@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Request4</title>
+</head>
+<body>
+<h2>MENU</h2>
+<input type="button" value="Add New Customer" onclick="addNew();">
+<input type="button" value="Delete Customer" onclick="delCustomer();">
+<script>
+    let List_Customer = [];
+
+    function addNew() {
+        let amount = prompt('Nhập Tên Số Lượng Khách Hàng Muốn Thêm.');
+        for (let i = 0; i < amount; i++) {
+            List_Customer[i] = prompt('Nhâp Tên Khách Hàng thứ ' + (i + 1) + ':');
+        }
+        List_Customer.sort();
+        alert(List_Customer);
+    }
+
+        let List_Customer_1 = ['Nguyễn Văn A', 'Trần Thị B', 'Lê Văn C', 'Đỗ Thị Quỳnh D', 'Võ Thị Ngọc E',
+            'Phạm Văn F', 'Huỳnh Khánh G', 'Đoàn H', 'Đinh Tiến J', 'Đặng Thu K'];
+
+        // let delCustomer ;
+    function delCustomer() {
+        let delCus = prompt('Lựa Chọn Khách Muốn Xóa: ' +
+            '\n1. ' + List_Customer_1[0] +
+            '\n2. ' + List_Customer_1[1] +
+            '\n3. ' + List_Customer_1[2] +
+            '\n4. ' + List_Customer_1[3] +
+            '\n5. ' + List_Customer_1[4] +
+            '\n6. ' + List_Customer_1[5] +
+            '\n7. ' + List_Customer_1[6] +
+            '\n8. ' + List_Customer_1[7] +
+            '\n9. ' + List_Customer_1[8] +
+            '\n10. ' + List_Customer_1[9]);
+        switch (delCus) {
+            case '1':
+                List_Customer_1.splice(0, 1);
+                break;
+            case '2':
+                List_Customer_1.splice(1, 1);
+                break;
+            case '3':
+                List_Customer_1.splice(2, 1);
+                break;
+            case '4':
+                List_Customer_1.splice(3, 1);
+                break;
+            case '5':
+                List_Customer_1.splice(4, 1);
+                break;
+            case '6':
+                List_Customer_1.splice(5, 1);
+                break;
+            case '7':
+                List_Customer_1.splice(6, 1);
+                break;
+            case '8':
+                List_Customer_1.splice(7, 1);
+                break;
+            case '9':
+                List_Customer_1.splice(8, 1);
+                break;
+            case '10':
+                List_Customer_1.splice(9, 1);
+                break;
+            default:
+                alert('Giá Trị Không Hợp Lệ.')
+        }
+        alert(List_Customer_1);
+    }
+</script>
+</body>
+</html>

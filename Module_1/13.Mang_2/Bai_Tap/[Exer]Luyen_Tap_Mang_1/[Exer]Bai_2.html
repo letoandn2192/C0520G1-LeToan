@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 2</title>
+</head>
+<body>
+    <script>
+        //Bài 2- Viết chương trình khởi tạo mảng số nguyên gồm 10 phần tử khác nhau.
+        // Chương trình hiển thị ra được phần tử có giá trị lớn nhất trong mảng và vị trí của phần tử đó.
+        let N = prompt('Nhập Số Số Nguyên Của Mảng');
+        let array = new Array(N);
+        let index = '';
+        for (let i = 0; i < N; i++){
+            array[i] = Math.floor(Math.random() * 100) + 1;
+        }
+        let max = array[0];
+        for (let i = 0; i < N; i++){
+            if(max < array[i]){
+                array[i] = max;
+                index += i + ' ';
+            }else if(max == array[i]){
+                index += i + ' ';
+            }
+        }
+        alert(array);
+        alert('GTLN là: '+ max+ ' và vị trí của GTLN:'+ index);
+
+    </script>
+</body>
+</html>
