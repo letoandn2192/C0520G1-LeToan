@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 9</title>
+</head>
+<body>
+    <script>
+        //Bài 9- Viết chương trình khởi tạo/nhập vào 2 mảng số nguyên gồm 10 phần tử, gọi là mảng a và b.
+        // Mảng c là một mảng được khai báo gồm 20 phần tử số nguyên.
+        // Chương trình sẽ lưu các phần tử được nối từ hai mảng b và a vào mảng c. Hiển thị mảng c.
+        let array_a = new Array(10);
+        let array_b = new Array(10);
+        let array_c = new Array(20);
+        for(let i = 0; i < 10; i++){
+            array_a[i] = Math.floor(Math.random() * 100) + 1;
+            array_b[i] = Math.floor(Math.random() * 100) + 1;
+        }
+        array_c = array_a.concat(array_b);
+        alert(array_a);
+        alert(array_b);
+        alert(array_c);
+    </script>
+</body>
+</html>

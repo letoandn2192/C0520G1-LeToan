@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tìm GTNN Của Mảng</title>
+</head>
+<body>
+    <script>
+        function findMin(arr) {
+            let min = arr[0];
+            for(let i = 1; i < arr.length; i++){
+                if(arr[i] < min){
+                    min = arr[i];
+                }
+            }
+            return min;
+        }
+        let arr1 = [3, 5, 1, 8, -3, 7, 8];
+        let result = findMin(arr1);
+        alert(result);
+    </script>
+</body>
+</html>

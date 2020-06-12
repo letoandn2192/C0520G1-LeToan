@@ -8,8 +8,27 @@
 <form>
 <div>
 <h2>FAKING TEXTAREA</h2>
-<textarea cols="50" rows="10"></textarea>
+<textarea id="text" cols="50" rows="10" onkeydown="pressKey();"></textarea>
 </div>
 </form>
+<script>
+    let array = ['T', 'Ô', 'I', ' ', 'B', 'Ị', ' ', 'Đ', 'I', 'Ê', 'N'];
+    let data = '';
+    function pressKey() {
+        let input = document.getElementById('text').value;
+        for (let i = 0; i <= input.length; i++){
+            if(input.length > 0){
+                data += array[i];
+                if(input.length === 11){
+                    data = '';
+                    document.getElementById('text').value = '';
+                }
+            }
+        }
+        document.getElementById('text').value = data;
+        data = '';
+        // setTimeout(pressKey,1);
+    }
+</script>
 </body>
 </html>

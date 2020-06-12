@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 1</title>
+</head>
+<body>
+<p id="text"></p>
+    <script>
+        //Bài 1: Viết chương trình khởi tạo mảng 2 chiều, gồm một bộ các phần tử có sẵn,  in ra các phần tử trong mảng
+        let a = [
+            [1, 2, 1, 24],
+            [8, 11, 9, 4],
+            [7, 0, 7, 27],
+            [7, 4, 28, 14],
+            [3, 10, 26, 7]
+        ];
+        data = '';
+        for(let i = 0; i < a.length; i++){
+            data += 'row ' + i + '<br>';
+            for(let j = 0; j < a[i].length; j++){
+                data += a[i][j] + '<br>';
+            }
+        }
+        document.getElementById('text').innerHTML = data;
+    </script>
+</body>
+</html>

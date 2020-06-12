@@ -6,37 +6,12 @@
 </head>
 <body>
     <script>
-        let fullName = prompt('Nhập Tên');
-        let checkSpace;
-        let partOfName;
-        let temp = '';
-        fullName = fullName.trim();
-        fullName = fullName.toLowerCase();
-        for (let i = 0; i < fullName.length; i++) {
-            checkSpace = fullName.substr(i, 1);
-            if (checkSpace == ' ') {
-                partOfName = fullName.slice(0, i);
-                fullName = fullName.slice(i);
-                fullName = fullName.trim();
-                temp += partOfName + ' ';
-                i = 0;
-                if (fullName.indexOf(' ') === -1) {
-                    temp += fullName;
-                }
-            }
+        let arrListCustomers = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21];
+        let data = '';
+        for(let i = 0; i < arrListCustomers.length; i=i+11){
+            data += Math.floor(i/11)+1 + '.' + arrListCustomers[i] + ' ' + arrListCustomers[i+1]+'\n';
         }
-        fullName = temp;
-
-        fullName = fullName.charAt(0).toUpperCase() + fullName.slice(1);
-        for (let i = 0; i < fullName.length; i++) {
-            checkSpace = fullName.substr(i, 1);
-            if (checkSpace === ' ') {
-                fullName = fullName.slice(0, i + 1) + fullName.charAt(i + 1).toUpperCase() + fullName.slice(i + 2);
-
-            }
-        }
-        alert(fullName);
-
+        alert(data);
     </script>
 </body>
 </html>

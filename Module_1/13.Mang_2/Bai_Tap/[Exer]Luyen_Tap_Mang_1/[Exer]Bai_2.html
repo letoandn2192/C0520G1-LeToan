@@ -11,20 +11,22 @@
         let N = prompt('Nhập Số Số Nguyên Của Mảng');
         let array = new Array(N);
         let index = '';
-        for (let i = 0; i < N; i++){
-            array[i] = Math.floor(Math.random() * 100) + 1;
+        for (let i = 0; i < N; i++) {
+            array[i] = Math.floor(Math.random() * 10) + 1;
         }
         let max = array[0];
-        for (let i = 0; i < N; i++){
-            if(max < array[i]){
-                array[i] = max;
-                index += i + ' ';
-            }else if(max == array[i]){
+        for (let i = 0; i < N; i++) {
+            if (max < array[i]) {
+                max = array[i];
+            }
+        }
+        for (let i = 0; i < N; i++) {
+            if (max == array[i]) {
                 index += i + ' ';
             }
         }
         alert(array);
-        alert('GTLN là: '+ max+ ' và vị trí của GTLN:'+ index);
+        alert('GTLN là: ' + max + ' và vị trí của GTLN: ' + index);
 
     </script>
 </body>

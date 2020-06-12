@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 8</title>
+</head>
+<body>
+    <script>
+        //Bài 8- Viết chương trình khởi tạo/nhập vào một mảng số nguyên gồm 10 phần tử.
+        // Chương trình sắp xếp mảng theo thứ tự giảm dần và hiển thị ra mảng đã được sắp xếp.
+        let array = new Array(10);
+        for(let i = 0; i < array.length; i++){
+            array[i] = prompt('Nhập phần tử thứ '+(i+1));
+        }
+        alert(array);
+        array.sort(function (a, b) {
+            return b-a;
+        })
+        alert(array);
+    </script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Caro</title>
+</head>
+<body>
+<table border="1">
+    <h2>Let's Play Caro Game</h2>
+    <p id="result"></p>
+    <input type="button" value="reset" onclick="resetGame();">
+</table>
+<script>
+    let checkStatus = true;
+    let checkReset = false;
+    let array = new Array(10);
+    for (let i = 0; i < 10; i++) {
+        array[i] = new Array(10);
+        for (let j = 0; j < 10; j++) {
+            array[i][j] = '';
+        }
+    }
+    function showTable() {
+        let table = '<table border="1">';
+        for (let i = 0; i < 10; i++) {
+            table += '<tr>';
+            for (let j = 0; j < 10; j++) {
+                table += '<td align="center" style="width: 25px; height: 25px" onclick="playGame(' + i + ',' + j + ');">' + array[i][j] + '</td>';
+            }
+            table += '</tr>';
+        }
+        table += '</table>';
+        document.getElementById('result').innerHTML = table;
+    }
+
+    function playGame(x, y) {
+        if (checkStatus === true && array[x][y] === '') {
+            array[x][y] = 'O';
+            checkStatus = false;
+            setTimeout(checkResult, 100);
+        } else if (checkStatus === false && array[x][y] === '') {
+            array[x][y] = 'X';
+            checkStatus = true;
+            setTimeout(checkResult, 100);
+        }
+        showTable();
+    }
+
+    function checkResult() {
+        for (let i = 0; i < array.length; i++) {
+            for (let j = 0; j < array[i].length; j++) {
+                if (array[i][j] === 'O') {
+                    if (array[i][j + 1] === 'O' && array[i][j + 2] === 'O') {
+                        alert('Player ' + array[i][j] + ' is winner.');
+                        checkReset = true;
+                    }
+                    if (array[i + 1][j] === 'O' && array[i + 2][j] === 'O') {
+                        alert('Player ' + array[i][j] + ' is winner.');
+                        checkReset = true;
+                    }
+                    if (array[i + 1][j + 1] === 'O' && array[i + 2][j + 2] === 'O') {
+                        alert('Player ' + array[i][j] + ' is winner.');
+                        checkReset = true;
+                    }
+                    if (array[i + 1][j - 1] === 'O' && array[i + 2][j - 2] === 'O') {
+                        alert('Player ' + array[i][j] + ' is winner.');
+                        checkReset = true;
+                    }
+                } else if (array[i][j] === 'X') {
+                    if (array[i][j + 1] === 'X' && array[i][j + 2] === 'X') {
+                        alert('Player ' + array[i][j] + ' is winner.');
+                        checkReset = true;
+                    }
+                    if (array[i + 1][j] === 'X' && array[i + 2][j] === 'X') {
+                        alert('Player ' + array[i][j] + ' is winner.');
+                        checkReset = true;
+                    }
+                    if (array[i + 1][j + 1] === 'X' && array[i + 2][j + 2] === 'X') {
+                        alert('Player ' + array[i][j] + ' is winner.');
+                        checkReset = true;
+                    }
+                    if (array[i + 1][j - 1] === 'X' && array[i + 2][j - 2] === 'X') {
+                        alert('Player ' + array[i][j] + ' is winner.');
+                        checkReset = true;
+                    }
+                }
+            }
+        }
+    }
+
+    function resetGame() {
+        if (checkReset) {
+            for (let i = 0; i < 10; i++) {
+                array[i] = new Array(10);
+                for (let j = 0; j < 10; j++) {
+                    array[i][j] = '';
+                }
+            }
+        }
+        showTable();
+    }
+    showTable();
+
+
+</script>
+</body>
+</html>
