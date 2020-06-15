@@ -5,11 +5,46 @@
     <title></title>
 </head>
 <body>
+<input type="button" onclick="addNewCustomer();">
 <p id="result"></p>
     <script>
-        let a = '';
-        a = a.substr;
-        alert(a);
+
+         arrListCustomers = new Array();
+        arrAddCustomers = new Array();
+        // arrListCustomers.push(arrAddCustomers1);
+        // alert(arrListCustomers);
+        // arrAddCustomers1 = [0,0,0,0,0,0,0,0,0,0,0];
+        // arrListCustomers.push(arrAddCustomers1);
+        // alert(arrListCustomers);
+        // alert(arrListCustomers.length);
+        function addNewCustomer() {
+            // alert(arrListCustomers.length);
+            // arrListCustomers[arrListCustomers.length][0] = prompt('Nhập Họ Và Tên:');
+            // arrListCustomers[arrListCustomers.length][1] = prompt('Nhập Họ Và Tên:');
+            // arrListCustomers[arrListCustomers.length][2] = prompt('Nhập Họ Và Tên:');
+            // arrListCustomers[arrListCustomers.length][3] = prompt('Nhập Họ Và Tên:');
+            // arrListCustomers[arrListCustomers.length][4] = prompt('Nhập Họ Và Tên:');
+            // arrListCustomers[arrListCustomers.length][5] = prompt('Nhập Họ Và Tên:');
+            // arrListCustomers[arrListCustomers.length][6] = prompt('Nhập Họ Và Tên:');
+            // arrListCustomers[arrListCustomers.length][7] = prompt('Nhập Họ Và Tên:');
+            // arrListCustomers[arrListCustomers.length][8] = prompt('Nhập Họ Và Tên:');
+            // arrListCustomers[arrListCustomers.length][9] = prompt('Nhập Họ Và Tên:');
+            // arrListCustomers[arrListCustomers.length][10] = prompt('Nhập Họ Và Tên:');
+            arrAddCustomers[1] = prompt('Nhập Số CMND:');
+            arrAddCustomers[2] = prompt('Nhập Ngày Tháng Năm Sinh:');
+            arrAddCustomers[3] = prompt('Nhập Email:');
+            arrAddCustomers[4] = prompt('Nhập địa chỉ');
+            arrAddCustomers[5] = prompt('Nhập Loại Customer:');
+            arrAddCustomers[6] = prompt('Nhập % Giảm Giá:');
+            arrAddCustomers[7] = prompt('Nhập Số Người Đi Cùng:');
+            arrAddCustomers[8] = prompt('Nhập Số Ngày Thuê:');
+            arrAddCustomers[9] = prompt('Nhập Loại Dịch Vụ:');
+            arrAddCustomers[10] = prompt('Nhập Loại Phòng Muốn Thuê:');
+            arrListCustomers.push(arrAddCustomers);
+            alert(arrListCustomers);
+            alert(arrListCustomers.length);
+
+        }
     </script>
 </body>
 </html>

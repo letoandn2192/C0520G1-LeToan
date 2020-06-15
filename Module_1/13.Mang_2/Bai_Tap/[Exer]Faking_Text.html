@@ -14,20 +14,34 @@
 <script>
     let array = ['T', 'Ô', 'I', ' ', 'B', 'Ị', ' ', 'Đ', 'I', 'Ê', 'N'];
     let data = '';
+    let count = 0;
+
+    // function pressKey() {
+    //     count++;
+    //     data += array[count - 1];
+    //     if (count > array.length) {
+    //         document.getElementById('text').value = '';
+    //         count = 0;
+    //         data = '';
+    //     }
+    //     document.getElementById('text').value = data;
+    //     setTimeout(pressKey,1000);
+    // }
+
     function pressKey() {
         let input = document.getElementById('text').value;
-        for (let i = 0; i <= input.length; i++){
-            if(input.length > 0){
+        if(input.length > 0){
+            for(let i = 0; i < input.length; i++){
                 data += array[i];
-                if(input.length === 11){
-                    data = '';
+                if(i === array.length){
                     document.getElementById('text').value = '';
+                    data = '';
                 }
             }
         }
         document.getElementById('text').value = data;
         data = '';
-        // setTimeout(pressKey,1);
+        setTimeout(pressKey,1);
     }
 </script>
 </body>

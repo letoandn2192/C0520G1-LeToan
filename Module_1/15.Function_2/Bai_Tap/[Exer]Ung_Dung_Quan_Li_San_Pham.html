@@ -27,14 +27,23 @@
 
     function addNewProduct() {
         let newProduct = document.getElementById('product').value;
-        document.getElementById('product').value = '';
-        arrProduct.push(newProduct);
-        displayProduct();
+        if(newProduct === ''){
+            alert('Nhập Giá Trị vào đi.');
+        }else{
+            document.getElementById('product').value = '';
+            arrProduct.push(newProduct);
+            displayProduct();
+        }
     }
 
     function editProduct(arg) {
-        arrProduct[arg] = prompt('Edit Product');
-        displayProduct();
+        let name = prompt('Edit Product');
+        if(name === '' || name == null){
+            alert('Nhập Lại Tên.');
+        }else{
+            arrProduct[arg] = name;
+            displayProduct();
+        }
     }
 
     function delProduct(arg) {
@@ -58,7 +67,7 @@
         for (let i = 0; i < arrProduct.length; i++) {
             table += '<tr>';
             for (let j = 0; j < 3; j++) {
-                table += '<td width="200px" height="50px">' + array[i][j] + '</td>';
+                table += '<td width="150px" height="50px">' + array[i][j] + '</td>';
             }
             table += '</tr>';
         }
