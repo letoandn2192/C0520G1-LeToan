@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ứng Dụng</title>
+</head>
+<body>
+<form style="">
+    <h2>Application</h2>
+    <div>
+        <h3>Add New Product</h3>
+        <label>
+            <input type="text" id="product">
+            <input type="button" value="Add" id="add" onclick="addNewProduct();">
+        </label>
+    </div>
+    <div>
+        <h3>Display Product</h3>
+        <p id="output"></p>
+    </div>
+</form>
+<script>
+    let arrProduct = ['Sony Xperia', 'Samsung Galaxy', 'Nokia 6', 'Xiaomi Redmi Note 4', 'Apple Iphone 6S',
+        'Xiaomi Mi 5S Plus', 'Apple Iphone 8 Plus', 'Oppo A71', 'Motorola'];
+    // let arrProduct = [];
+    let array = [];
+
+    function addNewProduct() {
+        let newProduct = document.getElementById('product').value;
+        document.getElementById('product').value = '';
+        arrProduct.push(newProduct);
+        displayProduct();
+    }
+
+    function editProduct(arg) {
+        arrProduct[arg] = prompt('Edit Product');
+        displayProduct();
+    }
+
+    function delProduct(arg) {
+        let check = confirm('Bạn muốn xóa sản phẩm này ?');
+        if(check){
+            arrProduct.splice(arg,1);
+            displayProduct();
+        }
+    }
+
+    function displayProduct() {
+        for (let i = 0; i < arrProduct.length; i++) {
+            for (let j = 0; j < 3; j++) {
+                array[i] = [0, '<input type="button" value="edit" onclick="editProduct('+i+');">', '<input type="button" value="delete" onclick="delProduct('+i+');">'];
+            }
+        }
+        for (let i = 0; i < arrProduct.length; i++) {
+            array[i][0] = arrProduct[i];
+        }
+        let table = '<table border="2">';
+        for (let i = 0; i < arrProduct.length; i++) {
+            table += '<tr>';
+            for (let j = 0; j < 3; j++) {
+                table += '<td width="200px" height="50px">' + array[i][j] + '</td>';
+            }
+            table += '</tr>';
+        }
+        table += '</table>';
+        document.getElementById('output').innerHTML = table;
+    }
+
+    displayProduct();
+
+</script>
+</body>
+</html>

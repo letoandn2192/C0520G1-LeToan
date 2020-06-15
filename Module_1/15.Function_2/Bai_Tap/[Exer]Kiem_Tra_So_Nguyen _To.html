@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kiểm Tra Số Nguyên Tố</title>
+</head>
+<body>
+<script>
+    function isPrime(arg) {
+        let sqr = Math.sqrt(arg);
+        for(let i = 2; i <= sqr; i++){
+            if(arg%i == 0){
+                return false;
+            }
+        }
+        return true;
+    }
+    let input = prompt('Nhập số bạn muốn kiểm tra');
+    let result = isPrime(input);
+    if(result){
+        alert('Là Số Nguên Tố.');
+    }else {
+        alert('Không Phải Số Nguyên Tố.');
+    }
+</script>
+</body>
+</html>

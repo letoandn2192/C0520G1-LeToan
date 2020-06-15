@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 6</title>
+</head>
+<body>
+    <script>
+        //Bài 6: Viết hàm nhận vào một số, kiểm tra xem nếu số đưa vào có phải là nguyên dương không.
+        // Nếu là nguyên dương trả về true, ngược lại trả về false.
+        function checkPositive(arg) {
+            let status;
+            if(arg > 0){
+                status = true;
+            }else {
+                status = false;
+            }
+            return status;
+        }
+        let a = prompt('Nhập số muốn kiểm tra.');
+        alert(checkPositive(a));
+    </script>
+</body>
+</html>

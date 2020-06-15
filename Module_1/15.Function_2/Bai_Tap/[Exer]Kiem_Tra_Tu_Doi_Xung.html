@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kiểm Tra Từ Đối Xứng</title>
+</head>
+<body>
+    <input id="input" type="text">
+    <input id="search" type="button" onclick="isPalindrome(document.getElementById('input').value);" value="Check">
+    <script>
+        function isPalindrome(arg) {
+            // let checkString = arg.trim();
+            // if (checkString.length > 1) {
+            //     for (let i = 0; i < checkString.length; i++) {
+            //         let firstChar = checkString.substr(0, 1);
+            //         let lastChar = checkString.substr(checkString.length - 1, 1);
+            //         if (firstChar === lastChar) {
+            //             checkString = checkString.substr(1, checkString.length - 2);
+            //             i = 0;
+            //             if(checkString.length <= 1){
+            //                 alert('Chuỗi Đối Xứng.');
+            //             }
+            //         } else {
+            //             alert('Chuỗi Không Đối Xứng.');
+            //             break;
+            //         }
+            //     }
+            // } else {
+            //     alert('Chuỗi Không Đối Xứng.')
+            // }
+            ////////////////////////////Cách Làm Đệ Quy//////////////////////////////////////////////////////////////
+            let checkString = arg.trim();
+            if(checkString.length < 1){
+                alert('Chuỗi Đối Xứng.');
+            }else {
+                let firstChar = checkString.substr(0, 1);
+                let lastChar = checkString.substr(checkString.length - 1, 1);
+                if(firstChar === lastChar){
+                    checkString = checkString.substr(1, checkString.length - 2);
+                    isPalindrome(checkString);
+                }else {
+                    alert('Chuỗi Không Đối Xứng.');
+                }
+            }
+        }
+    </script>
+</body>
+</html>

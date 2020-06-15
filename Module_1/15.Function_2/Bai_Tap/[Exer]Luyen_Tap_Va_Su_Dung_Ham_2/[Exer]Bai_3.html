@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 3</title>
+</head>
+<body>
+    <script>
+        //Bài 3: Viết hàm tính giai thừa của một số nguyên bất kỳ được đưa vào. Gọi hàm vừa xây dựng được.
+        function calGiaiThua(arg) {
+            let result = 1;
+            for (let i = 1; i <= arg; i++) {
+                result *= i;
+            }
+            return result;
+        }
+        let a = prompt('Nhập số nguyên.');
+        alert(calGiaiThua(a));
+    </script>
+</body>
+</html>

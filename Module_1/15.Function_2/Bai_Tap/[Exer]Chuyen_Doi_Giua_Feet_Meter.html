@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chuyển Đổi Meter và Feet</title>
+</head>
+<body>
+<h2>Feet Meter</h2>
+<input type="text" id="input">
+<select id="select1">
+    <option>Meter</option>
+    <option>Feet</option>
+</select>
+<select id="select2">
+    <option >Meter</option>
+    <option selected>Feet</option>
+</select>
+<input type="button" value="Change" onclick="changeUnit();">
+<p id="result"></p>
+<script>
+    function changeUnit() {
+        let data = document.getElementById('input').value;
+        // document.getElementById('input').value = '';
+        let fromUnit = document.getElementById('select1').value;
+        let toUnit = document.getElementById('select2').value;
+        if(fromUnit === 'Meter'){
+            if(toUnit === 'Feet'){
+                data = data * 3.279;
+            }
+        }else {
+            if(toUnit === 'Meter'){
+                data = data * 0.305;
+            }
+        }
+        document.getElementById('result').innerHTML = data;
+    }
+</script>
+</body>
+</html>

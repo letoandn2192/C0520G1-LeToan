@@ -7,18 +7,21 @@
 <body>
 <input type="button" onclick="displayMainMenu();" value="Menu">
 <script>
-    let select ;
-    let arrListCustomers = [];
-    let data;
-    // for (let i = 0; i < arrListCustomers.length; i++){
-    //     arrListCustomers[i] = new Array(10);
-    // }
+    let arrListCustomers = new Array(11);
+    let arrAddCustomers = new Array(11);
+    arrListCustomers = [['A11', 'B2', 'C3', 'D4', 'E5', 'F6', 'G7', 'H8', 'J9', 'K10', 'M11'],
+        ['A21', 'B2', 'C3', 'D4', 'E5', 'F6', 'G7', 'H8', 'J9', 'K10', 'M11'],
+        ['A31', 'B2', 'C3', 'D4', 'E5', 'F6', 'G7', 'H8', 'J9', 'K10', 'M11'],
+        ['A41', 'B2', 'C3', 'D4', 'E5', 'F6', 'G7', 'H8', 'J9', 'K10', 'M11']
+    ];
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     function displayMainMenu() {
-        select = prompt('1. Add New Customer.' +
+        let select = prompt('1. Add New Customer.' +
             '\n2.Display Information Customer.' +
-        '\n3.Edit Information Customer.' +
-        '\n4.Delete Customer.' +
-        '\n5.Exit.');
+            '\n3.Edit Information Customer.' +
+            '\n4.Delete Customer.' +
+            '\n5.Exit.');
         switch (select) {
             case '1':
                 addNewCustomer();
@@ -32,59 +35,167 @@
             case '4':
                 deleteCustomer();
                 break;
-            default:
-        }
-    }
-    function addNewCustomer() {
-        let fullName = prompt('Nhập Họ Và Tên:');
-        arrListCustomers.push(fullName);
-        let idNumber = prompt('Nhập Số CMND:');
-        arrListCustomers.push(idNumber);
-        let dateofbirth = prompt('Nhập Ngày Tháng Năm Sinh:');
-        arrListCustomers.push(dateofbirth);
-        let email = prompt('Nhập Email:');
-        arrListCustomers.push(email);
-        let address = prompt('Nhập địa chỉ');
-        arrListCustomers.push(address);
-        let typeCustomer = prompt('Nhập Loại Customer:');
-        arrListCustomers.push(typeCustomer);
-        let discount = prompt('Nhập % Giảm Giá:');
-        arrListCustomers.push(discount);
-        let accPerson = prompt('Nhập Số Người Đi Cùng:');
-        arrListCustomers.push(accPerson);
-        let rentDay = prompt('Nhập Số Ngày Thuê:');
-        arrListCustomers.push(rentDay);
-        let typeService = prompt('Nhập Loại Dịch Vụ:');
-        arrListCustomers.push(typeService);
-        let typeRoom = prompt('Nhập Loại Phòng Muốn Thuê:');
-        arrListCustomers.push(typeRoom);
-        displayMainMenu();
-    }
-    function displayCustomer() {
-        for(let i = 0; i < arrListCustomers.length; i=i+11){
-            data = Math.floor(i/11)+1 + '.' + arrListCustomers[i] + ' ' + arrListCustomers[i+1];
-        }
-        select = prompt(data + '\n0.Back');
-        switch (select) {
-            case '1':
-                displayInfomationCustomer(0);
+            case '5':
                 break;
             default:
-                displayMainMenu();
         }
     }
+
+    function addNewCustomer() {
+        arrAddCustomers[0] = prompt('Nhập Họ Và Tên:');
+        arrAddCustomers[1] = prompt('Nhập Số CMND:');
+        arrAddCustomers[2] = prompt('Nhập Ngày Tháng Năm Sinh:');
+        arrAddCustomers[3] = prompt('Nhập Email:');
+        arrAddCustomers[4] = prompt('Nhập địa chỉ');
+        arrAddCustomers[5] = prompt('Nhập Loại Customer:');
+        arrAddCustomers[6] = prompt('Nhập % Giảm Giá:');
+        arrAddCustomers[7] = prompt('Nhập Số Người Đi Cùng:');
+        arrAddCustomers[8] = prompt('Nhập Số Ngày Thuê:');
+        arrAddCustomers[9] = prompt('Nhập Loại Dịch Vụ:');
+        arrAddCustomers[10] = prompt('Nhập Loại Phòng Muốn Thuê:');
+        arrListCustomers.push(arrAddCustomers);
+        displayMainMenu();
+    }
+
+    function displayCustomer() {
+        let select;
+        let data = '';
+        for (let i = 0; i < arrListCustomers.length; i++) {
+            data += (i + 1) + '. ' + arrListCustomers[i][0] + ' ' + arrListCustomers[i][1] + '\n';
+        }
+        select = prompt(data + '0.Back');
+        if (0 < select && select <= arrListCustomers.length) {
+            displayInfomationCustomer(select - 1);
+        } else {
+            displayMainMenu();
+        }
+    }
+
     function displayInfomationCustomer(arg) {
-        alert('Họ Và Tên: '+ arrListCustomers[arg] +
-            '\n1.Số CMND: '+ arrListCustomers[arg+1] +
-            '\n2.Ngày Tháng Năm Sinh: '+ arrListCustomers[arg+2] +
-            '\n3.Email: '+ arrListCustomers[arg+3] +
-            '\n4.Địa Chỉ: '+arrListCustomers[arg+4] +
-            '\n5.Loại Customer: '+arrListCustomers[arg+5] +
-            '\n6.Giảm Giá: '+ arrListCustomers[arg+6] +
-            '\n7.Số Người Đi cùng: '+ arrListCustomers[arg+7] +
-            '\n8.Số Ngày Thuê: '+ arrListCustomers[arg+8] +
-            '\n9.Loại Dịch Vụ: '+ arrListCustomers[arg+9] +
-            '\n10.Loại Phòng Muốn Thuê: '+ arrListCustomers[arg+10]);
+        alert('1.Họ Và Tên: ' + arrListCustomers[arg][0] +
+            '\n2.Số CMND: ' + arrListCustomers[arg][1] +
+            '\n3.Ngày Tháng Năm Sinh: ' + arrListCustomers[arg][2] +
+            '\n4.Email: ' + arrListCustomers[arg][3] +
+            '\n5.Địa Chỉ: ' + arrListCustomers[arg][4] +
+            '\n6.Loại Customer: ' + arrListCustomers[arg][5] +
+            '\n7.Giảm Giá: ' + arrListCustomers[arg][6] +
+            '\n8.Số Người Đi cùng: ' + arrListCustomers[arg][7] +
+            '\n9.Số Ngày Thuê: ' + arrListCustomers[arg][8] +
+            '\n10.Loại Dịch Vụ: ' + arrListCustomers[arg][9] +
+            '\n11.Loại Phòng Muốn Thuê: ' + arrListCustomers[arg][10]);
+        displayCustomer();
+    }
+
+    function editCustomer() {
+        let select;
+        let data = '';
+        for (let i = 0; i < arrListCustomers.length; i++) {
+            data += (i + 1) + '. ' + arrListCustomers[i][0] + ' ' + arrListCustomers[i][1] + '\n';
+        }
+        select = prompt(data + '0.Back');
+        if (0 < select && select <= arrListCustomers.length) {
+            editInfomationCustomer(select - 1);
+        } else {
+            displayMainMenu();
+        }
+    }
+
+    function editInfomationCustomer(arg) {
+        let select;
+        select = prompt('1.Họ Và Tên: ' + arrListCustomers[arg][0] +
+            '\n2.Số CMND: ' + arrListCustomers[arg][1] +
+            '\n3.Ngày Tháng Năm Sinh: ' + arrListCustomers[arg][2] +
+            '\n4.Email: ' + arrListCustomers[arg][3] +
+            '\n5.Địa Chỉ: ' + arrListCustomers[arg][4] +
+            '\n6.Loại Customer: ' + arrListCustomers[arg][5] +
+            '\n7.Giảm Giá: ' + arrListCustomers[arg][6] +
+            '\n8.Số Người Đi cùng: ' + arrListCustomers[arg][7] +
+            '\n9.Số Ngày Thuê: ' + arrListCustomers[arg][8] +
+            '\n10.Loại Dịch Vụ: ' + arrListCustomers[arg][9] +
+            '\n11.Loại Phòng Muốn Thuê: ' + arrListCustomers[arg][10] +
+            '\n12.Back');
+        switch (select - 1) {
+            case 0:
+                arrListCustomers[arg][0] = prompt('Nhập Lại Họ Và Tên:');
+                break;
+            case 1:
+                arrListCustomers[arg][1] = prompt('Nhập Lại Số CMND:');
+                break;
+            case 2:
+                arrListCustomers[arg][2] = prompt('Nhập Lại Ngày Tháng Năm Sinh:');
+                break;
+            case 3:
+                arrListCustomers[arg][3] = prompt('Nhập Lại Email:');
+                break;
+            case 4:
+                arrListCustomers[arg][4] = prompt('Nhập Lại Địa Chỉ:');
+                break;
+            case 5:
+                arrListCustomers[arg][5] = prompt('Nhập Lại Loại Customer:');
+                break;
+            case 6:
+                arrListCustomers[arg][6] = prompt('Nhập Lại Phần Giảm Giá:');
+                break;
+            case 7:
+                arrListCustomers[arg][7] = prompt('Nhập Lại Số Người Đi Cùng:');
+                break;
+            case 8:
+                arrListCustomers[arg][8] = prompt('Nhâp Lại Số Ngày Thuê:');
+                break;
+            case 9:
+                arrListCustomers[arg][9] = prompt('Nhập Lại Loại Dịch Vụ:');
+                break;
+            case 10:
+                arrListCustomers[arg][10] = prompt('Nhập Lại Loại Phòng Muốn Thuê:');
+                break;
+            case 11:
+                editCustomer();
+                break;
+            default:
+        }
+        if(select >= 1 && select < 11){
+            displayEditInfomationCustomer(arg);
+            editCustomer();
+        }
+    }
+
+    function displayEditInfomationCustomer(arg) {
+        alert('1.Họ Và Tên: ' + arrListCustomers[arg][0] +
+            '\n2.Số CMND: ' + arrListCustomers[arg][1] +
+            '\n3.Ngày Tháng Năm Sinh: ' + arrListCustomers[arg][2] +
+            '\n4.Email: ' + arrListCustomers[arg][3] +
+            '\n5.Địa Chỉ: ' + arrListCustomers[arg][4] +
+            '\n6.Loại Customer: ' + arrListCustomers[arg][5] +
+            '\n7.Giảm Giá: ' + arrListCustomers[arg][6] +
+            '\n8.Số Người Đi cùng: ' + arrListCustomers[arg][7] +
+            '\n9.Số Ngày Thuê: ' + arrListCustomers[arg][8] +
+            '\n10.Loại Dịch Vụ: ' + arrListCustomers[arg][9] +
+            '\n11.Loại Phòng Muốn Thuê: ' + arrListCustomers[arg][10]);
+    }
+
+    function deleteCustomer() {
+        let select;
+        let data = '';
+        let check;
+        for (let i = 0; i < arrListCustomers.length; i++) {
+            data += (i + 1) + '. ' + arrListCustomers[i][0] + ' ' + arrListCustomers[i][1] + '\n';
+        }
+        select = prompt('0. Back'+ ' ' + '\n' + data);
+        if (0 < select && select <= arrListCustomers.length) {
+            check = confirm('Bạn Muốn Xóa Người Này:');
+            if (check) {
+                arrListCustomers.splice(select - 1, 1);
+                displayMainMenu();
+            } else {
+                displayMainMenu();
+            }
+        } else if(select === '0'){
+            displayMainMenu();
+        }else {
+            alert("Giá Trị Không Hợp Lệ.");
+            displayMainMenu();
+        }
+
     }
 </script>
 </body>

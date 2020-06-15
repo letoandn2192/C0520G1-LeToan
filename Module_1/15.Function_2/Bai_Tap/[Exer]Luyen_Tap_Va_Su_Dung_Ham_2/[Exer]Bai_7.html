@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 7</title>
+</head>
+<body>
+    <script>
+        //Bài 7: Viết hàm truyền vào 2 số nguyên bất kì, thực hiện đổi chỗ hai số nguyên đó.
+        function swap(arg1, arg2) {
+            let temp;
+            alert(arg1+' '+arg2);
+            temp = arg1;
+            arg1 = arg2;
+            arg2 = temp;
+            alert(arg1+' '+arg2);
+        }
+        let number1 = prompt('Nhập Số 1: ');
+        let number2 = prompt('Nhập Số 2: ');
+        swap(number1,number2);
+    </script>
+</body>
+</html>

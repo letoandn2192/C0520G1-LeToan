@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 2</title>
+</head>
+<body>
+    <script>
+        //Bài 2: Viết hàm tính diện tích, hàm tính chu vi hình tròn. Gọi hàm vừa xây dựng được
+        function calArea(radius) {
+            return radius*radius*Math.PI;
+        }
+        function calPerimeter(radius) {
+            return 2*radius*Math.PI;
+        }
+        let r = prompt('Nhập Bán Kính:');
+        alert('Chu vi hình tròn: '+ calPerimeter(r));
+        alert('Diện Tích hình tròn: '+ calArea(r));
+    </script>
+</body>
+</html>

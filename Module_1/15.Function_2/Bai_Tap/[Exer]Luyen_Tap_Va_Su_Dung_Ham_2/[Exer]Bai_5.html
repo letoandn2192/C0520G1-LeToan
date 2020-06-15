@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 5</title>
+</head>
+<body>
+<script>
+    //Bài 5: Viết hàm nhận vào 3 số nguyên bất kỳ, trả về số nguyên có giá trị nhỏ nhất.
+    function checkMin(arg1, arg2, arg3) {
+        let min = arg1;
+        if(arg2 < min){
+            if(arg2 < arg3){
+                min = arg2;
+            }else {
+                min = arg3;
+            }
+        }else {
+            if(arg3 < min){
+                min = arg3;
+            }
+        }
+        alert(min);
+    }
+    let number1 = prompt('Nhập Số 1: ');
+    let number2 = prompt('Nhập Số 2: ');
+    let number3 = prompt('Nhập Số 3: ');
+    checkMin(number1,number2,number3);
+</script>
+
+</body>
+</html>
