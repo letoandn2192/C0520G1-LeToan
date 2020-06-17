@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Xây Dựng Lớp Hình Chũ Nhật</title>
+</head>
+<body>
+    <canvas style="border: 1px solid red" id="canvas" height="500px" width="1000px"></canvas>
+<script>
+    let Rectangle = function (width, height) {
+        this.width = width;
+        this.height = height;
+        this.calPeri = function () {
+            return 2*(this.width + this.height);
+        };
+        this.calArea = function () {
+            return this.width*this.height;
+        };
+        this.drawRect = function () {
+            let c = document.getElementById('canvas').getContext('2d');
+            c.fillStyle = 'orange';
+            c.fillRect(10,10,this.width, this.height);
+        }
+    };
+    let rec = new Rectangle(300,200);
+    let per = rec.calPeri();
+    let area = rec.calArea();
+    alert(per + ' ' + area);
+    rec.drawRect();
+    rec.width = 500;
+    rec.height = 500;
+    per = rec.calPeri();
+    area = rec.calArea();
+    alert(per);
+    rec.drawRect();
+</script>
+</body>
+</html>

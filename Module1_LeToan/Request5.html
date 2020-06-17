@@ -7,14 +7,7 @@
 <body>
 <input type="button" onclick="displayMainMenu();" value="Menu">
 <script>
-    //let arrListCustomers = new Array(11);
-    let arrAddCustomers = new Array(11);
-    arrListCustomers = [
-        ['A11', 'B2', 'C3', 'D4', 'E5', 'F6', 'G7', 'H8', 'J9', 'K10', 'M11'],
-        ['A21', 'B2', 'C3', 'D4', 'E5', 'F6', 'G7', 'H8', 'J9', 'K10', 'M11'],
-        ['A31', 'B2', 'C3', 'D4', 'E5', 'F6', 'G7', 'H8', 'J9', 'K10', 'M11'],
-        ['A41', 'B2', 'C3', 'D4', 'E5', 'F6', 'G7', 'H8', 'J9', 'K10', 'M11']
-    ];
+    let arrListCustomers = [];
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     function displayMainMenu() {
@@ -43,6 +36,7 @@
     }
 
     function addNewCustomer() {
+        let arrAddCustomers = new Array(11);
         arrAddCustomers[0] = prompt('Nhập Họ Và Tên:');
         arrAddCustomers[1] = prompt('Nhập Số CMND:');
         arrAddCustomers[2] = prompt('Nhập Ngày Tháng Năm Sinh:');
@@ -154,7 +148,7 @@
                 break;
             default:
         }
-        if(select >= 1 && select < 11){
+        if (select >= 1 && select < 11) {
             displayEditInfomationCustomer(arg);
             editCustomer();
         }
@@ -181,7 +175,7 @@
         for (let i = 0; i < arrListCustomers.length; i++) {
             data += (i + 1) + '. ' + arrListCustomers[i][0] + ' ' + arrListCustomers[i][1] + '\n';
         }
-        select = prompt('0. Back'+ ' ' + '\n' + data);
+        select = prompt('0. Back' + ' ' + '\n' + data);
         if (0 < select && select <= arrListCustomers.length) {
             check = confirm('Bạn Muốn Xóa Người Này:');
             if (check) {
@@ -190,9 +184,9 @@
             } else {
                 displayMainMenu();
             }
-        } else if(select === '0'){
+        } else if (select === '0') {
             displayMainMenu();
-        }else {
+        } else {
             alert("Giá Trị Không Hợp Lệ.");
             displayMainMenu();
         }

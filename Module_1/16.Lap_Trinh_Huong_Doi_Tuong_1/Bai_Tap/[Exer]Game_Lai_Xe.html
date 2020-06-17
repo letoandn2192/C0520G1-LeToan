@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Lái Xe</title>
+</head>
+<body onload="docReady()">
+<canvas style="border: 1px solid red; height: 500px; width: 500px" id="canvas"></canvas>
+<img id="nobita" src="nobita.png" style="position: absolute; left: 250px; top: 250px; width: 50px; height: 50px">
+</body>
+<script>
+    function pressAheadKey() {
+        let element = document.getElementById('nobita');
+        element.style.top = parseInt(element.style.top) - 1 + 'px';
+    }
+    function pressleftKey() {
+        let element = document.getElementById('nobita');
+        element.style.left = parseInt(element.style.left) + 1 + 'px';
+    }
+    
+    function pressRightKey() {
+        let element = document.getElementById('nobita');
+        element.style.left = parseInt(element.style.left) - 1 + 'px';
+    }
+    
+    function pressCtrlKey() {
+        let element = document.getElementById('nobita');
+        element.style.top = parseInt(element.style.top) - 10 + 'px';
+    }
+
+    function moveSelection(evt) {
+        switch (evt.keyCode) {
+            case 37:
+                pressleftKey();
+                break;
+            case 39:
+                pressRightKey();
+                break;
+            case 17:
+                pressCtrlKey();
+                break;
+            case 38:
+                pressAheadKey();
+                break;
+        }
+    }
+
+    function docReady() {
+        window.addEventListener('keydown', moveSelection);
+    }
+</script>
+</html>

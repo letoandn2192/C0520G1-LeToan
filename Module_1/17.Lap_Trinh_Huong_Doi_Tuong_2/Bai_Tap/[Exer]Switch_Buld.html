@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Công Tắc</title>
+</head>
+<body>
+<img src="pic_bulboff.gif" id="img">
+<input type="button" value="On/Off" onclick="changeStatus();">
+<p id="output"></p>
+    <script>
+        class Switch{
+            constructor(status) {
+                this.status = status;
+            }
+            getStatus(){
+                return this.status;
+            }
+            turnSwitch(){
+                this.status = !this.status;
+            }
+        }
+
+        class Light{
+            constructor(sw) {
+            }
+            turnLight(){
+                if(sw.getStatus() === true){
+                    document.getElementById('img').src = "pic_bulbon.gif";
+                    document.getElementById('output').innerHTML = 'Đèn Đang Bật.';
+                }else {
+                    document.getElementById('img').src = "pic_bulboff.gif";
+                    document.getElementById('output').innerHTML = 'Đèn Tắt.';
+                }
+            }
+        }
+
+        let sw = new Switch(true);
+        let light = new Light(sw);
+        function changeStatus() {
+            sw.turnSwitch();
+            light.turnLight();
+        }
+    </script>
+</body>
+</html>

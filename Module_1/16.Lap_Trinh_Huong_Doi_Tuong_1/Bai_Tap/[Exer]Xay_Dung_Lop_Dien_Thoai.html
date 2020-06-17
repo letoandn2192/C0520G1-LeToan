@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Xây Dựng Lớp Mô Tả Điện Thoại</title>
+</head>
+<body>
+    <script>
+        const ON = true, OFF = false;
+        class Mobile {
+            constructor(name, battery, memory_send, memory_receive, memory_type, mobile_status) {
+                this.name = name;
+                this.battery = battery;
+                this.memory_send = memory_send;
+                this.memory_receive = memory_receive;
+                this.memory_type = memory_type;
+                this.mobile_status = mobile_status;
+            }
+            checkStatus (){
+                if(this.mobile_status){
+                    //alert('Điện Thoại ' + this.name + ' Đã Bật.');
+                    return true;
+                }else {
+                    //alert('Điện Thoại ' + this.name + ' Đã Tắt.');
+                    return false;
+                }
+            };
+            turnMobile () {
+                if(!this.checkStatus()){
+                    this.mobile_status = ON;
+                    alert('Điện Thoại ' + this.name + ' Đang Được Bật');
+                }else {
+                    this.mobile_status = OFF;
+                    alert('Điện Thoại ' + this.name + ' Đang Được tắt');
+                }
+            }
+            typeMessage(){
+                if(this.mobile_status){
+                    this.memory_type = prompt('Nhập Tin Nhắn.');
+                }
+            }
+            sendMessage (arg1){
+                if(this.mobile_status) {
+                    this.memory_send = this.memory_type;
+                    arg1.memory_receive = this.memory_send;
+                }
+            }
+            receiveMessage (){
+                if(this.mobile_status) {
+                    alert(this.name + ' có 1 tin nhắn đến.');
+                }
+            }
+            watchSentMessage(){
+                alert(this.memory_send);
+            }
+            checkReceivedMessage (){
+                if(this.mobile_status) {
+                    alert(this.name + ' ' + this.memory_receive);
+                }
+            }
+        }
+        let nokia = new Mobile('Nokia', 100, 100, 100, 100, ON);
+        let iphone = new Mobile('Iphone', 100, 100, 100, 100, ON);
+        nokia.checkStatus();
+        iphone.checkStatus();
+        nokia.typeMessage();
+        nokia.sendMessage(iphone);
+        nokia.watchSentMessage();
+        iphone.receiveMessage();
+        iphone.checkReceivedMessage();
+
+    </script>
+</body>
+</html>

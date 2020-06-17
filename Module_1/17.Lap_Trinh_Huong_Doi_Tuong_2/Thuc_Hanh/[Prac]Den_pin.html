@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Đèn Pin</title>
+</head>
+<body>
+    <script>
+        class Battery {
+            constructor(energy) {
+                // this.energy = energy;
+            }
+
+            setEnergy(energy) {
+                this.energy = energy;
+            }
+
+            getEnergy() {
+                return this.energy;
+            }
+
+            decreaseEnergy() {
+                if (this.energy > 0) {
+                    this.energy--;
+                }
+            }
+        }
+
+        class FlashLamp {
+            constructor(status) {
+                this.status = status;
+                // this.battery = battery;
+            }
+            setBattery (battery){
+                this.battery = battery;
+            }
+
+            getBattery(){
+                return this.battery;
+            }
+
+            light(){
+                if(this.status){
+                    alert('Đèn Sáng');
+                }else {
+                    alert('Đèn Không Sáng');
+                }
+            }
+
+            turnOn(){
+                this.status = true;
+            }
+
+            turnOff() {
+                this.status = false;
+            }
+        }
+        ////////////////////////////////////////////////////////////////
+        let battery = new Battery();
+        battery.setEnergy(10);
+        let lamp = new FlashLamp();
+        do {
+            lamp.setBattery(battery.getEnergy());
+            alert(lamp.getBattery());
+            lamp.turnOn();
+            battery.decreaseEnergy();
+            lamp.setBattery(battery.getEnergy());
+            alert(lamp.getBattery());
+            lamp.light();
+            lamp.turnOff();
+            lamp.light();
+        }while (battery.energy > 0);
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Xây Dựng Lớp Nhiệt Độ</title>
+</head>
+<body>
+    <script>
+        class Temperature {
+            constructor(tempC) {
+                this.tempC = tempC;
+            }
+            getTempF () {
+                return this.tempC * 1.8 +32;
+            };
+            getTempK () {
+                return this.tempC +273.15;
+            }
+        }
+        let change = new Temperature(10);
+        let F = change.getTempF();
+        let K = change.getTempK();
+        alert(F + ' ' + K);
+    </script>
+</body>
+</html>
