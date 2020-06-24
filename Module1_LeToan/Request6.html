@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Request6</title>
+</head>
+<body>
+<input type="button" onclick="displayMainMenu();" value="Menu">
+<script>
+    const VILLA = 500, HOUSE = 300, ROOM = 100;
+    const MANAGER = 500, SALE = 300, MARKETING = 200;
+
+    class Customer {
+        constructor(name, id, birth, email, address, typecustomer, discount, accperson, rentday, typeservice, typeroom) {
+            this.name = name;
+            this.id = id;
+            this.birth = birth;
+            this.email = email;
+            this.address = address;
+            this.typecustomer = typecustomer;
+            this.discount = discount;
+            this.accperson = accperson;
+            this.rentday = rentday;
+            this.typeservice = typeservice;
+            this.typeroom = typeroom;
+        }
+
+        ///////////////////////Name/////////////////////////////////
+        getName() {
+            return this.name;
+        }
+
+        setName(arg) {
+            this.name = arg;
+        }
+
+        ////////////////////////////ID Number//////////////////////////
+        getId() {
+            return this.id;
+        }
+
+        setId(arg) {
+            this.id = arg;
+        }
+
+        ////////////////////////////Date Of Birth////////////////////////
+        getDateOfBirth() {
+            return this.birth;
+        }
+
+        setDateOfBirth(arg) {
+            this.birth = arg;
+        }
+
+        ////////////////////////////Email///////////////////////////////
+        getEmail() {
+            return this.email;
+        }
+
+        setEmail(arg) {
+            this.email = arg;
+        }
+
+        ////////////////////////////Address/////////////////////////////
+        getAddress() {
+            return this.address;
+        }
+
+        setAddress(arg) {
+            this.address = arg;
+        }
+
+        ////////////////////////////Type Of Customer/////////////////////
+        getTypeCustomer() {
+            return this.typecustomer;
+        }
+
+        setTypeCustomer(arg) {
+            this.typecustomer = arg;
+        }
+
+        ///////////////////////////Discount///////////////////////////////
+        getDiscount() {
+            return this.discount;
+        }
+
+        setDiscount(arg) {
+            this.discount = arg;
+        }
+
+        //////////////////////////Accompany Person////////////////////////
+        getAccPerson() {
+            return this.accperson;
+        }
+
+        setAccPerson(arg) {
+            this.accperson = arg;
+        }
+
+        ///////////////////////////Rent Day///////////////////////////////
+        getRentDay() {
+            return this.rentday;
+        }
+
+        setRentDay(arg) {
+            this.rentday = arg;
+        }
+
+        ///////////////////////////Type Of Service/////////////////////////
+        getTypeService() {
+            return this.typeservice;
+        }
+
+        setTypeService(arg) {
+            this.typeservice = arg;
+        }
+
+        ////////////////////////////Type Of Room/////////////////////////////
+        getTypeRoom() {
+            return this.typeroom;
+        }
+
+        setTypeRoom(arg) {
+            this.typeroom = arg;
+        }
+
+        ////////////////////////////Calculate Money//////////////////////////
+        chargeMoney() {
+            let chargeMoney;
+            if (this.typeservice === 'Villa') {
+                chargeMoney = VILLA + this.rentday * (1 - this.discount / 100);
+            } else if (this.typeservice === 'House') {
+                chargeMoney = HOUSE + this.rentday * (1 - this.discount / 100);
+            } else {
+                chargeMoney = ROOM + this.rentday * (1 - this.discount / 100);
+            }
+            return chargeMoney;
+        }
+    }
+
+    class Employee extends Customer{
+        constructor(position) {
+            super();
+            this.position = position;
+        }
+        getPosition(){
+            return this.position;
+        }
+
+        setPosition(arg){
+            this.position = arg;
+        }
+
+        chargeMoneyEmployee() {
+            let chargeMoney;
+            if (this.typeservice === 'Villa') {
+                chargeMoney = VILLA + this.rentday * (1 - this.discount / 100);
+            } else if (this.typeservice === 'House') {
+                chargeMoney = HOUSE + this.rentday * (1 - this.discount / 100);
+            } else {
+                chargeMoney = ROOM + this.rentday * (1 - this.discount / 100);
+            }
+            if(this.position === 'Manager'){
+                chargeMoney -= MANAGER;
+            }else if (this.position === 'Sale'){
+                chargeMoney -= SALE;
+            }else {
+                chargeMoney -= MARKETING;
+            }
+            return chargeMoney;
+        }
+    }
+
+    let listCustomers = [];
+    let listEmployees = [];
+
+    ///////////////////////////////SHOW MENU////////////////////////////////////////////////////////////////////////
+    function displayMainMenu() {
+        let select = prompt('1. Add New Customer.' +
+            '\n2.Display Information Customer.' +
+            '\n3.Display total pay of customer' +
+            '\n4.Edit Information Customer.' +
+            '\n5.Delete Customer.' +
+            '\n6.Add New Employee.' +
+            '\n7.Exit.');
+        switch (select) {
+            case '1':
+                addNewCustomer();
+                break;
+            case '2':
+                displayCustomer();
+                break;
+            case '3':
+                displayCustomerPaid();
+                break;
+            case '4':
+                editCustomer();
+                break;
+            case '5':
+                deleteCustomer();
+                break;
+            case '6':
+                addNewEmployee();
+                break;
+            case '7':
+                break;
+            default:
+        }
+    }
+
+    ////////////////////////////////ADD NEW CUSTOMER FUNCTION///////////////////////////////////////////////////////
+    function addNewCustomer() {
+        let arrAddCustomers = new Customer();
+        arrAddCustomers.setName(editNameAddress(prompt('Nhập Họ Và Tên:')));
+        arrAddCustomers.setId(checkValidateId(prompt('Nhập Số CMND:')));
+        arrAddCustomers.setDateOfBirth(checkValidateDay(prompt('Nhập Ngày Tháng Năm Sinh (DD/MM/YYYY):')));
+        arrAddCustomers.setEmail(checkValidateEmail(prompt('Nhập Email:')));
+        arrAddCustomers.setAddress(editNameAddress(prompt('Nhập địa chỉ')));
+        arrAddCustomers.setTypeCustomer(checkValidateString(prompt('Nhập Loại Customer (Diamond, Platinum, Gold, Silver, Member):')));
+        arrAddCustomers.setDiscount(checkValidateNumber(parseInt(prompt('Nhập % Giảm Giá:'))));
+        arrAddCustomers.setAccPerson(checkValidateNumber(parseInt(prompt('Nhập Số Người Đi Cùng:'))));
+        arrAddCustomers.setRentDay(checkValidateNumber(parseInt(prompt('Nhập Số Ngày Thuê:'))));
+        arrAddCustomers.setTypeService(checkValidateString(prompt('Nhập Loại Dịch Vụ (Villa, House, Room):')));
+        arrAddCustomers.setTypeRoom(checkValidateString(prompt('Nhập Loại Phòng Muốn Thuê (Vip, Business,  Normal):')));
+        listCustomers.push(arrAddCustomers);
+        displayMainMenu();
+    }
+
+    /////////////////////////////////DISPLAY CUSTOMER LIST//////////////////////////////////////////////////////////
+    function displayCustomer() {
+        let select;
+        let data = '';
+        for (let i = 0; i < listCustomers.length; i++) {
+            data += (i + 1) + '. ' + listCustomers[i].name + ' ' + listCustomers[i].id + '\n';
+        }
+        select = prompt(data + '0.Back');
+        if (0 < select && select <= listCustomers.length) {
+            displayInformationCustomer(select - 1);
+        } else {
+            displayMainMenu();
+        }
+    }
+
+    function displayInformationCustomer(arg) {
+        alert('1.Họ Và Tên: ' + listCustomers[arg].getName() +
+            '\n2.Số CMND: ' + listCustomers[arg].getId() +
+            '\n3.Ngày Tháng Năm Sinh: ' + listCustomers[arg].getDateOfBirth() +
+            '\n4.Email: ' + listCustomers[arg].getEmail() +
+            '\n5.Địa Chỉ: ' + listCustomers[arg].getAddress() +
+            '\n6.Loại Customer: ' + listCustomers[arg].getTypeCustomer() +
+            '\n7.Giảm Giá: ' + listCustomers[arg].getDiscount() +
+            '\n8.Số Người Đi cùng: ' + listCustomers[arg].getAccPerson() +
+            '\n9.Số Ngày Thuê: ' + listCustomers[arg].getRentDay() +
+            '\n10.Loại Dịch Vụ: ' + listCustomers[arg].getTypeService() +
+            '\n11.Loại Phòng Muốn Thuê: ' + listCustomers[arg].getTypeRoom());
+        displayCustomer();
+    }
+
+    /////////////////////////////////DISPLAY TOTAL PAY OF CUSTOMER//////////////////////////////////////////////////
+    function displayCustomerPaid() {
+        let select;
+        let data = '';
+        for (let i = 0; i < listCustomers.length; i++) {
+            data += (i + 1) + '. ' + listCustomers[i].name + ' ' + listCustomers[i].id + '\n';
+        }
+        select = prompt(data + '0.Back');
+        if (0 < select && select <= listCustomers.length) {
+            displayTotalPaid(select - 1);
+        } else {
+            displayMainMenu();
+        }
+    }
+
+    function displayTotalPaid(arg) {
+        alert('Số Tiền Phải Trả là: ' + listCustomers[arg].chargeMoney());
+        displayCustomerPaid();
+    }
+
+    /////////////////////////////////EDIT CUSTOMER//////////////////////////////////////////////////////////////////
+    function editCustomer() {
+        let select;
+        let data = '';
+        for (let i = 0; i < listCustomers.length; i++) {
+            data += (i + 1) + '. ' + listCustomers[i].name + ' ' + listCustomers[i].id + '\n';
+        }
+        select = prompt(data + '0.Back');
+        if (0 < select && select <= listCustomers.length) {
+            editInformationCustomer(select - 1);
+        } else {
+            displayMainMenu();
+        }
+    }
+
+    function editInformationCustomer(arg) {
+        let select;
+        select = prompt('1.Họ Và Tên: ' + listCustomers[arg].getName() +
+            '\n2.Số CMND: ' + listCustomers[arg].getId() +
+            '\n3.Ngày Tháng Năm Sinh: ' + listCustomers[arg].getDateOfBirth() +
+            '\n4.Email: ' + listCustomers[arg].getEmail() +
+            '\n5.Địa Chỉ: ' + listCustomers[arg].getAddress() +
+            '\n6.Loại Customer: ' + listCustomers[arg].getTypeCustomer() +
+            '\n7.Giảm Giá: ' + listCustomers[arg].getDiscount() +
+            '\n8.Số Người Đi cùng: ' + listCustomers[arg].getAccPerson() +
+            '\n9.Số Ngày Thuê: ' + listCustomers[arg].getRentDay() +
+            '\n10.Loại Dịch Vụ: ' + listCustomers[arg].getTypeService() +
+            '\n11.Loại Phòng Muốn Thuê: ' + listCustomers[arg].getTypeRoom() +
+            '\n12.Back');
+        switch (select - 1) {
+            case 0:
+                listCustomers[arg].setName(editNameAddress(prompt('Nhập Lại Họ Và Tên:')));
+                break;
+            case 1:
+                listCustomers[arg].setId(checkValidateId(prompt('Nhập Lại Số CMND:')));
+                break;
+            case 2:
+                listCustomers[arg].setDateOfBirth(checkValidateDay(prompt('Nhập Lại Ngày Tháng Năm Sinh:')));
+                break;
+            case 3:
+                listCustomers[arg].setEmail(checkValidateEmail(prompt('Nhập Lại Email:')));
+                break;
+            case 4:
+                listCustomers[arg].setAddress(editNameAddress(prompt('Nhập Lại Địa Chỉ:')));
+                break;
+            case 5:
+                listCustomers[arg].setTypeCustomer(prompt('Nhập Lại Loại Customer:'));
+                break;
+            case 6:
+                listCustomers[arg].setDiscount(prompt('Nhập Lại Phần Giảm Giá:'));
+                break;
+            case 7:
+                listCustomers[arg].setAccPerson(prompt('Nhập Lại Số Người Đi Cùng:'));
+                break;
+            case 8:
+                listCustomers[arg].setRentDay(prompt('Nhâp Lại Số Ngày Thuê:'));
+                break;
+            case 9:
+                listCustomers[arg].setTypeService(prompt('Nhập Lại Loại Dịch Vụ:'));
+                break;
+            case 10:
+                listCustomers[arg].setTypeRoom(prompt('Nhập Lại Loại Phòng Muốn Thuê:'));
+                break;
+            case 11:
+                editCustomer();
+                break;
+            default:
+                alert('Failed');
+                editCustomer();
+        }
+        if (select >= 1 && select < 11) {
+            displayEditInformationCustomer(arg);
+            editCustomer();
+        }
+    }
+
+    function displayEditInformationCustomer(arg) {
+        alert('1.Họ Và Tên: ' + listCustomers[arg].getName() +
+            '\n2.Số CMND: ' + listCustomers[arg].getId() +
+            '\n3.Ngày Tháng Năm Sinh: ' + listCustomers[arg].getDateOfBirth() +
+            '\n4.Email: ' + listCustomers[arg].getEmail() +
+            '\n5.Địa Chỉ: ' + listCustomers[arg].getAddress() +
+            '\n6.Loại Customer: ' + listCustomers[arg].getTypeCustomer() +
+            '\n7.Giảm Giá: ' + listCustomers[arg].getDiscount() +
+            '\n8.Số Người Đi cùng: ' + listCustomers[arg].getAccPerson() +
+            '\n9.Số Ngày Thuê: ' + listCustomers[arg].getRentDay() +
+            '\n10.Loại Dịch Vụ: ' + listCustomers[arg].getTypeService() +
+            '\n11.Loại Phòng Muốn Thuê: ' + listCustomers[arg].getTypeRoom());
+    }
+
+    ///////////////////////////////////////DELETE CUSTOMER//////////////////////////////////////////////////////////
+    function deleteCustomer() {
+        let select;
+        let data = '';
+        let check;
+        for (let i = 0; i < listCustomers.length; i++) {
+            data += (i + 1) + '. ' + listCustomers[i].name + ' ' + listCustomers[i].id + '\n';
+        }
+        select = prompt('0. Back' + ' ' + '\n' + data);
+        if (0 < select && select <= listCustomers.length) {
+            check = confirm('Bạn Muốn Xóa Người Này: ' + listCustomers[select - 1].getName());
+            if (check) {
+                listCustomers.splice(select - 1, 1);
+                displayMainMenu();
+            } else {
+                displayMainMenu();
+            }
+        } else if (select === '0') {
+            displayMainMenu();
+        } else {
+            alert("Giá Trị Không Hợp Lệ.");
+            displayMainMenu();
+        }
+
+    }
+
+    ///////////////////////////////////////ADD NEW EMPLOYEE/////////////////////////////////////////////////////////
+    function addNewEmployee() {
+        let arrAddEmployee = new Employee();
+        arrAddEmployee.setName(prompt('Nhập tên nhân viên: '));
+        arrAddEmployee.setId(prompt('Nhập số CMND: '));
+        arrAddEmployee.setDateOfBirth(prompt('Nhập ngày tháng năm sinh (DD/MM/YYYY): '));
+        arrAddEmployee.setEmail(prompt('Nhập email: '));
+        arrAddEmployee.setAddress(prompt('Nhập địa chỉ: '));
+        arrAddEmployee.setTypeCustomer(prompt('Nhập loại khách hàng: '));
+        arrAddEmployee.setDiscount(prompt('Nhập % giảm giá: '));
+        arrAddEmployee.setAccPerson(prompt('Nhập số người đi cùng: '));
+        arrAddEmployee.setRentDay(prompt('Nhập số ngày thuê: '));
+        arrAddEmployee.setTypeService(prompt('Nhập loại dịch vụ: '));
+        arrAddEmployee.setTypeRoom(prompt('Nhập loại phòng: '));
+        arrAddEmployee.setPosition(prompt('Nhập chức vụ:'));
+        listEmployees.push(arrAddEmployee);
+        alert(listEmployees);
+}
+    ///////////////////////////////////////EDIT NAME ADDRESS FUNCTION///////////////////////////////////////////////
+    function editNameAddress(name) {
+        let arrTemp;
+        let fullName = '';
+        name = name.trim().toLowerCase();
+        arrTemp = name.split(' ');
+        for (let i = 0; i < arrTemp.length; i++) {
+            if (arrTemp[i] !== '') {
+                arrTemp[i] = arrTemp[i].charAt(0).toUpperCase() + arrTemp[i].substr(1);
+                fullName += arrTemp[i] + ' ';
+            }
+        }
+        return fullName;
+    }
+
+    //////////////////////////////////////CHECK VALIDATE ID/////////////////////////////////////////////////////////
+    function checkValidateId(idNumber) {
+        let isIdInvalid = true;
+        let checkId;
+        while (isIdInvalid) {
+            if (idNumber.length === 8) {
+                for (let i = 0; i <= idNumber.length - 1; i++) {
+                    checkId = parseInt(idNumber.substr(i, 1));
+                    if (isNaN(checkId)) {
+                        isIdInvalid = true;
+                        idNumber = prompt('CMND không hợp lệ.');
+                        break;
+                    }
+                    isIdInvalid = false;
+                }
+            } else {
+                idNumber = prompt('CMND không hợp lệ.');
+            }
+        }
+        return idNumber;
+    }
+
+    //////////////////////////////////////CHECK VALIDATE DAY////////////////////////////////////////////////////////
+    function checkValidateDay(dateofbirth) {
+        let isDateInvalid = true;
+        let checkDate, checkMonth, checkYear;
+        while (isDateInvalid) {
+            if (dateofbirth.length !== 10) {
+                dateofbirth = prompt('Giá trị không hợp lệ.');
+            } else {
+                checkDate = dateofbirth.substr(0, 2);
+                checkMonth = dateofbirth.substr(3, 2);
+                checkYear = dateofbirth.substr(6, 4);
+                if (0 < checkDate && checkDate <= 31) {
+                    if (0 < checkMonth && checkMonth <= 12) {
+                        if (1940 < checkYear && checkYear < 2020) {
+                            isDateInvalid = false;
+                        } else {
+                            dateofbirth = prompt('Giá trị không hợp lệ.');
+                        }
+                    } else {
+                        dateofbirth = prompt('Giá trị không hợp lệ.');
+                    }
+                } else {
+                    dateofbirth = prompt('Giá trị không hợp lệ.');
+                }
+            }
+        }
+        return dateofbirth;
+    }
+
+    //////////////////////////////////////CHECK VALIDATE EMAIL//////////////////////////////////////////////////////
+    function checkValidateEmail(email) {
+        let isEmailInvalid = true;
+        let at, at1, dot;
+        while (isEmailInvalid) {
+            at = email.indexOf('@');
+            at1 = email.lastIndexOf('@');
+            dot = email.lastIndexOf('.');
+            if ((at < 1) || ((dot + 3) > email.length) || ((at + 3) > dot) || (at !== at1)) {
+                email = prompt('Email không hợp lệ..')
+            } else {
+                isEmailInvalid = false;
+            }
+        }
+        return email;
+    }
+
+    //////////////////////////////////////CHECK VALIDATE POSITIVE NUMBER////////////////////////////////////////////
+    function checkValidateNumber(number) {
+        while(1){
+            if(number >=0){
+                return number;
+            }else {
+                number = prompt('Nhập Lại');
+            }
+        }
+    }
+
+    //////////////////////////////////////CHECK VALIDATE STRING/////////////////////////////////////////////////////
+    function checkValidateString(string) {
+        while (1) {
+            if (string.length !== 0) {
+                return string;
+            } else {
+                string = prompt('Giá Trị Không Hợp lệ. Vui Lòng Nhập Lại.');
+            }
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bouncing Ball</title>
+</head>
+<body>
+    <canvas id="output" width="500px" height="500px" style="border: 1px solid black"></canvas>
+    <script>
+        class Ball{
+            constructor(x, y, radius) {
+                this.x = x;
+                this.y = y;
+                this.radius = radius;
+            }
+            setBallHorizone(x){
+                this.x = x;
+            }
+
+            getBallHorizone(){
+                return this.x;
+            }
+
+            setBallVertical(y){
+                this.y = y;
+            }
+
+            getBallVertical(){
+                return this.y;
+            }
+
+            setBallRadius(r){
+                this.radius = r;
+            }
+
+            getBallRadius(){
+                return this.radius;
+            }
+        }
+        class Padding{
+            constructor(x) {
+                this.x = x;
+            }
+            setPaddingHorizone(x){
+                this.x = x;
+            }
+
+            getPaddingHorizone(){
+                return this.x;
+            }
+
+        }
+        let canvas = document.getElementById('output');
+        let ctx = canvas.getContext('2d');
+
+
+        let ball = new Ball(250,250,10);
+        let padding = new Padding(215);
+        let dx = 2;
+        let dy = 1;
+        function drawBall(){
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawPadding();
+            ctx.beginPath();
+            ctx.arc(ball.getBallHorizone(),ball.getBallVertical(),ball.getBallRadius(),0,2*Math.PI);
+            ctx.fillStyle = 'blue';
+            ctx.fill();
+            ctx.closePath();
+            ball.setBallHorizone(ball.getBallHorizone()+dx);
+            ball.setBallVertical(ball.getBallVertical()-dy);
+            if( ball.getBallHorizone() + dx > canvas.width - ball.radius || ball.getBallHorizone() + dx < ball.radius){
+                dx = -dx;
+            }
+            if( ball.getBallVertical() - dy > canvas.height - ball.radius || ball.getBallVertical() - dy < ball.radius){
+                dy = -dy;
+            }
+        }
+
+        function drawPadding(){
+            ctx.beginPath();
+            ctx.rect(padding.getPaddingHorizone(),450,70,10);
+            ctx.fillStyle = 'red';
+            ctx.fill();
+            ctx.closePath();
+            padding.setPaddingHorizone(padding.getPaddingHorizone()+dx);
+            if(padding.getPaddingHorizone() < 0){
+                dx = -dx;
+            }
+            if(padding.getPaddingHorizone() + 70 > canvas.width){
+                dx = -dx;
+            }
+        }
+
+        setInterval(drawBall,10);
+
+
+    </script>
+</body>
+</html>

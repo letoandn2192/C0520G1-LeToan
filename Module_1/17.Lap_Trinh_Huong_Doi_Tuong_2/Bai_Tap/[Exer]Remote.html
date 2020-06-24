@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Remote</title>
+</head>
+<input type="button" value="On/Off" onclick="remoteTV();">
+<body>
+    <script>
+        const ON = true;
+        const OFF = false;
+        class Remote{
+            constructor(code) {
+                this.code = code;
+            }
+
+            controlChannel(){
+                return prompt('Nhập channel bạn muốn: ');
+            }
+
+            controlVolume(){
+                return parseInt(prompt('Bạn Muốn Thay Đổi Volume'));
+            }
+        }
+
+        class Tivi{
+            constructor(channel, volume, status) {
+                this.channel = channel;
+                this.volume = volume;
+                this.status = status;
+            }
+
+            getChannel(){
+                return alert('Kênh bạn đang xem là: '+ this.channel);
+            }
+
+            changeChannel(arg){
+                this.channel = arg.controlChannel();
+            }
+
+            changeVolume(arg){
+                return this.volume += arg.controlVolume();
+            }
+
+            turnTV(){
+                this.status = !this.status;
+            }
+        }
+
+
+        let remote = new  Remote(2);
+        let tv = new Tivi(2, 10, OFF);
+        function remoteTV() {
+            tv.turnTV();
+            if(tv.status){
+                alert('TV đã bật');
+                tv.getChannel();
+                tv.changeChannel(remote);
+                tv.getChannel();
+                alert('volume hiện tại là: '+ tv.changeVolume(remote));
+
+            }else {
+                alert('TV đã tắt');
+            }
+        }
+    </script>
+</body>
+</html>

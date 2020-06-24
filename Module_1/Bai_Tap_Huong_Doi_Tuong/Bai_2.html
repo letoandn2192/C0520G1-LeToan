@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 2</title>
+</head>
+<body>
+    <script>
+        class Candidate{
+            constructor(name, id, date, math, english, liter) {
+                this.name = name;
+                this.id = id;
+                this.date = date;
+                this.math = math;
+                this.english = english;
+                this.liter = liter;
+            }
+            getName(){
+                return this.name;
+            }
+
+            setName(name){
+                this.name = name;
+            }
+
+            getId(){
+                return this.id;
+            }
+
+            setId(id){
+                this.id = id;
+            }
+
+            getDate(){
+                return this.date;
+            }
+
+            setDate(date){
+                this.date = date;
+            }
+
+            getMath(){
+                return this.math;
+            }
+
+            setMath(math){
+                this.math = math;
+            }
+
+            getEnglish(){
+                return this.english;
+            }
+
+            setEnglish(english){
+                this.english = english;
+            }
+
+            getLiter(){
+                return this.liter;
+            }
+
+            setLiter(liter){
+                this.liter = liter;
+            }
+
+            calSum(){
+                return parseFloat(this.getMath()) + parseFloat(this.getEnglish()) + parseFloat(this.getLiter());
+            }
+        }
+        class TextCandidate{
+            constructor(listStudent) {
+                this.listStudent = listStudent;
+            }
+            addStudent(){
+                let N = prompt('Nhập số sinh viên bạn muốn thêm.');
+                let i = 0;
+                while (i < N){
+                    let student = new Candidate();
+                    student.setName(prompt('Nhập Tên.'));
+                    student.setId(prompt('Nhập ID.'));
+                    student.setDate(prompt('Nhập Ngày Sinh.'));
+                    student.setMath(parseFloat(prompt('Nhập Điểm Toán.')));
+                    student.setLiter(parseFloat(prompt('Nhập Điểm Văn.')));
+                    student.setEnglish(parseFloat(prompt('Nhập Điểm Anh.')));
+                    listStudent.push(student);
+                    i++;
+                }
+            }
+
+            checkSum(){
+                let sum;
+                for(let i = 0; i < this.listStudent.length; i++){
+                    sum = this.listStudent[i].getLiter() + this.listStudent[i].getEnglish() + this.listStudent[i].getMath();
+                    if(sum > 15){
+                        alert(this.listStudent[i].getName());
+                    }
+                }
+            }
+        }
+        let listStudent = [];
+        let text = new TextCandidate(listStudent);
+        text.addStudent();
+        text.checkSum();
+        // let N = prompt('Nhập số thí sinh mà bạn muốn.');
+        // let arr = [];
+        // for(let i = 0; i < N; i++){
+        //     arr[i] = new Candidate();
+        //     arr[i].setName(prompt('Nhập tên thí sinh thứ: '+(i+1)));
+        //     arr[i].setId(prompt('Nhập mã thí sinh thứ: '+(i+1)));
+        //     arr[i].setDate(prompt('Nhập ngày sinh thí sinh thứ: '+(i+1)));
+        //     arr[i].setMath(prompt('Nhập điểm toán thí sinh thứ: '+(i+1)));
+        //     arr[i].setEnglish(prompt('Nhập điểm tiếng anh thí sinh thứ: '+(i+1)));
+        //     arr[i].setLiter(prompt('Nhập điểm văn thí sinh thứ: '+(i+1)));
+        // }
+        // for(let i = 0; i < arr.length; i++){
+        //     if(arr[i].calSum() > 15){
+        //         alert('Tên: ' + arr[i].getName() +
+        //         '\nId: ' + arr[i].getId() +
+        //         '\nNgày Sinh: ' +arr[i].getDate() +
+        //         '\nĐiểm Toán: ' +arr[i].getMath() +
+        //         '\nĐiểm Anh: ' +arr[i].getEnglish() +
+        //         '\nĐiểm Văn: ' +arr[i].getLiter() );
+        //     }
+        // }
+    </script>
+</body>
+</html>

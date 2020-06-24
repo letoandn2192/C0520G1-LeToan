@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 9</title>
+</head>
+<body>
+    <script>
+        //Bài 9: Nhập vào 1 chuỗi và thực hiện các yêu cầu sau:
+        let inputString = prompt('Nhập vào 1 chuỗi.');
+
+        //a. In ra chuỗi đảo ngược.
+        let reverse = '';
+        for(let i = inputString.length-1; i >= 0 ; i--){
+            reverse += inputString.charAt(i);
+        }
+        alert(reverse);
+
+        //b. Đổi chuỗi sang chữ hoa.
+        let upperString = inputString.toUpperCase();
+        alert(upperString);
+
+        //c. Đổi chuỗi sang chữ thường.
+        let lowerString = inputString.toLowerCase();
+        alert(lowerString);
+
+        //d. Đổi chuỗi đã cho sang chữ vừa hoa vừa thường.
+        let UPPER = 'QWERTYUIOPASDFGHJKLZXCVBNM';
+        let LOWER = 'qwertyuiopasdfghjklzxcvbnm';
+        let string = '';
+        for (let i = 0; i < inputString.length; i++){
+            if(UPPER.indexOf(inputString.charAt(i)) !== -1){
+                string += inputString.charAt(i).toLowerCase();
+                // string += inputString.charAt(i);
+            }else if(LOWER.indexOf(inputString.charAt(i)) !== -1){
+                string += inputString.charAt(i).toUpperCase();
+                //string += inputString.charAt(i);
+            }else {
+                string += inputString.charAt(i);
+            }
+        }
+        alert(string);
+
+    </script>
+</body>
+</html>

@@ -4,34 +4,157 @@
     <meta charset="UTF-8">
     <title>CaRo</title>
 </head>
-<p id="output"></p>
-<body>
-    <script>
-        const VALUE_EMPTY = 1;
-        const VALUE_X = 2;
-        const VALUE_O = 3;
-        const DEFAULT_COLS = 10;
-        const DEFAULT_ROWS = 10;
-        const DEFAULT_CELL_SIZE = 40;
 
-        function Cell(x, y) {
-            this.x = x;
-            this.y = y;
-            this.value = VALUE_EMPTY;
-            this.getHtml = function () {
-                let top = x * DEFAULT_CELL_SIZE;
-                let left = y * DEFAULT_CELL_SIZE;
-                let cellHtml = '<div id="cell-' + x + '-' + y + '" onclick="play(' + x + ',' + y + ')" class="cell" style="position: absolute; width: ' +
-                    DEFAULT_CELL_SIZE + 'px; height:' +
-                    DEFAULT_CELL_SIZE + 'px; left:' +
-                    left + 'px; top:' +
-                    top + 'px; line-height: ' +
-                    DEFAULT_CELL_SIZE + 'px;"></div>';
-                return cellHtml;
-            };
+<body>
+<p id="output"></p>
+<div ></div>
+    <script>
+        // class Table{
+        //     constructor(row, col) {
+        //         this.row = row;
+        //         this.col = col;
+        //         this.value = 0;
+        //     }
+        //
+        //     // drawTable(){
+        //     //     let table = '<table border="1px">';
+        //     //     for (let i = 0; i < this.row; i++){
+        //     //         table += '<tr>';
+        //     //         for (let j = 0; j < this.col; j++){
+        //     //             table += '<td width="25px"; height="25px">' + '</td>';
+        //     //         }
+        //     //         table += '</tr>';
+        //     //     }
+        //     //     table += '</table>';
+        //     //     document.getElementById('output').innerHTML = table;
+        //     // }
+        //
+        //     drawCell(){
+        //
+        //         // let cell = '<div id="cell-x-y" class="cell" style="position: absolute; width: 25px; height: 25px; top: 0px; left: 0px; line-height: 30px"></div>';
+        //         let cell = '<table id="cell-'+this.row+'-'+this.col+'" border="1px" style="top: '+this.col*33+'px; left: '+this.row*33+'px;position: absolute"><tr><td width="25px"; height="25px"></td></tr></table>';
+        //         //document.getElementById('output').innerHTML = cell;
+        //         return cell;
+        //     }
+        //     //
+        //     // tickCell(){
+        //     //     let cell = document.getElementById('cell-'+this.row+'-'+this.col);
+        //     //     switch (this.value){
+        //     //         case 1:
+        //     //             cell.innerHTML = "X";
+        //     //             break;
+        //     //         case 2:
+        //     //             cell.innerHTML = "O";
+        //     //             break;
+        //     //         default:
+        //     //             cell.innerHTML = "";
+        //     //             break;
+        //     //     }
+        //     // }
+        // }
+        //
+        // class Game{
+        //     constructor(rows, cols, Idelement) {
+        //         this.rows = rows;
+        //         this.cols = cols;
+        //         this.cells = [];
+        //         this.Idelement = Idelement;
+        //     }
+        //     drawBoard(){
+        //         let board = '';
+        //         for(let i = 0; i < this.rows; i++){
+        //             let row = [];
+        //             this.cells.push(row);
+        //             for (let j = 0; j < this.cols; j++){
+        //                 let cell = new Table(i,j);
+        //                 row.push(cell);
+        //                 board += cell.drawCell();
+        //             }
+        //
+        //         }
+        //         document.getElementById('output').innerHTML = board;
+        //     }
+        // }
+        // let game = new Game(10,10, 'output');
+        // game.drawBoard();
+        // let arr = [-4 ,3 ,-9 ,0, 4 ,1]
+        // function plusMinus(arr) {
+        //     let countPositive = 0;
+        //     let countNegative = 0;
+        //     let countZero = 0;
+        //     for(let i = 0; i < arr.length; i++){
+        //         if(arr[i] > 0){
+        //             countPositive++;
+        //         }else if(arr[i] < 0){
+        //             countNegative++;
+        //         }else{
+        //             countZero++;
+        //         }
+        //     }
+        //     Math.round(a)
+        //     // let result = [parseFloat(countPositive/arr.length), countNegative/arr.length, countZero/arr.length];
+        //     // return result;
+        //     document.write(parseFloat(countPositive/arr.length));
+        //     document.write(parseFloat(countNegative/arr.length));
+        //     document.write(parseFloat(countZero/arr.length));
+        // }
+        // plusMinus(arr);
+
+        // function staircase(n) {
+        //     for(let i = 0; i < n; i++){
+        //         for(let j = 0; j < n; j++){
+        //             if(i+j >= n-1){
+        //                 document.write('#');
+        //             }else{
+        //                 document.write('&nbsp');
+        //             }
+        //         }
+        //         document.write('<br>');
+        //     }
+        //
+        // }
+        // staircase(4);
+        // let arr = [7 ,69 ,2 ,221 ,8974]
+        // function miniMaxSum(arr) {
+        //     let max = arr[0];
+        //     let min = arr[0];
+        //     let sum = [0,0];
+        //     for(let i = 0; i < arr.length; i++){
+        //         if(arr[i] > max){
+        //             max = arr[i];
+        //         }
+        //         if(arr[i] < min){
+        //             min = arr[i];
+        //         }
+        //     }
+        //     for(let i = 0; i < arr.length; i++){
+        //         if(arr[i] !== max){
+        //             sum[0] += arr[i];
+        //         }
+        //         if(arr[i] !== min){
+        //             sum[1] += arr[i];
+        //         }
+        //     }
+        //     document.write(sum[1] + '&nbsp&nbsp' + sum[0]);
+        // }
+        let scores = [10 ,5 ,20 ,20 ,4 ,5 ,2 ,25 ,1];
+        function breakingRecords(scores) {
+            let count = [0,0];
+            let high = scores[0];
+            let low = scores[0];
+            for(let i = 0; i < scores.length; i++){
+                if(scores[i+1] > high){
+                    high = scores[i];
+                    count[0]++;
+                }
+                if(scores[i+1] < low){
+                    low = scores[i];
+                    count[1]++;
+                }
+            }
+            return count;
         }
-        let a = new Cell(9,1);
-        document.getElementById('output').innerHTML = a.getHtml();
+        breakingRecords(scores);
     </script>
 </body>
 </html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 3</title>
+</head>
+<body>
+<script>
+    //Bài 3:
+    class Student {
+        constructor(name, id, date, gender, group, course) {
+            this.name = name;
+            this.id = id;
+            this.date = date;
+            this.gender = gender;
+            this.group = group;
+            this.course = course;
+        }
+
+        getName() {
+            return this.name;
+        }
+
+        setName(name) {
+            this.name = name;
+        }
+
+        getId() {
+            return this.id;
+        }
+
+        setId(id) {
+            this.id = id;
+        }
+
+        getDate() {
+            return this.date;
+        }
+
+        setDate(date) {
+            this.date = date;
+        }
+
+        getGender() {
+            return this.gender;
+        }
+
+        setGender(gender) {
+            this.gender = gender;
+        }
+
+        getGroup() {
+            return this.group;
+        }
+
+        setGroup(group) {
+            this.group = group;
+        }
+
+        getCourse() {
+            return this.course;
+        }
+
+        setCourse(course) {
+            this.course = course;
+        }
+    }
+
+    let listStudent = [];
+    let student1 = new Student('Lê Toàn', 18, '02/01/1993', 'male', 'CĐT', 'K11');
+    let student2 = new Student('Lê Hùng', 12, '12/10/1995', 'male', 'ĐTVT', 'K13');
+    let student3 = new Student('Lê Trang', 10, '25/07/1994', 'female', 'CNTT', 'K12');
+    let student4 = new Student('Lê Trang', 9, '25/07/1994', 'female', 'CNTT', 'K12');
+    let student5 = new Student('Lê Trang', 7, '25/07/1994', 'female', 'CNTT', 'K12');
+    listStudent.push(student1);
+    listStudent.push(student2);
+    listStudent.push(student3);
+    listStudent.push(student4);
+    listStudent.push(student5);
+    displayMenu();
+
+    function displayMenu() {
+        let select = prompt('1. Add New Student' +
+            '\n2. Delete Student' +
+            '\n3. Search Student' +
+            '\n4. Display Information' +
+            '\n5. Sort List' +
+            '\n6. Exit');
+        switch (select) {
+            case '1':
+                addStudent();
+                break;
+            case '2':
+                select = prompt('1. Delete By Id.' +
+                    '\n2. Delete By Index');
+                if (select === '1') {
+                    removeStudentById();
+                } else if (select === '2') {
+                    removeStudentByIndex();
+                } else {
+                    alert('Failed');
+                    displayMenu();
+                }
+                break;
+            case '3':
+                searchStudent();
+                break;
+            case '4':
+                displayInfor();
+                break;
+            case '5':
+                sortList();
+                break;
+            default:
+        }
+    }
+
+    //////////////////////////////ADD NEW STUDENT///////////////////////////////////////////////////////////////////
+    function addStudent() {
+        let student = new Student();
+        student.setName(prompt('Nhập Tên Sinh Viên'));
+        student.setId(prompt('Nhập Mã Sinh Viên'));
+        student.setDate(prompt('Nhập Ngày Sinh Của Sinh Viên'));
+        student.setGender(prompt('Nhập Giới Tính Sinh Viên'));
+        student.setGroup(prompt('Nhập Lớp Của Sinh Viên'));
+        student.setCourse(prompt('Nhập Khóa Học Sinh Viên'));
+        listStudent.push(student);
+        alert('Đã Thêm Thành Công.');
+        displayMenu();
+    }
+
+    ///////////////////////////////////DELETE STUDENT///////////////////////////////////////////////////////////////
+    function removeStudentById() {
+        let id = parseInt(prompt('Nhập MSSV bạn muốn xóa'));
+        for (let i = 0; i < listStudent.length; i++) {
+            if (listStudent[i].getId() === id) {
+                let check = confirm('Bạn Muốn Xóa Sinh Viên ' + listStudent[i].getName() + ' ' + listStudent[i].getId());
+                if(check) {
+                    listStudent.splice(i, 1);
+                    alert('Đã xóa thành công.');
+                }
+            }
+        }
+        displayInfor();
+    }
+
+    function removeStudentByIndex() {
+        let index = parseInt(prompt('Nhập Vị trí Sinh Viên Bạn Muốn Xóa'));
+        let check = confirm('Bạn Muốn Xóa Sinh Viên ' + listStudent[index-1].getName() + ' ' + listStudent[index-1].getId());
+        if(check) {
+            listStudent.splice(index-1, 1);
+            alert('Đã xóa thành công.');
+        }
+        displayInfor();
+    }
+
+    /////////////////////////////////////SEARCH STUDENT///////////////////////////////////////////////////////////////
+    function searchStudent() {
+        let string = prompt('Nhập MSSV Hoặc Tên Bạn Muốn Tìm');
+        let isFind = false;
+        let result = '';
+        for (let i = 0; i < listStudent.length; i++) {
+            if (listStudent[i].getId().indexOf(string) !== -1) {
+                isFind = true;
+                result += (i + 1) + '. ' + listStudent[i].getName() + ' ' + listStudent[i].getId() + ' ' + listStudent[i].getDate() +
+                    ' ' + listStudent[i].getGender() + ' ' + listStudent[i].getGroup() + ' ' + listStudent[i].getCourse() + '\n';
+                break;
+            } else {
+                if (listStudent[i].getName().indexOf(string) !== -1) {
+                    isFind = true;
+                    result += (i + 1) + '. ' + listStudent[i].getName() + ' ' + listStudent[i].getId() + ' ' + listStudent[i].getDate() +
+                        ' ' + listStudent[i].getGender() + ' ' + listStudent[i].getGroup() + ' ' + listStudent[i].getCourse() + '\n';
+                }
+            }
+        }
+        if(isFind){
+            alert(result);
+        }else {
+            alert('Không Tìm Thấy.');
+        }
+        displayMenu();
+    }
+
+    //////////////////////////////DISPLAY INFORMATION//////////////////////////////////////////////////////////////
+    function displayInfor() {
+        let info = '';
+        for (let i = 0; i < listStudent.length; i++) {
+            info += (i + 1) + '. ' + listStudent[i].getName() + ' ' + listStudent[i].getId() + ' ' + listStudent[i].getDate() +
+                ' ' + listStudent[i].getGender() + ' ' + listStudent[i].getGroup() + ' ' + listStudent[i].getCourse() + '\n';
+        }
+        alert(info);
+        displayMenu();
+    }
+
+    ///////////////////////////////SORT STUDENT////////////////////////////////////////////////////////////////////
+    function sortList() {
+        let checkChange;
+        do {
+            checkChange = false;
+            for (let i = 0; i < listStudent.length - 1; i++) {
+                if (listStudent[i].getId() > listStudent[i + 1].getId()) {
+                    let temp = listStudent[i];
+                    listStudent[i] = listStudent[i + 1];
+                    listStudent[i + 1] = temp;
+                    checkChange = checkChange || true;
+                } else {
+                    checkChange = checkChange || false;
+                }
+            }
+        }while (checkChange);
+        displayInfor();
+    }
+</script>
+</body>
+</html>

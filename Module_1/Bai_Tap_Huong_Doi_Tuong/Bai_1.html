@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 1</title>
+</head>
+<body>
+    <script>
+        class PhanSo{
+            constructor(tuSo, mauSo) {
+                this.tuSo = tuSo;
+                this.mauSo = mauSo;
+            }
+            setTuSo(tuso){
+                this.tuSo = tuso;
+            }
+
+            getTuSo(){
+                return this.tuSo;
+            }
+
+            setMauSo(mauso){
+                this.mauSo = mauso;
+            }
+
+            getMauSo(){
+                return this.mauSo;
+            }
+
+            calDivision(phanso1, phanso2){
+                this.tuSo = phanso1.tuSo * phanso2.mauSo;
+                this.mauSo = phanso1.mauSo * phanso2.tuSo;
+            }
+
+            calMultiple(phanSo1, phanSo2){
+                this.tuSo = phanSo1.tuSo * phanSo2.tuSo;
+                this.mauSo = phanSo1.mauSo * phanSo2.mauSo;
+            }
+
+            calAddition(phanSo1, phanSo2){
+                this.tuSo = phanSo1.tuSo * phanSo2.mauSo + phanSo2.tuSo * phanSo1.mauSo;
+                this.mauSo = phanSo1.mauSo * phanSo2.mauSo;
+            }
+
+            calSubtract(phanSo1, phanSo2){
+                this.tuSo = phanSo1.tuSo * phanSo2.mauSo - phanSo2.tuSo * phanSo1.mauSo;
+                this.mauSo = phanSo1.mauSo * phanSo2.mauSo;
+            }
+
+            outputPhanSo(){
+                this.tuSo = this.getTuSo();
+                this.mauSo = this.getMauSo();
+                alert('Phân số là: '+ this.tuSo + '/' + this.mauSo);
+            }
+        }
+
+        let phanSo1 = new PhanSo(3,4);
+        let phanSo2 = new PhanSo(1,2);
+        phanSo1.outputPhanSo();
+        phanSo2.outputPhanSo();
+        let tongPhanSo = new PhanSo();
+        let hieuPhanSo = new PhanSo();
+        let tichPhanSo = new PhanSo();
+        let thuongPhanSo = new PhanSo();
+        tongPhanSo.calAddition(phanSo1, phanSo2);
+        tongPhanSo.outputPhanSo();
+        hieuPhanSo.calSubtract(phanSo1, phanSo2);
+        hieuPhanSo.outputPhanSo();
+        tichPhanSo.calMultiple(phanSo1, phanSo2);
+        tichPhanSo.outputPhanSo();
+        thuongPhanSo.calDivision(phanSo1, phanSo2);
+        thuongPhanSo.outputPhanSo();
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 12</title>
+</head>
+<body>
+<script>
+    //Bài 12: Viết chương trình thực hiện các công việc sau:
+    let inputRow = parseInt(prompt('Nhập số dòng M của ma trận.'));
+    let inputCol = parseInt(prompt('Nhập số cột N của ma trận.'));
+
+    //a. Nhập ma trận a (m dòng, n cột) gồm các phần tử kiểu int
+    let arr = new Array(inputCol);
+    for (let i = 0; i < inputRow; i++) {
+        arr[i] = new Array(inputCol);
+    }
+    for (let i = 0; i < inputRow; i++) {
+        for (let j = 0; j < inputCol; j++) {
+            arr[i][j] = parseInt(prompt('Nhâp phần tử ' + i + j));
+        }
+    }
+    alert(arr);
+
+    //b. Tính tích các số là bội số của 3 nằm trên dòng đầu tiên của ma trận a.
+    let p = 1;
+
+    for (let j = 0; j < arr[0].length; j++) {
+        if (arr[0][j] !== 0 && arr[0][j] % 3 === 0) {
+            p *= arr[0][j];
+        }
+    }
+    alert(p);
+
+    //c. Tạo ra mảng một chiều X[i] với X[i] là các giá trị lớn nhất trên dòng i của ma trận a
+    let X = [];
+    for (let i = 0; i < arr.length; i++) {
+        let max = arr[i][0];
+        for (let j = 1; j < arr[i].length; j++) {
+            if (arr[i][j] > max) {
+                max = arr[i][j];
+            }
+        }
+        X.push(max);
+    }
+    alert(X);
+
+</script>
+</body>
+</html>

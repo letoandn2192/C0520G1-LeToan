@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 10</title>
+</head>
+<body>
+<script>
+    //Bài 10: Nhập vào một chuỗi kí tự và thực hiện:
+    let inputString = prompt('Nhập Chuỗi Bạn Muốn:');
+    //a. In mỗi từ trên 1 dòng và đếm số từ.
+    inputString = inputString.trim();
+    let result = '';
+    let count = 0;
+    let list = [];
+    let listResult = [];
+    for (let i = 0; i < inputString.length; i++) {
+        if (inputString.charAt(i) === ' ') {
+            let temp = inputString.substr(0, i);
+            inputString = inputString.substr(i).trim();
+            listString(temp);
+            i = 0;
+            count++;
+            result += temp + '</br>';
+            if (inputString.indexOf(' ') === -1) {
+                result += inputString;
+                count++;
+                listString(inputString);
+            }
+        }
+    }
+
+    function listString(string) {
+        let check = false;
+        for (let i = 0; i < listResult.length; i++) {
+            if (listResult[i][0] === string) {
+                check = true;
+                index = i;
+                break;
+            }
+        }
+        if (check) {
+            listResult[index][1] += 1;
+        } else {
+            list.push(string);
+            list.push(1);
+            listResult.push(list);
+            list = [];
+        }
+    }
+
+    document.write(result);
+    alert(listResult);
+</script>
+</body>
+</html>

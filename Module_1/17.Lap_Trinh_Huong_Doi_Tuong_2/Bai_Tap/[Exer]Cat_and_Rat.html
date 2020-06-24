@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mèo Chuột</title>
+</head>
+<body>
+    <script>
+        const LIVE = true;
+        const DEATH = false;
+        class Rat{
+            constructor(name, weight, speed, status) {
+                this.name = name;
+                this.weight = weight;
+                this.speed = speed;
+                this.status = status;
+            }
+            say(){
+                alert('Chít chít chít!!!');
+            }
+
+            getSpeed(){
+                return this.speed;
+            }
+
+            getWeight(){
+                return this.weight;
+            }
+
+            getStatus(){
+                return this.status;
+            }
+
+            setStatus(arg){
+                this.status = arg;
+            }
+        }
+
+        class Cat{
+            constructor(name, weight, speed) {
+                this.name = name;
+                this.weight = weight;
+                this.speed = speed;
+            }
+
+            say(){
+                alert('Meo meo meo !!!');
+            }
+
+            catchRat(arg){
+                if(this.speed > arg.getSpeed()){
+                    alert('Bắt được chuột!!!');
+                }else {
+                    alert('Đang bắt chuột!!!');
+                }
+            }
+
+            setSpeed(arg){
+                this.speed = arg;
+            }
+
+            eatRat(arg){
+                if(arg.getStatus()){
+                    this.weight += arg.getWeight();
+                    alert('Ăn xong ròi!!!');
+                    alert('Khối lượng của mèo là: '+ this.weight);
+                }else {
+                    alert('Chuột chết rồi không ăn!!!');
+                }
+            }
+        }
+
+
+        let rat = new Rat('Jerry', 10, 20, LIVE);
+        let cat = new Cat('Tom', 20, 20);
+        cat.say();
+        rat.say();
+        cat.catchRat(rat);
+        cat.setSpeed(21);
+        cat.catchRat(rat);
+        cat.eatRat(rat);
+        cat.say();
+        rat.setStatus(DEATH);
+        cat.catchRat(rat);
+        cat.eatRat(rat);
+    </script>
+</body>
+</html>

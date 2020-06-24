@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 5</title>
+</head>
+<body>
+    <script>
+        //Bài 5: Viết chương trình tính: S = 1 + 1/3! + 1/5! +...+ 1/(2n-1)!
+        let inputN = parseInt(prompt('Nhập Số Nguyên Dương N:'));
+        function tinhGiaiThua(number) {
+            let giaiThua = 1;
+            for(let i = 1; i <=number; i++){
+                giaiThua *= i;
+            }
+            return giaiThua;
+        }
+
+        let sum = 0;
+        for(let i = 1; i <= inputN; i++){
+            sum += 1/tinhGiaiThua(2*i - 1);
+        }
+        alert(sum);
+    </script>
+</body>
+</html>

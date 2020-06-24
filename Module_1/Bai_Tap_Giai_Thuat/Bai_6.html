@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 6</title>
+</head>
+<body>
+    <script>
+        //Bài 6: Tính n!! = 1 * 3 * 5 * 7 *...*n (n lẻ)
+        //                = 2 * 4 * 6 * 8 *...*n (n chẵn)
+        let inputN = parseInt(prompt('Nhập Số Nguyên Dương N:'));
+        let result = 1;
+        if (inputN % 2 === 0){
+            for (let i = 2; i <= 4; i = i+2){
+                result *= i;
+            }
+        }else {
+            for (let i = 1; i <= inputN; i=i+2){
+                result *= i;
+            }
+        }
+        alert(result);
+    </script>
+</body>
+</html>

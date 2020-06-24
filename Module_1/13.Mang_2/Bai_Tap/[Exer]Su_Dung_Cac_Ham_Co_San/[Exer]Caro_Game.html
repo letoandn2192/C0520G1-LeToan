@@ -12,7 +12,6 @@
 </table>
 <script>
     let checkStatus = true;
-    let checkReset = false;
     let array = new Array(10);
     for (let i = 0; i < 10; i++) {
         array[i] = new Array(10);
@@ -52,36 +51,28 @@
                 if (array[i][j] === 'O') {
                     if (array[i][j + 1] === 'O' && array[i][j + 2] === 'O') {
                         alert('Player ' + array[i][j] + ' is winner.');
-                        checkReset = true;
                     }
                     if (array[i + 1][j] === 'O' && array[i + 2][j] === 'O') {
                         alert('Player ' + array[i][j] + ' is winner.');
-                        checkReset = true;
                     }
                     if (array[i + 1][j + 1] === 'O' && array[i + 2][j + 2] === 'O') {
                         alert('Player ' + array[i][j] + ' is winner.');
-                        checkReset = true;
                     }
                     if (array[i + 1][j - 1] === 'O' && array[i + 2][j - 2] === 'O') {
                         alert('Player ' + array[i][j] + ' is winner.');
-                        checkReset = true;
                     }
                 } else if (array[i][j] === 'X') {
                     if (array[i][j + 1] === 'X' && array[i][j + 2] === 'X') {
                         alert('Player ' + array[i][j] + ' is winner.');
-                        checkReset = true;
                     }
                     if (array[i + 1][j] === 'X' && array[i + 2][j] === 'X') {
                         alert('Player ' + array[i][j] + ' is winner.');
-                        checkReset = true;
                     }
                     if (array[i + 1][j + 1] === 'X' && array[i + 2][j + 2] === 'X') {
                         alert('Player ' + array[i][j] + ' is winner.');
-                        checkReset = true;
                     }
                     if (array[i + 1][j - 1] === 'X' && array[i + 2][j - 2] === 'X') {
                         alert('Player ' + array[i][j] + ' is winner.');
-                        checkReset = true;
                     }
                 }
             }
@@ -89,12 +80,9 @@
     }
 
     function resetGame() {
-        if (checkReset) {
-            for (let i = 0; i < 10; i++) {
-                array[i] = new Array(10);
-                for (let j = 0; j < 10; j++) {
-                    array[i][j] = '';
-                }
+        for (let i = 0; i < 10; i++) {
+            for (let j = 0; j < 10; j++) {
+                array[i][j] = '';
             }
         }
         showTable();

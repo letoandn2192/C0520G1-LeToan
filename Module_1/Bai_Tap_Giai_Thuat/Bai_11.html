@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 11</title>
+</head>
+<body>
+    <script>
+        //Bài 11: Viết chương ttrinhf thực hiện các công việc sau:
+        //a. Nhập một mảng gồm n phần tử nguyên dương.
+        let N = prompt('Nhập N số phần tử của mảng.');
+        let arr = new Array(N);
+        let sum = 0;
+        for (let i = 0; i < N; i++){
+            arr[i] = prompt('Nhập phần tử thứ '+ i);
+        }
+
+        //b. Tổng số dương lẻ của mảng.
+        for (let i = 0; i < arr.length; i++){
+            if(arr[i] > 0 && arr[i]%2 === 1){
+                sum += parseInt(arr[i]);
+            }
+        }
+
+        //c. Nhập phần tử k xem k có nằm trong mảng không. Nếu có xuất vị trí đầu tiên.
+        let check = prompt('Nhập số k: ');
+        let index = -1;
+        for(let i = 0; i < arr.length; i++){
+            if(check === arr[i]){
+                index = i;
+                break;
+            }
+        }
+        alert(index);
+
+        //d. Sắp xếp mảng theo thứ tự tăng dần.
+        arr.sort(function (a,b) {
+            return a-b;
+        });
+        alert(arr);
+    </script>
+</body>
+</html>

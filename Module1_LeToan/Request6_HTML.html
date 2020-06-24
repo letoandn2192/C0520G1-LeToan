@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        tr:nth-child(even) {
+            background-color: cornflowerblue;
+            padding: 10px;
+            text-align: left;
+        }
+        tr:hover{background-color: #f5f5f5;}
+        input{background-color: #f5f5f5;}
+        th{
+            opacity: 0.8;
+            background-color: #4CAF50;
+            color: white;
+        }
+        body{
+            align-content: center;
+            /*width: 1024px;*/
+            /*height: 558px;*/
+            background-image: url("furama.jpg");
+            background-repeat: repeat-x;
+        }
+    </style>
+</head>
+<body>
+<input type="button" onclick="addNewCustomer();" value="Add New Customer">
+<h2 align="center">FURAMA</h2>
+<p id="result"></p>
+<script>
+    let checkEmail = /^(\w{3,}@\w+\.\w+)$/;
+    let checkDate =  /^(([0][1-9]|[1-2]\d|[3][0-1])\/(0[1-9]|1[0-2])\/(19\d{2}|(20[0-2]\d)))$/;
+    let checkId = /[0-9]{8,8}/;
+    let checkNumber = /\d{1,}[^a-zA-Z-/*!@#$%^&*()_+|:;'"<>]/;
+    const VILLA = 500, HOUSE = 300, ROOM = 100;
+    let checkValid = false;
+
+    class Customer {
+        constructor(name, id, birth, email, address, typecustomer, discount, accperson, renday, typeservice, typeroom) {
+            this.name = name;
+            this.id = id;
+            this.email = email;
+            this.address = address;
+            this.typecustomer = typecustomer;
+            this.discount = discount;
+            this.accperson = accperson;
+            this.rentday = renday;
+            this.typeservice = typeservice;
+            this.typeroom = typeroom;
+        }
+
+        ///////////////////////Name/////////////////////////////////
+        getName() {
+            return this.name;
+        }
+
+        setName(arg) {
+            this.name = arg;
+        }
+
+        ////////////////////////////ID Number//////////////////////////
+        getId() {
+            return this.id;
+        }
+
+        setId(arg) {
+            this.id = arg;
+        }
+
+        ////////////////////////////Date Of Birth////////////////////////
+        getDateOfBirth() {
+            return this.birth;
+        }
+
+        setDateOfBirth(arg) {
+            this.birth = arg;
+        }
+
+        ////////////////////////////Email///////////////////////////////
+        getEmail() {
+            return this.email;
+        }
+
+        setEmail(arg) {
+            this.email = arg;
+        }
+
+        ////////////////////////////Address/////////////////////////////
+        getAddress() {
+            return this.address;
+        }
+
+        setAddress(arg) {
+            this.address = arg;
+        }
+
+        ////////////////////////////Type Of Customer/////////////////////
+        getTypeCustomer() {
+            return this.typecustomer;
+        }
+
+        setTypeCustomer(arg) {
+            this.typecustomer = arg;
+        }
+
+        ///////////////////////////Discount///////////////////////////////
+        getDiscount() {
+            return this.discount;
+        }
+
+        setDiscount(arg) {
+            this.discount = arg;
+        }
+
+        //////////////////////////Accompany Person////////////////////////
+        getAccPerson() {
+            return this.accperson;
+        }
+
+        setAccPerson(arg) {
+            this.accperson = arg;
+        }
+
+        ///////////////////////////Rent Day///////////////////////////////
+        getRentDay() {
+            return this.rentday;
+        }
+
+        setRentDay(arg) {
+            this.rentday = arg;
+        }
+
+        ///////////////////////////Type Of Service/////////////////////////
+        getTypeService() {
+            return this.typeservice;
+        }
+
+        setTypeService(arg) {
+            this.typeservice = arg;
+        }
+
+        ////////////////////////////Type Of Room/////////////////////////////
+        getTypeRoom() {
+            return this.typeroom;
+        }
+
+        setTypeRoom(arg) {
+            this.typeroom = arg;
+        }
+
+        ////////////////////////////Calculate Money//////////////////////////
+        chargeMoney() {
+            let chargeMoney;
+            if (this.typeservice === 'Villa') {
+                chargeMoney = VILLA * this.rentday * (1 - this.discount / 100);
+            } else if (this.typeservice === 'House') {
+                chargeMoney = HOUSE * this.rentday * (1 - this.discount / 100);
+            } else {
+                chargeMoney = ROOM * this.rentday * (1 - this.discount / 100);
+            }
+            return chargeMoney;
+        }
+    }
+
+    let listCustomer = [];
+
+    function displayTable() {
+        let table = '<table border="1px" style="border-collapse: collapse" align="center">';
+        table += '<tr>' +
+            '<th>Number</th>' +
+            '<th>Full Name</th>' +
+            '<th>Id Number</th>' +
+            '<th>Date of Birth</th>' +
+            '<th>Email</th>' +
+            '<th>Address</th>' +
+            '<th>Type of Customer</th>' +
+            '<th>Discount</th>' +
+            '<th>Accompany Person</th>' +
+            '<th>Rent Day</th>' +
+            '<th>Type of Service</th>' +
+            '<th>Type of Room</th>' +
+            '<th>Money Chagre</th>' +
+            '<th>Delete</th>' +
+            '</tr>';
+        for (let i = 0; i < listCustomer.length; i++) {
+            table += '<tr>' +
+                '<td align="center">' + (i + 1) + '</td>' +
+                '<td ondblclick="editName(' + i + ');">' + listCustomer[i].getName() + '</td>' +
+                '<td ondblclick="editId(' + i + ');">' + listCustomer[i].getId() + '</td>' +
+                '<td ondblclick="editDateOfBirth(' + i + ');">' + listCustomer[i].getDateOfBirth() + '</td>' +
+                '<td ondblclick="editEmail(' + i + ');">' + listCustomer[i].getEmail() + '</td>' +
+                '<td ondblclick="editAddress(' + i + ');">' + listCustomer[i].getAddress() + '</td>' +
+                '<td ondblclick="editTypeCustomer(' + i + ');" align="center">' + listCustomer[i].getTypeCustomer() + '</td>' +
+                '<td ondblclick="editDiscount(' + i + ');" align="center">' + listCustomer[i].getDiscount() + '%' + '</td>' +
+                '<td ondblclick="editAccPerson(' + i + ');" align="center">' + listCustomer[i].getAccPerson() + '</td>' +
+                '<td ondblclick="editRentDay(' + i + ');" align="center">' + listCustomer[i].getRentDay() + '</td>' +
+                '<td ondblclick="editTypeService(' + i + ');" align="center">' + listCustomer[i].getTypeService() + '</td>' +
+                '<td ondblclick="editTypeRoom(' + i + ');" align="center">' + listCustomer[i].getTypeRoom() + '</td>' +
+                '<td>' + listCustomer[i].chargeMoney() + '$' + '</td>' +
+                '<td>' + '<input type="button" value="Delete" onclick="deleteCustomer(' + i + ');">' + '</td>' +
+                '</tr:>';
+        }
+        table += '</table>';
+        document.getElementById('result').innerHTML = table;
+    }
+
+    function addNewCustomer() {
+        let arrAddCustomer = new Customer();
+        arrAddCustomer.setName(prompt('Nhập Họ Và Tên:'));
+        do {
+            arrAddCustomer.setId(prompt('Nhập Số CMND:'));
+            checkValid = checkId.test(arrAddCustomer.getId());
+            if (!checkValid) {
+                alert('Không Hợp Lệ');
+            }
+        } while (!checkValid);
+        checkValid = false;
+        do {
+            arrAddCustomer.setDateOfBirth(prompt('Nhập Ngày Tháng Năm Sinh:'));
+            checkValid = checkDate.test(arrAddCustomer.getDateOfBirth());
+            if (!checkValid) {
+                alert('Không Hợp Lệ');
+            }
+        } while (!checkValid);
+        checkValid = false;
+        do {
+            arrAddCustomer.setEmail(prompt('Nhập Email:'));
+            checkValid = checkEmail.test(arrAddCustomer.getEmail());
+            if (!checkValid) {
+                alert('Email Không Hợp Lệ.');
+            }
+        } while (!checkValid);
+        checkValid = false;
+        arrAddCustomer.setAddress(prompt('Nhập Địa Chỉ:'));
+        arrAddCustomer.setTypeCustomer(prompt('Nhập Loại Customer:'));
+        do{
+            arrAddCustomer.setDiscount(parseInt(prompt('Nhập % Giảm Giá:')));
+            if (arrAddCustomer.getDiscount() >= 0) {
+                break;
+            } else {
+                alert('Không Hợp Lệ');
+            }
+        }while (1);
+
+        arrAddCustomer.setAccPerson(prompt('Nhập Số Lượng Người ĐI Cùng:'));
+        arrAddCustomer.setRentDay(prompt('Nhập Số Ngày Thuê:'));
+        arrAddCustomer.setTypeService(prompt('Nhập Loại Dịch Vụ:'));
+        arrAddCustomer.setTypeRoom(prompt('Nhập Loại Phòng:'));
+        listCustomer.push(arrAddCustomer);
+        displayTable();
+    }
+
+    /////////////////////////////////////////EDIT NAME CUSTOMER/////////////////////////////////////////////////////////
+    function editName(index) {
+        listCustomer[index].setName(prompt('Nhập Lại Họ Và Tên'));
+        displayTable();
+    }
+
+    ////////////////////////////////////////EDIT ID NUMBER//////////////////////////////////////////////////////////////
+    function editId(index) {
+        listCustomer[index].setId(prompt('Nhập Lại CMND'));
+        displayTable();
+    }
+
+    ////////////////////////////////////////EDIT DATE OF BIRTH//////////////////////////////////////////////////////////
+    function editDateOfBirth(index) {
+        listCustomer[index].setDateOfBirth(prompt('Nhập Lại Ngày Tháng Năm Sinh'));
+        displayTable();
+    }
+
+    ////////////////////////////////////////EDIT EMAIL//////////////////////////////////////////////////////////////////
+    function editEmail(index) {
+        listCustomer[index].setEmail(prompt('Nhập Lại Email'));
+        displayTable();
+    }
+
+    /////////////////////////////////////////EDIT ADDRESS///////////////////////////////////////////////////////////////
+    function editAddress(index) {
+        listCustomer[index].setAddress(prompt('Nhập Lại Địa Chỉ'));
+        displayTable();
+    }
+
+    ////////////////////////////////////////EDIT TYPE OF CUSTOMER///////////////////////////////////////////////////////
+    function editTypeCustomer(index) {
+        listCustomer[index].setTypeCustomer(prompt('Nhập Lại Loại Customer'));
+        displayTable();
+    }
+
+    //////////////////////////////////////////EDIT DISCOUNT/////////////////////////////////////////////////////////////
+    function editDiscount(index) {
+        listCustomer[index].setDiscount(prompt('Nhập Lại % Giảm Giá'));
+        displayTable();
+    }
+
+    //////////////////////////////////////////EDIT ACCOMPANY PERSON/////////////////////////////////////////////////////
+    function editAccPerson(index) {
+        listCustomer[index].setAccPerson(prompt('Nhập Lại Số Người Đi Cùng'));
+        displayTable();
+    }
+
+    //////////////////////////////////////////EDIT RENT DAY/////////////////////////////////////////////////////////////
+    function editRentDay(index) {
+        listCustomer[index].setRentDay(prompt('Nhập Lại Số Ngày Thuê'));
+        displayTable();
+    }
+
+    //////////////////////////////////////////EDIT TYPE OF SERVICE//////////////////////////////////////////////////////
+    function editTypeService(index) {
+        listCustomer[index].setTypeService(prompt('Nhập Lại Loại Dịch Vụ'));
+        displayTable();
+    }
+
+    //////////////////////////////////////////EDIT TYPE OF ROOM/////////////////////////////////////////////////////////
+    function editTypeRoom(index) {
+        listCustomer[index].setTypeRoom(prompt('Nhập Lại Loại Phòng'));
+        displayTable();
+    }
+
+    //////////////////////////////////////////DELETE CUSTOMER///////////////////////////////////////////////////////////
+    function deleteCustomer(index) {
+        let check = confirm('Bạn Muốn Xóa ' + listCustomer[index].getName() + '?');
+        if (check) {
+            listCustomer.splice(index, 1);
+            displayTable();
+        }
+    }
+
+    displayTable();
+</script>
+</body>
+</html>

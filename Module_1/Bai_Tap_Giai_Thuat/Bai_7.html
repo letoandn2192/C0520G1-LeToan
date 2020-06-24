@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 7</title>
+</head>
+<body>
+    <script>
+        //Bài 7: Tính tổng và tích của 1 số nguyên dương m cho trước.
+        let input = prompt('Nhập Số Nguyên Dương:');
+        let sum = 0;
+        let mul = 1;
+        for (let i= 0; i < input.length; i++){
+            sum += parseInt(input.charAt(i));
+            mul *= parseInt(input.charAt(i));
+        }
+        alert(sum);
+        alert(mul);
+    </script>
+</body>
+</html>

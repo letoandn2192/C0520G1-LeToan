@@ -3,48 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+
 </head>
 <body>
-<input type="button" onclick="addNewCustomer();">
-<p id="result"></p>
-    <script>
+<!--<div style="border: solid; border-width: 1px; margin-left: 200px; width: 700px; height: 500px">-->
+<!--    <h1 style="margin-left: 150px">EMPLOYEE CONTROL</h1>-->
+<!--    <input type="button" value="Add New Employee" onclick="addNewEmployee();" style="background-color: lightgreen">-->
+<!--    <p id="output"></p>-->
+<!--</div>-->
+<script>
+    let arr = [1,2,3];
+    let a= arr.concat(4 ,[5,[6,7]]);
+    alert(a.length);
+    alert(a[5][0]);
 
-         arrListCustomers = new Array();
-        arrAddCustomers = new Array();
-        // arrListCustomers.push(arrAddCustomers1);
-        // alert(arrListCustomers);
-        // arrAddCustomers1 = [0,0,0,0,0,0,0,0,0,0,0];
-        // arrListCustomers.push(arrAddCustomers1);
-        // alert(arrListCustomers);
-        // alert(arrListCustomers.length);
-        function addNewCustomer() {
-            // alert(arrListCustomers.length);
-            // arrListCustomers[arrListCustomers.length][0] = prompt('Nhập Họ Và Tên:');
-            // arrListCustomers[arrListCustomers.length][1] = prompt('Nhập Họ Và Tên:');
-            // arrListCustomers[arrListCustomers.length][2] = prompt('Nhập Họ Và Tên:');
-            // arrListCustomers[arrListCustomers.length][3] = prompt('Nhập Họ Và Tên:');
-            // arrListCustomers[arrListCustomers.length][4] = prompt('Nhập Họ Và Tên:');
-            // arrListCustomers[arrListCustomers.length][5] = prompt('Nhập Họ Và Tên:');
-            // arrListCustomers[arrListCustomers.length][6] = prompt('Nhập Họ Và Tên:');
-            // arrListCustomers[arrListCustomers.length][7] = prompt('Nhập Họ Và Tên:');
-            // arrListCustomers[arrListCustomers.length][8] = prompt('Nhập Họ Và Tên:');
-            // arrListCustomers[arrListCustomers.length][9] = prompt('Nhập Họ Và Tên:');
-            // arrListCustomers[arrListCustomers.length][10] = prompt('Nhập Họ Và Tên:');
-            arrAddCustomers[1] = prompt('Nhập Số CMND:');
-            arrAddCustomers[2] = prompt('Nhập Ngày Tháng Năm Sinh:');
-            arrAddCustomers[3] = prompt('Nhập Email:');
-            arrAddCustomers[4] = prompt('Nhập địa chỉ');
-            arrAddCustomers[5] = prompt('Nhập Loại Customer:');
-            arrAddCustomers[6] = prompt('Nhập % Giảm Giá:');
-            arrAddCustomers[7] = prompt('Nhập Số Người Đi Cùng:');
-            arrAddCustomers[8] = prompt('Nhập Số Ngày Thuê:');
-            arrAddCustomers[9] = prompt('Nhập Loại Dịch Vụ:');
-            arrAddCustomers[10] = prompt('Nhập Loại Phòng Muốn Thuê:');
-            arrListCustomers.push(arrAddCustomers);
-            alert(arrListCustomers);
-            alert(arrListCustomers.length);
-
-        }
-    </script>
+    // class Employee{
+    //     constructor(name, birth, address, salary, position) {
+    //         this.name = name;
+    //         this.birth = birth;
+    //         this.address = address;
+    //         this.salary = salary;
+    //         this.position = position;
+    //     }
+    //     setName(name){
+    //         this.name = name;
+    //     }
+    //
+    //     getName(){
+    //         return this.name;
+    //     }
+    //
+    //     setDateOfBirth(date){
+    //         this.birth = date;
+    //     }
+    //
+    //     getDateOfBirth(){
+    //         return this.birth;
+    //     }
+    //
+    //     setAddress(address){
+    //         this.address = address;
+    //     }
+    //
+    //     getAddress(){
+    //         return this.address;
+    //     }
+    //
+    //     setSalary(salary){
+    //         this.salary = salary;
+    //     }
+    //
+    //     getSalary(){
+    //         return this.salary;
+    //     }
+    //
+    //     setPosition(position){
+    //         this.position = position;
+    //     }
+    //
+    //     getPosition(){
+    //         return this.position;
+    //     }
+    // }
+    // let listEmployee = [];
+    // display();
+    // function display() {
+    //     let table = '<table style="border-collapse: collapse" border="1px">';
+    //     table += '<tr>' +
+    //             '<th>Number</th>' +
+    //             '<th>Name</th>' +
+    //             '<th>Date Of Birth</th>' +
+    //             '<th>Address</th>' +
+    //             '<th>Salary</th>' +
+    //             '<th>Position</th>' +
+    //             '<th style="background-color: yellow">Edit</th>' +
+    //             '<th style="background-color: red">Delete</th>' +
+    //             '</tr>';
+    //     for(let i = 0; i < listEmployee.length; i++){
+    //         table += '<tr>' +
+    //                 '<th>' + (i+1) +'</th>' +
+    //                 '<th>' + listEmployee[i].getName() +'</th>' +
+    //                 '<th>' + listEmployee[i].getDateOfBirth() +'</th>' +
+    //                 '<th>' + listEmployee[i].getAddress() +'</th>' +
+    //                 '<th>' + listEmployee[i].getSalary() +'</th>' +
+    //                 '<th>' + listEmployee[i].getPosition() +'</th>' +
+    //                 '<th>' + '<input type="button" value="Edit" onclick="editInfo('+ i +');">' +'</th>' +
+    //                 '<th>' + '<input type="button" value="Delete" onclick="deleteInfo(' + i +');">' +'</th>' +
+    //                 '</tr>';
+    //     }
+    //     table += '</table>';
+    //     document.getElementById('output').innerHTML = table;
+    // }
+    //
+    // function addNewEmployee() {
+    //     let employee = new Employee();
+    //     employee.setName(prompt('Nhập Tên:'));
+    //     employee.setDateOfBirth(prompt('Nhập Ngày Sinh:'));
+    //     employee.setAddress(prompt('Nhập Địa Chỉ:'));
+    //     employee.setSalary(prompt('Nhập Lương:'));
+    //     employee.setPosition(prompt('Nhập Chức Vụ:'));
+    //     listEmployee.push(employee);
+    //     display();
+    // }
+    // function editInfo(index) {
+    //     listEmployee[index].setName(prompt('Nhập Tên.'));
+    //     listEmployee[index].setDateOfBirth(prompt('Nhập Ngày Sinh.'));
+    //     listEmployee[index].setAddress(prompt('Nhập Địa Chỉ.'));
+    //     listEmployee[index].setSalary(prompt('Nhập Lương.'));
+    //     listEmployee[index].setPosition(prompt('Nhập Chức Vụ.'));
+    //     display();
+    // }
+    // function deleteInfo(index) {
+    //     let check = confirm('Bạn Muốn Xóa Nhân VIên Này.');
+    //     if(check){
+    //         listEmployee.splice(index,1);
+    //     }
+    //     display();
+    // }
+</script>
 </body>
 </html>

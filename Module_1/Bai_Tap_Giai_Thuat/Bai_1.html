@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 1</title>
+</head>
+<p id="output"></p>
+<body>
+    <script>
+        //Bài 1: Viết chương trình in ra dấu * theo hình chữ nhật.
+        let d =  '';
+        let N = prompt('Nhập Chiều Cao Của Tháp.');
+        for(let i = 0; i < N; i++){
+            for (let j = 0; j < 5; j++){
+                //document.write('*');
+                d += '*';
+            }
+            //document.write('<br>');
+            d += '<br>';
+        }
+        document.getElementById('output').innerHTML = d;
+    </script>
+</body>
+</html>

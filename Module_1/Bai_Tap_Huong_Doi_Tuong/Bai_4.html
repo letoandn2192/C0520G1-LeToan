@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    class Employee{
+        constructor(id, name, gender, hometown, year, major, level, salarycoef , support) {
+            this.id = id;
+            this.name = name;
+            this.gender = gender;
+            this.hometown = hometown;
+            this.year = year;
+            this.major = major;
+            this.level = level;
+            this.salarycoef = salarycoef;
+            this.support = support;
+        }
+        getId(){
+            return this.id;
+        }
+
+        setId(id){
+            this.id = id;
+        }
+
+        getName(){
+            return this.name;
+        }
+
+        setName(name){
+            this.name = name;
+        }
+
+        getGender(){
+            return this.gender;
+        }
+
+        setGender(gender){
+            this.gender = gender;
+        }
+
+        getHometown(){
+            return this.hometown;
+        }
+
+        setHometown(hometown){
+            this.hometown = hometown;
+        }
+
+        getYear(){
+            return this.year;
+        }
+
+        setYear(year){
+            this.year = year;
+        }
+
+        getMajor(){
+            return this.major;
+        }
+
+        setMajor(major){
+            this.major = major;
+        }
+
+        getLevel(){
+            return this.level;
+        }
+
+        setLevel(level){
+            this.level = level;
+        }
+
+        getSalaryCoef(){
+            return this.salarycoef;
+        }
+
+        setSalaryCoef(salarycoef){
+            this.salarycoef = salarycoef;
+        }
+
+        getSupport(){
+            return this.support;
+        }
+
+        setSupport(support){
+            this.support = support;
+        }
+
+        getSalary(){
+            return 450000 * (this.salarycoef + this.support);
+        }
+    }
+    let employee1 = new Employee('1234', 'Lê Tuấn','male', 'Đà Nẵng', '1993', 'ĐTVT', 'Đại Học', 2, 5);
+    let employee2 = new Employee('1275', 'Lê Trang', 'female', 'Đà Nẵng', '1995', 'ĐTVT', 'Đại Học', 1, 4);
+    let employee3 = new Employee('1496', 'Lê Hùng', 'male', 'Đà Nẵng', '1992', 'ĐTVT', 'Cao Đẳng', 1.5, 4.5);
+    let listEmployee = [];
+    listEmployee.push(employee1);
+    listEmployee.push(employee2);
+    listEmployee.push(employee3);
+    displayMenu();
+    function displayMenu() {
+        let select = prompt('1. Add New Employee.' +
+                            '\n2. Show Information.' +
+                            '\n3. Calculate Salary.' +
+                            '\n4. List Information.' +
+                            '\n5. Exit.');
+        switch (select) {
+            case '1':
+                addNewEmployee();
+                break;
+            case '2':
+                showInfo();
+                break;
+            case '3':
+                calcuSalary();
+                break;
+            case '4':
+                listInfo();
+                break;
+            default:
+        }
+    }
+    ///////////////////////////////////////ADD NEW EMPLOYEE//////////////////////////////////////////////////////////
+    function addNewEmployee() {
+        let name = prompt('Input new employee\'s name: ');
+        let id = prompt('Input new employee\'s id: ');
+        let gender = prompt('Input new employee\'s gender: ');
+        let hometown = prompt('Input new employee\'s hometown: ');
+        let year = prompt('Input new employee\'s year of birth: ');
+        let major = prompt('Input new employee\'s major: ');
+        let level = prompt('Input new employee\'s level: ');
+        let salarycoef = parseFloat(prompt('Input new employee\'s salarycoef: '));
+        let support = parseFloat(prompt('Input new employee\'s support: '));
+        let employee = new Employee(id,name,gender,hometown,year,major,level,salarycoef,support);
+        listEmployee.push(employee);
+        alert('Finished');
+        displayMenu();
+    }
+
+    /////////////////////////////////////SHOW INFORMATION////////////////////////////////////////////////////////////
+    function showInfo() {
+        let info = '';
+        for (let i=0; i < listEmployee.length; i++){
+            info += (i+1) + '. ' + listEmployee[i].getName() + ' ' + listEmployee[i].getId() +
+                    ' ' + listEmployee[i].getGender() + ' ' + listEmployee[i].getHometown() +
+                    ' ' + listEmployee[i].getYear() + ' ' + listEmployee[i].getMajor() +
+                    ' ' + listEmployee[i].getLevel() + ' ' + listEmployee[i].getSalaryCoef() + ' ' + listEmployee[i].getSupport() + '\n';
+        }
+        alert(info);
+        displayMenu();
+    }
+
+    ///////////////////////////////////////CALCULATOR SALARY/////////////////////////////////////////////////////////
+    function calcuSalary() {
+        let sum = 0;
+        for (let i = 0; i < listEmployee.length; i++){
+            sum += listEmployee[i].getSalary();
+        }
+        alert('Tổng Lương Cần Phải Trả Cho Nhân Viên Là: '+ sum + ' VND');
+        displayMenu();
+    }
+
+    ///////////////////////////////////////LIST INFORMATION///////////////////////////////////////////////////////////
+    function listInfo() {
+        let info = prompt('1. List by id.'+
+            '\n2. List by name.'+
+            '\n3. List by gender.'+
+            '\n4. List by hometown.'+
+            '\n5. List by year.'+
+            '\n6. List by major.'+
+            '\n7. List by Level.'+
+            '\nInput information you want to list.');
+        switch (info) {
+            case '1':
+                listById();
+                break;
+            case '2':
+                listByName();
+                break;
+            case '3':
+                listByGender();
+                break;
+            case '4':
+                listByHometown();
+                break;
+            case '5':
+                listByYear();
+                break;
+            default:
+                alert('failed');
+        }
+        displayMenu();
+    }
+
+    /////////////////////////////////////////LIST BY ID////////////////////////////////////////////////////////////////
+    function listById() {
+        let info = '';
+        let count = 0;
+        let id = prompt('Input id you want to list');
+        for (let i = 0; i < listEmployee.length; i++){
+            if(listEmployee[i].getId().indexOf(id) !== -1){
+                info += (count + 1) + '. ' + listEmployee[i].getName() + ' ' + listEmployee[i].getId() +
+                    ' ' + listEmployee[i].getGender() + ' ' + listEmployee[i].getHometown() +
+                    ' ' + listEmployee[i].getYear() + ' ' + listEmployee[i].getMajor() +
+                    ' ' + listEmployee[i].getLevel() + ' ' + listEmployee[i].getSalaryCoef() + ' ' + listEmployee[i].getSupport() + '\n';
+                count++
+            }
+        }
+        info = 'Found ' + count + ' information:' + '\n' + info;
+        alert(info);
+    }
+
+    ///////////////////////////////////////////LIST BY NAME//////////////////////////////////////////////////////////
+    function listByName() {
+        let info = '';
+        let count = 0;
+        let name = prompt('Input name you want to list').toLowerCase();
+        for (let i = 0; i < listEmployee.length; i++){
+            if(listEmployee[i].getName().toLowerCase().indexOf(name) !== -1){
+                info += (count + 1) + '. ' + listEmployee[i].getName() + ' ' + listEmployee[i].getId() +
+                    ' ' + listEmployee[i].getGender() + ' ' + listEmployee[i].getHometown() +
+                    ' ' + listEmployee[i].getYear() + ' ' + listEmployee[i].getMajor() +
+                    ' ' + listEmployee[i].getLevel() + ' ' + listEmployee[i].getSalaryCoef() + ' ' + listEmployee[i].getSupport() + '\n';
+                count++
+            }
+        }
+        info = 'Found ' + count + ' information:' + '\n' + info;
+        alert(info);
+    }
+
+    ///////////////////////////////////////////////////LIST BY GENDER//////////////////////////////////////////////////
+    function listByGender() {
+        let info = '';
+        let count = 0;
+        let gender = prompt('Input gender you want to list').toLowerCase();
+        for (let i = 0; i < listEmployee.length; i++){
+            if(listEmployee[i].getGender().toLowerCase() === gender){
+                count++;
+                info += count + '. ' + listEmployee[i].getName() + ' ' + listEmployee[i].getId() +
+                    ' ' + listEmployee[i].getGender() + ' ' + listEmployee[i].getHometown() +
+                    ' ' + listEmployee[i].getYear() + ' ' + listEmployee[i].getMajor() +
+                    ' ' + listEmployee[i].getLevel() + ' ' + listEmployee[i].getSalaryCoef() + ' ' + listEmployee[i].getSupport() + '\n';
+            }
+        }
+        info = 'Found ' + count + ' information:' + '\n' + info;
+        alert(info);
+    }
+
+    //////////////////////////////////////////////////LIST BY HOMETOWN////////////////////////////////////////////////
+    function listByHometown() {
+        let info = '';
+        let count = 0;
+        let hometown = prompt('Input hometown you want to list').toLowerCase();
+        for (let i = 0; i < listEmployee.length; i++){
+            if(listEmployee[i].getHometown().toLowerCase() === hometown){
+                count++;
+                info += count + '. ' + listEmployee[i].getName() + ' ' + listEmployee[i].getId() +
+                    ' ' + listEmployee[i].getGender() + ' ' + listEmployee[i].getHometown() +
+                    ' ' + listEmployee[i].getYear() + ' ' + listEmployee[i].getMajor() +
+                    ' ' + listEmployee[i].getLevel() + ' ' + listEmployee[i].getSalaryCoef() + ' ' + listEmployee[i].getSupport() + '\n';
+            }
+        }
+        info = 'Found ' + count + ' information:' + '\n' + info;
+        alert(info);
+    }
+
+    //////////////////////////////////////////////////LIST BY YEAR/////////////////////////////////////////////////////
+    function listByYear() {
+        let info = '';
+        let count = 0;
+        let year = prompt('Input year you want to list');
+        for (let i = 0; i < listEmployee.length; i++){
+            if(listEmployee[i].getYear() === year){
+                count++;
+                info += count + '. ' + listEmployee[i].getName() + ' ' + listEmployee[i].getId() +
+                    ' ' + listEmployee[i].getGender() + ' ' + listEmployee[i].getHometown() +
+                    ' ' + listEmployee[i].getYear() + ' ' + listEmployee[i].getMajor() +
+                    ' ' + listEmployee[i].getLevel() + ' ' + listEmployee[i].getSalaryCoef() + ' ' + listEmployee[i].getSupport() + '\n';
+            }
+        }
+        info = 'Found ' + count + ' information:' + '\n' + info;
+        alert(info);
+    }
+</script>
+</body>
+</html>

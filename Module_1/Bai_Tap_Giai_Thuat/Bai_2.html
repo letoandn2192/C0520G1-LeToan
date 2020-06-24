@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 2</title>
+</head>
+<body>
+<script>
+    //Bài 2: Nhập vào tháng, năm bất kỳ. In ra số ngày tương ứng với tháng, năm đó.
+    const JAN = 0, FEB = 1, MAR = 2, APR = 3, MAY = 4, JUN = 5, JUL = 6, AUG = 7, SEP = 8, OCT = 9, NOV = 10, DEC = 11;
+    let input = prompt('Nhập Ngày tháng năm muốn tính MM/DD/YYYY');
+    let date = new Date(input);
+    let day = date.getDate();
+    let month = date.getMonth();
+    let year = date.getFullYear();
+    // alert(day);
+    // alert(month);
+    // alert(year);
+    alert(calDay(day, month, year));
+
+    function isLeapYear(year) {
+        if (year % 4 === 0) {
+            if (year % 100 === 0) {
+                if (year % 400 === 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    function calDayOfMonth(month) {
+        switch (month) {
+            case JAN:
+            case MAR:
+            case MAY:
+            case JUL:
+            case AUG:
+            case OCT:
+            case DEC:
+                day = 31;
+                break;
+            case APR:
+            case JUN:
+            case SEP:
+            case NOV:
+                day = 30;
+                break;
+            case FEB:
+                day = 28;
+                break;
+        }
+        return day;
+    }
+
+    function calDay(day, month, year) {
+        let sum = 0;
+        for (let i = 0; i < month; i++) {
+            sum += calDayOfMonth(i);
+        }
+        sum += day;
+        if(isLeapYear(year) && month > FEB){
+            sum += 1;
+        }
+        return sum;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 8</title>
+</head>
+<body>
+    <script>
+        //Bài 8: Tìm UCLN và BCNN của 2 số a và b.
+        let number1 = parseInt(prompt('Nhập Số Thứ Nhất: '));
+        let number2 = parseInt(prompt('Nhập Số Thứ Hai: '));
+        function timUCLN(a,b) {
+            if(b === 0){
+                return a;
+            }
+            return timUCLN(b, a%b);
+        }
+        function timBcnn(a,b) {
+            return a*b/timUCLN(a,b);
+        }
+        c = timUCLN(number1, number2);
+        alert(c);
+        d = timBcnn(number1, number2);
+        alert(d);
+    </script>
+</body>
+</html>
