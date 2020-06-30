@@ -23,30 +23,30 @@
         '\n2.Edit Information Customer' +
         '\n3.Show the amount to be paid after discount');
         function editInformation() {
-            makeDecision = prompt('1.Họ Và Tên: '+ fullName +
-                '\n2.Số CMND: '+ idNumber +
-                '\n3.Ngày Tháng Năm Sinh: '+ dateofbirth +
-                '\n4.Email: '+ email +
-                '\n5.Địa Chỉ: '+address +
-                '\n6.Loại Customer: '+typeCustomer +
-                '\n7.Giảm Giá: '+ discount + '%' +
-                '\n8.Số Người Đi cùng: '+ accPerson +
-                '\n9.Số Ngày Thuê: '+ rentDay +
-                '\n10.Loại Dịch Vụ: '+ typeService +
-                '\n11.Loại Phòng Muốn Thuê: '+ typeRoom);
+            makeDecision = prompt('1. Họ Và Tên: '+ fullName +
+                '\n2. Số CMND: '+ idNumber +
+                '\n3. Ngày Tháng Năm Sinh: '+ dateofbirth +
+                '\n4. Email: '+ email +
+                '\n5. Địa Chỉ: '+address +
+                '\n6. Loại Customer: '+typeCustomer +
+                '\n7. Giảm Giá: '+ discount + '%' +
+                '\n8. Số Người Đi cùng: '+ accPerson +
+                '\n9. Số Ngày Thuê: '+ rentDay +
+                '\n10. Loại Dịch Vụ: '+ typeService +
+                '\n11. Loại Phòng Muốn Thuê: '+ typeRoom);
         }
         function showInformation() {
-            alert('1.Họ Và Tên: '+ fullName +
-                '\n2.Số CMND: '+ idNumber +
-                '\n3.Ngày Tháng Năm Sinh: '+ dateofbirth +
-                '\n4.Email: '+ email +
-                '\n5.Địa Chỉ: '+address +
-                '\n6.Loại Customer: '+typeCustomer +
-                '\n7.Giảm Giá: '+ discount + '%' +
-                '\n8.Số Người Đi cùng: '+ accPerson +
-                '\n9.Số Ngày Thuê: '+ rentDay +
-                '\n10.Loại Dịch Vụ: '+ typeService +
-                '\n11.Loại Phòng Muốn Thuê: '+ typeRoom);
+            alert('1. Họ Và Tên: '+ fullName +
+                '\n2. Số CMND: '+ idNumber +
+                '\n3. Ngày Tháng Năm Sinh: '+ dateofbirth +
+                '\n4. Email: '+ email +
+                '\n5. Địa Chỉ: '+address +
+                '\n6. Loại Customer: '+typeCustomer +
+                '\n7. Giảm Giá: '+ discount + '%' +
+                '\n8. Số Người Đi cùng: '+ accPerson +
+                '\n9. Số Ngày Thuê: '+ rentDay +
+                '\n10. Loại Dịch Vụ: '+ typeService +
+                '\n11. Loại Phòng Muốn Thuê: '+ typeRoom);
         }
 
         switch (makeDecision) {
@@ -57,47 +57,47 @@
                 editInformation();
                 switch (makeDecision) {
                     case '1':
-                        fullName = prompt('1.Họ Và Tên:');
+                        fullName = prompt('1. Họ Và Tên:');
                         showInformation();
                         break;
                     case '2':
-                        idNumber = prompt('2.Số CMND:');
+                        idNumber = prompt('2. Số CMND:');
                         showInformation();
                         break;
                     case '3':
-                        dateofbirth = prompt('3.Ngày Tháng Năm Sinh:');
+                        dateofbirth = prompt('3. Ngày Tháng Năm Sinh:');
                         showInformation();
                         break;
                     case '4':
-                        email = prompt('4.Email:');
+                        email = prompt('4. Email:');
                         showInformation();
                         break;
                     case '5':
-                        address = prompt('5.Nhập Địa Chỉ:');
+                        address = prompt('5. Nhập Địa Chỉ:');
                         showInformation();
                         break;
                     case '6':
-                        typeCustomer = prompt('6.Nhập Loại Customer:');
+                        typeCustomer = prompt('6. Nhập Loại Customer:');
                         showInformation();
                         break;
                     case '7':
-                        discount = prompt('7.Nhập % Mã Giảm Giá:');
+                        discount = prompt('7. Nhập % Mã Giảm Giá:');
                         showInformation();
                         break;
                     case '8':
-                        accPerson = prompt('Nhập Số Người Đi Cùng:');
+                        accPerson = prompt('8. Nhập Số Người Đi Cùng:');
                         showInformation();
                         break;
                     case '9':
-                        rentDay = prompt('Nhập Số Ngày Thuê:');
+                        rentDay = prompt('9. Nhập Số Ngày Thuê:');
                         showInformation();
                         break;
                     case '10':
-                        typeService = prompt('Nhập Loại Dịch Vụ:');
+                        typeService = prompt('10. Nhập Loại Dịch Vụ:');
                         showInformation();
                         break;
                     case '11':
-                        typeRoom = prompt('Nhập Loại Phòng Muốn Thuê:');
+                        typeRoom = prompt('11. Nhập Loại Phòng Muốn Thuê:');
                         showInformation();
                         break;
                     default:

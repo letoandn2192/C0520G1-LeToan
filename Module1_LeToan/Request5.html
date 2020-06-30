@@ -177,7 +177,7 @@
         }
         select = prompt('0. Back' + ' ' + '\n' + data);
         if (0 < select && select <= arrListCustomers.length) {
-            check = confirm('Bạn Muốn Xóa Người Này:');
+            check = confirm('Bạn Muốn Xóa Người Này: '+ arrListCustomers[select-1][0]);
             if (check) {
                 arrListCustomers.splice(select - 1, 1);
                 displayMainMenu();

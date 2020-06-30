@@ -9,20 +9,20 @@
             padding: 10px;
             text-align: left;
         }
-        tr:hover{background-color: #f5f5f5;}
+        /*tr:hover{background-color: #f5f5f5;}*/
         input{background-color: #f5f5f5;}
         th{
             opacity: 0.8;
-            background-color: #4CAF50;
-            color: white;
+            background-color: white;
+            color: black;
         }
-        body{
-            align-content: center;
-            /*width: 1024px;*/
-            /*height: 558px;*/
-            background-image: url("furama.jpg");
-            background-repeat: repeat-x;
-        }
+        /*body{*/
+        /*    align-content: center;*/
+        /*    !*width: 1024px;*!*/
+        /*    !*height: 558px;*!*/
+        /*    background-image: url("furama.jpg");*/
+        /*    background-repeat: repeat-x;*/
+        /*}*/
     </style>
 </head>
 <body>
@@ -41,6 +41,7 @@
         constructor(name, id, birth, email, address, typecustomer, discount, accperson, renday, typeservice, typeroom) {
             this.name = name;
             this.id = id;
+            this.birth = birth;
             this.email = email;
             this.address = address;
             this.typecustomer = typecustomer;
@@ -56,8 +57,8 @@
             return this.name;
         }
 
-        setName(arg) {
-            this.name = arg;
+        setName(name) {
+            this.name = name;
         }
 
         ////////////////////////////ID Number//////////////////////////
@@ -74,8 +75,8 @@
             return this.birth;
         }
 
-        setDateOfBirth(arg) {
-            this.birth = arg;
+        setDateOfBirth(birth) {
+            this.birth = birth;
         }
 
         ////////////////////////////Email///////////////////////////////
@@ -83,8 +84,8 @@
             return this.email;
         }
 
-        setEmail(arg) {
-            this.email = arg;
+        setEmail(email) {
+            this.email = email;
         }
 
         ////////////////////////////Address/////////////////////////////
@@ -92,8 +93,8 @@
             return this.address;
         }
 
-        setAddress(arg) {
-            this.address = arg;
+        setAddress(address) {
+            this.address = address;
         }
 
         ////////////////////////////Type Of Customer/////////////////////
@@ -101,8 +102,8 @@
             return this.typecustomer;
         }
 
-        setTypeCustomer(arg) {
-            this.typecustomer = arg;
+        setTypeCustomer(typecustomer) {
+            this.typecustomer = typecustomer;
         }
 
         ///////////////////////////Discount///////////////////////////////
@@ -165,6 +166,18 @@
     }
 
     let listCustomer = [];
+    let customer1 = new Customer('Lê Toàn', 12345678, '02/01/1993', 'letoandn2193@gmail.com', '96 Cao Xuân Huy', 'Diamond', 10, 4, 5, 'Villa', 'Vip');
+    let customer2 = new Customer('Lê Hùng', 18765432, '10/10/1990', 'lehungdn2193@gmail.com', '96 Cao Xuân Hóa', 'Gold', 10, 5, 5, 'House', 'Normal');
+    let customer3 = new Customer('Lê Trang', 65478912, '20/12/1988', 'letrangdn2193@gmail.com', '96 Cao Xuân Dục', 'Silver', 7, 4, 5, 'Room', 'Vip');
+    let customer4 = new Customer('Lê Văn', 23456816, '09/09/1998', 'levandn2193@gmail.com', '96 Cao Xuân Hoàng', 'Platinum', 10, 4, 3, 'Villa', 'Vip');
+    let customer5 = new Customer('Lê Bình', 78945612, '25/12/1993', 'lebinhdn2193@gmail.com', '96 Cao Xuân Hùng', 'Gold', 1, 3, 5, 'Normal', 'Vip');
+    let customer6 = new Customer('Lê Hoàn', 32165478, '30/07/1980', 'lehoandn2193@gmail.com', '96 Cao Xuân Tùng', 'Silver', 7, 3, 3, 'House', 'Normal');
+    listCustomer.push(customer1);
+    listCustomer.push(customer2);
+    listCustomer.push(customer3);
+    listCustomer.push(customer4);
+    listCustomer.push(customer5);
+    listCustomer.push(customer6);
 
     function displayTable() {
         let table = '<table border="1px" style="border-collapse: collapse" align="center">';
@@ -200,7 +213,7 @@
                 '<td ondblclick="editTypeRoom(' + i + ');" align="center">' + listCustomer[i].getTypeRoom() + '</td>' +
                 '<td>' + listCustomer[i].chargeMoney() + '$' + '</td>' +
                 '<td>' + '<input type="button" value="Delete" onclick="deleteCustomer(' + i + ');">' + '</td>' +
-                '</tr:>';
+                '</tr>';
         }
         table += '</table>';
         document.getElementById('result').innerHTML = table;

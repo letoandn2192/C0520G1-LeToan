@@ -248,7 +248,7 @@
             '\n4.Email: ' + listCustomers[arg].getEmail() +
             '\n5.Địa Chỉ: ' + listCustomers[arg].getAddress() +
             '\n6.Loại Customer: ' + listCustomers[arg].getTypeCustomer() +
-            '\n7.Giảm Giá: ' + listCustomers[arg].getDiscount() +
+            '\n7.Giảm Giá: ' + listCustomers[arg].getDiscount() + '%'+
             '\n8.Số Người Đi cùng: ' + listCustomers[arg].getAccPerson() +
             '\n9.Số Ngày Thuê: ' + listCustomers[arg].getRentDay() +
             '\n10.Loại Dịch Vụ: ' + listCustomers[arg].getTypeService() +
@@ -299,7 +299,7 @@
             '\n4.Email: ' + listCustomers[arg].getEmail() +
             '\n5.Địa Chỉ: ' + listCustomers[arg].getAddress() +
             '\n6.Loại Customer: ' + listCustomers[arg].getTypeCustomer() +
-            '\n7.Giảm Giá: ' + listCustomers[arg].getDiscount() +
+            '\n7.Giảm Giá: ' + listCustomers[arg].getDiscount() +'%'+
             '\n8.Số Người Đi cùng: ' + listCustomers[arg].getAccPerson() +
             '\n9.Số Ngày Thuê: ' + listCustomers[arg].getRentDay() +
             '\n10.Loại Dịch Vụ: ' + listCustomers[arg].getTypeService() +
@@ -359,7 +359,7 @@
             '\n4.Email: ' + listCustomers[arg].getEmail() +
             '\n5.Địa Chỉ: ' + listCustomers[arg].getAddress() +
             '\n6.Loại Customer: ' + listCustomers[arg].getTypeCustomer() +
-            '\n7.Giảm Giá: ' + listCustomers[arg].getDiscount() +
+            '\n7.Giảm Giá: ' + listCustomers[arg].getDiscount() +'%'+
             '\n8.Số Người Đi cùng: ' + listCustomers[arg].getAccPerson() +
             '\n9.Số Ngày Thuê: ' + listCustomers[arg].getRentDay() +
             '\n10.Loại Dịch Vụ: ' + listCustomers[arg].getTypeService() +
@@ -460,7 +460,7 @@
                 checkYear = dateofbirth.substr(6, 4);
                 if (0 < checkDate && checkDate <= 31) {
                     if (0 < checkMonth && checkMonth <= 12) {
-                        if (1940 < checkYear && checkYear < 2020) {
+                        if (1940 < checkYear && checkYear < 2002) {
                             isDateInvalid = false;
                         } else {
                             dateofbirth = prompt('Giá trị không hợp lệ.');

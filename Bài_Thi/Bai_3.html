@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 3</title>
+</head>
+<body>
+<script>
+    const JAN = 1, FEB = 2, MAR = 3, APR = 4, MAY = 5, JUN = 6, JUL = 7, AUG = 8, SEP = 9, OCT = 10, NOV = 11, DEC = 12;
+    let checkFormat =  /^((0[1-9]|1[0-2])\/\d{4})$/;
+    let input = prompt('Input Month and year follow format MM/yyyy');
+    let month;
+    let year;
+    if(checkFormat.test(input)){
+        month = parseInt(input.substr(0,2));
+        year = parseInt(input.substr(3));
+        let result = checkDayOfMonth(month, year);
+        alert('Day of ' + month +'/' + year + ' is '+ result);
+    }else {
+        alert('Failed');
+    }
+
+    //////////////////////////////////CHECK LEAP YEAR///////////////////////////////////////////////////////
+    function isLeapYear(year) {
+        let flag = false;
+        if (year % 4 === 0) {
+            if (year % 100 === 0) {
+                if (year % 400 === 0) {
+                    flag = true;
+                }
+            } else {
+                flag = true;
+            }
+        }
+        return flag;
+    }
+
+    /////////////////////////////////CHECK DAY OF MONTH/////////////////////////////////////////////////////
+    function checkDayOfMonth(month, year) {
+        let dayOfMonth;
+        switch (month) {
+            case JAN:
+            case MAR:
+            case MAY:
+            case JUL:
+            case AUG:
+            case OCT:
+            case DEC:
+                dayOfMonth = 31;
+                break;
+            case APR:
+            case JUN:
+            case SEP:
+            case NOV:
+                dayOfMonth = 30;
+                break;
+            case FEB:
+                if (isLeapYear(year)) {
+                    dayOfMonth = 29;
+                } else {
+                    dayOfMonth = 28;
+                }
+                break;
+            default:
+        }
+        return dayOfMonth;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+</script>
+</body>
+</html>

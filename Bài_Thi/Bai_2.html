@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 2</title>
+</head>
+<body>
+<script>
+    function isPerfectNumber(number) {
+        let checkSum = 0;
+        for (let i = 1; i <= number / 2; i++) {
+            if (number % i === 0) {
+                checkSum += i;
+            }
+        }
+        if (checkSum === number) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    let input = parseInt(prompt('Input a positive number you want to check ?'));
+    if (input <= 0) {
+        alert('Failed');
+    } else {
+        let check = isPerfectNumber(input);
+        if (check) {
+            alert(input + ' is a perfect number.');
+        } else {
+            alert(input + ' is not a perfect number.');
+        }
+    }
+</script>
+</body>
+</html>

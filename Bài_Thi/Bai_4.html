@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 4</title>
+</head>
+<body>
+<h2>Worker Management</h2>
+    <p id="screen"></p>
+<script>
+        class Worker{
+            constructor(id, name, birth, address, salary, position) {
+                this.id = id;
+                this.name = name;
+                this.dayofbirth = birth;
+                this.address = address;
+                this.salary = salary;
+                this.position = position;
+            }
+
+            setId(id){
+                this.id = id;
+            }
+
+            getId(){
+                return this.id;
+            }
+
+            getName(){
+                return this.name;
+            }
+
+            setName(name){
+                this.name = name;
+            }
+
+            getDayOfBirth(){
+                return this.dayofbirth;
+            }
+
+            setDayOfBirth(birth){
+                this.dayofbirth = birth;
+            }
+
+            getAddress(){
+                return this.address;
+            }
+
+            setAddress(address){
+                this.address = address;
+            }
+
+            getSalary(){
+                return this.salary;
+            }
+
+            setSalary(salary){
+                this.salary = salary;
+            }
+
+            getPosition(){
+                return this.position;
+            }
+
+            setPosition(position){
+                this.position = position;
+            }
+
+        }
+
+        function display() {
+            let table = '<table border="1" style="border-collapse: collapse">';
+            table += '<tr>' + '<th>Number</th>' +
+                '<th>Name</th>' +
+                '<th>Day of birth</th>' +
+                '<th>Address</th>' +
+                '<th>Salary</th>' +
+                '<th>Position</th>'
+                + '</tr>';
+            for (let i = 0; i < listWorker.length; i++){
+                table += '<tr>' + '<td>' + listWorker[i].getId() +'</td>' +
+                    '<td>' + listWorker[i].getName() +'</td>' +
+                    '<td>' + listWorker[i].getDayOfBirth() +'</td>' +
+                    '<td>' + listWorker[i].getAddress() +'</td>' +
+                    '<td>' + listWorker[i].getSalary() +'</td>' +
+                    '<td>' + listWorker[i].getPosition() +'</td>' +
+                    '</tr>';
+            }
+            table += '</table>';
+            document.getElementById('screen').innerHTML = table;
+        }
+
+        // let table = '<table border="1px" style="border-collapse: collapse">';
+        // table += '<tr>' +
+        //     '<th>alo1</th>'+
+        //     '<th>alo2</th>'+
+        //     '<th>alo3</th>'+
+        //     '<th>alo4</th>'+
+        //     '<th>alo5</th>'+
+        //     '<th>alo6</th>'+
+        //     '</tr>';
+        // for (let i = 0; i < 1; i++ ){
+        //             table += '<tr>' + '<th>122</th>' +
+        //                 '<th>122</th>' +
+        //                 '<th>122</th>' +
+        //                 '<th>122</th>' +
+        //                 '<th>122</th>' +
+        //                 '<th>122</th>' +
+        //                 + '</tr>';
+        //         }
+        // table += '</table>';
+        //
+        // document.getElementById('screen').innerHTML = table;
+
+
+        function sortList(array) {
+            let arrTemp = [];
+            for(let i = 0; i < array.length; i++){
+                arrTemp[i] = array[i].getName();
+            }
+            arrTemp.sort();
+            for(let i = 0; i < arrTemp.length; i++){
+                for (let j = 0; j < listWorker.length; j++){
+                    if(arrTemp[i] === listWorker[j].getName()){
+                        let temp = listWorker[i];
+                        listWorker[i] = listWorker[j];
+                        listWorker[j] = temp;
+                    }
+                }
+            }
+            for (let i = 0; i < listWorker.length; i++){
+                listWorker[i].setId(i+1);
+            }
+        }
+
+        let listWorker = [];
+        let worker1 = new Worker(1, 'Trương Tấn C', '11-11-1997', 'Quảng Nam', 2000, 'Abc');
+        let worker2 = new Worker(2, 'Trương Tấn A', '11-11-1998', 'Đà Nẵng', 2000, 'Abc');
+        let worker3 = new Worker(3, 'Trương Tấn B', '11-11-1999', 'Huế', 2000, 'Abc');
+        listWorker.push(worker1);
+        listWorker.push(worker2);
+        listWorker.push(worker3);
+        console.table(listWorker);
+        sortList(listWorker);
+        display();
+        console.table(listWorker);
+
+    </script>
+</body>
+</html>

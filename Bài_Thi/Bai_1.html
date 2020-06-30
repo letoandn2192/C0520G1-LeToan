@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 1</title>
+</head>
+<body>
+<script>
+    let array = [];
+    let sum = 0;
+    let count = 0;
+    let inputN = parseInt(prompt('Input amount of element in array:'));
+    if (inputN > 50 || inputN <= 0) {
+        alert('Failed');
+    } else {
+        let count = 0;
+        while (count < inputN) {
+            array[count] = parseInt(prompt('Input element ' + count + 'th'));
+            count++;
+        }
+    }
+    alert(array);
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] % 3 === 0) {
+            sum += array[i];
+            count++;
+        }
+    }
+    alert('Average is ' + sum / count);
+</script>
+</body>
+</html>
