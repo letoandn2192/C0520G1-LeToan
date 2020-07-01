@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class XoaPhanTuTrongMang {
     public static void main(String[] args) {
-        int[] array = {1,2,3,5,5,6,7,8,9};
+        int[] array = {1,2,3,5,5,6,7,0,0};
         Scanner input = new Scanner(System.in);
         System.out.println("Nhập phần tử cần xóa: ");
         int delElement = input.nextInt();
