@@ -10,7 +10,6 @@ public class StudentCodeGym {
         this.id = id;
         this.name = name;
         this.dateofbirth = dateofbirth;
-//        numberOfStudent++;
     }
 
     public int getId() {
