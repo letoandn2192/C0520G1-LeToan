@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import java.util.Scanner;
 
@@ -11,12 +12,13 @@ public class Villa extends Services {
     private String roomStandard;
     private double poolArea;
     private int numberOfFloor;
+    ArrayList<Villa> villas = new ArrayList<Villa>();
     public Villa(){
-       super.includedServices[0] = new Services.AvailableServices("Massage", 1, 1000);
-       super.includedServices[1] = new Services.AvailableServices("Karaoke", 1, 500);
-       super.includedServices[2] = new Services.AvailableServices("Food", 1, 10);
-       super.includedServices[3] = new Services.AvailableServices("Drink", 1, 20);
-       super.includedServices[4] = new Services.AvailableServices("Car", 1, 300);
+       super.includedServices[0] = new AvailableServices("Massage", 1, 1000);
+       super.includedServices[1] = new AvailableServices("Karaoke", 1, 500);
+       super.includedServices[2] = new AvailableServices("Food", 1, 10);
+       super.includedServices[3] = new AvailableServices("Drink", 1, 20);
+       super.includedServices[4] = new AvailableServices("Car", 1, 300);
     }
 
     public void setRoomStandard(String roomStandard) {
@@ -55,10 +57,6 @@ public class Villa extends Services {
         super.rentOfType = rentOfType;
     }
 
-//    public String getIncludedServices(){
-//        return super.includedServices + super.unit + super.price;
-//    }
-
     @Override
     public void showInformation(){
         System.out.println("Your Services:");
@@ -71,17 +69,50 @@ public class Villa extends Services {
         System.out.println("Standard of services: "+this.roomStandard);
         System.out.println("Pool of services: "+this.poolArea);
         System.out.println("Floor of services: "+this.numberOfFloor);
-        System.out.printf("%-20s%-10s%-10s", "Included Services", "Unit", "Price");
+        System.out.printf("%-20s%-10s%s", "Included Services", "Unit", "Price");
         System.out.println();
         for (AvailableServices includedService : super.includedServices) {
-            System.out.printf("%-20s%-10d%-10.2f", includedService.includedServices, includedService.unit, includedService.price);
+            System.out.printf("%-20s%-10d%.2f$", includedService.includedServices, includedService.unit, includedService.price);
             System.out.println();
         }
     }
 
-    public void createVillaFile(){
+    public Villa addNewVilla(){
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter Id: ");
+        String id = input.nextLine();
+        this.setId(id);
+        System.out.print("Enter Name Services: ");
+        String name = input.nextLine();
+        this.setNameServices(name);
+        System.out.print("Enter Area: ");
+        int area = input.nextInt();
+        this.setUsableArea(area);
+        System.out.print("Enter cost: ");
+        double rentCost = input.nextDouble();
+        this.setRentCost(rentCost);
+        System.out.print("Enter Maximum Person: ");
+        int maxPerson = input.nextInt();
+        this.setMaxPerson(maxPerson);
+        System.out.print("Enter rent type: ");
+        String rentOfType = input.nextLine();
+        rentOfType = input.nextLine();
+        this.setRentOfType(rentOfType);
+        System.out.print("Enter room standard: ");
+        String roomStandard = input.nextLine();
+        this.setRoomStandard(roomStandard);
+        System.out.print("Enter pool area: ");
+        double poolArea = input.nextDouble();
+        this.setPoolArea(poolArea);
+        System.out.print("Enter number of floor: ");
+        int numberOfFloor = input.nextInt();
+        this.setNumberOfFloor(numberOfFloor);
+        return this;
+    }
+
+    public void createFile(){
         try {
-            File myObj = new File("E:\\villa.csv");
+            File myObj = new File("D:\\C0520G1-LeToan\\Module2_LeToan\\data\\villa.csv");
             if (myObj.createNewFile()) {
                 System.out.println("File created: " + myObj.getName());
             } else {
@@ -93,30 +124,48 @@ public class Villa extends Services {
         }
     }
 
-    public void writeToFile(String id, String nameServices){
+    public void writeFile(Villa villa){
+        final String FILE_HEADER = "1,2,3,4,5,6,7,8,9";
+        villas.add(villa);
         try {
-            FileWriter myWriter = new FileWriter("E:\\villa.csv");
-            myWriter.write(super.id + "," + super.nameServices);
-            myWriter.close();
-            System.out.println("Successfully wrote to the file.");
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-    }
+            FileWriter myWrite = new FileWriter("D:\\C0520G1-LeToan\\Module2_LeToan\\data\\villa.csv");
 
-    public void readFile(){
-        try {
-            File myObj = new File("E:\\villa.csv");
-            Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
-                System.out.println(data);
+            // Write the CSV file header
+            myWrite.append(FILE_HEADER);
+
+            // Add a new line separator after the header
+            myWrite.append("\n");
+
+            // Write a new Country object list to the CSV file
+            for (int i = 0; i < villas.size(); i++) {
+                myWrite.append(String.valueOf(villas.get(i).id));
+                myWrite.append(",");
+                myWrite.append(villas.get(i).nameServices);
+                myWrite.append(",");
+                myWrite.append(String.valueOf(villas.get(i).usableArea));
+                myWrite.append(",");
+                myWrite.append(String.valueOf(villas.get(i).rentCost));
+                myWrite.append(",");
+                myWrite.append(String.valueOf(villas.get(i).maxPerson));
+                myWrite.append(",");
+                myWrite.append(String.valueOf(villas.get(i).rentOfType));
+                myWrite.append(",");
+                myWrite.append(villas.get(i).roomStandard);
+                myWrite.append(",");
+                myWrite.append(String.valueOf(villas.get(i).poolArea));
+                myWrite.append(",");
+                myWrite.append(String.valueOf(villas.get(i).numberOfFloor));
+                myWrite.append(",");
+                myWrite.append("\n");
             }
-            myReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
+            myWrite.flush();
+            myWrite.close();
+            System.out.println("CSV file was created successfully !!!");
+
+        } catch (Exception e) {
+            System.out.println("Error in CsvFileWriter !!!");
             e.printStackTrace();
         }
+
     }
 }

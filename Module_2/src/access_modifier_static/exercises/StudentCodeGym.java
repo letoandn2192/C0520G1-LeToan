@@ -3,13 +3,13 @@ package access_modifier_static.exercises;
 public class StudentCodeGym {
     private int id;
     private String name;
-    private String dateofbirth;
+    private String dateOfBirth;
 //    static int numberOfStudent = 0;
 
-    public StudentCodeGym(int id, String name, String dateofbirth) {
+    public StudentCodeGym(int id, String name, String dateOfBirth) {
         this.id = id;
         this.name = name;
-        this.dateofbirth = dateofbirth;
+        this.dateOfBirth = dateOfBirth;
     }
 
     public int getId() {
@@ -21,6 +21,6 @@ public class StudentCodeGym {
     }
 
     public String getDateofbirth() {
-        return dateofbirth;
+        return this.dateOfBirth;
     }
 }
