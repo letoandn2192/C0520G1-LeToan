@@ -1,4 +1,4 @@
-package inheritance.exercises.circle_and_cylander;
+package inheritance.exercises.circle_and_cylinder;
 
 public class Circle {
     private double radius;
