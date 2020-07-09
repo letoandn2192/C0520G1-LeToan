@@ -7,20 +7,20 @@ public class TennisGame {
         int tempScore = 0;
         if (firstPlayerScore == secondPlayerScore)
         {
-            displayScore = getString(firstPlayerScore);
+            displayScore = getDrawCase(firstPlayerScore);
         }
         else if (firstPlayerScore>= 4 || secondPlayerScore>= 4)
         {
-            displayScore = getString(firstPlayerScore, secondPlayerScore);
+            displayScore = getWinCase(firstPlayerScore, secondPlayerScore);
         }
         else
         {
-            displayScore = getString(firstPlayerScore, secondPlayerScore, displayScore);
+            displayScore = getPlayCase(firstPlayerScore, secondPlayerScore, displayScore);
         }
         return displayScore;
     }
 
-    public static String getString(int firstPlayerScore, int secondPlayerScore, String displayScore) {
+    public static String getPlayCase(int firstPlayerScore, int secondPlayerScore, String displayScore) {
         int tempScore;
         for (int i = 1; i < 3; i++){
             if (i==1) {
@@ -48,7 +48,7 @@ public class TennisGame {
         return displayScore;
     }
 
-    public static String getString(int firstPlayerScore, int secondPlayerScore) {
+    public static String getWinCase(int firstPlayerScore, int secondPlayerScore) {
         String displayScore;
         int minusResult = firstPlayerScore - secondPlayerScore;
         if (minusResult == 1) {
@@ -63,7 +63,7 @@ public class TennisGame {
         return displayScore;
     }
 
-    public static String getString(int firstPlayerScore) {
+    public static String getDrawCase(int firstPlayerScore) {
         String displayScore;
         switch (firstPlayerScore)
         {
