@@ -1,5 +1,7 @@
 package models;
 
+import commons.Regex;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -13,13 +15,13 @@ public class Villa extends Services {
     private double poolArea;
     private int numberOfFloor;
     ArrayList<Villa> villas = new ArrayList<Villa>();
-    public Villa(){
-       super.includedServices[0] = new AvailableServices("Massage", 1, 1000);
-       super.includedServices[1] = new AvailableServices("Karaoke", 1, 500);
-       super.includedServices[2] = new AvailableServices("Food", 1, 10);
-       super.includedServices[3] = new AvailableServices("Drink", 1, 20);
-       super.includedServices[4] = new AvailableServices("Car", 1, 300);
-    }
+//    public Villa(){
+//       super.includedServices[0] = new AvailableServices("Massage", 1, 1000);
+//       super.includedServices[1] = new AvailableServices("Karaoke", 1, 500);
+//       super.includedServices[2] = new AvailableServices("Food", 1, 10);
+//       super.includedServices[3] = new AvailableServices("Drink", 1, 20);
+//       super.includedServices[4] = new AvailableServices("Car", 1, 300);
+//    }
 
     public void setRoomStandard(String roomStandard) {
         this.roomStandard = roomStandard;
@@ -41,7 +43,7 @@ public class Villa extends Services {
         super.nameServices = nameServices;
     }
 
-    public void setUsableArea(int usableArea) {
+    public void setUsableArea(double usableArea) {
         super.usableArea = usableArea;
     }
 
@@ -62,51 +64,73 @@ public class Villa extends Services {
         System.out.println("Your Services:");
         System.out.println("Id of services: "+super.id);
         System.out.println("Name of services: "+super.nameServices);
-        System.out.println("Area of services: "+super.usableArea);
+        System.out.println("Area of services: "+super.usableArea + " m2");
         System.out.println("Cost of services: "+super.rentCost);
         System.out.println("Maximum of services: "+super.maxPerson);
         System.out.println("Type of services: "+super.rentOfType);
         System.out.println("Standard of services: "+this.roomStandard);
-        System.out.println("Pool of services: "+this.poolArea);
+        System.out.println("Pool of services: "+this.poolArea + " m2");
         System.out.println("Floor of services: "+this.numberOfFloor);
         System.out.printf("%-20s%-10s%s", "Included Services", "Unit", "Price");
         System.out.println();
-        for (AvailableServices includedService : super.includedServices) {
-            System.out.printf("%-20s%-10d%.2f$", includedService.includedServices, includedService.unit, includedService.price);
+        for (AvailableServices includedService : super.getIncludedServices()) {
+            System.out.printf("%-20s%-10d%.2f$", includedService.includedServicesName, includedService.unit, includedService.price);
             System.out.println();
         }
     }
 
     public Villa addNewVilla(){
         Scanner input = new Scanner(System.in);
-        System.out.print("Enter Id: ");
-        String id = input.nextLine();
+        String id, name, rentOfType, roomStandard;
+        int maxPerson, numberOfFloor;
+        double area, rentCost, poolArea;
+        do {
+            System.out.print("Enter Id: ");
+            id = input.nextLine();
+        }while (!Regex.checkRegexId(id));
         this.setId(id);
-        System.out.print("Enter Name Services: ");
-        String name = input.nextLine();
+        do{
+            System.out.print("Enter Name Services: ");
+            name = input.nextLine();
+        }while (!Regex.checkRegexNameFormat(name));
         this.setNameServices(name);
-        System.out.print("Enter Area: ");
-        int area = input.nextInt();
+        do{
+            System.out.print("Enter Area: ");
+            area = input.nextDouble();
+        }while (area < 30.0);
         this.setUsableArea(area);
-        System.out.print("Enter cost: ");
-        double rentCost = input.nextDouble();
+        do{
+            System.out.print("Enter cost: ");
+            rentCost = input.nextDouble();
+        }while (rentCost <= 0.0);
         this.setRentCost(rentCost);
-        System.out.print("Enter Maximum Person: ");
-        int maxPerson = input.nextInt();
+        do{
+            System.out.print("Enter Maximum Person: ");
+            maxPerson = input.nextInt();
+        }while (maxPerson <= 0);
         this.setMaxPerson(maxPerson);
-        System.out.print("Enter rent type: ");
-        String rentOfType = input.nextLine();
         rentOfType = input.nextLine();
+        do{
+            System.out.print("Enter rent type: ");
+            rentOfType = input.nextLine();
+        }while (!Regex.checkRegexNameFormat(rentOfType));
         this.setRentOfType(rentOfType);
-        System.out.print("Enter room standard: ");
-        String roomStandard = input.nextLine();
+        do {
+            System.out.print("Enter room standard: ");
+            roomStandard = input.nextLine();
+        }while (!Regex.checkRegexNameFormat(roomStandard));
         this.setRoomStandard(roomStandard);
-        System.out.print("Enter pool area: ");
-        double poolArea = input.nextDouble();
+        do {
+            System.out.print("Enter pool area: ");
+            poolArea = input.nextDouble();
+        }while(poolArea < 30);
         this.setPoolArea(poolArea);
-        System.out.print("Enter number of floor: ");
-        int numberOfFloor = input.nextInt();
+        do {
+            System.out.print("Enter number of floor: ");
+            numberOfFloor = input.nextInt();
+        }while (numberOfFloor <= 0);
         this.setNumberOfFloor(numberOfFloor);
+        System.out.println("Enter included services (Karaoke/Massage/Food/Drink/Car): ");
         return this;
     }
 
@@ -125,7 +149,7 @@ public class Villa extends Services {
     }
 
     public void writeFile(Villa villa){
-        final String FILE_HEADER = "1,2,3,4,5,6,7,8,9";
+        final String FILE_HEADER = "id,nameServices,usableArea,rentCost,maxPerson,rentOfType,roomStandard,poolArea,numberOfFloor";
         villas.add(villa);
         try {
             FileWriter myWrite = new FileWriter("D:\\C0520G1-LeToan\\Module2_LeToan\\data\\villa.csv");
@@ -166,6 +190,35 @@ public class Villa extends Services {
             System.out.println("Error in CsvFileWriter !!!");
             e.printStackTrace();
         }
+    }
 
+    public static void readFile(){
+        ArrayList<Villa> villas = new ArrayList<Villa>();
+        try {
+            File myObj = new File("D:\\C0520G1-LeToan\\Module2_LeToan\\data\\villa.csv");
+            Scanner myReader = new Scanner(myObj);
+            myReader.nextLine();                                             //skip header line
+            while (myReader.hasNextLine()) {
+                String[] data = myReader.nextLine().split(",");
+                Villa a = new Villa();
+                a.setId(data[0]);
+                a.setNameServices(data[1]);
+                a.setUsableArea(Double.parseDouble(data[2]));
+                a.setRentCost(Double.parseDouble(data[3]));
+                a.setMaxPerson(Integer.parseInt(data[4]));
+                a.setRentOfType(data[5]);
+                a.setRoomStandard(data[6]);
+                a.setPoolArea(Double.parseDouble(data[7]));
+                a.setNumberOfFloor(Integer.parseInt(data[8]));
+                villas.add(a);
+            }
+            myReader.close();
+            for(Villa element: villas){
+                element.showInformation();
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 }

@@ -55,10 +55,9 @@ public class MainController {
         switch (select) {
             case 1:
                 Villa villa1 = new Villa().addNewVilla();
-                Villa villa2 = new Villa().addNewVilla();
                 villa1.createFile();
                 villa1.writeFile(villa1);
-                villa1.writeFile(villa2);
+                villa1.showInformation();
                 break;
             case 2:
                 break;
@@ -88,6 +87,7 @@ public class MainController {
         int select = input.nextInt();
         switch (select) {
             case 1:
+                Villa.readFile();
                 break;
             case 2:
                 break;

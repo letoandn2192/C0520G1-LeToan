@@ -1,11 +1,11 @@
 package models;
 
 public class AvailableServices {
-    String includedServices;
+    String includedServicesName;
     int unit;
     double price;
-    public AvailableServices(String includedServices, int unit, double price){
-        this.includedServices = includedServices;
+    public AvailableServices(String includedServicesName, int unit, double price){
+        this.includedServicesName = includedServicesName;
         this.unit = unit;
         this.price = price;
     }
