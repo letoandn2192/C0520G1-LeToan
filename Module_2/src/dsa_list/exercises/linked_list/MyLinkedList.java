@@ -70,7 +70,7 @@ public class MyLinkedList {
     }
 
     public Object getFirst() {
-        return this.head.data;
+        return this.head.getData();
     }
 
     public Object getLast() {

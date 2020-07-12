@@ -62,12 +62,13 @@ public class MyList {
         return Arrays.copyOf(this.elements,this.size);
     }
 
-//    public boolean contains(Object element){
-//        for (Object o : elements) {
-//            if (element == o) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
+    public boolean contains(Object element){
+        for (int i = 0; i < this.size(); i++) {
+            if (elements[i].equals(element)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

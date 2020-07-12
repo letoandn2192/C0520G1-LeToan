@@ -41,4 +41,14 @@ public class Circle {
     public String toString() {
         return "A circle with radius is " + this.radius + " and color " + this.color;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        Circle circle = (Circle) obj;
+        if(this.radius == circle.getRadius() && this.color.equals(circle.getColor())){
+            return true;
+        }else {
+            return false;
+        }
+    }
 }

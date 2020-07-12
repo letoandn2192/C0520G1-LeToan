@@ -15,9 +15,6 @@ public class MyLinkedTest {
         }
         System.out.println();
         System.out.println("------------------");
-        System.out.println(array.remove(0));
-        for(int i = 0; i < array.size(); i++){
-            System.out.print(array.get(i) + "\t");
-        }
+        System.out.println(array.getFirst());
     }
 }
