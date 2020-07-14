@@ -24,7 +24,6 @@ public class Solution {
             return data;
         } else {
             data = queue.getFront().getData();
-            //Node temp = queue.getFront();
             queue.setFront(queue.getFront().getLink());
             queue.getRear().setLink(queue.getFront());
             return data;

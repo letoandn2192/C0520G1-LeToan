@@ -1,4 +1,4 @@
-package collection_framework.practical;
+package collection_framework.practical.binary_tree;
 
 public class TreeNode<E> {
     protected E element;
