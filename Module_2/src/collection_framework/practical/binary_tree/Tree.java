@@ -12,7 +12,7 @@ public interface Tree<E> {
 
     public void breathFirst();
 
-    public void search(E element);
+    public boolean search(E element);
 
     public int getSize();
 }

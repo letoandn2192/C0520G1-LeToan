@@ -19,8 +19,11 @@ public class BSTTest {
 
         System.out.println();
         System.out.println("-------------------------------------------");
-        tree.delete(45);
-        System.out.println("inOrder (sorted): ");
-        tree.inOrder();
+        tree.delete(60);
+        System.out.println("breathFirst (sorted): ");
+        tree.breathFirst();
+        System.out.println();
+
+        System.out.println(tree.search(57));
     }
 }

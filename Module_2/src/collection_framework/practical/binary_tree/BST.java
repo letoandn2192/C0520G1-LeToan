@@ -24,8 +24,8 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
     }
 
     @Override
-    public void search(Object element) {
-        search(this.root, (E) element);
+    public boolean search(Object element) {
+        return search(this.root, (E) element);
     }
 
     public boolean search(TreeNode root, E element) {
@@ -42,29 +42,29 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
     }
 
     public void delete(E element){
-        System.out.println(delete(this.root, element));
+        this.root = delete(this.root, element);
     }
 
-    public boolean delete(TreeNode root, E element){
+    public TreeNode delete(TreeNode root, E element){
         if(root == null){
-            return false;
+            return null;
         }else if (element.compareTo((E)root.element) < 0){
-            delete(root.left, element);
-        }else if(element.compareTo( (E)root.element) > 0){
-            delete(root.right, element);
+            root.left = delete(root.left, element);
+        }else if(element.compareTo((E)root.element) > 0){
+            root.right = delete(root.right, element);
         }else {
             if(root.left == null && root.right == null){
-                root = null;
+                return null;
             }else if(root.left == null){
-                root = root.right;
+                return root.right;
             }else if(root.right == null){
-                root =  root.left;
+                return root.left;
             }else {
                 root.element = findMinValue(root.right);
-                delete(root.right, (E)root.element);
+                root.right = delete(root.right, (E)root.element);
             }
         }
-        return true;
+        return root;
     }
 
     public E findMinValue(TreeNode root){
