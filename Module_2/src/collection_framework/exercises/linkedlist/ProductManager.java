@@ -32,41 +32,53 @@ public class ProductManager{
         System.out.println("Successful");
     }
 
-    public void editInformation(int id){
+    public void editInformation(){
         boolean isExist = false;
-        for(Product product: listProduct){
-            if(product.getId() == id){
-                System.out.println(product);
-                System.out.println("Enter new name: ");
-                product.setName(input.nextLine());
-                product.setName(input.nextLine());
-                System.out.println("Enter new price: ");
-                product.setPrice(input.nextDouble());
-                isExist = true;
-                break;
+        if(listProduct.isEmpty()){
+            System.out.println("List is empty!!!");
+        }else {
+            System.out.println("Enter Id you want to edit: ");
+            int id = input.nextInt();
+            for (Product products: listProduct) {
+                if (products.getId() == id) {
+                    System.out.println(products);
+                    System.out.println("Enter new name: ");
+                    products.setName(input.nextLine());
+                    products.setName(input.nextLine());
+                    System.out.println("Enter new price: ");
+                    products.setPrice(input.nextDouble());
+                    isExist = true;
+                    break;
+                }
             }
-        }
-        if(!isExist){
-            System.out.println("Not found!!!");
+            if (!isExist) {
+                System.out.println("Not found!!!");
+            }
         }
     }
 
-    public Product delete(int id){
+    public Product delete(){
         Product temp = null;
         boolean isExist = false;
-        for(Product product: listProduct){
-            if(product.getId() == id){
-                temp = product;
-                isExist = true;
-                break;
-            }
-        }
-
-        if(isExist){
-            listProduct.remove(temp);
-            System.out.println("Successful!!!");
+        if(listProduct.isEmpty()){
+            System.out.println("List is empty!!!");
         }else {
-            System.out.println("No exist !!!");
+            System.out.println("Enter product's id you want to remove: ");
+            int id = input.nextInt();
+            for (Product product : listProduct) {
+                if (product.getId() == id) {
+                    temp = product;
+                    isExist = true;
+                    break;
+                }
+            }
+
+            if (isExist) {
+                listProduct.remove(temp);
+                System.out.println("Successful!!!");
+            } else {
+                System.out.println("No exist !!!");
+            }
         }
         return temp;
     }

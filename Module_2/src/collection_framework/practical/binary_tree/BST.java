@@ -125,11 +125,6 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
     }
 
     @Override
-    public void preOrder() {
-        preOrder(this.root);
-    }
-
-    @Override
     public void breathFirst() {
         breathFirst(this.root);
     }
@@ -150,6 +145,11 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
                 treeNodeDeque.add(current.right);
             }
         }
+    }
+
+    @Override
+    public void preOrder() {
+        preOrder(this.root);
     }
 
     protected void preOrder(TreeNode root) {

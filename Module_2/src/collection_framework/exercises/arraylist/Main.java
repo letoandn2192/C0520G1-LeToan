@@ -22,23 +22,18 @@ public class Main {
                     listProduct.addNewProduct();
                     break;
                 case 2:
-                    System.out.println("Enter Id you want to edit: ");
-                    int index = input.nextInt();
-                    listProduct.editInformation(index);
+                    listProduct.editInformation();
                     break;
                 case 3:
-                    listProduct.showListProduct();
-                    System.out.println("Enter product's id you want to remove: ");
-                    int id = input.nextInt();
-                    listProduct.delete(id);
+                    listProduct.delete();
                     break;
                 case 4:
                     listProduct.showListProduct();
                     break;
                 case 5:
                     System.out.println("Enter your product's name: ");
+                    input.nextLine();
                     String name = input.nextLine();
-                    name = input.nextLine();
                     listProduct.search(name);
                     break;
                 case 6:
