@@ -1,7 +1,5 @@
-package search_algorithm.exercises.binary_search_recursion;
+package search_algorithm.exercises.serial_string;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class SerialString {
