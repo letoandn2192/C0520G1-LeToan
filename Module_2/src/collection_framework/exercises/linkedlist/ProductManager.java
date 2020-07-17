@@ -22,7 +22,7 @@ public class ProductManager{
             }
         }while (id < 0 || isExist);
         System.out.println("Enter product's name: ");
-        name = input.nextLine();
+        input.nextLine();
         name = input.nextLine();
         do{
             System.out.println("Enter product's price: ");
@@ -43,7 +43,7 @@ public class ProductManager{
                 if (products.getId() == id) {
                     System.out.println(products);
                     System.out.println("Enter new name: ");
-                    products.setName(input.nextLine());
+                    input.nextLine();
                     products.setName(input.nextLine());
                     System.out.println("Enter new price: ");
                     products.setPrice(input.nextDouble());
