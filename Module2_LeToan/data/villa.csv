@@ -1,2 +1,5 @@
-id,nameServices,usableArea,rentCost,maxPerson,rentOfType,roomStandard,poolArea,numberOfFloor
-SVVL-1111,Le Tia,30.0,12.0,2,Vip,Vila A,30.0,1,
+SVVL-2222,Villa Xinh,45.0,13.0,3,Full,Vip 1,30.0,3,Car,1,2.0,Food,1,1.0,Massage,1,3.0,
+SVVL-1111,Vip,30.0,12.0,2,Ha,Boss,30.0,1,Car,1,2.0,Food,1,1.0,Massage,1,3.0,
+SVVL-3333,Bussiness,40.0,1.0,3,Half,Vip,30.0,4,Car,1,2.0,Food,1,1.0,Massage,1,3.0,
+SVVL-1111,Vip Vuon,30.0,123.0,2,Full House,Full,30.0,2,Car,1,1.0,
+SVVL-2222,Tuan Map,40.0,12.0,3,Half,Hello,40.0,4,Karaoke,1,10.0,Massage,1,2.0,

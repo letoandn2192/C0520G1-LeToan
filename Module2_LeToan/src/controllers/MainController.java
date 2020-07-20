@@ -1,8 +1,11 @@
 package controllers;
 
 
+import models.Customer;
 import models.Villa;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 
@@ -23,16 +26,44 @@ public class MainController {
 
         switch (choice) {
             case 1:
-                addNewServices();
+                try {
+                    addNewServices();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
                 break;
             case 2:
-                showServices();
+                try {
+                    showServices();
+                } catch (FileNotFoundException e) {
+                    System.out.println("An error occurred.");
+                    e.printStackTrace();
+                }
+
                 break;
             case 3:
+                try {
+                    addNewCustomer();
+                } catch (IOException e) {
+                    System.out.println("Error in CsvFileWriter !!!");
+                    e.printStackTrace();
+                }
                 break;
             case 4:
+                try {
+                    showInformationCustomers();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
                 break;
             case 5:
+                try {
+                    addNewBooking();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
                 break;
             case 6:
                 break;
@@ -43,7 +74,7 @@ public class MainController {
         }
     }
 
-    public void addNewServices() {
+    public void addNewServices() throws FileNotFoundException {
         Scanner input = new Scanner(System.in);
         System.out.println("1. Add New Villa.");
         System.out.println("2. Add New House.");
@@ -54,9 +85,10 @@ public class MainController {
         int select = input.nextInt();
         switch (select) {
             case 1:
-                Villa villa1 = new Villa().addNewVilla();
-                villa1.createFile();
-                villa1.writeFile(villa1);
+                Villa villa1 = new Villa();
+                villa1.addNewVilla();
+                villa1.createFileVilla();
+                villa1.writeFileVilla(villa1);
                 villa1.showInformation();
                 break;
             case 2:
@@ -73,7 +105,7 @@ public class MainController {
         }
     }
 
-    public void showServices(){
+    public void showServices() throws FileNotFoundException {
         Scanner input = new Scanner(System.in);
         System.out.println("1. Show all Villa.");
         System.out.println("2. Show all House.");
@@ -87,7 +119,13 @@ public class MainController {
         int select = input.nextInt();
         switch (select) {
             case 1:
-                Villa.readFile();
+                Villa.readFileVilla();
+                System.out.printf("%-4s%-12s%-30s%-20s%-10s%-10s%-10s%-10s%-15s%-10s%s", "", "Id",
+                        "Name", "Villa's Area", "Cost", "Capacity", "Type", "Standard", "Pool's Area", "Floor", "Included Services");
+                System.out.println();
+                for (Villa element : Villa.getVillas()) {
+                    element.showInformation();
+                }
                 break;
             case 2:
                 break;
@@ -106,6 +144,50 @@ public class MainController {
                 System.exit(0);
             default:
                 System.out.println("Invalid value.");
+        }
+    }
+
+    public void addNewCustomer() throws IOException {
+        Customer.addNewCustomer();
+    }
+
+    public void showInformationCustomers() throws FileNotFoundException {
+        Customer.showInformation();
+    }
+
+    public void addNewBooking() throws IOException {
+        Scanner input = new Scanner(System.in);
+        Customer.showInformation();
+        System.out.println("Choose customer you want: ");
+        int chooseCustomer = input.nextInt();
+        Customer customer = Customer.getCustomers().get(chooseCustomer - 1);
+        System.out.println("Choose services: ");
+        System.out.println("1. Booking Villa");
+        System.out.println("2. Booking House");
+        System.out.println("3. Booking Room");
+        System.out.println("Choose services: ");
+        int choice = input.nextInt();
+        switch (choice) {
+            case 1:
+                Villa.readFileVilla();
+                System.out.printf("%-4s%-12s%-30s%-20s%-10s%-10s%-10s%-10s%-15s%-10s%s", "", "Id",
+                        "Name", "Villa's Area", "Cost", "Capacity", "Type", "Standard", "Pool's Area", "Floor", "Included Services");
+                System.out.println();
+                for (Villa element : Villa.getVillas()) {
+                    element.showInformation();
+                }
+                System.out.println("Choose villa: ");
+                int chooseVilla = input.nextInt();
+                Villa villa = Villa.getVillas().get(chooseVilla - 1);
+                customer.setServices(villa);
+                Customer.writeFileCustomer();
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            default:
+
         }
     }
 
