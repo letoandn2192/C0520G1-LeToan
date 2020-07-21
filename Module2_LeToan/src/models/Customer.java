@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class Customer implements Comparable<Customer> {
@@ -20,7 +21,7 @@ public class Customer implements Comparable<Customer> {
     private String typeCustomer;
     private String address;
     private Services services;
-    private static ArrayList<Customer> customers = new ArrayList<>();
+    private static List<Customer> customers = new ArrayList<>();
     private static Scanner input = new Scanner(System.in);
 
     public Customer() {
@@ -53,7 +54,7 @@ public class Customer implements Comparable<Customer> {
         return services;
     }
 
-    public static ArrayList<Customer> getCustomers() {
+    public static List<Customer> getCustomers() {
         return customers;
     }
 

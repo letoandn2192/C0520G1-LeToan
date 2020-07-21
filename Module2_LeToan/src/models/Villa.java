@@ -3,17 +3,13 @@ package models;
 import commons.Regex;
 
 import java.io.*;
-import java.util.ArrayList;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Villa extends Services {
     private String roomStandard;
     private double poolArea;
     private int numberOfFloor;
-    private static ArrayList<Villa> villas = new ArrayList<Villa>();
+    private static List<Villa> villas = new ArrayList<Villa>();
 
     public void setRoomStandard(String roomStandard) {
         this.roomStandard = roomStandard;
@@ -27,17 +23,14 @@ public class Villa extends Services {
         this.numberOfFloor = numberOfFloor;
     }
 
-    public static ArrayList<Villa> getVillas() {
+    public static List<Villa> getVillas() {
         return villas;
     }
 
-    public static void setVillas(ArrayList<Villa> villas) {
-        Villa.villas = villas;
-    }
 
     @Override
     public void showInformation() {
-        System.out.printf("%-4s%-12s%-30s%-20.2f%-10.2f%-10d%-10s%-10s%-15.2f%-10s", "", super.getId(), super.getNameServices(),
+        System.out.printf("%-4s%-12s%-30s%-20.2f%-10.2f%-10d%-10s%-10s%-15.2f%-10d", "", super.getId(), super.getNameServices(),
                 super.getUsableArea(), super.getRentCost(), super.getMaxPerson(), super.getRentOfType(), this.roomStandard,
                 this.poolArea, this.numberOfFloor);
         if (super.getIncludedServices().size() != 0) {
@@ -50,7 +43,19 @@ public class Villa extends Services {
         }
     }
 
-    public Villa addNewVilla() {
+    public static void showVillaName(){
+        Set<String> villaList = new TreeSet<>();
+        for (Villa element: villas){
+            villaList.add(element.getNameServices());
+        }
+
+        System.out.println("List of villa: ");
+        for(String element: villaList){
+            System.out.println(element);
+        }
+    }
+
+    public void addNewVilla() {
         Scanner input = new Scanner(System.in);
         List<AvailableServices> includedServices = new ArrayList<>();
         System.out.print("Enter Id: ");
@@ -104,8 +109,6 @@ public class Villa extends Services {
                 isContinue = true;
             }
         } while (!isContinue);
-
-        return this;
     }
 
     public void createFileVilla() {

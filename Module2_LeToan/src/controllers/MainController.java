@@ -2,6 +2,7 @@ package controllers;
 
 
 import models.Customer;
+import models.Employee;
 import models.Villa;
 
 import java.io.FileNotFoundException;
@@ -34,13 +35,7 @@ public class MainController {
 
                 break;
             case 2:
-                try {
                     showServices();
-                } catch (FileNotFoundException e) {
-                    System.out.println("An error occurred.");
-                    e.printStackTrace();
-                }
-
                 break;
             case 3:
                 try {
@@ -66,11 +61,22 @@ public class MainController {
 
                 break;
             case 6:
+                showInformationEmployees();
                 break;
             case 7:
                 System.exit(0);
             default:
                 System.out.println("Invalid value!!!");
+        }
+    }
+
+    public void opening(){
+        try {
+            Villa.readFileVilla();
+            Customer.readFileCustomer();
+            Employee.readFileEmployee();
+        } catch (FileNotFoundException e){
+            System.out.println("File not found!!!");
         }
     }
 
@@ -85,11 +91,14 @@ public class MainController {
         int select = input.nextInt();
         switch (select) {
             case 1:
-                Villa villa1 = new Villa();
-                villa1.addNewVilla();
-                villa1.createFileVilla();
-                villa1.writeFileVilla(villa1);
-                villa1.showInformation();
+                Villa villa = new Villa();
+                villa.addNewVilla();
+                villa.createFileVilla();
+                villa.writeFileVilla(villa);
+                System.out.printf("%-4s%-12s%-30s%-20s%-10s%-10s%-10s%-10s%-15s%-10s%s", "", "Id",
+                        "Name", "Villa's Area", "Cost", "Capacity", "Type", "Standard", "Pool's Area", "Floor", "Included Services");
+                System.out.println();
+                villa.showInformation();
                 break;
             case 2:
                 break;
@@ -105,7 +114,7 @@ public class MainController {
         }
     }
 
-    public void showServices() throws FileNotFoundException {
+    public void showServices() {
         Scanner input = new Scanner(System.in);
         System.out.println("1. Show all Villa.");
         System.out.println("2. Show all House.");
@@ -119,7 +128,6 @@ public class MainController {
         int select = input.nextInt();
         switch (select) {
             case 1:
-                Villa.readFileVilla();
                 System.out.printf("%-4s%-12s%-30s%-20s%-10s%-10s%-10s%-10s%-15s%-10s%s", "", "Id",
                         "Name", "Villa's Area", "Cost", "Capacity", "Type", "Standard", "Pool's Area", "Floor", "Included Services");
                 System.out.println();
@@ -132,6 +140,7 @@ public class MainController {
             case 3:
                 break;
             case 4:
+                Villa.showVillaName();
                 break;
             case 5:
                 break;
@@ -191,8 +200,13 @@ public class MainController {
         }
     }
 
+    public void showInformationEmployees(){
+        Employee.showInformation();
+    }
+
     public static void main(String[] args) {
         MainController main = new MainController();
+        main.opening();
         main.displayMainMenu();
     }
 }
