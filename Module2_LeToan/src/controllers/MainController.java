@@ -14,59 +14,61 @@ public class MainController {
     public void displayMainMenu() {
         Scanner input = new Scanner(System.in);
         int choice;
-        System.out.println("Menu");
-        System.out.println("1. Add New Services.");
-        System.out.println("2. Show Services.");
-        System.out.println("3. Add New Customer.");
-        System.out.println("4. Show Information of Customer.");
-        System.out.println("5. Add New Booking.");
-        System.out.println("6. Show Information of Employee.");
-        System.out.println("7. Exit.");
-        System.out.print("Enter your choice: ");
-        choice = input.nextInt();
+        while (true) {
+            System.out.println("Menu");
+            System.out.println("1. Add New Services.");
+            System.out.println("2. Show Services.");
+            System.out.println("3. Add New Customer.");
+            System.out.println("4. Show Information of Customer.");
+            System.out.println("5. Add New Booking.");
+            System.out.println("6. Show Information of Employee.");
+            System.out.println("7. Exit.");
+            System.out.print("Enter your choice: ");
+            choice = input.nextInt();
 
-        switch (choice) {
-            case 1:
-                try {
-                    addNewServices();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+            switch (choice) {
+                case 1:
+                    try {
+                        addNewServices();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
 
-                break;
-            case 2:
+                    break;
+                case 2:
                     showServices();
-                break;
-            case 3:
-                try {
-                    addNewCustomer();
-                } catch (IOException e) {
-                    System.out.println("Error in CsvFileWriter !!!");
-                    e.printStackTrace();
-                }
-                break;
-            case 4:
-                try {
-                    showInformationCustomers();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case 5:
-                try {
-                    addNewBooking();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                    break;
+                case 3:
+                    try {
+                        addNewCustomer();
+                    } catch (IOException e) {
+                        System.out.println("Error in CsvFileWriter !!!");
+                        e.printStackTrace();
+                    }
+                    break;
+                case 4:
+                    try {
+                        showInformationCustomers();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case 5:
+                    try {
+                        addNewBooking();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
-                break;
-            case 6:
-                showInformationEmployees();
-                break;
-            case 7:
-                System.exit(0);
-            default:
-                System.out.println("Invalid value!!!");
+                    break;
+                case 6:
+                    showInformationEmployees();
+                    break;
+                case 7:
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid value!!!");
+            }
         }
     }
 
@@ -75,7 +77,7 @@ public class MainController {
             Villa.readFileVilla();
             Customer.readFileCustomer();
             Employee.readFileEmployee();
-        } catch (FileNotFoundException e){
+        } catch (IOException e){
             System.out.println("File not found!!!");
         }
     }
@@ -93,7 +95,7 @@ public class MainController {
             case 1:
                 Villa villa = new Villa();
                 villa.addNewVilla();
-                villa.createFileVilla();
+//                villa.createFileVilla();
                 villa.writeFileVilla(villa);
                 System.out.printf("%-4s%-12s%-30s%-20s%-10s%-10s%-10s%-10s%-15s%-10s%s", "", "Id",
                         "Name", "Villa's Area", "Cost", "Capacity", "Type", "Standard", "Pool's Area", "Floor", "Included Services");

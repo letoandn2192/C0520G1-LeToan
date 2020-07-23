@@ -5,11 +5,12 @@ import commons.Regex;
 import java.io.*;
 import java.util.*;
 
-public class Villa extends Services {
+public class Villa extends Services implements Serializable {
     private String roomStandard;
     private double poolArea;
     private int numberOfFloor;
     private static List<Villa> villas = new ArrayList<Villa>();
+    private static final String FILE_PATH_DESTINATION = "D:\\C0520G1-LeToan\\Module2_LeToan\\data\\villa.txt";
 
     public void setRoomStandard(String roomStandard) {
         this.roomStandard = roomStandard;
@@ -41,16 +42,17 @@ public class Villa extends Services {
             }
             System.out.println();
         }
+        System.out.println();;
     }
 
-    public static void showVillaName(){
+    public static void showVillaName() {
         Set<String> villaList = new TreeSet<>();
-        for (Villa element: villas){
+        for (Villa element : villas) {
             villaList.add(element.getNameServices());
         }
 
         System.out.println("List of villa: ");
-        for(String element: villaList){
+        for (String element : villaList) {
             System.out.println(element);
         }
     }
@@ -111,93 +113,135 @@ public class Villa extends Services {
         } while (!isContinue);
     }
 
-    public void createFileVilla() {
+
+    public void writeFileVilla(Villa villa1) throws FileNotFoundException {
+        villas.add(villa1);
         try {
-            File myObj = new File("D:\\C0520G1-LeToan\\Module2_LeToan\\data\\villa.csv");
-            if (myObj.createNewFile()) {
-                System.out.println("File created: " + myObj.getName());
-            } else {
-                System.out.println("File already exists.");
+            FileOutputStream fileOutputStream = new FileOutputStream(FILE_PATH_DESTINATION);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            for (Villa villa: villas){
+                objectOutputStream.writeObject(villa);
             }
+            objectOutputStream.flush();
+            objectOutputStream.close();
+            fileOutputStream.close();
         } catch (IOException e) {
-            System.out.println("An error occurred.");
             e.printStackTrace();
         }
-    }
 
-    public void writeFileVilla(Villa villa) throws FileNotFoundException {
-        readFileVilla();
-        villas.add(villa);
-        try {
-            FileWriter myWrite = new FileWriter("D:\\C0520G1-LeToan\\Module2_LeToan\\data\\villa.csv");
-            for (Villa value : villas) {
-                myWrite.append(String.valueOf(value.getId()));
-                myWrite.append(",");
-                myWrite.append(value.getNameServices());
-                myWrite.append(",");
-                myWrite.append(String.valueOf(value.getUsableArea()));
-                myWrite.append(",");
-                myWrite.append(String.valueOf(value.getRentCost()));
-                myWrite.append(",");
-                myWrite.append(String.valueOf(value.getMaxPerson()));
-                myWrite.append(",");
-                myWrite.append(String.valueOf(value.getRentOfType()));
-                myWrite.append(",");
-                myWrite.append(value.roomStandard);
-                myWrite.append(",");
-                myWrite.append(String.valueOf(value.poolArea));
-                myWrite.append(",");
-                myWrite.append(String.valueOf(value.numberOfFloor));
-                myWrite.append(",");
-                Iterator includedServices = value.getIncludedServices().iterator();
-                while (includedServices.hasNext()) {
-                    AvailableServices temp = (AvailableServices) includedServices.next();
-                    myWrite.append(temp.getIncludedServicesName());
-                    myWrite.append(",");
-                    myWrite.append(String.valueOf(temp.getUnit()));
-                    myWrite.append(",");
-                    myWrite.append(String.valueOf(temp.getPrice()));
-                    myWrite.append(",");
-                }
-                myWrite.append("\n");
-            }
-            myWrite.flush();
-            myWrite.close();
-            System.out.println("CSV file was created successfully !!!");
-
-        } catch (Exception e) {
-            System.out.println("Error in CsvFileWriter !!!");
-            e.printStackTrace();
-        }
     }
 
     public static void readFileVilla() throws FileNotFoundException {
-        villas.clear();// moi lan doc se clear mang villas de khong bi trung lap
-        File myObj = new File("D:\\C0520G1-LeToan\\Module2_LeToan\\data\\villa.csv");
-        Scanner myReader = new Scanner(myObj);
-        //myReader.nextLine();                                             //skip header line
-        while (myReader.hasNextLine()) {
-            String[] data = myReader.nextLine().split(",");
-            Villa a = new Villa();
-            List<AvailableServices> includedServices = new ArrayList<>();
-            a.setId(data[0]);
-            a.setNameServices(data[1]);
-            a.setUsableArea(Double.parseDouble(data[2]));
-            a.setRentCost(Double.parseDouble(data[3]));
-            a.setMaxPerson(Integer.parseInt(data[4]));
-            a.setRentOfType(data[5]);
-            a.setRoomStandard(data[6]);
-            a.setPoolArea(Double.parseDouble(data[7]));
-            a.setNumberOfFloor(Integer.parseInt(data[8]));
-            for (int i = 9; i < data.length; i = i + 3) {
-                String name = data[i];
-                int unit = Integer.parseInt(data[i + 1]);
-                double price = Double.parseDouble(data[i + 2]);
-                includedServices.add(new AvailableServices(name, unit, price));
-            }
-            a.setIncludedServices(includedServices);
-            villas.add(a);
+        File file = new File(FILE_PATH_DESTINATION);
+        if(!file.exists()){
+            System.exit(0);
         }
-        myReader.close();
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            Villa villa;
+            villas.clear();
+            while (true){
+                try {
+                    villa = (Villa) objectInputStream.readObject();
+                    villas.add(villa);
+                } catch (EOFException e){
+                    break;
+                }
+            }
+            objectInputStream.close();
+            fileInputStream.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
+
+//    public void createFileVilla() {
+//        try {
+//            File myObj = new File("D:\\C0520G1-LeToan\\Module2_LeToan\\data\\villa.csv");
+//            if (myObj.createNewFile()) {
+//                System.out.println("File created: " + myObj.getName());
+//            } else {
+//                System.out.println("File already exists.");
+//            }
+//        } catch (IOException e) {
+//            System.out.println("An error occurred.");
+//            e.printStackTrace();
+//        }
+//    }
+
+//    public void writeFileVilla(Villa villa) throws FileNotFoundException {
+//        readFileVilla();
+//        villas.add(villa);
+//        try {
+//            FileWriter myWrite = new FileWriter("D:\\C0520G1-LeToan\\Module2_LeToan\\data\\villa.csv");
+//            for (Villa value : villas) {
+//                myWrite.append(String.valueOf(value.getId()));
+//                myWrite.append(",");
+//                myWrite.append(value.getNameServices());
+//                myWrite.append(",");
+//                myWrite.append(String.valueOf(value.getUsableArea()));
+//                myWrite.append(",");
+//                myWrite.append(String.valueOf(value.getRentCost()));
+//                myWrite.append(",");
+//                myWrite.append(String.valueOf(value.getMaxPerson()));
+//                myWrite.append(",");
+//                myWrite.append(String.valueOf(value.getRentOfType()));
+//                myWrite.append(",");
+//                myWrite.append(value.roomStandard);
+//                myWrite.append(",");
+//                myWrite.append(String.valueOf(value.poolArea));
+//                myWrite.append(",");
+//                myWrite.append(String.valueOf(value.numberOfFloor));
+//                myWrite.append(",");
+//                Iterator includedServices = value.getIncludedServices().iterator();
+//                while (includedServices.hasNext()) {
+//                    AvailableServices temp = (AvailableServices) includedServices.next();
+//                    myWrite.append(temp.getIncludedServicesName());
+//                    myWrite.append(",");
+//                    myWrite.append(String.valueOf(temp.getUnit()));
+//                    myWrite.append(",");
+//                    myWrite.append(String.valueOf(temp.getPrice()));
+//                    myWrite.append(",");
+//                }
+//                myWrite.append("\n");
+//            }
+//            myWrite.flush();
+//            myWrite.close();
+//            System.out.println("CSV file was created successfully !!!");
+//
+//        } catch (Exception e) {
+//            System.out.println("Error in CsvFileWriter !!!");
+//            e.printStackTrace();
+//        }
+//    }
+
+//    public static void readFileVilla() throws FileNotFoundException {
+//        villas.clear();// moi lan doc se clear mang villas de khong bi trung lap
+//        File myObj = new File("D:\\C0520G1-LeToan\\Module2_LeToan\\data\\villa.csv");
+//        Scanner myReader = new Scanner(myObj);
+//        while (myReader.hasNextLine()) {
+//            String[] data = myReader.nextLine().split(",");
+//            Villa a = new Villa();
+//            List<AvailableServices> includedServices = new ArrayList<>();
+//            a.setId(data[0]);
+//            a.setNameServices(data[1]);
+//            a.setUsableArea(Double.parseDouble(data[2]));
+//            a.setRentCost(Double.parseDouble(data[3]));
+//            a.setMaxPerson(Integer.parseInt(data[4]));
+//            a.setRentOfType(data[5]);
+//            a.setRoomStandard(data[6]);
+//            a.setPoolArea(Double.parseDouble(data[7]));
+//            a.setNumberOfFloor(Integer.parseInt(data[8]));
+//            for (int i = 9; i < data.length; i = i + 3) {
+//                String name = data[i];
+//                int unit = Integer.parseInt(data[i + 1]);
+//                double price = Double.parseDouble(data[i + 2]);
+//                includedServices.add(new AvailableServices(name, unit, price));
+//            }
+//            a.setIncludedServices(includedServices);
+//            villas.add(a);
+//        }
+//        myReader.close();
+//    }
 }

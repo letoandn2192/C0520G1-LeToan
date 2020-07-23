@@ -1,6 +1,8 @@
 package models;
 
-public class AvailableServices implements Comparable<AvailableServices>{
+import java.io.Serializable;
+
+public class AvailableServices implements Comparable<AvailableServices>, Serializable {
     String includedServicesName;
     int unit;
     double price;
