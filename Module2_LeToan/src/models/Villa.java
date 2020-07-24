@@ -5,12 +5,12 @@ import commons.Regex;
 import java.io.*;
 import java.util.*;
 
-public class Villa extends Services implements Serializable {
+public class Villa extends Services{
     private String roomStandard;
     private double poolArea;
     private int numberOfFloor;
     private static List<Villa> villas = new ArrayList<Villa>();
-    private static final String FILE_PATH_DESTINATION = "D:\\C0520G1-LeToan\\Module2_LeToan\\data\\villa.txt";
+    private static final String FILE_PATH = "D:\\C0520G1-LeToan\\Module2_LeToan\\data\\villa.csv";
 
     public void setRoomStandard(String roomStandard) {
         this.roomStandard = roomStandard;
@@ -40,9 +40,8 @@ public class Villa extends Services implements Serializable {
                 AvailableServices services = list.next();
                 System.out.print(services.getIncludedServicesName() + "/" + services.getUnit() + "/" + services.getPrice() + " ");
             }
-            System.out.println();
         }
-        System.out.println();;
+        System.out.println();
     }
 
     public static void showVillaName() {
@@ -61,18 +60,18 @@ public class Villa extends Services implements Serializable {
         Scanner input = new Scanner(System.in);
         List<AvailableServices> includedServices = new ArrayList<>();
         System.out.print("Enter Id: ");
-        this.setId(Regex.checkId(input.nextLine()));
+        super.setId(Regex.checkId(input.nextLine()));
         System.out.print("Enter Name Services: ");
-        this.setNameServices(Regex.checkNameFormat(input.nextLine()));
+        super.setNameServices(Regex.checkNameFormat(input.nextLine()));
         System.out.print("Enter Area: ");
-        this.setUsableArea(Regex.checkArea(input.nextDouble()));
+        super.setUsableArea(Regex.checkArea(input.nextDouble()));
         System.out.print("Enter cost: ");
-        this.setRentCost(Regex.checkRentCost(input.nextDouble()));
+        super.setRentCost(Regex.checkRentCost(input.nextDouble()));
         System.out.print("Enter Maximum Person: ");
-        this.setMaxPerson(Regex.checkNumber(input.nextInt()));
+        super.setMaxPerson(Regex.checkNumber(input.nextInt()));
         input.nextLine();
         System.out.print("Enter rent type: ");
-        this.setRentOfType(Regex.checkNameFormat(input.nextLine()));
+        super.setRentOfType(Regex.checkNameFormat(input.nextLine()));
         System.out.print("Enter room standard: ");
         this.setRoomStandard(Regex.checkNameFormat(input.nextLine()));
         System.out.print("Enter pool area: ");
@@ -113,14 +112,13 @@ public class Villa extends Services implements Serializable {
         } while (!isContinue);
     }
 
-
-    public void writeFileVilla(Villa villa1) throws FileNotFoundException {
-        villas.add(villa1);
+    public void writeFileVilla(Villa villa) {
+        villas.add(villa);
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream(FILE_PATH_DESTINATION);
+            FileOutputStream fileOutputStream = new FileOutputStream(FILE_PATH);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            for (Villa villa: villas){
-                objectOutputStream.writeObject(villa);
+            for (Villa villas: villas){
+                objectOutputStream.writeObject(villas);
             }
             objectOutputStream.flush();
             objectOutputStream.close();
@@ -128,11 +126,10 @@ public class Villa extends Services implements Serializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
-    public static void readFileVilla() throws FileNotFoundException {
-        File file = new File(FILE_PATH_DESTINATION);
+    public static void readFileVilla() {
+        File file = new File(FILE_PATH);
         if(!file.exists()){
             System.exit(0);
         }

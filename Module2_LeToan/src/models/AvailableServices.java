@@ -17,9 +17,9 @@ public class AvailableServices implements Comparable<AvailableServices>, Seriali
         return includedServicesName;
     }
 
-    public void setIncludedServicesName(String includedServicesName) {
-        this.includedServicesName = includedServicesName;
-    }
+//    public void setIncludedServicesName(String includedServicesName) {
+//        this.includedServicesName = includedServicesName;
+//    }
 
     public int getUnit() {
         return unit;

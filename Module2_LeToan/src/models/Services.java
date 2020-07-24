@@ -1,10 +1,11 @@
 package models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-abstract class Services {
+abstract class Services implements Serializable {
     private String nameServices;
     private double usableArea;
     private double rentCost;

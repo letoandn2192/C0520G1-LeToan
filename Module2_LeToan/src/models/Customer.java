@@ -23,6 +23,7 @@ public class Customer implements Comparable<Customer> {
     private Services services;
     private static List<Customer> customers = new ArrayList<>();
     private static Scanner input = new Scanner(System.in);
+    private static final String FILE_PATH = "D:\\C0520G1-LeToan\\Module2_LeToan\\data\\customer.csv";
 
     public Customer() {
     }
@@ -63,7 +64,7 @@ public class Customer implements Comparable<Customer> {
         return array[2];
     }
 
-    public static void showInformation() throws FileNotFoundException {
+    public static void showInformation() throws IOException {
         readFileCustomer();
         Collections.sort(customers);
         System.out.printf("%-4s%-30s%-20s%-15s%-15s%-20s%-30s%-20s%-20s", "", "Name", "Date of birth", "Gender", "Id Number", "Phone Number", "Email", "Type Of Customer", "Address");
@@ -99,10 +100,12 @@ public class Customer implements Comparable<Customer> {
         writeFileCustomer();
     }
 
-    public static void readFileCustomer() throws FileNotFoundException{
-        File myObj = new File("D:\\C0520G1-LeToan\\Module2_LeToan\\data\\customer.csv");
+    public static void readFileCustomer() throws IOException {
+        File myObj = new File(FILE_PATH);
+        if(!myObj.exists()){
+            myObj.createNewFile();
+        }
         Scanner myReader = new Scanner(myObj);
-        //ArrayList<Customer> customerList = new ArrayList<>();
         customers.clear();
         while (myReader.hasNextLine()) {
             String[] arrayData = myReader.nextLine().split(",");
@@ -121,12 +124,7 @@ public class Customer implements Comparable<Customer> {
     }
 
     public static void writeFileCustomer() throws IOException{
-        File myFile = new File("D:\\C0520G1-LeToan\\Module2_LeToan\\data\\customer.csv");
-        if (!myFile.exists()) {
-            myFile.createNewFile();
-        }
-
-        FileWriter myWrite = new FileWriter("D:\\C0520G1-LeToan\\Module2_LeToan\\data\\customer.csv");
+        FileWriter myWrite = new FileWriter(FILE_PATH);
         for (Customer customer : customers) {
             myWrite.append(customer.name);
             myWrite.append(",");

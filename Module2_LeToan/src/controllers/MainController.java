@@ -3,6 +3,7 @@ package controllers;
 
 import models.Customer;
 import models.Employee;
+import models.House;
 import models.Villa;
 
 import java.io.FileNotFoundException;
@@ -33,7 +34,6 @@ public class MainController {
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
-
                     break;
                 case 2:
                     showServices();
@@ -49,7 +49,7 @@ public class MainController {
                 case 4:
                     try {
                         showInformationCustomers();
-                    } catch (FileNotFoundException e) {
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
                     break;
@@ -75,6 +75,7 @@ public class MainController {
     public void opening(){
         try {
             Villa.readFileVilla();
+            House.readFileHouse();
             Customer.readFileCustomer();
             Employee.readFileEmployee();
         } catch (IOException e){
@@ -95,7 +96,6 @@ public class MainController {
             case 1:
                 Villa villa = new Villa();
                 villa.addNewVilla();
-//                villa.createFileVilla();
                 villa.writeFileVilla(villa);
                 System.out.printf("%-4s%-12s%-30s%-20s%-10s%-10s%-10s%-10s%-15s%-10s%s", "", "Id",
                         "Name", "Villa's Area", "Cost", "Capacity", "Type", "Standard", "Pool's Area", "Floor", "Included Services");
@@ -103,6 +103,13 @@ public class MainController {
                 villa.showInformation();
                 break;
             case 2:
+                House house = new House();
+                house.addNewHouse();
+                house.writeFileHouse(house);
+                System.out.printf("%-4s%-12s%-30s%-20s%-10s%-10s%-10s%-10s%-8s%-10s%s", "", "Id",
+                        "Name", "Villa's Area", "Cost", "Capacity", "Type", "Standard", "Floor", "Other", "Included Services");
+                System.out.println();
+                house.showInformation();
                 break;
             case 3:
                 break;
@@ -138,6 +145,12 @@ public class MainController {
                 }
                 break;
             case 2:
+                System.out.printf("%-4s%-12s%-30s%-20s%-10s%-10s%-10s%-10s%-8s%-10s%s", "", "Id",
+                        "Name", "Villa's Area", "Cost", "Capacity", "Type", "Standard", "Floor", "Other", "Included Services");
+                System.out.println();
+                for (House element : House.getHouses()) {
+                    element.showInformation();
+                }
                 break;
             case 3:
                 break;
@@ -145,6 +158,7 @@ public class MainController {
                 Villa.showVillaName();
                 break;
             case 5:
+                House.showHouseName();
                 break;
             case 6:
                 break;
@@ -162,7 +176,7 @@ public class MainController {
         Customer.addNewCustomer();
     }
 
-    public void showInformationCustomers() throws FileNotFoundException {
+    public void showInformationCustomers() throws IOException {
         Customer.showInformation();
     }
 
