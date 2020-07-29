@@ -6,14 +6,37 @@ import java.io.*;
 import java.util.*;
 
 public class FileManager {
-    private static final String VILLA_FILE_PATH = "D:\\C0520G1-LeToan\\Module2_LeToan\\data\\villa.csv";
-    private static final String HOUSE_FILE_PATH = "D:\\C0520G1-LeToan\\Module2_LeToan\\data\\house.csv";
-    private static final String ROOM_FILE_PATH = "D:\\C0520G1-LeToan\\Module2_LeToan\\data\\room.csv";
-    private static final String EMPLOYEE_FILE_PATH = "D:\\C0520G1-LeToan\\Module2_LeToan\\data\\employee.csv";
-    private static final String CUSTOMER_FILE_PATH = "D:\\C0520G1-LeToan\\Module2_LeToan\\data\\customer.csv";
-    private static final String BOOKING_FILE_PATH = "D:\\C0520G1-LeToan\\Module2_LeToan\\data\\booking.csv";
+    private static final String VILLA_FILE_PATH = "D:\\C0520G1-LeToan\\Module2_LeToan\\src\\data\\villa.csv";
+    private static final String HOUSE_FILE_PATH = "D:\\C0520G1-LeToan\\Module2_LeToan\\src\\data\\house.csv";
+    private static final String ROOM_FILE_PATH = "D:\\C0520G1-LeToan\\Module2_LeToan\\src\\data\\room.csv";
+    private static final String EMPLOYEE_FILE_PATH = "D:\\C0520G1-LeToan\\Module2_LeToan\\src\\data\\employee.csv";
+    private static final String CUSTOMER_FILE_PATH = "D:\\C0520G1-LeToan\\Module2_LeToan\\src\\data\\customer.csv";
+    private static final String BOOKING_FILE_PATH = "D:\\C0520G1-LeToan\\Module2_LeToan\\src\\data\\booking.csv";
 
-    public static void writeFileVilla() {
+    public static void writeData(){
+        FileManager fileManager = new FileManager();
+        fileManager.writeFileBooking();
+        fileManager.writeFileCustomer();
+        fileManager.writeFileVilla();
+        fileManager.writeFileHouse();
+        fileManager.writeFileRoom();
+//        fileManager.writeFileEmployee();
+    }
+
+    public static void readData(){
+        FileManager fileManager = new FileManager();
+        try {
+            fileManager.readFileVilla();
+            fileManager.readFileHouse();
+            fileManager.readFileRoom();
+            fileManager.readFileCustomer();
+            fileManager.readFileEmployee();
+        } catch (IOException e) {
+            System.out.println("File not found!!!");
+        }
+    }
+
+    public void writeFileVilla() {
         List<Villa> villaList = Villa.getVillaList();
         try {
             FileWriter myWrite = new FileWriter(VILLA_FILE_PATH);
@@ -59,7 +82,7 @@ public class FileManager {
         }
     }
 
-    public static void readFileVilla() throws IOException {
+    public void readFileVilla() throws IOException {
         List<Villa> villaList = new ArrayList<>();
         FileReader fileReader = new FileReader(VILLA_FILE_PATH);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -93,7 +116,7 @@ public class FileManager {
         fileReader.close();
     }
 
-    public static void writeFileHouse() {
+    public void writeFileHouse() {
         List<House> houseList = House.getHouseList();
         try {
             FileWriter fileWriter = new FileWriter(HOUSE_FILE_PATH);
@@ -137,7 +160,7 @@ public class FileManager {
         }
     }
 
-    public static void readFileHouse() throws IOException {
+    public void readFileHouse() throws IOException {
         List<House> houseList = new ArrayList<>();
         FileReader fileReader = new FileReader(HOUSE_FILE_PATH);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -170,7 +193,7 @@ public class FileManager {
         fileReader.close();
     }
 
-    public static void writeFileRoom() {
+    public void writeFileRoom() {
         List<Room> roomList = Room.getRoomList();
         try {
             FileWriter myWrite = new FileWriter(ROOM_FILE_PATH);
@@ -211,7 +234,7 @@ public class FileManager {
         }
     }
 
-    public static void readFileRoom() throws IOException {
+    public void readFileRoom() throws IOException {
         List<Room> roomList = new ArrayList<>();
         FileReader fileReader = new FileReader(ROOM_FILE_PATH);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -242,7 +265,29 @@ public class FileManager {
         fileReader.close();
     }
 
-    public static void readFileEmployee() throws IOException {
+//    public void writeFileEmployee() {
+//        Map<String, Employee> employeeMap = Employee.getEmployeeList();
+//        try {
+//            FileWriter myWrite = new FileWriter(EMPLOYEE_FILE_PATH);
+//            for (Map.Entry<String, Employee> employee : employeeMap.entrySet()) {
+//                myWrite.append(employee.getValue().getCodeNumber());
+//                myWrite.append(",");
+//                myWrite.append(employee.getValue().getName());
+//                myWrite.append(",");
+//                myWrite.append(String.valueOf(employee.getValue().getAge()));
+//                myWrite.append(",");
+//                myWrite.append(employee.getValue().getAddress());
+//                myWrite.append(",");
+//                myWrite.append("\n");
+//            }
+//            myWrite.flush();
+//            myWrite.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+    public void readFileEmployee() throws IOException {
         File myObj = new File(EMPLOYEE_FILE_PATH);
         Map<String, Employee> employeeList = new TreeMap<>();
         if (!myObj.exists()) {
@@ -259,14 +304,14 @@ public class FileManager {
             int age = Integer.parseInt(arrayData[2]);
             String address = arrayData[3];
             Employee employeeTemp = new Employee(codeNumber, name, age, address);
-            employeeList.put(employeeTemp.getCodeNumber(), employeeTemp);
+            employeeList.put(codeNumber, employeeTemp);
         }
         Employee.setEmployeeList(employeeList);
         bufferedReader.close();
         fileReader.close();
     }
 
-    public static void readFileCustomer() throws IOException {
+    public void readFileCustomer() throws IOException {
         File myObj = new File(CUSTOMER_FILE_PATH);
         if (!myObj.exists()) {
             myObj.createNewFile();
@@ -290,7 +335,7 @@ public class FileManager {
         myReader.close();
     }
 
-    public static void writeFileCustomer() {
+    public void writeFileCustomer() {
         List<Customer> customerList = Customer.getCustomerList();
         try {
             FileWriter myWrite = new FileWriter(CUSTOMER_FILE_PATH);
@@ -299,7 +344,7 @@ public class FileManager {
                 myWrite.append(",");
                 myWrite.append(customer.getDateOfBirth());
                 myWrite.append(",");
-                myWrite.append(customer.getName());
+                myWrite.append(customer.getGender());
                 myWrite.append(",");
                 myWrite.append(customer.getIdNumber());
                 myWrite.append(",");
@@ -320,7 +365,7 @@ public class FileManager {
         }
     }
 
-    public static void writeFileBooking() {
+    public void writeFileBooking() {
         List<Customer> customerList = Customer.getCustomerList();
         try {
             FileWriter myWrite = new FileWriter(BOOKING_FILE_PATH);

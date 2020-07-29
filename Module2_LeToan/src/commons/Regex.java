@@ -1,5 +1,10 @@
 package commons;
 
+import models.Customer;
+import models.House;
+import models.Room;
+import models.Villa;
+
 import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -30,36 +35,37 @@ public class Regex {
         return nameFormat;
     }
 
-    public static double checkArea(double area){
-        while (area < 30.0){
-            System.out.println("Area at least is 30.0 m2!!!");
-            area = input.nextDouble();
+    public static double checkArea(String area){
+        Pattern pattern = Pattern.compile("^\\d+([.]?)\\d+$");
+        Matcher matcher = pattern.matcher(area);
+        while (!matcher.matches() || Double.parseDouble(area) < 30.0){
+            System.out.println("Area must be number and at least 30 m2!!!");
+            area = input.nextLine();
+            matcher = pattern.matcher(area);
         }
-        return area;
+        return Double.parseDouble(area);
     }
 
-    public static double checkRentCost(double rentCost){
-        while (rentCost <= 0){
-            System.out.println("Cost must be a positive number!!!");
-            rentCost = input.nextDouble();
-        }
-        return rentCost;
-    }
-
-    public static int checkNumber(int number){
-        while (number <= 0){
+    public static int checkNumberInt(String number){
+        Pattern pattern = Pattern.compile("^\\d+$");
+        Matcher matcher = pattern.matcher(number);
+        while (!matcher.matches() || Integer.parseInt(number) <= 0){
             System.out.println("Input must be a positive integer!!!");
-            number = input.nextInt();
+            number = input.nextLine();
+            matcher = pattern.matcher(number);
         }
-        return number;
+        return Integer.parseInt(number);
     }
 
-    public static double checkNumber(double number){
-        while (number <= 0){
-            System.out.println("Input must be a positive integer!!!");
-            number = input.nextInt();
+    public static double checkNumberDouble(String number){
+        Pattern pattern = Pattern.compile("^\\d+([.]?)\\d+$");
+        Matcher matcher = pattern.matcher(number);
+        while (!matcher.matches() || Double.parseDouble(number) <= 0){
+            System.out.println("Input must be a positive number!!!");
+            number = input.nextLine();
+            matcher = pattern.matcher(number);
         }
-        return number;
+        return Double.parseDouble(number);
     }
 
     public static String checkRegexIncludedServices(String includedServices) {
@@ -135,5 +141,50 @@ public class Regex {
             matcher = pattern.matcher(dateOfBirth);
         }
         return dateOfBirth;
+    }
+
+    //////////////////////////////CHECK BOOKING///////////////////////////////////////////////////////////////////
+    public static int checkInvalidBookingCustomer(String chooseCustomer){
+        Pattern pattern = Pattern.compile("^\\d+$");
+        Matcher matcher = pattern.matcher(chooseCustomer);
+        while (!matcher.matches() || Integer.parseInt(chooseCustomer) - 1 >= Customer.getCustomerList().size() || Integer.parseInt(chooseCustomer) - 1 < 0){
+            System.out.println("Invalid Value!!!. Choose again!!!");
+            chooseCustomer = input.nextLine();
+            matcher = pattern.matcher(chooseCustomer);
+        }
+        return Integer.parseInt(chooseCustomer);
+    }
+
+    public static int checkInvalidBookingVilla(String chooseVilla){
+        Pattern pattern = Pattern.compile("^\\d+$");
+        Matcher matcher = pattern.matcher(chooseVilla);
+        while (!matcher.matches() || Integer.parseInt(chooseVilla) - 1 >= Villa.getVillaList().size() || Integer.parseInt(chooseVilla) - 1 < 0){
+            System.out.println("Invalid Value!!!. Choose again!!!");
+            chooseVilla = input.nextLine();
+            matcher = pattern.matcher(chooseVilla);
+        }
+        return Integer.parseInt(chooseVilla);
+    }
+
+    public static int checkInvalidBookingHouse(String chooseHouse){
+        Pattern pattern = Pattern.compile("^\\d+$");
+        Matcher matcher = pattern.matcher(chooseHouse);
+        while (!matcher.matches() || Integer.parseInt(chooseHouse) - 1 >= House.getHouseList().size() || Integer.parseInt(chooseHouse) - 1 < 0){
+            System.out.println("Invalid Value!!!. Choose again!!!");
+            chooseHouse = input.nextLine();
+            matcher = pattern.matcher(chooseHouse);
+        }
+        return Integer.parseInt(chooseHouse);
+    }
+
+    public static int checkInvalidBookingRoom(String chooseRoom){
+        Pattern pattern = Pattern.compile("^\\d+$");
+        Matcher matcher = pattern.matcher(chooseRoom);
+        while (!matcher.matches() || Integer.parseInt(chooseRoom) - 1 >= Room.getRoomList().size() || Integer.parseInt(chooseRoom) - 1 < 0){
+            System.out.println("Invalid Value!!!. Choose again!!!");
+            chooseRoom = input.nextLine();
+            matcher = pattern.matcher(chooseRoom);
+        }
+        return Integer.parseInt(chooseRoom);
     }
 }

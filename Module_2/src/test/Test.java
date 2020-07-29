@@ -1,38 +1,20 @@
 package test;
 
-import java.util.Scanner;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class Test {
-    public static boolean checkRegexId(String id){
-        //Pattern pattern = Pattern.compile("^((SVVL-|SVHO-|SVRO-)\\d{4})$");
-        Pattern pattern = Pattern.compile("^a$");
-        Matcher matcher = pattern.matcher(id);
-        return matcher.matches();
-    }
-
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        String a;
-//        boolean b = true;
-        do {
-            System.out.println("dfsdf: ");
-            a = input.nextLine();
-            System.out.println(a);
-            System.out.println(checkRegexId(a));
-        }while (checkRegexId(a));
+        Map<String, Student> list = new TreeMap<String, Student>();
+        Student student1 = new Student("001", "Toan");
+        Student student2 = new Student("002", "Tuan");
+        Student student3 = new Student("003", "Hao");
 
-
-//        while(b){
-//            System.out.println("dfsdf: ");
-//            a = input.nextLine();
-//            System.out.println(a);
-//            if(checkRegexId(a)){
-//                b = true;
-//            }else {
-//                b =false;
-//            }
-//        }
+        list.put(student1.getCode(), student1);
+        list.put(student2.getCode(), student2);
+        list.put(student3.getCode(), student3);
+        for (Map.Entry<String, Student> a : list.entrySet()){
+            System.out.println(a.getValue());
+        }
     }
 }

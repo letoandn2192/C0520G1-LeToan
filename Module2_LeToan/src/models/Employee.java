@@ -20,6 +20,10 @@ public class Employee{
         Employee.employeeList = employees;
     }
 
+    public static Map<String, Employee> getEmployeeList() {
+        return employeeList;
+    }
+
     public String getCodeNumber() {
         return codeNumber;
     }
@@ -27,6 +31,12 @@ public class Employee{
     @Override
     public String toString() {
         return String.format("%-5s%-20s%-5d%s", this.codeNumber, this.name, this.age, this.address);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Employee employee = (Employee) obj;
+        return this.codeNumber.compareTo(employee.getCodeNumber()) == 0;
     }
 
     public static void showInformation(){

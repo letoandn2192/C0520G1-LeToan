@@ -1,23 +1,14 @@
 package controllers;
 
 import commons.FileManager;
+import commons.Regex;
 import models.*;
 
-import java.io.IOException;
 import java.util.*;
 
 public class Function {
-    private static Deque<Customer> queue = new LinkedList<>();
     public void opening() {
-        try {
-            FileManager.readFileVilla();
-            FileManager.readFileHouse();
-            FileManager.readFileRoom();
-            FileManager.readFileCustomer();
-            FileManager.readFileEmployee();
-        } catch (IOException e) {
-            System.out.println("File not found!!!");
-        }
+        FileManager.readData();
     }
 
     public void displayMainMenu() {
@@ -59,11 +50,7 @@ public class Function {
                     other();
                     break;
                 case 8:
-                    FileManager.writeFileVilla();
-                    FileManager.writeFileHouse();
-                    FileManager.writeFileRoom();
-                    FileManager.writeFileCustomer();
-                    FileManager.writeFileBooking();
+                    FileManager.writeData();
                     System.exit(0);
                 default:
                     System.out.println("Invalid value!!!");
@@ -109,11 +96,7 @@ public class Function {
                 displayMainMenu();
                 break;
             case 5:
-                FileManager.writeFileVilla();
-                FileManager.writeFileHouse();
-                FileManager.writeFileRoom();
-                FileManager.writeFileCustomer();
-                FileManager.writeFileBooking();
+                FileManager.writeData();
                 System.exit(0);
             default:
                 System.out.println("Invalid value.");
@@ -170,11 +153,7 @@ public class Function {
                 displayMainMenu();
                 break;
             case 8:
-                FileManager.writeFileVilla();
-                FileManager.writeFileHouse();
-                FileManager.writeFileRoom();
-                FileManager.writeFileCustomer();
-                FileManager.writeFileBooking();
+                FileManager.writeData();
                 System.exit(0);
             default:
                 System.out.println("Invalid value.");
@@ -193,15 +172,15 @@ public class Function {
         Scanner input = new Scanner(System.in);
         Customer.showInformation();
         System.out.println("Choose customer you want: ");
-        String chooseCustomer = input.nextLine();
-        Customer customer = Customer.getCustomerList().get(Integer.parseInt(chooseCustomer )- 1);
+        int chooseCustomer = Regex.checkInvalidBookingCustomer(input.nextLine());
+        Customer customer = Customer.getCustomerList().get(chooseCustomer-1);
         System.out.println("Choose services: ");
         System.out.println("1. Booking Villa");
         System.out.println("2. Booking House");
         System.out.println("3. Booking Room");
         System.out.println("4. Back to Menu");
         System.out.println("Choose services: ");
-        int choice = input.nextInt();
+        int choice = Integer.parseInt(input.nextLine());
         switch (choice) {
             case 1:
                 System.out.printf("%-4s%-12s%-30s%-20s%-10s%-10s%-10s%-10s%-15s%-10s%s", "", "Id",
@@ -211,8 +190,8 @@ public class Function {
                     element.showInformation();
                 }
                 System.out.println("Choose villa: ");
-                int chooseVilla = input.nextInt();
-                Villa villa = Villa.getVillaList().get(chooseVilla - 1);
+                int chooseVilla = Regex.checkInvalidBookingVilla(input.nextLine());
+                Villa villa = Villa.getVillaList().get(chooseVilla-1);
                 customer.setServices(villa);
                 break;
             case 2:
@@ -223,7 +202,7 @@ public class Function {
                     element.showInformation();
                 }
                 System.out.println("Choose House: ");
-                int chooseHouse = input.nextInt();
+                int chooseHouse = Regex.checkInvalidBookingHouse(input.nextLine());
                 House house = House.getHouseList().get(chooseHouse - 1);
                 customer.setServices(house);
                 break;
@@ -235,7 +214,7 @@ public class Function {
                     element.showInformation();
                 }
                 System.out.println("Choose room: ");
-                int chooseRoom = input.nextInt();
+                int chooseRoom = Regex.checkInvalidBookingRoom(input.nextLine());
                 Room room = Room.getRoomList().get(chooseRoom - 1);
                 customer.setServices(room);
                 break;
@@ -251,30 +230,34 @@ public class Function {
         Employee.showInformation();
     }
 
-    public void other(){
+    public void other() {
         Scanner input = new Scanner(System.in);
         int select;
         System.out.println("1. Movie theater");
         System.out.println("2. Cabinet");
         System.out.println("Choose your select");
-        select = input.nextInt();
-        switch (select){
+        select = Integer.parseInt(input.nextLine());
+        switch (select) {
             case 1:
-                Customer.showInformation();
-                System.out.println("Choose customer: ");
-                select = input.nextInt();
-                if(Customer.getCustomerList().size() > select -1) {
-                    Customer customer = Customer.getCustomerList().get(select - 1);
-                    queue.add(customer);
-                }
-                if(queue.size() == 2){
-                    System.out.println("List of customer: ");
-                    while (!queue.isEmpty()){
-                        System.out.println(queue.poll());
-                    }
+                Theatre theatre = new Theatre();
+                System.out.println("Welcome to Furama theatre!!!");
+                if(theatre.getAvailable() == 0){
+                    System.out.println("Sorry!!! Ticket sold out!!!");
+                } else {
+                    System.out.println("Enter your name: ");
+                    String name = input.nextLine();
+                    System.out.println("How many ticket you want to buy ?");
+                    int numberOfTicket = Integer.parseInt(input.nextLine());
+                    theatre.buyTicket(name, numberOfTicket);
                 }
                 break;
             case 2:
+                Cabinet cabinet = new Cabinet();
+                Employee.showInformation();
+                System.out.println("Choose employee: ");
+                String chooseEmployee = input.nextLine();
+                Employee employee = Employee.getEmployeeList().get(chooseEmployee);
+                cabinet.search(employee);
                 break;
             default:
                 System.out.println("Invalid value!!!");

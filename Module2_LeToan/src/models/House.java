@@ -77,18 +77,18 @@ public class House extends Services {
         System.out.print("Enter Name Services: ");
         super.setNameServices(Regex.checkNameFormat(input.nextLine()));
         System.out.print("Enter Area: ");
-        super.setUsableArea(Regex.checkArea(input.nextDouble()));
+        super.setUsableArea(Regex.checkArea(input.nextLine()));
         System.out.print("Enter cost: ");
-        super.setRentCost(Regex.checkRentCost(input.nextDouble()));
+        super.setRentCost(Regex.checkNumberDouble(input.nextLine()));
         System.out.print("Enter Maximum Person: ");
-        super.setMaxPerson(Regex.checkNumber(input.nextInt()));
+        super.setMaxPerson(Regex.checkNumberInt(input.nextLine()));
         input.nextLine();
         System.out.print("Enter rent type: ");
         super.setRentOfType(Regex.checkNameFormat(input.nextLine()));
         System.out.print("Enter room standard: ");
         this.setRoomStandard(Regex.checkNameFormat(input.nextLine()));
         System.out.print("Enter number of floor: ");
-        this.setNumberOfFloor(Regex.checkNumber(input.nextInt()));
+        this.setNumberOfFloor(Regex.checkNumberInt(input.nextLine()));
         input.nextLine();
         System.out.print("Enter other convenient: ");
         this.setOther(input.nextLine());
@@ -112,9 +112,9 @@ public class House extends Services {
                     }
                 } while (isExist);
                 System.out.println("Enter unit: ");
-                int unitIncludedServices = Regex.checkNumber(input.nextInt());
+                int unitIncludedServices = Regex.checkNumberInt(input.nextLine());
                 System.out.println("Enter your price: ");
-                double priceIncludedServices = Regex.checkNumber(input.nextDouble());
+                double priceIncludedServices = Regex.checkNumberDouble(input.nextLine());
                 includedServices.add(new AvailableServices(nameIncludedServices, unitIncludedServices, priceIncludedServices));
                 super.setIncludedServices(includedServices);
                 if (includedServices.size() == 5) {

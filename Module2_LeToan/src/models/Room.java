@@ -27,7 +27,7 @@ public class Room extends Services {
 
     @Override
     public void showInformation() {
-        System.out.printf("%-4s%-12s%-30s%-20.2f%-10.2f%-10d%-10s%-10s", "", super.getId(), super.getNameServices(),
+        System.out.printf("%-4s%-12s%-30s%-20.2f%-10.2f%-10d%-10s%-15s", "", super.getId(), super.getNameServices(),
                 super.getUsableArea(), super.getRentCost(), super.getMaxPerson(), super.getRentOfType(), this.freeServices);
         if (super.getIncludedServices().size() != 0) {
             Iterator<AvailableServices> list = super.getIncludedServices().iterator();
@@ -59,11 +59,11 @@ public class Room extends Services {
         System.out.print("Enter Name Services: ");
         super.setNameServices(Regex.checkNameFormat(input.nextLine()));
         System.out.print("Enter Area: ");
-        super.setUsableArea(Regex.checkArea(Double.parseDouble(input.nextLine())));
+        super.setUsableArea(Regex.checkArea(input.nextLine()));
         System.out.print("Enter cost: ");
-        super.setRentCost(Regex.checkRentCost(Double.parseDouble(input.nextLine())));
+        super.setRentCost(Regex.checkNumberDouble(input.nextLine()));
         System.out.print("Enter Maximum Person: ");
-        super.setMaxPerson(Regex.checkNumber(Integer.parseInt(input.nextLine())));
+        super.setMaxPerson(Regex.checkNumberInt(input.nextLine()));
         System.out.print("Enter rent type (Year/Month/Day/Hour): ");
         super.setRentOfType(Regex.checkNameFormat(input.nextLine()));
         System.out.print("Enter free services: ");
@@ -88,9 +88,9 @@ public class Room extends Services {
                     }
                 } while (isExist);
                 System.out.println("Enter unit: ");
-                int unitIncludedServices = Regex.checkNumber(Integer.parseInt(input.nextLine()));
+                int unitIncludedServices = Regex.checkNumberInt(input.nextLine());
                 System.out.println("Enter your price: ");
-                double priceIncludedServices = Regex.checkNumber(Double.parseDouble(input.nextLine()));
+                double priceIncludedServices = Regex.checkNumberDouble(input.nextLine());
                 includedServices.add(new AvailableServices(nameIncludedServices, unitIncludedServices, priceIncludedServices));
                 super.setIncludedServices(includedServices);
                 if (includedServices.size() == 5) {
