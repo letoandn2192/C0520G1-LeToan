@@ -2,15 +2,14 @@ package models;
 
 import commons.Regex;
 
-import java.io.*;
 import java.util.*;
 
 public class Villa extends Services{
     private String roomStandard;
     private double poolArea;
     private int numberOfFloor;
-    private static List<Villa> villas = new ArrayList<Villa>();
-    private static final String FILE_PATH = "D:\\C0520G1-LeToan\\Module2_LeToan\\data\\villa.csv";
+    private String other;
+    private static List<Villa> villaList = new ArrayList<>();
 
     public void setRoomStandard(String roomStandard) {
         this.roomStandard = roomStandard;
@@ -24,16 +23,39 @@ public class Villa extends Services{
         this.numberOfFloor = numberOfFloor;
     }
 
-    public static List<Villa> getVillas() {
-        return villas;
+    public void setOther(String other) {
+        this.other = other;
     }
 
+    public String getRoomStandard() {
+        return roomStandard;
+    }
+
+    public double getPoolArea() {
+        return poolArea;
+    }
+
+    public int getNumberOfFloor() {
+        return numberOfFloor;
+    }
+
+    public String getOther() {
+        return other;
+    }
+
+    public static List<Villa> getVillaList() {
+        return villaList;
+    }
+
+    public static void setVillaList(List<Villa> villaList) {
+        Villa.villaList = villaList;
+    }
 
     @Override
     public void showInformation() {
-        System.out.printf("%-4s%-12s%-30s%-20.2f%-10.2f%-10d%-10s%-10s%-15.2f%-10d", "", super.getId(), super.getNameServices(),
+        System.out.printf("%-4s%-12s%-30s%-20.2f%-10.2f%-10d%-10s%-10s%-15.2f%-10d%-10s", "", super.getId(), super.getNameServices(),
                 super.getUsableArea(), super.getRentCost(), super.getMaxPerson(), super.getRentOfType(), this.roomStandard,
-                this.poolArea, this.numberOfFloor);
+                this.poolArea, this.numberOfFloor, this.other);
         if (super.getIncludedServices().size() != 0) {
             Iterator<AvailableServices> list = super.getIncludedServices().iterator();
             while (list.hasNext()) {
@@ -46,7 +68,7 @@ public class Villa extends Services{
 
     public static void showVillaName() {
         Set<String> villaList = new TreeSet<>();
-        for (Villa element : villas) {
+        for (Villa element : Villa.villaList) {
             villaList.add(element.getNameServices());
         }
 
@@ -64,27 +86,28 @@ public class Villa extends Services{
         System.out.print("Enter Name Services: ");
         super.setNameServices(Regex.checkNameFormat(input.nextLine()));
         System.out.print("Enter Area: ");
-        super.setUsableArea(Regex.checkArea(input.nextDouble()));
+        super.setUsableArea(Regex.checkArea(Double.parseDouble(input.nextLine())));
         System.out.print("Enter cost: ");
-        super.setRentCost(Regex.checkRentCost(input.nextDouble()));
+        super.setRentCost(Regex.checkRentCost(Double.parseDouble(input.nextLine())));
         System.out.print("Enter Maximum Person: ");
-        super.setMaxPerson(Regex.checkNumber(input.nextInt()));
-        input.nextLine();
-        System.out.print("Enter rent type: ");
+        super.setMaxPerson(Regex.checkNumber(Integer.parseInt(input.nextLine())));
+        System.out.print("Enter rent type (Year/Month/Day/Hour): ");
         super.setRentOfType(Regex.checkNameFormat(input.nextLine()));
-        System.out.print("Enter room standard: ");
+        System.out.print("Enter room standard (Vip/Normal): ");
         this.setRoomStandard(Regex.checkNameFormat(input.nextLine()));
         System.out.print("Enter pool area: ");
-        this.setPoolArea(Regex.checkArea(input.nextDouble()));
+        this.setPoolArea(Regex.checkArea(Double.parseDouble(input.nextLine())));
         System.out.print("Enter number of floor: ");
-        this.setNumberOfFloor(Regex.checkNumber(input.nextInt()));
+        this.setNumberOfFloor(Regex.checkNumber(Integer.parseInt(input.nextLine())));
+        System.out.print("Enter other convenient: ");
+        this.setOther(input.nextLine());
         boolean isContinue = false;
         do {
             System.out.println("Do you want to add included services (Yes or No) ?");
             char confirm = input.next().charAt(0);
+            input.nextLine();
             if (confirm == 'Y' || confirm == 'y') {
                 String nameIncludedServices;
-                input.nextLine();
                 boolean isExist;
                 do {
                     isExist = false;
@@ -98,9 +121,9 @@ public class Villa extends Services{
                     }
                 } while (isExist);
                 System.out.println("Enter unit: ");
-                int unitIncludedServices = Regex.checkNumber(input.nextInt());
+                int unitIncludedServices = Regex.checkNumber(Integer.parseInt(input.nextLine()));
                 System.out.println("Enter your price: ");
-                double priceIncludedServices = Regex.checkNumber(input.nextDouble());
+                double priceIncludedServices = Regex.checkNumber(Double.parseDouble(input.nextLine()));
                 includedServices.add(new AvailableServices(nameIncludedServices, unitIncludedServices, priceIncludedServices));
                 super.setIncludedServices(includedServices);
                 if (includedServices.size() == 5) {
@@ -110,135 +133,6 @@ public class Villa extends Services{
                 isContinue = true;
             }
         } while (!isContinue);
+        villaList.add(this);
     }
-
-    public void writeFileVilla(Villa villa) {
-        villas.add(villa);
-        try {
-            FileOutputStream fileOutputStream = new FileOutputStream(FILE_PATH);
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            for (Villa villas: villas){
-                objectOutputStream.writeObject(villas);
-            }
-            objectOutputStream.flush();
-            objectOutputStream.close();
-            fileOutputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void readFileVilla() {
-        File file = new File(FILE_PATH);
-        if(!file.exists()){
-            System.exit(0);
-        }
-        try {
-            FileInputStream fileInputStream = new FileInputStream(file);
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            Villa villa;
-            villas.clear();
-            while (true){
-                try {
-                    villa = (Villa) objectInputStream.readObject();
-                    villas.add(villa);
-                } catch (EOFException e){
-                    break;
-                }
-            }
-            objectInputStream.close();
-            fileInputStream.close();
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-//    public void createFileVilla() {
-//        try {
-//            File myObj = new File("D:\\C0520G1-LeToan\\Module2_LeToan\\data\\villa.csv");
-//            if (myObj.createNewFile()) {
-//                System.out.println("File created: " + myObj.getName());
-//            } else {
-//                System.out.println("File already exists.");
-//            }
-//        } catch (IOException e) {
-//            System.out.println("An error occurred.");
-//            e.printStackTrace();
-//        }
-//    }
-
-//    public void writeFileVilla(Villa villa) throws FileNotFoundException {
-//        readFileVilla();
-//        villas.add(villa);
-//        try {
-//            FileWriter myWrite = new FileWriter("D:\\C0520G1-LeToan\\Module2_LeToan\\data\\villa.csv");
-//            for (Villa value : villas) {
-//                myWrite.append(String.valueOf(value.getId()));
-//                myWrite.append(",");
-//                myWrite.append(value.getNameServices());
-//                myWrite.append(",");
-//                myWrite.append(String.valueOf(value.getUsableArea()));
-//                myWrite.append(",");
-//                myWrite.append(String.valueOf(value.getRentCost()));
-//                myWrite.append(",");
-//                myWrite.append(String.valueOf(value.getMaxPerson()));
-//                myWrite.append(",");
-//                myWrite.append(String.valueOf(value.getRentOfType()));
-//                myWrite.append(",");
-//                myWrite.append(value.roomStandard);
-//                myWrite.append(",");
-//                myWrite.append(String.valueOf(value.poolArea));
-//                myWrite.append(",");
-//                myWrite.append(String.valueOf(value.numberOfFloor));
-//                myWrite.append(",");
-//                Iterator includedServices = value.getIncludedServices().iterator();
-//                while (includedServices.hasNext()) {
-//                    AvailableServices temp = (AvailableServices) includedServices.next();
-//                    myWrite.append(temp.getIncludedServicesName());
-//                    myWrite.append(",");
-//                    myWrite.append(String.valueOf(temp.getUnit()));
-//                    myWrite.append(",");
-//                    myWrite.append(String.valueOf(temp.getPrice()));
-//                    myWrite.append(",");
-//                }
-//                myWrite.append("\n");
-//            }
-//            myWrite.flush();
-//            myWrite.close();
-//            System.out.println("CSV file was created successfully !!!");
-//
-//        } catch (Exception e) {
-//            System.out.println("Error in CsvFileWriter !!!");
-//            e.printStackTrace();
-//        }
-//    }
-
-//    public static void readFileVilla() throws FileNotFoundException {
-//        villas.clear();// moi lan doc se clear mang villas de khong bi trung lap
-//        File myObj = new File("D:\\C0520G1-LeToan\\Module2_LeToan\\data\\villa.csv");
-//        Scanner myReader = new Scanner(myObj);
-//        while (myReader.hasNextLine()) {
-//            String[] data = myReader.nextLine().split(",");
-//            Villa a = new Villa();
-//            List<AvailableServices> includedServices = new ArrayList<>();
-//            a.setId(data[0]);
-//            a.setNameServices(data[1]);
-//            a.setUsableArea(Double.parseDouble(data[2]));
-//            a.setRentCost(Double.parseDouble(data[3]));
-//            a.setMaxPerson(Integer.parseInt(data[4]));
-//            a.setRentOfType(data[5]);
-//            a.setRoomStandard(data[6]);
-//            a.setPoolArea(Double.parseDouble(data[7]));
-//            a.setNumberOfFloor(Integer.parseInt(data[8]));
-//            for (int i = 9; i < data.length; i = i + 3) {
-//                String name = data[i];
-//                int unit = Integer.parseInt(data[i + 1]);
-//                double price = Double.parseDouble(data[i + 2]);
-//                includedServices.add(new AvailableServices(name, unit, price));
-//            }
-//            a.setIncludedServices(includedServices);
-//            villas.add(a);
-//        }
-//        myReader.close();
-//    }
 }

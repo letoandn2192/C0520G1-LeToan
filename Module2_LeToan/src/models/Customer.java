@@ -2,14 +2,7 @@ package models;
 
 import commons.Regex;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Customer implements Comparable<Customer> {
     private String name;
@@ -21,9 +14,8 @@ public class Customer implements Comparable<Customer> {
     private String typeCustomer;
     private String address;
     private Services services;
-    private static List<Customer> customers = new ArrayList<>();
+    private static List<Customer> customerList = new ArrayList<>();
     private static Scanner input = new Scanner(System.in);
-    private static final String FILE_PATH = "D:\\C0520G1-LeToan\\Module2_LeToan\\data\\customer.csv";
 
     public Customer() {
     }
@@ -47,16 +39,44 @@ public class Customer implements Comparable<Customer> {
         return dateOfBirth;
     }
 
-    public void setServices(Services services) {
-        this.services = services;
+    public String getGender() {
+        return gender;
+    }
+
+    public String getIdNumber() {
+        return idNumber;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getTypeCustomer() {
+        return typeCustomer;
+    }
+
+    public String getAddress() {
+        return address;
     }
 
     public Services getServices() {
         return services;
     }
 
-    public static List<Customer> getCustomers() {
-        return customers;
+    public void setServices(Services services) {
+        this.services = services;
+    }
+
+    public static List<Customer> getCustomerList() {
+        return customerList;
+    }
+
+    public static void setCustomerList(List<Customer> customerList) {
+        Customer.customerList = customerList;
     }
 
     public String getYear(String dateOfBirth){
@@ -64,22 +84,20 @@ public class Customer implements Comparable<Customer> {
         return array[2];
     }
 
-    public static void showInformation() throws IOException {
-        readFileCustomer();
-        Collections.sort(customers);
+    public static void showInformation() {
+        Collections.sort(customerList);
         System.out.printf("%-4s%-30s%-20s%-15s%-15s%-20s%-30s%-20s%-20s", "", "Name", "Date of birth", "Gender", "Id Number", "Phone Number", "Email", "Type Of Customer", "Address");
         System.out.println();
         int order = 0;
-        for (Customer customer : customers) {
+        for (Customer customer : customerList) {
             System.out.printf("%-4s%-30s%-20s%-15s%-15s%-20s%-30s%-20s%-20s", ++order + ".", customer.name, customer.dateOfBirth, customer.gender, customer.idNumber,
                     customer.phoneNumber, customer.email, customer.typeCustomer, customer.address);
             System.out.println();
         }
     }
 
-    public static void addNewCustomer() throws IOException {
+    public static void addNewCustomer() {
         String name, dateOfBirth,idNumber, gender, phoneNumber, email, typeCustomer, address;
-        Services services;
         System.out.println("Enter your name: ");
         name = Regex.checkNameException(input.nextLine());
         System.out.println("Enter your date of birth: ");
@@ -96,63 +114,7 @@ public class Customer implements Comparable<Customer> {
         typeCustomer = input.nextLine();
         System.out.println("Enter your address: ");
         address = input.nextLine();
-        customers.add(new Customer(name, dateOfBirth, gender, idNumber, phoneNumber, email, typeCustomer, address));
-        writeFileCustomer();
-    }
-
-    public static void readFileCustomer() throws IOException {
-        File myObj = new File(FILE_PATH);
-        if(!myObj.exists()){
-            myObj.createNewFile();
-        }
-        Scanner myReader = new Scanner(myObj);
-        customers.clear();
-        while (myReader.hasNextLine()) {
-            String[] arrayData = myReader.nextLine().split(",");
-            String name = arrayData[0];
-            String dateOfBirth = arrayData[1];
-            String gender = arrayData[2];
-            String idNumber = arrayData[3];
-            String phoneNumber = arrayData[4];
-            String email = arrayData[5];
-            String typeCustomer = arrayData[6];
-            String address = arrayData[7];
-            Customer customerTemp = new Customer(name, dateOfBirth, gender, idNumber, phoneNumber, email, typeCustomer, address);
-            customers.add(customerTemp);
-        }
-        myReader.close();
-    }
-
-    public static void writeFileCustomer() throws IOException{
-        FileWriter myWrite = new FileWriter(FILE_PATH);
-        for (Customer customer : customers) {
-            myWrite.append(customer.name);
-            myWrite.append(",");
-            myWrite.append(customer.dateOfBirth);
-            myWrite.append(",");
-            myWrite.append(customer.gender);
-            myWrite.append(",");
-            myWrite.append(customer.idNumber);
-            myWrite.append(",");
-            myWrite.append(customer.phoneNumber);
-            myWrite.append(",");
-            myWrite.append(customer.email);
-            myWrite.append(",");
-            myWrite.append(customer.typeCustomer);
-            myWrite.append(",");
-            myWrite.append(customer.address);
-            myWrite.append(",");
-            if(customer.services != null){
-            myWrite.append(customer.services.getId());
-            myWrite.append(",");
-            myWrite.append(customer.services.getNameServices());
-            myWrite.append(",");
-            }
-            myWrite.append("\n");
-        }
-        System.out.println("CSV file was created successfully !!!");
-        myWrite.flush();
-        myWrite.close();
+        customerList.add(new Customer(name, dateOfBirth, gender, idNumber, phoneNumber, email, typeCustomer, address));
     }
 
     @Override
@@ -164,5 +126,10 @@ public class Customer implements Comparable<Customer> {
         }else {
             return this.getYear(this.dateOfBirth).compareTo(o.getYear(o.getDateOfBirth()));
         }
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }
