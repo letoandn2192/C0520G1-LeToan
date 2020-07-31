@@ -73,7 +73,7 @@ public class House extends Services {
         Scanner input = new Scanner(System.in);
         List<AvailableServices> includedServices = new ArrayList<>();
         System.out.print("Enter Id: ");
-        super.setId(Regex.checkId(input.nextLine()));
+        super.setId(Regex.checkIdHouse(input.nextLine()));
         System.out.print("Enter Name Services: ");
         super.setNameServices(Regex.checkNameFormat(input.nextLine()));
         System.out.print("Enter Area: ");

@@ -12,18 +12,85 @@ import java.util.regex.Matcher;
 public class Regex {
     static Scanner input = new Scanner(System.in);
 
-/////////////////////////////////////////CHECK REGEX VILLA////////////////////////////////////////////////////////////
-    public static String checkId(String id) {
-        Pattern pattern = Pattern.compile("^((SVVL-|SVHO-|SVRO-)\\d{4})$");
+    /////////////////////////////////////CHECK VILLA ID///////////////////////////////////////////////////////////
+    public static boolean checkDuplicateIdVilla(String id){
+        for(Villa element : Villa.getVillaList()){
+            if(id.equals(element.getId())){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static String checkIdVilla(String id) {
+        Pattern pattern = Pattern.compile("^(SVVL-\\d{4})$");
         Matcher matcher = pattern.matcher(id);
-        while (!matcher.matches()){
-            System.out.println("Enter id again: ");
+        boolean isDuplicate = checkDuplicateIdVilla(id);
+        while (!matcher.matches() || isDuplicate){
+            if(isDuplicate){
+                System.out.println("Duplicate Id!!!");
+            } else {
+                System.out.println("Id must be follow format!!!");
+            }
             id = input.nextLine();
             matcher = pattern.matcher(id);
+            isDuplicate = checkDuplicateIdVilla(id);
         }
         return id;
     }
+    /////////////////////////////////////CHECK HOUSE ID///////////////////////////////////////////////////////////
+    public static boolean checkDuplicateIdHouse(String id){
+        for(House element : House.getHouseList()){
+            if(id.equals(element.getId())){
+                return true;
+            }
+        }
+        return false;
+    }
 
+    public static String checkIdHouse(String id) {
+        Pattern pattern = Pattern.compile("^(SVHO-\\d{4})$");
+        Matcher matcher = pattern.matcher(id);
+        boolean isDuplicate = checkDuplicateIdHouse(id);
+        while (!matcher.matches() || isDuplicate){
+            if(isDuplicate){
+                System.out.println("Duplicate Id!!!");
+            } else {
+                System.out.println("Id must be follow format!!!");
+            }
+            id = input.nextLine();
+            matcher = pattern.matcher(id);
+            isDuplicate = checkDuplicateIdHouse(id);
+        }
+        return id;
+    }
+    /////////////////////////////////////CHECK HOUSE ID///////////////////////////////////////////////////////////
+    public static boolean checkDuplicateIdRoom(String id){
+        for(Room element : Room.getRoomList()){
+            if(id.equals(element.getId())){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static String checkIdRoom(String id) {
+        Pattern pattern = Pattern.compile("^(SVRO-\\d{4})$");
+        Matcher matcher = pattern.matcher(id);
+        boolean isDuplicate = checkDuplicateIdRoom(id);
+        while (!matcher.matches() || isDuplicate){
+            if(isDuplicate){
+                System.out.println("Duplicate Id!!!");
+            } else {
+                System.out.println("Id must be follow format!!!");
+            }
+            id = input.nextLine();
+            matcher = pattern.matcher(id);
+            isDuplicate = checkDuplicateIdRoom(id);
+        }
+        return id;
+    }
+/////////////////////////////////////////CHECK REGEX SERVICES////////////////////////////////////////////////////////////
     public static String checkNameFormat(String nameFormat) {
         Pattern pattern = Pattern.compile("^[A-Z][a-z]{1,9}(([ ][A-Z][a-z]{0,9})?)*$");
         Matcher matcher = pattern.matcher(nameFormat);
