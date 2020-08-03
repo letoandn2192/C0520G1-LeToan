@@ -2,12 +2,19 @@ package models;
 
 import commons.Regex;
 
-import java.io.*;
 import java.util.*;
 
 public class Room extends Services {
     private String freeServices;
-    private static List<Room> roomList = new ArrayList<>();
+    private static List<Services> roomList = new ArrayList<>();
+
+    public Room() {
+    }
+
+    public Room(String id, String nameServices, double usableArea, double rentCost, int maxPerson, String rentOfType, String freeServices) {
+        super(id, nameServices, usableArea, rentCost, maxPerson, rentOfType);
+        this.freeServices = freeServices;
+    }
 
     public void setFreeServices(String freeServices) {
         this.freeServices = freeServices;
@@ -17,11 +24,11 @@ public class Room extends Services {
         return freeServices;
     }
 
-    public static void setRoomList(List<Room> roomList) {
+    public static void setRoomList(List<Services> roomList) {
         Room.roomList = roomList;
     }
 
-    public static List<Room> getRoomList() {
+    public static List<Services> getRoomList() {
         return roomList;
     }
 
@@ -41,7 +48,7 @@ public class Room extends Services {
 
     public static void showRoomName() {
         Set<String> roomList = new TreeSet<>();
-        for (Room element : Room.roomList) {
+        for (Services element : Room.roomList) {
             roomList.add(element.getNameServices());
         }
 

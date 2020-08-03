@@ -8,7 +8,17 @@ public class House extends Services {
     private String roomStandard;
     private int numberOfFloor;
     private String other;
-    private static List<House> houseList = new ArrayList<>();
+    private static List<Services> houseList = new ArrayList<>();
+
+    public House() {
+    }
+
+    public House(String id, String nameServices, double usableArea, double rentCost, int maxPerson, String rentOfType, String roomStandard, int numberOfFloor, String other) {
+        super(id, nameServices, usableArea, rentCost, maxPerson, rentOfType);
+        this.roomStandard = roomStandard;
+        this.numberOfFloor = numberOfFloor;
+        this.other = other;
+    }
 
     public void setRoomStandard(String roomStandard) {
         this.roomStandard = roomStandard;
@@ -22,11 +32,11 @@ public class House extends Services {
         this.other = other;
     }
 
-    public static void setHouseList(List<House> houseList) {
+    public static void setHouseList(List<Services> houseList) {
         House.houseList = houseList;
     }
 
-    public static List<House> getHouseList() {
+    public static List<Services> getHouseList() {
         return houseList;
     }
 
@@ -59,7 +69,7 @@ public class House extends Services {
 
     public static void showHouseName() {
         Set<String> houseList = new TreeSet<>();
-        for (House element : House.houseList) {
+        for (Services element : House.houseList) {
             houseList.add(element.getNameServices());
         }
 

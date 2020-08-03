@@ -1,9 +1,6 @@
 package commons;
 
-import models.Customer;
-import models.House;
-import models.Room;
-import models.Villa;
+import models.*;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -14,7 +11,7 @@ public class Regex {
 
     /////////////////////////////////////CHECK VILLA ID///////////////////////////////////////////////////////////
     public static boolean checkDuplicateIdVilla(String id){
-        for(Villa element : Villa.getVillaList()){
+        for(Services element : Villa.getVillaList()){
             if(id.equals(element.getId())){
                 return true;
             }
@@ -40,7 +37,7 @@ public class Regex {
     }
     /////////////////////////////////////CHECK HOUSE ID///////////////////////////////////////////////////////////
     public static boolean checkDuplicateIdHouse(String id){
-        for(House element : House.getHouseList()){
+        for(Services element : House.getHouseList()){
             if(id.equals(element.getId())){
                 return true;
             }
@@ -66,7 +63,7 @@ public class Regex {
     }
     /////////////////////////////////////CHECK HOUSE ID///////////////////////////////////////////////////////////
     public static boolean checkDuplicateIdRoom(String id){
-        for(Room element : Room.getRoomList()){
+        for(Services element : Room.getRoomList()){
             if(id.equals(element.getId())){
                 return true;
             }
@@ -125,7 +122,7 @@ public class Regex {
     }
 
     public static double checkNumberDouble(String number){
-        Pattern pattern = Pattern.compile("^\\d+([.]?)\\d+$");
+        Pattern pattern = Pattern.compile("^\\d+([.]\\d+)?$");
         Matcher matcher = pattern.matcher(number);
         while (!matcher.matches() || Double.parseDouble(number) <= 0){
             System.out.println("Input must be a positive number!!!");

@@ -15,15 +15,16 @@ public class Function {
         Scanner input = new Scanner(System.in);
         int choice;
         while (true) {
-            System.out.println("Menu");
-            System.out.println("1. Add New Services.");
-            System.out.println("2. Show Services.");
-            System.out.println("3. Add New Customer.");
-            System.out.println("4. Show Information of Customer.");
-            System.out.println("5. Add New Booking.");
-            System.out.println("6. Show Information of Employee.");
-            System.out.println("7. Other.");
-            System.out.println("8. Exit.");
+            System.out.println("*************************MENU*****************************");
+            System.out.println("*              1. Add New Services.                      *");
+            System.out.println("*              2. Show Services.                         *");
+            System.out.println("*              3. Add New Customer.                      *");
+            System.out.println("*              4. Show Information of Customer.          *");
+            System.out.println("*              5. Add New Booking.                       *");
+            System.out.println("*              6. Show Information of Employee.          *");
+            System.out.println("*              7. Other.                                 *");
+            System.out.println("*              8. Exit.                                  *");
+            System.out.println("**********************************************************");
             System.out.print("Enter your choice: ");
             choice = input.nextInt();
 
@@ -120,7 +121,7 @@ public class Function {
                 System.out.printf("%-4s%-12s%-30s%-20s%-10s%-10s%-10s%-10s%-15s%-10s%-10s%s", "", "Id",
                         "Name", "Villa's Area", "Cost", "Capacity", "Type", "Standard", "Pool's Area", "Floor", "Other", "Included Services");
                 System.out.println();
-                for (Villa element : Villa.getVillaList()) {
+                for (Services element : Villa.getVillaList()) {
                     element.showInformation();
                 }
                 break;
@@ -128,7 +129,7 @@ public class Function {
                 System.out.printf("%-4s%-12s%-30s%-20s%-10s%-10s%-10s%-10s%-8s%-10s%s", "", "Id",
                         "Name", "Villa's Area", "Cost", "Capacity", "Type", "Standard", "Floor", "Other", "Included Services");
                 System.out.println();
-                for (House element : House.getHouseList()) {
+                for (Services element : House.getHouseList()) {
                     element.showInformation();
                 }
                 break;
@@ -136,7 +137,7 @@ public class Function {
                 System.out.printf("%-4s%-12s%-30s%-20s%-10s%-10s%-10s%-15s%s", "", "Id",
                         "Name", "Villa's Area", "Cost", "Capacity", "Type", "Free Services", "Included Services");
                 System.out.println();
-                for (Room element : Room.getRoomList()) {
+                for (Services element : Room.getRoomList()) {
                     element.showInformation();
                 }
                 break;
@@ -183,40 +184,52 @@ public class Function {
         int choice = Integer.parseInt(input.nextLine());
         switch (choice) {
             case 1:
-                System.out.printf("%-4s%-12s%-30s%-20s%-10s%-10s%-10s%-10s%-15s%-10s%s", "", "Id",
-                        "Name", "Villa's Area", "Cost", "Capacity", "Type", "Standard", "Pool's Area", "Floor", "Included Services");
-                System.out.println();
-                for (Villa element : Villa.getVillaList()) {
-                    element.showInformation();
+                if(Villa.getVillaList().size() != 0) {
+                    System.out.printf("%-4s%-12s%-30s%-20s%-10s%-10s%-10s%-10s%-15s%-10s%s", "", "Id",
+                            "Name", "Villa's Area", "Cost", "Capacity", "Type", "Standard", "Pool's Area", "Floor", "Included Services");
+                    System.out.println();
+                    for (Services element : Villa.getVillaList()) {
+                        element.showInformation();
+                    }
+                    System.out.println("Choose villa: ");
+                    int chooseVilla = Regex.checkInvalidBookingVilla(input.nextLine());
+                    Services villa = Villa.getVillaList().get(chooseVilla - 1);
+                    customer.setServices(villa);
+                } else {
+                    System.out.println("List is empty!!!");
                 }
-                System.out.println("Choose villa: ");
-                int chooseVilla = Regex.checkInvalidBookingVilla(input.nextLine());
-                Villa villa = Villa.getVillaList().get(chooseVilla-1);
-                customer.setServices(villa);
                 break;
             case 2:
-                System.out.printf("%-4s%-12s%-30s%-20s%-10s%-10s%-10s%-10s%-8s%-10s%s", "", "Id",
-                        "Name", "House's Area", "Cost", "Capacity", "Type", "Standard", "Floor", "Other", "Included Services");
-                System.out.println();
-                for (House element : House.getHouseList()) {
-                    element.showInformation();
+                if(House.getHouseList().size() != 0) {
+                    System.out.printf("%-4s%-12s%-30s%-20s%-10s%-10s%-10s%-10s%-8s%-10s%s", "", "Id",
+                            "Name", "House's Area", "Cost", "Capacity", "Type", "Standard", "Floor", "Other", "Included Services");
+                    System.out.println();
+                    for (Services element : House.getHouseList()) {
+                        element.showInformation();
+                    }
+                    System.out.println("Choose House: ");
+                    int chooseHouse = Regex.checkInvalidBookingHouse(input.nextLine());
+                    Services house = House.getHouseList().get(chooseHouse - 1);
+                    customer.setServices(house);
+                } else {
+                    System.out.println("List is empty!!!");
                 }
-                System.out.println("Choose House: ");
-                int chooseHouse = Regex.checkInvalidBookingHouse(input.nextLine());
-                House house = House.getHouseList().get(chooseHouse - 1);
-                customer.setServices(house);
                 break;
             case 3:
-                System.out.printf("%-4s%-12s%-30s%-20s%-10s%-10s%-10s%-15s%s", "", "Id",
-                        "Name", "Room's Area", "Cost", "Capacity", "Type", "Free Services", "Included Services");
-                System.out.println();
-                for (Room element : Room.getRoomList()) {
-                    element.showInformation();
+                if(Room.getRoomList().size() != 0) {
+                    System.out.printf("%-4s%-12s%-30s%-20s%-10s%-10s%-10s%-15s%s", "", "Id",
+                            "Name", "Room's Area", "Cost", "Capacity", "Type", "Free Services", "Included Services");
+                    System.out.println();
+                    for (Services element : Room.getRoomList()) {
+                        element.showInformation();
+                    }
+                    System.out.println("Choose room: ");
+                    int chooseRoom = Regex.checkInvalidBookingRoom(input.nextLine());
+                    Services room = Room.getRoomList().get(chooseRoom - 1);
+                    customer.setServices(room);
+                } else {
+                    System.out.println("List is empty!!!");
                 }
-                System.out.println("Choose room: ");
-                int chooseRoom = Regex.checkInvalidBookingRoom(input.nextLine());
-                Room room = Room.getRoomList().get(chooseRoom - 1);
-                customer.setServices(room);
                 break;
             case 4:
                 displayMainMenu();

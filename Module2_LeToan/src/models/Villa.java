@@ -9,7 +9,18 @@ public class Villa extends Services{
     private double poolArea;
     private int numberOfFloor;
     private String other;
-    private static List<Villa> villaList = new ArrayList<>();
+    private static List<Services> villaList = new ArrayList<>();
+
+    public Villa() {
+    }
+
+    public Villa(String id, String nameServices, double usableArea, double rentCost, int maxPerson, String rentOfType, String roomStandard, double poolArea, int numberOfFloor, String other){
+        super(id, nameServices, usableArea, rentCost, maxPerson, rentOfType);
+        this.roomStandard = roomStandard;
+        this.poolArea = poolArea;
+        this.numberOfFloor = numberOfFloor;
+        this.other = other;
+    }
 
     public void setRoomStandard(String roomStandard) {
         this.roomStandard = roomStandard;
@@ -43,11 +54,11 @@ public class Villa extends Services{
         return other;
     }
 
-    public static List<Villa> getVillaList() {
+    public static List<Services> getVillaList() {
         return villaList;
     }
 
-    public static void setVillaList(List<Villa> villaList) {
+    public static void setVillaList(List<Services> villaList) {
         Villa.villaList = villaList;
     }
 
@@ -68,7 +79,7 @@ public class Villa extends Services{
 
     public static void showVillaName() {
         Set<String> villaList = new TreeSet<>();
-        for (Villa element : Villa.villaList) {
+        for (Services element : Villa.villaList) {
             villaList.add(element.getNameServices());
         }
 

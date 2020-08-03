@@ -1,11 +1,10 @@
 package models;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-abstract class Services implements Serializable {
+public abstract class Services{
     private String nameServices;
     private double usableArea;
     private double rentCost;
@@ -13,6 +12,18 @@ abstract class Services implements Serializable {
     private String rentOfType;
     private String id;
     private List<AvailableServices> includedServices = new ArrayList<>();
+
+    public Services(){
+    }
+
+    public Services(String id, String nameServices, double usableArea, double rentCost, int maxPerson, String rentOfType) {
+        this.id = id;
+        this.nameServices = nameServices;
+        this.usableArea = usableArea;
+        this.rentCost = rentCost;
+        this.maxPerson = maxPerson;
+        this.rentOfType = rentOfType;
+    }
 
     public List<AvailableServices> getIncludedServices() {
         Collections.sort(this.includedServices);
