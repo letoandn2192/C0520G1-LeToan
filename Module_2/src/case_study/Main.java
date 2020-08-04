@@ -15,7 +15,7 @@ public class Main {
             System.out.println("*                            4. Exit                                    *");
             System.out.println("*************************************************************************");
             System.out.println("Your choose: ");
-            int choose = input.nextInt();
+            int choose = Regex.checkInputFormat(input.nextLine());
             switch (choose) {
                 case 1:
                     manager.define();

@@ -99,17 +99,17 @@ public class Customer implements Comparable<Customer> {
     public static void addNewCustomer() {
         String name, dateOfBirth,idNumber, gender, phoneNumber, email, typeCustomer, address;
         System.out.println("Enter your name: ");
-        name = Regex.checkNameException(input.nextLine());
+        name = Regex.checkNameCustomer(input.nextLine());
         System.out.println("Enter your date of birth: ");
-        dateOfBirth = Regex.checkBirthdayException(input.nextLine());
+        dateOfBirth = Regex.checkBirthdayCustomer(input.nextLine());
         System.out.println("Enter your gender: ");
-        gender = Regex.checkGenderException(input.nextLine());
+        gender = Regex.checkGenderCustomer(input.nextLine());
         System.out.println("Enter your id number: ");
-        idNumber = Regex.checkIdCardException(input.nextLine());
+        idNumber = Regex.checkIdCardCustomer(input.nextLine());
         System.out.println("Enter your phone number: ");
-        phoneNumber = input.nextLine();
+        phoneNumber = Regex.checkPhoneNumber(input.nextLine());
         System.out.println("Enter your email: ");
-        email = Regex.checkEmailException(input.nextLine());
+        email = Regex.checkEmailCustomer(input.nextLine());
         System.out.println("Enter your type of customer (Diamond/Platinum/Gold/Silver/Member): ");
         typeCustomer = input.nextLine();
         System.out.println("Enter your address: ");

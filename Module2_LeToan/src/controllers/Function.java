@@ -121,8 +121,13 @@ public class Function {
                 System.out.printf("%-4s%-12s%-30s%-20s%-10s%-10s%-10s%-10s%-15s%-10s%-10s%s", "", "Id",
                         "Name", "Villa's Area", "Cost", "Capacity", "Type", "Standard", "Pool's Area", "Floor", "Other", "Included Services");
                 System.out.println();
-                for (Services element : Villa.getVillaList()) {
-                    element.showInformation();
+//                for (Services element : Villa.getVillaList()) {
+//                    element.showInformation();
+//                }
+                List<Services> villaList = Villa.getVillaList();
+                for (int i = 0; i <  villaList.size(); i++) {
+                    System.out.print(i+1);
+                    villaList.get(i).showInformation();
                 }
                 break;
             case 2:
