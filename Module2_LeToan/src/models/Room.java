@@ -1,5 +1,6 @@
 package models;
 
+import commons.DisplayFormat;
 import commons.Regex;
 
 import java.util.*;
@@ -34,16 +35,29 @@ public class Room extends Services {
 
     @Override
     public void showInformation() {
-        System.out.printf("%-4s%-12s%-30s%-20.2f%-10.2f%-10d%-10s%-15s", "", super.getId(), super.getNameServices(),
-                super.getUsableArea(), super.getRentCost(), super.getMaxPerson(), super.getRentOfType(), this.freeServices);
-        if (super.getIncludedServices().size() != 0) {
-            Iterator<AvailableServices> list = super.getIncludedServices().iterator();
-            while (list.hasNext()) {
-                AvailableServices services = list.next();
-                System.out.print(services.getIncludedServicesName() + "/" + services.getUnit() + "/" + services.getPrice() + " ");
+        System.out.println(DisplayFormat.roomTitle());
+        int count = 0;
+        for (Services element: roomList) {
+            Room room = (Room) element;
+            System.out.printf("%-4d%-12s%-30s%-20.2f%-10.2f%-10d%-10s%-15s", ++count, room.getId(), room.getNameServices(),
+                    room.getUsableArea(), room.getRentCost(), room.getMaxPerson(), room.getRentOfType(), room.freeServices);
+            if (room.getIncludedServices().size() != 0) {
+                Iterator<AvailableServices> list = room.getIncludedServices().iterator();
+                while (list.hasNext()) {
+                    AvailableServices services = list.next();
+                    System.out.print(services.getIncludedServicesName() + "/" + services.getUnit() + "/" + services.getPrice() + " ");
+                }
+            } else {
+                System.out.print("No services");
             }
+            System.out.println();
         }
-        System.out.println();
+    }
+
+    @Override
+    public String toString() {
+        return  String.format("%-4s%-12s%-30s%-20.2f%-10.2f%-10d%-10s%-15s%s", "", super.getId(), super.getNameServices(),
+                super.getUsableArea(), super.getRentCost(), super.getMaxPerson(), super.getRentOfType(), this.freeServices, super.getIncludedServices());
     }
 
     public static void showRoomName() {

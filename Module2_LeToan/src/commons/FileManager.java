@@ -531,7 +531,7 @@ public class FileManager {
     public void writeFileBooking() {
         List<Customer> customerList = Customer.getCustomerList();
         try {
-            FileWriter myWrite = new FileWriter(BOOKING_FILE_PATH,true);
+            FileWriter myWrite = new FileWriter(BOOKING_FILE_PATH, true);
             for (Customer customer : customerList) {
                 if (customer.getServices() != null) {
                     myWrite.append(customer.getName());

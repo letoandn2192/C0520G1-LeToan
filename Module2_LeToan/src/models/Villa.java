@@ -1,5 +1,6 @@
 package models;
 
+import commons.DisplayFormat;
 import commons.Regex;
 
 import java.util.*;
@@ -64,17 +65,31 @@ public class Villa extends Services{
 
     @Override
     public void showInformation() {
-        System.out.printf("%-4s%-12s%-30s%-20.2f%-10.2f%-10d%-10s%-10s%-15.2f%-10d%-10s", "", super.getId(), super.getNameServices(),
-                super.getUsableArea(), super.getRentCost(), super.getMaxPerson(), super.getRentOfType(), this.roomStandard,
-                this.poolArea, this.numberOfFloor, this.other);
-        if (super.getIncludedServices().size() != 0) {
-            Iterator<AvailableServices> list = super.getIncludedServices().iterator();
-            while (list.hasNext()) {
-                AvailableServices services = list.next();
-                System.out.print(services.getIncludedServicesName() + "/" + services.getUnit() + "/" + services.getPrice() + " ");
+        System.out.println(DisplayFormat.villaTitle());
+        int count = 0;
+        for (Services element: villaList) {
+            Villa villa = (Villa) element;
+            System.out.printf("%-4d%-12s%-30s%-20.2f%-10.2f%-10d%-10s%-10s%-15.2f%-10d%-10s", ++count, villa.getId(), villa.getNameServices(),
+                    villa.getUsableArea(), villa.getRentCost(), villa.getMaxPerson(), villa.getRentOfType(), villa.roomStandard,
+                    villa.poolArea, villa.numberOfFloor, villa.other);
+            if (villa.getIncludedServices().size() != 0) {
+                Iterator<AvailableServices> list = villa.getIncludedServices().iterator();
+                while (list.hasNext()) {
+                    AvailableServices services = list.next();
+                    System.out.print(services.getIncludedServicesName() + "/" + services.getUnit() + "/" + services.getPrice() + " ");
+                }
+            } else {
+                System.out.print("No services");
             }
+            System.out.println();
         }
-        System.out.println();
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%-4s%-12s%-30s%-20.2f%-10.2f%-10d%-10s%-10s%-15.2f%-10d%-10s%s", "", super.getId(), super.getNameServices(),
+                super.getUsableArea(), super.getRentCost(), super.getMaxPerson(), super.getRentOfType(), this.roomStandard,
+                this.poolArea, this.numberOfFloor, this.other, super.getIncludedServices());
     }
 
     public static void showVillaName() {

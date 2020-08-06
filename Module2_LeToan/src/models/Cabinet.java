@@ -7,23 +7,15 @@ public class Cabinet {
 
     public Cabinet() {
         Employee.getEmployeeList();
-        for (Employee employee: Employee.getEmployeeList().values()){
+        for (Employee employee : Employee.getEmployeeList().values()) {
             this.cabinet.add(employee);
         }
     }
 
-    public void search(Employee employee){
-        boolean isFind = false;
-        while (!cabinet.empty()){
-            if(cabinet.search(employee) != -1){
-                isFind = true;
-                break;
-            }
-            cabinet.pop();
-        }
-        if(isFind){
+    public void search(Employee employee) {
+        if (cabinet.search(employee) != -1) {
             System.out.println("Found it !!!");
-        }else {
+        } else {
             System.out.println("No Found!!!");
         }
     }

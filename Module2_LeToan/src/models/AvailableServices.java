@@ -29,4 +29,10 @@ public class AvailableServices implements Comparable<AvailableServices>, Seriali
     public int compareTo(AvailableServices o) {
         return this.includedServicesName.compareTo(o.getIncludedServicesName());
     }
+
+    @Override
+    public String toString() {
+        return  this.includedServicesName + "/" +
+                 + this.unit + "/" + this.price;
+    }
 }

@@ -1,5 +1,6 @@
 package models;
 
+import commons.DisplayFormat;
 import commons.Regex;
 
 import java.util.*;
@@ -86,8 +87,7 @@ public class Customer implements Comparable<Customer> {
 
     public static void showInformation() {
         Collections.sort(customerList);
-        System.out.printf("%-4s%-30s%-20s%-15s%-15s%-20s%-30s%-20s%-20s", "", "Name", "Date of birth", "Gender", "Id Number", "Phone Number", "Email", "Type Of Customer", "Address");
-        System.out.println();
+        System.out.println(DisplayFormat.customerTitle());
         int order = 0;
         for (Customer customer : customerList) {
             System.out.printf("%-4s%-30s%-20s%-15s%-15s%-20s%-30s%-20s%-20s", ++order + ".", customer.name, customer.dateOfBirth, customer.gender, customer.idNumber,
@@ -115,6 +115,7 @@ public class Customer implements Comparable<Customer> {
         System.out.println("Enter your address: ");
         address = input.nextLine();
         customerList.add(new Customer(name, dateOfBirth, gender, idNumber, phoneNumber, email, typeCustomer, address));
+        System.out.println("Successful !!!");
     }
 
     @Override

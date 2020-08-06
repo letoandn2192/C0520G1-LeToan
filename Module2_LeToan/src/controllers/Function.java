@@ -2,6 +2,7 @@ package controllers;
 
 import commons.FileManager;
 import commons.Regex;
+import commons.DisplayFormat;
 import models.*;
 
 import java.util.*;
@@ -15,18 +16,9 @@ public class Function {
         Scanner input = new Scanner(System.in);
         int choice;
         while (true) {
-            System.out.println("*************************MENU*****************************");
-            System.out.println("*              1. Add New Services.                      *");
-            System.out.println("*              2. Show Services.                         *");
-            System.out.println("*              3. Add New Customer.                      *");
-            System.out.println("*              4. Show Information of Customer.          *");
-            System.out.println("*              5. Add New Booking.                       *");
-            System.out.println("*              6. Show Information of Employee.          *");
-            System.out.println("*              7. Other.                                 *");
-            System.out.println("*              8. Exit.                                  *");
-            System.out.println("**********************************************************");
+            System.out.println(DisplayFormat.mainMenu());
             System.out.print("Enter your choice: ");
-            choice = input.nextInt();
+            choice = Regex.checkNumberInt(input.nextLine());
 
             switch (choice) {
                 case 1:
@@ -61,37 +53,27 @@ public class Function {
 
     public void addNewServices() {
         Scanner input = new Scanner(System.in);
-        System.out.println("1. Add New Villa.");
-        System.out.println("2. Add New House.");
-        System.out.println("3. Add New Room.");
-        System.out.println("4. Back to Menu.");
-        System.out.println("5. Exit.");
+        System.out.println(DisplayFormat.addServicesMenu());
         System.out.print("Enter your select: ");
-        int select = input.nextInt();
+        int select = Regex.checkNumberInt(input.nextLine());
         switch (select) {
             case 1:
                 Villa villa = new Villa();
                 villa.addNewVilla();
-                System.out.printf("%-4s%-12s%-30s%-20s%-10s%-10s%-10s%-10s%-15s%-10s%-10s%s", "", "Id",
-                        "Name", "Villa's Area", "Cost", "Capacity", "Type", "Standard", "Pool's Area", "Floor", "Other", "Included Services");
-                System.out.println();
-                villa.showInformation();
+                System.out.println(DisplayFormat.villaTitle());
+                System.out.println(villa);
                 break;
             case 2:
                 House house = new House();
                 house.addNewHouse();
-                System.out.printf("%-4s%-12s%-30s%-20s%-10s%-10s%-10s%-10s%-8s%-10s%s", "", "Id",
-                        "Name", "Villa's Area", "Cost", "Capacity", "Type", "Standard", "Floor", "Other", "Included Services");
-                System.out.println();
-                house.showInformation();
+                System.out.println(DisplayFormat.houseTitle());
+                System.out.println(house);
                 break;
             case 3:
                 Room room = new Room();
                 room.addNewRoom();
-                System.out.printf("%-4s%-12s%-30s%-20s%-10s%-10s%-10s%-15s%s", "", "Id",
-                        "Name", "Villa's Area", "Cost", "Capacity", "Type", "Free Services", "Included Services");
-                System.out.println();
-                room.showInformation();
+                System.out.println(DisplayFormat.roomTitle());
+                System.out.println(room);
                 break;
             case 4:
                 displayMainMenu();
@@ -106,45 +88,21 @@ public class Function {
 
     public void showServices() {
         Scanner input = new Scanner(System.in);
-        System.out.println("1. Show all Villa.");
-        System.out.println("2. Show all House.");
-        System.out.println("3. Show all Room.");
-        System.out.println("4. Show all Villa Not Duplicate.");
-        System.out.println("5. Show all House Not Duplicate.");
-        System.out.println("6. Show all Room Not Duplicate.");
-        System.out.println("7. Back to Menu.");
-        System.out.println("8. Exit.");
+        System.out.println(DisplayFormat.showServicesMenu());
         System.out.print("Enter your select: ");
-        int select = input.nextInt();
+        int select = Regex.checkNumberInt(input.nextLine());
         switch (select) {
             case 1:
-                System.out.printf("%-4s%-12s%-30s%-20s%-10s%-10s%-10s%-10s%-15s%-10s%-10s%s", "", "Id",
-                        "Name", "Villa's Area", "Cost", "Capacity", "Type", "Standard", "Pool's Area", "Floor", "Other", "Included Services");
-                System.out.println();
-//                for (Services element : Villa.getVillaList()) {
-//                    element.showInformation();
-//                }
-                List<Services> villaList = Villa.getVillaList();
-                for (int i = 0; i <  villaList.size(); i++) {
-                    System.out.print(i+1);
-                    villaList.get(i).showInformation();
-                }
+                Villa villa = new Villa();
+                villa.showInformation();
                 break;
             case 2:
-                System.out.printf("%-4s%-12s%-30s%-20s%-10s%-10s%-10s%-10s%-8s%-10s%s", "", "Id",
-                        "Name", "Villa's Area", "Cost", "Capacity", "Type", "Standard", "Floor", "Other", "Included Services");
-                System.out.println();
-                for (Services element : House.getHouseList()) {
-                    element.showInformation();
-                }
+                House house = new House();
+                house.showInformation();
                 break;
             case 3:
-                System.out.printf("%-4s%-12s%-30s%-20s%-10s%-10s%-10s%-15s%s", "", "Id",
-                        "Name", "Villa's Area", "Cost", "Capacity", "Type", "Free Services", "Included Services");
-                System.out.println();
-                for (Services element : Room.getRoomList()) {
-                    element.showInformation();
-                }
+                Room room = new Room();
+                room.showInformation();
                 break;
             case 4:
                 Villa.showVillaName();
@@ -179,62 +137,34 @@ public class Function {
         Customer.showInformation();
         System.out.println("Choose customer you want: ");
         int chooseCustomer = Regex.checkInvalidBookingCustomer(input.nextLine());
-        Customer customer = Customer.getCustomerList().get(chooseCustomer-1);
+        Customer customer = Customer.getCustomerList().get(chooseCustomer - 1);
+        System.out.println(DisplayFormat.bookingMenu());
         System.out.println("Choose services: ");
-        System.out.println("1. Booking Villa");
-        System.out.println("2. Booking House");
-        System.out.println("3. Booking Room");
-        System.out.println("4. Back to Menu");
-        System.out.println("Choose services: ");
-        int choice = Integer.parseInt(input.nextLine());
+        int choice = Regex.checkNumberInt(input.nextLine());
         switch (choice) {
             case 1:
-                if(Villa.getVillaList().size() != 0) {
-                    System.out.printf("%-4s%-12s%-30s%-20s%-10s%-10s%-10s%-10s%-15s%-10s%s", "", "Id",
-                            "Name", "Villa's Area", "Cost", "Capacity", "Type", "Standard", "Pool's Area", "Floor", "Included Services");
-                    System.out.println();
-                    for (Services element : Villa.getVillaList()) {
-                        element.showInformation();
-                    }
-                    System.out.println("Choose villa: ");
-                    int chooseVilla = Regex.checkInvalidBookingVilla(input.nextLine());
-                    Services villa = Villa.getVillaList().get(chooseVilla - 1);
-                    customer.setServices(villa);
-                } else {
-                    System.out.println("List is empty!!!");
-                }
+                Services villa = new Villa();
+                villa.showInformation();
+                System.out.println("Choose villa: ");
+                int chooseVilla = Regex.checkInvalidBookingVilla(input.nextLine());
+                villa = Villa.getVillaList().get(chooseVilla - 1);
+                customer.setServices(villa);
                 break;
             case 2:
-                if(House.getHouseList().size() != 0) {
-                    System.out.printf("%-4s%-12s%-30s%-20s%-10s%-10s%-10s%-10s%-8s%-10s%s", "", "Id",
-                            "Name", "House's Area", "Cost", "Capacity", "Type", "Standard", "Floor", "Other", "Included Services");
-                    System.out.println();
-                    for (Services element : House.getHouseList()) {
-                        element.showInformation();
-                    }
-                    System.out.println("Choose House: ");
-                    int chooseHouse = Regex.checkInvalidBookingHouse(input.nextLine());
-                    Services house = House.getHouseList().get(chooseHouse - 1);
-                    customer.setServices(house);
-                } else {
-                    System.out.println("List is empty!!!");
-                }
+                Services house = new House();
+                house.showInformation();
+                System.out.println("Choose House: ");
+                int chooseHouse = Regex.checkInvalidBookingHouse(input.nextLine());
+                house = House.getHouseList().get(chooseHouse - 1);
+                customer.setServices(house);
                 break;
             case 3:
-                if(Room.getRoomList().size() != 0) {
-                    System.out.printf("%-4s%-12s%-30s%-20s%-10s%-10s%-10s%-15s%s", "", "Id",
-                            "Name", "Room's Area", "Cost", "Capacity", "Type", "Free Services", "Included Services");
-                    System.out.println();
-                    for (Services element : Room.getRoomList()) {
-                        element.showInformation();
-                    }
-                    System.out.println("Choose room: ");
-                    int chooseRoom = Regex.checkInvalidBookingRoom(input.nextLine());
-                    Services room = Room.getRoomList().get(chooseRoom - 1);
-                    customer.setServices(room);
-                } else {
-                    System.out.println("List is empty!!!");
-                }
+                Services room = new Room();
+                room.showInformation();
+                System.out.println("Choose room: ");
+                int chooseRoom = Regex.checkInvalidBookingRoom(input.nextLine());
+                room = Room.getRoomList().get(chooseRoom - 1);
+                customer.setServices(room);
                 break;
             case 4:
                 displayMainMenu();
@@ -251,22 +181,26 @@ public class Function {
     public void other() {
         Scanner input = new Scanner(System.in);
         int select;
-        System.out.println("1. Movie theater");
-        System.out.println("2. Cabinet");
+        System.out.println(DisplayFormat.otherMenu());
         System.out.println("Choose your select");
-        select = Integer.parseInt(input.nextLine());
+        select = Regex.checkNumberInt(input.nextLine());
         switch (select) {
             case 1:
                 Theatre theatre = new Theatre();
                 System.out.println("Welcome to Furama theatre!!!");
-                if(theatre.getAvailable() == 0){
+                if (theatre.getAvailable() == 0) {
                     System.out.println("Sorry!!! Ticket sold out!!!");
                 } else {
-                    System.out.println("Enter your name: ");
-                    String name = input.nextLine();
-                    System.out.println("How many ticket you want to buy ?");
-                    int numberOfTicket = Integer.parseInt(input.nextLine());
-                    theatre.buyTicket(name, numberOfTicket);
+                    System.out.println("Now we have " + theatre.getAvailable() + " tickets!!! Do you want to buy ticket ?");
+                    char confirm = input.next().toLowerCase().charAt(0);
+                    if (confirm == 'y') {
+                        System.out.println("Enter your name: ");
+                        input.nextLine();
+                        String name = input.nextLine();
+                        System.out.println("How many ticket you want to buy ?");
+                        int numberOfTicket = Regex.checkNumberInt(input.nextLine());
+                        theatre.buyTicket(name, numberOfTicket);
+                    }
                 }
                 break;
             case 2:
