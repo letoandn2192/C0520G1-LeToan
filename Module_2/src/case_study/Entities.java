@@ -57,21 +57,27 @@ public class Entities implements Serializable {
             System.out.println("Noun");
             for (Noun element: noun){
                 System.out.println("* " + element.getDefinition());
-                System.out.println("- " + element.getDescription() + ": " + element.getSentenceMeaning());
+                if(element.getDescription() != null){
+                    System.out.println("- " + element.getDescription() + ": " + element.getSentenceMeaning());
+                }
             }
         }
         if(!adjective.isEmpty()){
             System.out.println("Adjective");
             for (Adjective element: adjective){
                 System.out.println("* " + element.getDefinition());
-                System.out.println("- " + element.getDescription() + ": " + element.getSentenceMeaning());
+                if(element.getDescription() != null){
+                    System.out.println("- " + element.getDescription() + ": " + element.getSentenceMeaning());
+                }
             }
         }
         if(!verb.isEmpty()){
             System.out.println("Verb");
             for (Verb element: verb){
                 System.out.println("* " + element.getDefinition());
-                System.out.println("- " + element.getDescription() + ": " + element.getSentenceMeaning());
+                if(element.getDescription() != null){
+                    System.out.println("- " + element.getDescription() + ": " + element.getSentenceMeaning());
+                }
             }
         }
         System.out.println("Synonymous: " + this.synonymous);

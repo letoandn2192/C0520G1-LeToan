@@ -15,7 +15,7 @@ public class Manager {
         System.out.println("Enter your word: ");
         word.setKeyWord(input.nextLine().toLowerCase());
         System.out.println("Enter pronoun");
-        entities.setPronoun(input.nextLine());
+        entities.setPronoun(input.nextLine().trim());
         List<Noun> nounList = new ArrayList<>();
         List<Adjective> adjectiveList = new ArrayList<>();
         List<Verb> verbList = new ArrayList<>();
@@ -81,7 +81,7 @@ public class Manager {
         Scanner input = new Scanner(System.in);
         boolean isExist = false;
         System.out.println("Enter word you want to drop: ");
-        String removeWord = input.nextLine();
+        String removeWord = input.nextLine().toLowerCase();
         for (String keyWord : dictionary.keySet()) {
             if (keyWord.equals(removeWord)) {
                 isExist = true;
@@ -94,6 +94,61 @@ public class Manager {
         } else {
             System.out.println("Not Found!!!");
         }
+    }
+
+    public void addDefinition(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter word");
+        String keyWord = input.nextLine();
+        boolean isFinish = false;
+        Word word = dictionary.get(keyWord);
+        Entities entities = word.getEntities();
+        List<Noun> nounList = entities.getNoun();
+        List<Adjective> adjectiveList = entities.getAdjective();
+        List<Verb> verbList = entities.getVerb();
+        while (!isFinish) {
+            System.out.println("1. Noun");
+            System.out.println("2. Adjective");
+            System.out.println("3. Verb");
+            System.out.println("4. Finish");
+            System.out.println("Enter word type: ");
+            int select = Regex.checkInputFormat(input.nextLine());
+            switch (select) {
+                case 1:
+                    nounList.add(addNewNoun());
+                    break;
+                case 2:
+                    adjectiveList.add(addNewAdjective());
+                    break;
+                case 3:
+                    verbList.add(addNewVerb());
+                    break;
+                case 4:
+                    entities.setNoun(nounList);
+                    entities.setAdjective(adjectiveList);
+                    entities.setVerb(verbList);
+                    word.setEntities(entities);
+                    dictionary.put(keyWord, word);
+                    isFinish = true;
+                    break;
+                default:
+                    System.out.println("Invalid value !!!");
+            }
+        }
+    }
+
+
+    public void showDictionary(){
+        int count = 0;
+        for (String keyWord: dictionary.keySet()){
+            System.out.printf("%-20s", keyWord);
+            count++;
+            if(count == 8){
+                System.out.println();
+                count = 0;
+            }
+        }
+        System.out.println();
     }
 
     public Adjective addNewAdjective() {
