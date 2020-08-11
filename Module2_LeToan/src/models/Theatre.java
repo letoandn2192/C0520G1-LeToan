@@ -1,12 +1,12 @@
 package models;
 
 import java.util.ArrayList;
-import java.util.Deque;
 import java.util.LinkedList;
+import java.util.Queue;
 
 public class Theatre {
     public static final int CAPACITY = 10;
-    private static Deque<ArrayList> queue = new LinkedList<>();
+    private static Queue<ArrayList> queue = new LinkedList<>();
     private static int available = CAPACITY;
 
     public int getAvailable() {

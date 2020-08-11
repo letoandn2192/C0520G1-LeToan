@@ -4,6 +4,9 @@ public class Student extends Person implements Comparable<Student>{
     private String code;
     private String Name;
 
+    public Student() {
+    }
+
     public Student(String code, String name) {
         this.code = code;
         Name = name;

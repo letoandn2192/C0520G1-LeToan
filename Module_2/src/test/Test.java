@@ -1,20 +1,10 @@
 package test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.File;
 
 public class Test {
     public static void main(String[] args) {
-        List<String> array = new ArrayList<>();
-        array.add("a");
-        array.add("f");
-        array.add("y");
-        array.add("g");
-        array.add("e");
-        array.add("k");
-        array.add("b");
-        for (String element: array){
-            System.out.print(element + " ");
-        }
+        File dir = new File("dir");
+        File f = new File(dir, "f");
     }
 }
