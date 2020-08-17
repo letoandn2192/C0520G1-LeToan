@@ -3,96 +3,96 @@ create database my_database;
 use my_database;
 
 /*Products Line Entity*/
-create table ProductsLine (
-	productLineNumber varchar(50) primary key,
-    textDesciption text,
+create table products_line (
+	product_line_number varchar(50) primary key,
+    text_desciption text,
     image mediumblob
 );
 
 /*Products Entity*/
-create table Products (
-	productCode varchar(15) primary key,
-    productName varchar(70) not null,
-    productScale varchar(10) not null,
-    productVentor varchar(50) not null,
-    productDesciption text not null,
-    quantityInStock int not null,
-    buyPrice decimal(10,2) not null,
+create table products (
+	product_code varchar(15) primary key,
+    product_name varchar(70) not null,
+    product_scale varchar(10) not null,
+    product_ventor varchar(50) not null,
+    product_desciption text not null,
+    quantity_in_stock int not null,
+    buy_price decimal(10,2) not null,
     MSRP decimal(10,2) not null,
-    productLineNumber varchar(50),
-    foreign key (productLineNumber) references ProductsLine(productLineNumber)
+    product_line_number varchar(50),
+    foreign key (product_line_number) references products_line(product_line_number)
 );
 
 /*Offices Entity*/
-create table Offices (
-	officeCode varchar(10) primary key,
+create table offices (
+	office_code varchar(10) primary key,
     city varchar(50) not null,
     phone varchar(50) not null,
-    addressLine1 varchar(50) not null,
-    addressLine2 varchar(50),
+    address_line1 varchar(50) not null,
+    address_line2 varchar(50),
     state varchar(50),
     country varchar(50),
-    postalCode varchar(10) not null
+    postal_code varchar(10) not null
 );
 
 /*Employees Entity*/
-create table Employees (
-	employeeNumber int primary key,
-    lastName varchar(50) not null,
-    firstName varchar(50) not null,
+create table employees (
+	employee_number int primary key,
+    last_name varchar(50) not null,
+    first_name varchar(50) not null,
     email varchar(100) not null,
-    jobTitle varchar(50) not null,
-    officeCode varchar(10),
-    reportTo int,
-    foreign key (reportTo) references Employees(employeeNumber),
-    foreign key (officeCode) references Offices(officeCode)
+    job_title varchar(50) not null,
+    office_code varchar(10),
+    report_to int,
+    foreign key (report_to) references employees(employee_number),
+    foreign key (office_code) references offices(office_code)
 );
 
 /*Customer Entity*/
-create table Customers (
-	customerNumber int primary key,
-    customerName varchar(50) not null,
-    contactLastName varchar(50) not null,
-    contactFirstName varchar(50) not null,
+create table customers (
+	customer_number int primary key,
+    customer_name varchar(50) not null,
+    contact_last_name varchar(50) not null,
+    contact_first_name varchar(50) not null,
     phone varchar(50) not null,
-    addressLine1 varchar(50) not null,
-    addressLine2 varchar(50),
+    address_line1 varchar(50) not null,
+    address_line2 varchar(50),
     city varchar(50) not null,
     state varchar(50) not null,
-    postalCode varchar(15) not null,
+    postal_code varchar(15) not null,
     country varchar(50) not null,
-    creditLimit decimal(10,2) not null,
-    salesRepEmployeeNumber int,
-    foreign key (salesRepEmployeeNumber) references Employees(employeeNumber)
+    credit_limit decimal(10,2) not null,
+    sales_rep_employee_number int,
+    foreign key (sales_rep_employee_number) references employees(employee_number)
 );
 
 /*Orders Entity*/
-create table Orders (
-	orderNumber int primary key,
-    orderDate Date not null,
-    requiredDate Date not null,
-    shippedDate Date not null,
+create table orders (
+	order_number int primary key,
+    order_date Date not null,
+    required_date Date not null,
+    shipped_date Date not null,
     `status` varchar(15) not null,
     comments text,
-    customerNumber int,
-    foreign key (customerNumber) references Customers(customerNumber)
+    customer_number int,
+    foreign key (customer_number) references customers(customer_number)
 );
 
 /*OrderDetails Entity*/
-create table OrderDetail (
-	productCode varchar(50),
-    orderNumber int,
-	quantityOrdered int not null,
-    priceEach decimal(10,2) not null,
-    foreign key (productCode) references Products(productCode),
-    foreign key (orderNumber) references Orders(orderNumber)
+create table order_detail (
+	product_code varchar(50),
+    order_number int,
+	quantity_ordered int not null,
+    price_each decimal(10,2) not null,
+    foreign key (product_code) references products(product_code),
+    foreign key (order_number) references orders(order_number)
 );
 
 /*Payments Entity*/
-create table Payments (
-	customerNumber int primary key,
-    checkNumber varchar(50) not null,
-    paymentDate Date not null,
+create table payments (
+	customer_number int primary key,
+    check_number varchar(50) not null,
+    payment_date Date not null,
     amount decimal(10,2) not null,
-    foreign key (customerNumber) references Customers(customerNumber)
+    foreign key (customer_number) references customers(customer_number)
 );

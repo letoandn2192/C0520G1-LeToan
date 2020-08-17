@@ -1,7 +1,7 @@
 drop database if exists my_database;
 create database my_database;
 use my_database;
-create table Customers (
+create table customers (
 	customer_number int primary key,
 	full_name varchar(255) not null,
 	address varchar(255),
@@ -9,7 +9,7 @@ create table Customers (
     phone varchar(255) unique
 );
 
-create table Accounts (
+create table accounts (
 	account_number int primary key,
     account_type varchar(255),
     `date` date,
@@ -18,7 +18,7 @@ create table Accounts (
     foreign key (customer_number) references Customers(customer_number)
 );
 
-create table Transactions (
+create table transactions (
 	tran_number int primary key,
 	account_number int,
     `date` Date,
