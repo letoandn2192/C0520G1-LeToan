@@ -1,9 +1,37 @@
-use classicmodels;
+USE classicmodels;
 
-explain select productCode, productName, buyPrice, textDescription from products
-inner join productlines
-on products.productLine = productlines.productLine
-where buyPrice > 56.76 and buyPrice < 95.59;
+EXPLAIN SELECT productCode, productName, buyPrice, textDescription FROM products
+	INNER JOIN productlines
+ON products.productLine = productlines.productLine
+WHERE buyPrice > 56.76 AND buyPrice < 95.59;
 
-select table_name, table_rows from information_schema.tables
-where table_schema = 'classicmodels';
+SELECT table_name, table_rows FROM information_schema.tables
+WHERE table_schema = 'classicmodels';
+
+/*Inner Join*/
+SELECT customers.customerNumber, customers.customerName, orders.orderNumber, orders.status FROM customers
+	INNER JOIN orders
+ON customers.customerNumber = orders.customerNumber;
+
+/*Left Join*/
+SELECT customers.customerNumber, customers.customerName, orders.orderNumber, orders.status FROM customers
+	LEFT JOIN orders
+ON customers.customerNumber = orders.customerNumber;
+
+/*Rightorders Join*/
+SELECT customers.customerNumber, customers.customerName, orders.orderNumber, orders.status FROM customers
+	RIGHT JOIN orders
+ON customers.customerNumber = orders.customerNumber;
+
+/*Full Join*/
+SELECT customers.customerNumber, customers.customerName, orders.orderNumber, orders.status FROM customers
+	LEFT JOIN orders ON customers.customerNumber = orders.customerNumber
+UNION ALL
+SELECT customers.customerNumber, customers.customerName, orders.orderNumber, orders.status FROM customers
+	RIGHT JOIN orders ON customers.customerNumber = orders.customerNumber
+WHERE customers.customerNumber IS NULL;
+
+SELECT orders.orderNumber, customers.customerName, orderdetails.priceEach Price
+FROM orders
+	LEFT JOIN customers ON orders.customerNumber = customers.customerNumber
+	LEFT JOIN orderdetails ON orders.orderNumber = orderdetails.orderNumber;

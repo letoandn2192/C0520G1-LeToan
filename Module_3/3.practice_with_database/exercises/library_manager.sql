@@ -8,8 +8,9 @@ create table category (
     quantity_in_lib int not null
 );
 
-create table student (
-	student_number varchar(15) primary key,
+create table student_card (
+	student_number_card varchar(15) primary key,
+	student_number varchar(15) not null unique,
     student_name varchar(50) not null,
     address text not null,
     email varchar(50) not null,
@@ -23,13 +24,16 @@ create table borrow_order (
     returned_date Date,
     `status` varchar(15),
     `comment` text,
-    student_number varchar(15),
-    foreign key (student_number) references student(student_number)
+    student_number_card varchar(15),
+    foreign key (student_number_card) references student_card(student_number_card)
 );
 
 create table book (
 	book_number varchar(15) primary key,
     book_name varchar(50) not null,
+    publisher varchar(50) not null,
+    author varchar(50) not null,
+    publish_year int,
     category varchar(50),
     book_vendor varchar(50) not null,
     book_description mediumtext,
@@ -39,8 +43,6 @@ create table book (
 create table borrow_order_detail (
 	book_number varchar(15),
     borrow_order_number varchar(15),
-    price_each decimal(10,2),
-    borrow_quantity int,
     primary key (book_number, borrow_order_number),
     foreign key (book_number) references book(book_number),
     foreign key (borrow_order_number) references borrow_order(borrow_order_number)

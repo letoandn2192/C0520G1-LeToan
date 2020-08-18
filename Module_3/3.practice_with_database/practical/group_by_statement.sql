@@ -1,4 +1,5 @@
 use classicmodels;
+
 select count(orderNumber) as `count`,`status` from orders
 group by `status`;
 
