@@ -15,3 +15,6 @@ SELECT orders.orderNumber, customers.customerName, orderdetails.priceEach Price
 FROM orders
 	LEFT JOIN customers ON orders.customerNumber = customers.customerNumber
 	LEFT JOIN orderdetails ON orders.orderNumber = orderdetails.orderNumber;
+    
+select orderDate from orders;
+select date_format(now(), '%d/%m/%Y') `date` from orders;
