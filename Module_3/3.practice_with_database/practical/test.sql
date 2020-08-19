@@ -1,20 +1,22 @@
 USE classicmodels;
 
-SELECT customers.customerNumber, customers.customerName, orders.orderNumber, orders.status FROM customers
-	INNER JOIN orders
-ON customers.customerNumber = orders.customerNumber;
+explain select * from customers 
+where contactFirstName like 'A%';
 
-SELECT customers.customerNumber, customers.customerName, orders.orderNumber, orders.status FROM customers
-	LEFT JOIN orders ON customers.customerNumber = orders.customerNumber
-UNION all
-SELECT customers.customerNumber, customers.customerName, orders.orderNumber, orders.status FROM customers
-	RIGHT JOIN orders ON customers.customerNumber = orders.customerNumber
-WHERE customers.customerNumber IS NULL;
+select * from customers 
+where phone =  '0902';
 
-SELECT orders.orderNumber, customers.customerName, orderdetails.priceEach Price
-FROM orders
-	LEFT JOIN customers ON orders.customerNumber = customers.customerNumber
-	LEFT JOIN orderdetails ON orders.orderNumber = orderdetails.orderNumber;
-    
-select orderDate from orders;
-select date_format(now(), '%d/%m/%Y') `date` from orders;
+create index inx_fn on customers(contactFirstName);
+create index inx_ln on customers(contactLastName);
+
+SHOW INDEXES FROM customers;
+
+explain select * from customers
+where contactFirstName like 'A%';
+
+explain select * from customers 
+where contactLastName like '%A%';
+
+alter table customers
+drop index inx_fn,
+drop index inx_ln;

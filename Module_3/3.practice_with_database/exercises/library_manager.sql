@@ -36,7 +36,7 @@ create table borrow_order (
     returned_date Date default null,
     `status` varchar(15),
     `comment` text,
-    primary key (book_number, student_number),    
+    primary key (book_number, student_number, borrow_date),    
     foreign key (student_number) references student_card(student_number),
 	foreign key (book_number) references book(book_number)
 );
@@ -74,6 +74,6 @@ insert into borrow_order (book_number, student_number, borrow_date, required_dat
 ('TC00003', '201300002', '2011-01-15', '2011-01-20', '2011-01-19', 'finish', 'This is a student...'),
 ('TC00002', '201100006', '2020-07-27', '2020-08-02', '2020-08-03', 'finish', 'This is a student...'),
 ('TC00001', '201500004', '2019-12-07', '2019-12-13', '2019-12-12', 'finish', 'This is a student...'),
-('TC00001', '201200003', '2007-11-10', '2007-11-15', '2007-12-12', 'finish', 'This is a student...');
+('TC00001', '201300002', '2000-11-12', '2000-11-16', default, 'finish', 'This is a student...');
 
 select * from borrow_order;
