@@ -1,0 +1,159 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial';
+}
+/*----------------------------------------Header-----------------------------------------------*/
+
+#top-bar {
+    width: 100%;
+    background: #F1F1F1;
+    border-bottom: 1px solid #D4D4D4;
+    height: 25px;
+}
+
+.normal-wrapper {
+    width: 900px;
+    margin: 0 auto;
+    padding: 15px 40px;
+    background: white;
+    overflow: auto;
+}
+
+.logo-icon {
+    color: #000000;
+    font-size: 60pt;
+    float: left;
+}
+
+h1 {
+    float: left;
+    margin: 21px 0 0 25px;
+}
+
+#naval {
+    list-style-type: none; /* remove bullet points */
+    margin: 29px 0 0 0;
+    padding: 0;
+    float: right;
+    font-size: 16pt;
+}
+#naval li {
+    display: inline; /* make items horizontal */
+}
+#naval li a:link, #naval li a:visited, #naval li a:active {
+    text-decoration: none; /* remove underline */
+    color: #000000;
+    padding: 0 16px 0 10px; /* space links apart */
+    margin: 0;
+    border-right: 2px solid #B4B4B4; /* divider */
+}
+#naval li a:link.last-link {
+    /* remove divider */
+    border-right: 0px;
+}
+#naval li a:hover {
+    /* change color on hover (mouseover) */
+    color: #EB6361;
+}
+
+#top-color-splash {
+    width: 100%;
+    height: 4px;
+    background: #EB6361;
+}
+
+/*---------------------------------------Body------------------------------------------*/
+.one-third {
+    width: 75%;
+    float: left;
+    box-sizing: border-box; /* ensure padding and borders do not increase the size */
+    margin-top: 20px;
+}
+.two-third {
+    width: 25%;
+    float: left;
+    box-sizing: border-box; /* ensure padding and borders do not increase the size */
+    padding-left: 40px;
+    text-align: right;
+    margin-top: 20px;
+}
+
+#image1 {
+    width: 220px;
+    height: 300px;
+}
+
+.menu_list {
+    width: 200px;
+    margin: 0;
+    padding: 0;
+    float: left;
+}
+
+.menuitem {
+    background-color: lightsalmon;
+    border: 1px solid #d4d4d4;
+    list-style-type: none;
+    padding: 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin: 4px;
+    color: #FFFFFF;
+}
+
+.menuitem:hover {
+    background-color: #ffffff;
+}
+
+.no-margin-top {
+    text-align: center;
+    font-size: 20px;
+}
+
+#menu_1 {
+    width: 33%;
+    float: left;
+    box-sizing: border-box; /* ensure padding and borders do not increase the size */
+    margin-top: 20px;
+}
+
+#menu_2 {
+    width: 33%;
+    float: left;
+    box-sizing: border-box; /* ensure padding and borders do not increase the size */
+    margin-top: 20px;
+}
+
+#menu_3 {
+    width: 34%;
+    float: left;
+    box-sizing: border-box; /* ensure padding and borders do not increase the size */
+    margin-top: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+
+/*--------------------------------Footer-----------------------------------------------------*/
+#quote-area {
+    background: #363636;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 15px 0;
+}
+h3 {
+    font-weight: normal;
+    font-size: 20pt;
+    margin-top: 0px;
+}
+h4 {
+    font-weight: normal;
+    font-size: 16pt;
+    margin-bottom: 0;
+}
+
+
