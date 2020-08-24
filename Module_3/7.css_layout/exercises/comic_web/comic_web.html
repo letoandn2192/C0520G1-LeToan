@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Web</title>
+    <link href="comic_web.css" rel="stylesheet" type="text/css">
+</head>
+<body onload="docReady()">
+  <!-- -------------------------------------------Header-------------------------------------------------------------- -->
+    <div id="top-bar"></div>
+    <div class="normal-wrapper">
+        <div id="logo-container">
+            <img src="download.png" style="width: 70px; height: 70px" class="logo-icon"> <h1>World's Comic</h1>
+        </div>
+        <ul id="naval">
+            <li><a href="http://www.nettruyen.com/">Home</a></li>
+            <li><a href="http://www.nettruyen.com/hot">Hot</a></li>
+            <li><a href="http://www.nettruyen.com/tim-truyen-nang-cao">Find</a></li>
+            <li><a href="https://vi.wikipedia.org/wiki/Truy%E1%BB%87n_tranh_Vi%E1%BB%87t_Nam" class="last-link" >Contact</a></li>
+        </ul>
+    </div>
+    <div id="top-color-splash"></div>
+
+  <!-- --------------------------------------------Body----------------------------------------------------------------- -->
+  <div class="normal-wrapper">
+      <div class="one-third">
+          <h2 class="no-margin-top">CATEGORY</h2>
+          <div id="menu_1">
+              <ul class="menu_list">
+                  <li class="menuitem"><a href="http://www.nettruyen.com/tim-truyen/action">Action</a></li>
+                  <li class="menuitem"><a href="http://www.nettruyen.com/tim-truyen/adventure">Adventure</a></li>
+                  <li class="menuitem"><a href="http://www.nettruyen.com/tim-truyen/comedy">Comedy</a></li>
+                  <li class="menuitem"><a href="http://www.nettruyen.com/tim-truyen/cooking">Cooking</a></li>
+                  <li class="menuitem"><a href="http://www.nettruyen.com/tim-truyen/psychological">Psychological</a></li>
+                  <li class="menuitem"><a href="http://www.nettruyen.com/tim-truyen/sports">Sports</a></li>
+                  <li class="menuitem"><a href="http://www.nettruyen.com/tim-truyen/supernatural">Supernatural</a></li>
+              </ul>
+          </div>
+
+          <div id="menu_2">
+              <ul class="menu_list">
+                  <li class="menuitem"><a href="http://www.nettruyen.com/tim-truyen/fantasy">Fantasy</a></li>
+                  <li class="menuitem"><a href="http://www.nettruyen.com/tim-truyen/drama">Drama</a></li>
+                  <li class="menuitem"><a href="http://www.nettruyen.com/tim-truyen/horror">Horror</a></li>
+                  <li class="menuitem"><a href="http://www.nettruyen.com/tim-truyen/comic">Comic</a></li>
+                  <li class="menuitem"><a href="http://www.nettruyen.com/tim-truyen/historical">Historical</a></li>
+                  <li class="menuitem"><a href="http://www.nettruyen.com/tim-truyen/anime">Anime</a></li>
+                  <li class="menuitem"><a href="http://www.nettruyen.com/tim-truyen/mature">Mature</a></li>
+              </ul>
+          </div>
+
+          <div id="menu_3">
+              <ul class="menu_list">
+                  <li class="menuitem"><a href="http://www.nettruyen.com/tim-truyen/school-life">School Life</a></li>
+                  <li class="menuitem"><a href="http://www.nettruyen.com/tim-truyen/mystery">Mystery</a></li>
+                  <li class="menuitem"><a href="http://www.nettruyen.com/tim-truyen/tragedy">Tragedy</a></li>
+                  <li class="menuitem"><a href="http://www.nettruyen.com/tim-truyen/sci-fi">Sci-fi</a></li>
+                  <li class="menuitem"><a href="http://www.nettruyen.com/tim-truyen/live-action">Live Action</a></li>
+                  <li class="menuitem"><a href="http://www.nettruyen.com/tim-truyen/manga">Manga</a></li>
+                  <li class="menuitem"><a href="http://www.nettruyen.com/tim-truyen/harem">Harem</a></li>
+              </ul>
+          </div>
+
+      </div>
+      <div class="two-third">
+          <img id="image1" class="featured-image" src="http://st.nettruyen.com/data/comics/16/ta-co-phong-rieng-thoi-tan-the.jpg" alt="Loading..."/>
+       </div>
+  </div>
+  <!-- --------------------------------------------------footer--------------------------------------------- -->
+  <div id="quote-area">
+            <h3>“This is the best website ever”</h3>
+            <h4>C0520G1</h4>
+    </div>
+</body>
+<script>
+    let currentImage = 1;
+    function changeImage() {
+        switch (currentImage) {
+            case 1:
+                document.getElementById('image1').src = "http://st.nettruyen.com/data/comics/26/doc-bo-tieu-dao.jpg";
+                currentImage = 2;
+                break;
+            case 2:
+                document.getElementById('image1').src = "http://st.nettruyen.com/data/comics/9/ton-thuong.jpg";
+                currentImage = 3;
+                break;
+            default:
+                document.getElementById('image1').src = "http://st.nettruyen.com/data/comics/16/ta-co-phong-rieng-thoi-tan-the.jpg";
+                currentImage = 1;
+        }
+    }
+
+    function docReady() {
+        setInterval(changeImage, 500);
+    }
+</script>
+</html>

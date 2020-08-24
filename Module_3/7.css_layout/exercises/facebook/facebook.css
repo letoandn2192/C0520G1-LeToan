@@ -1,0 +1,134 @@
+* {
+    box-sizing: border-box;
+}
+
+.content::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+[class*="col-"] {
+    padding: 15px;
+    float: left;
+}
+
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+
+body {
+    font-family: "Times New Roman", serif;
+    margin: auto;
+}
+
+#header {
+    background-color: pink;
+    margin: 0;
+    height: 50px;
+    width: 100%;
+    position: fixed;
+}
+
+#logo {
+    height: 50px;
+    width: 50px;
+    margin: 0;
+    padding: 0;
+}
+
+#search {
+    position: absolute;
+    bottom: 10px;
+    left: 55px;
+}
+
+/*img {*/
+/*    height: 50px;*/
+/*    width: 50px;*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*}*/
+
+#header ul {
+    position: absolute;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 270px;
+    left: 600px;
+    top: 0px;
+}
+
+#header li {
+    display: inline;
+    margin: 0;
+    cursor: pointer;
+}
+
+#header li:hover {
+    background-color: #B4B4B4;
+}
+
+.aside1 {
+    background-color: yellow;
+    height: 500px;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    top: 50px;
+    overflow-y: scroll;
+}
+
+/* The navigation menu links */
+.aside1 ul {
+    list-style-type: none;
+    font-size: 25px;
+    color: #818181;
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+
+/* When you mouse over the navigation links, change their color */
+.aside1 li:hover {
+    background-color: #f1f1f1;
+}
+
+.aside1 li {
+    margin: 0 0 5px 0;
+}
+
+.content1 {
+    background-color: greenyellow;
+    height: 1000px;
+    margin: 50px 0 0 25%;
+}
+
+.aside2 {
+    background-color: brown;
+    height: 500px;
+    margin: 0;
+    position: fixed;
+    top: 50px;
+    right: 0;
+}
+
+img {
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+

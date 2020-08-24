@@ -79,7 +79,7 @@ values
 insert into customer (customer_type_id, customer_name, customer_date_of_birth, customer_id_number, customer_phone,
 customer_email, customer_address)
 values
-(1, 'Nguyến Hương Giang', '1993-02-01', '201935404', '09028783813', 'giangnguyenhuong@gmail.com', 'Hà Nội'),
+(1, 'Nguyến Hương Giang', '1993-02-01', '201935404', '09028783813', 'giangnguyenhuong@gmail.com', 'Quảng Ngãi'),
 (2, 'Trương Tấn Sang', '1989-08-21', '200935491', '09058779513', 'sangtruongtan@gmail.com', 'Hải Phòng'),
 (3, 'Trương Công An', '1985-11-27', '200835762', '09054337453', 'truongcongan@gmail.com', 'Hồ Chí Minh'),
 (4, 'Lương Xuân Trường', '1995-10-19', '201361834', '0933783517', 'luongxuantruong@gmail.com', 'Tuyên Quang'),
@@ -89,7 +89,7 @@ values
 (3, 'Khổng Tú Quỳnh', '1994-12-07', '201408635', '0944168359', 'quynhngaytho@gmail.com', 'Sơn La'),
 (4, 'Đàm Vĩnh Hưng', '1988-04-01', '200845679', '0936482178', 'hungdam@gmail.com', 'Bến Tre'),
 (5, 'Trần Quang Cường', '1995-03-31', '201345682', '0988123852', 'cuongtranquang@gmail.com', 'Cà Mau'),
-(1, 'Lê Toàn', '1993-01-02', '201635805', '0902872813', 'letoandn2193@gmail.com', 'Đà Nẵng');
+(1, 'Lê Toàn', '1993-01-02', '201635805', '0902872813', 'letoandn2193@gmail.com', 'Vinh');
 
 -- 10. services
 insert into services (services_name, services_area, services_floor, servicers_max_person, services_price,
@@ -115,7 +115,8 @@ values
 (4, 9, 4, '2019-10-10', '2020-10-10', 1000, 3000),
 (5, 6, 7, '2019-03-10', '2019-12-10', 1000, 2500),
 (6, 2, 2, '2016-09-10', '2020-03-10', 2000, 10000),
-(7, 1, 5, '2018-07-30', '2018-07-30', 10, 20);
+(7, 1, 5, '2018-07-30', '2018-07-30', 10, 20),
+(8, 10, 5, '2016-04-30', '2016-05-30', 100, 800);
 
 -- 12. detail_contract
 insert into detail_contract (contract_id, detail_contract_included_services_id, detail_contract_amount)

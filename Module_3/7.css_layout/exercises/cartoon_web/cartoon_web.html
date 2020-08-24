@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cartoon Web</title>
+    <link href="cartoon_web.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+    <div class="header col-12">
+        <img id="image1" src="cartoon.png">
+    </div>
+    <div class="navigation col-12">
+        <ul>
+            <li class="col-1">Cartoon</li>
+            <li class="col-1">Popular</li>
+            <li class="col-1">Character</li>
+            <li class="col-1">Feedback</li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="left col-4">
+            <div style="margin: 0; padding: 0" class="col-10">
+            <video class="col-12" onclick="changeVideo(this)" src="video_1.mp4">
+                Your browser does not support HTML5 video.
+            </video>
+            <span class="col-12" style="padding: 0 0 0 15px; margin: 0">Cartoon - On & On (feat. Daniel Levi) [NCS Release]</span>
+            </div>
+            <div style="margin: 0; padding: 0" class="col-10">
+            <video class="col-12" onclick="changeVideo(this)" src="video_2.mp4">
+                Your browser does not support HTML5 video.
+            </video>
+            <span class="col-12" style="padding: 0 0 0 15px; margin: 0">Alan Walker - Fade [NCS Release]</span>
+            </div>
+            <div style="margin: 0; padding: 0" class="col-10">
+            <video class="col-12" onclick="changeVideo(this)" src="video_3.mp4">
+                Your browser does not support HTML5 video.
+            </video>
+            <span class="col-12" style="padding: 0 0 0 15px; margin: 0">Maroon 5 - Memories</span>
+            </div>
+            <div style="margin: 0; padding: 0" class="col-10">
+            <video class="col-12" onclick="changeVideo(this)" src="video_4.mp4">
+                Your browser does not support HTML5 video.
+            </video>
+            <span class="col-12" style="padding: 0 0 0 15px; margin: 0">Clean Bandit - Symphony (Lyrics) feat. Zara Larsson</span>
+            </div>
+        </div>
+        <div class="right col-8">
+            <video id="expandedImg" class="col-10" controls autoplay>
+                <source src="video_1.mp4">
+                Your browser does not support HTML5 video.
+            </video>
+        </div>
+    </div>
+    <div class="footer col-12">
+        <p>@2017 - Designed By Le Toan</p>
+    </div>
+
+<script>
+    function changeVideo(video) {
+        let chooseVideo = document.getElementById("expandedImg");
+        chooseVideo.src = video.src;
+    }
+</script>
+</body>
+</html>

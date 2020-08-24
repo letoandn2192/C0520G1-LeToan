@@ -1,0 +1,29 @@
+body {
+    margin-top: 0;
+}
+#header {
+    background-color: black;
+    height: 100px;
+    width: 100%;
+}
+
+#main {
+    background-color: #EB6361;
+    height: 500px;
+    width: 70%;
+    float: left;
+}
+
+#side-bar {
+    background-color: burlywood;
+    height: 500px;
+    width: 30%;
+    float: left;
+}
+
+#footer {
+    background-color: pink;
+    height: 100px;
+    width: 100%;
+    clear: both;
+}
