@@ -2,9 +2,59 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Test Bootstrap</title>
+    <link rel="stylesheet" href="../../../bootstrap_3/css/bootstrap.min.css">
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">-->
 </head>
 <body>
-$END$
+<nav class = "navbar navbar-default" role = "navigation">
+
+    <div class = "navbar-header">
+        <button type = "button" class = "navbar-toggle"
+                data-toggle = "collapse" data-target = "#example-navbar-collapse">
+            <span class = "sr-only">Toggle navigation</span>
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+        </button>
+
+        <a class = "navbar-brand" href = "#">TutorialsPoint</a>
+    </div>
+
+    <div class = "collapse navbar-collapse" id = "example-navbar-collapse">
+
+        <ul class = "nav navbar-nav">
+            <li class = "active"><a href = "#">iOS</a></li>
+            <li><a href = "#">SVN</a></li>
+
+            <li class = "dropdown">
+                <a href = "#" class = "dropdown-toggle" data-toggle = "dropdown">
+                    Java
+                    <b class = "caret"></b>
+                </a>
+                <ul class = "dropdown-menu">
+                    <li><a href = "#">jmeter</a></li>
+                    <li><a href = "#">EJB</a></li>
+                    <li><a href = "#">Jasper Report</a></li>
+
+                    <li class = "divider"></li>
+                    <li><a href = "#">Separated link</a></li>
+
+                    <li class = "divider"></li>
+                    <li><a href = "#">One more separated link</a></li>
+                </ul>
+
+            </li>
+
+        </ul>
+    </div>
+
+</nav>
+
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
+<!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>-->
+<script src="../../../bootstrap_3/js/jquery-3.5.1.js"></script>
+<script src="../../../bootstrap_3/js/bootstrap.min.js"></script>
 </body>
 </html>
