@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap Layout</title>
+    <link rel="stylesheet" href="../../../bootstrap_4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../bootstrap_4/font/css/all.css">
+</head>
+<body>
+<div class="container">
+    <header class="row" >
+        <div class="col-xl-8" style="height: 100px; padding-top: 20px;">
+            <h2>ONLINE SHOPPING MALL</h2>
+            <p>THE CENTER POINT OF THE PROFESSIONAL PROGRAMMING</p>
+        </div>
+        <img class="col-xl-4" src="header.jpg" alt="picture" style="height: 100px">
+    </header>
+
+    <nav class="row navbar navbar-expand-lg navbar-light bg-light col-xl-12">
+        <div class="collapse navbar-collapse" id="alo" style="background-color: lightgray">
+            <ul class="navbar-collapse mr-auto" style="list-style-type: none; padding-left: 0; margin-bottom: 0">
+                    <a class="nav-link" href="#"><span class="fas fa-home"></span> Trang Chủ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><span class="fas fa-list"></span> Giới Thiệu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><span class="fas fa-phone"></span> Liên Hệ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><span class="fas fa-mail-bulk"> Góp Ý</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><span class="fas fa-question"></span> Hỏi Đáp</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="fas fa-user"></span> Tài Khoản
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <a class="nav-link" href="#"><span>English</span></span></a>
+                <a class="nav-link" href="#">Tiếng Việt</span></a>
+            </form>
+        </div>
+    </nav>
+
+    <div class="row">
+        <div class="row col-xl-9">
+            <div class="row">
+                <div class="card col-xl-4">
+                    <div class="card-header">Nokia</div>
+                    <div class="card-body">
+                        <img src="nokia.jpg" alt="Nokia">
+                    </div>
+                    <div class="card-footer">$ 100.25</div>
+                </div>
+
+                <div class="card col-xl-4">
+                    <div class="card-header">Samsung</div>
+                    <div class="card-body">
+                        <img src="samsung.jpg" alt="Samsung">
+                    </div>
+                    <div class="card-footer">$ 120.25</div>
+                </div>
+
+                <div class="card col-xl-4">
+                    <div class="card-header">Iphone</div>
+                    <div class="card-body">
+                        <img src="iphone.jpg" alt="Iphone">
+                    </div>
+                    <div class="card-footer">$ 130.25</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="card col-xl-4">
+                    <div class="card-header">Zen Phone</div>
+                    <div class="card-body">
+                        <img src="zen.jpg" alt="Zen">
+                    </div>
+                    <div class="card-footer">$ 70.25</div>
+                </div>
+
+                <div class="card col-xl-4">
+                    <div class="card-header">Oppo</div>
+                    <div class="card-body">
+                        <img src="oppo.jpg" alt="Oppo">
+                    </div>
+                    <div class="card-footer">$ 60.35</div>
+                </div>
+
+                <div class="card col-xl-4">
+                    <div class="card-header">Xiaomi</div>
+                    <div class="card-body">
+                        <img src="xiaomi.jpg" alt="Xiaomi">
+                    </div>
+                    <div class="card-footer">$ 40.25</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3" style="padding-right: 0; margin-left: 11px">
+            <div class="card">
+                <div class="card-body">
+                    <img src="cart.jpg" alt="Cart">
+                    <ul style="list-style-type: none; margin-right: 0">
+                        <li>100 items</li>
+                        <li>$56.8</li>
+                        <li><a href="#">Xem giỏ hàng</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="fas fa-list"></span>
+                    <strong>Chủng Loại</strong>
+                </div>
+                <div class="list-group">
+                    <a href="#" class="list-group-item">Điện thoại di động</a>
+                    <a href="#" class="list-group-item">Máy tính xách tay</a>
+                    <a href="#" class="list-group-item">Máy tính để bàn</a>
+                    <a href="#" class="list-group-item">Quạt máy</a>
+                    <a href="#" class="list-group-item">Tivi</a>
+                    <a href="#" class="list-group-item">Tủ lạnh</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="col-xl-12" style="text-align: center">
+        <p>CodeGym &copy; 2017</p>
+    </footer>
+</div>
+</body>
+</html>
