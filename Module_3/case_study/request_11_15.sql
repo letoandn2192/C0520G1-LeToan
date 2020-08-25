@@ -10,6 +10,21 @@ inner join included_services on included_services_id = detail_contract_included_
 where customer_type_id = 1
 	and customer_address in ('Vinh', 'Quảng Ngãi');
     
+ /*Request 12:12.	Hiển thị thông tin IDHopDong, TenNhanVien, TenKhachHang, SoDienThoaiKhachHang, TenDichVu, 
+ SoLuongDichVuDikem (được tính dựa trên tổng Hợp đồng chi tiết), TienDatCoc của tất cả các dịch vụ đã từng được 
+ khách hàng đặt vào 3 tháng cuối năm 2019 nhưng chưa từng được khách hàng đặt vào 6 tháng đầu năm 2019.*/   
+ select contract.contract_id, employee_name, customer_phone, services_name, detail_contract_amount, contract_deposit_money
+from services
+inner join contract on contract_services_id = services_id
+inner join detail_contract on contract_services_id = services_id
+inner join type_of_services on type_services_id = services_type_id
+inner join employee on employee_id = contract_employee_id
+inner join customer on customer_id = contract_customer_id
+where year(contract_date_start) = 2019 and quarter(contract_date_start) = 1
+		and services_id not in (select services_id
+								from services
+								where quarter(contract_date_start) in (1,2));   
+    
 /*Request 13: Hiển thị thông tin các Dịch vụ đi kèm được sử dụng nhiều nhất bởi các Khách hàng đã đặt phòng. 
 (Lưu ý là có thể có nhiều dịch vụ có số lần sử dụng nhiều như nhau).*/    
 create or replace view hello as
