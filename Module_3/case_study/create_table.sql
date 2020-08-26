@@ -61,9 +61,9 @@ create table employee (
     employee_phone varchar(45) not null,
     employee_email varchar(45) not null,
     employee_address varchar(45) not null,
-    foreign key (employee_position_id) references `position`(position_id) on delete cascade,
-    foreign key (employee_level_id) references `level`(level_id) on delete cascade,
-    foreign key (employee_department_id) references department(department_id) on delete cascade
+    foreign key (employee_position_id) references `position`(position_id),
+    foreign key (employee_level_id) references `level`(level_id),
+    foreign key (employee_department_id) references department(department_id)
 );
 
 -- 9.create table customer
@@ -76,7 +76,7 @@ create table customer (
     customer_phone varchar(45) not null,
     customer_email varchar(45) not null,
     customer_address varchar(45) not null,
-    foreign key (customer_type_id) references type_of_customer(type_customer_id) on delete cascade 
+    foreign key (customer_type_id) references type_of_customer(type_customer_id) 
 );
 
 -- 10.create table services
@@ -90,8 +90,8 @@ create table services (
     services_type_rent_id int,
     services_type_id int,
     services_status varchar(45) not null,
-    foreign key (services_type_rent_id) references type_of_rent(type_rent_id) on delete cascade,
-    foreign key (services_type_id) references type_of_services(type_services_id) on delete cascade
+    foreign key (services_type_rent_id) references type_of_rent(type_rent_id),
+    foreign key (services_type_id) references type_of_services(type_services_id)
 );
 
 -- 11.create table contract
@@ -106,7 +106,7 @@ create table contract (
     contract_total_money decimal(10,2) not null,
     foreign key (contract_employee_id) references employee(employee_id) on delete cascade,
     foreign key (contract_customer_id) references customer(customer_id) on delete cascade,
-    foreign key (contract_services_id) references services(services_id) on delete cascade
+    foreign key (contract_services_id) references services(services_id)
 );
 
 -- 12.create table	detail_contract
@@ -116,5 +116,5 @@ create table detail_contract (
     detail_contract_included_services_id int,
     detail_contract_amount int not null,
     foreign key (contract_id) references contract(contract_id) on delete cascade,
-    foreign key (detail_contract_included_services_id) references included_services(included_services_id) on delete cascade
+    foreign key (detail_contract_included_services_id) references included_services(included_services_id)
 );

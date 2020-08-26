@@ -38,6 +38,16 @@ from included_services
 right join hello on included_services.included_services_id = hello.included_services_id
 where Amount = (select max(Amount) from hello); 
 
+-- way 2:
+select * 
+from (select count(detail_contract_included_services_id) as total, included_services.*
+							from detail_contract
+							inner join included_services on detail_contract_included_services_id = included_services_id
+							group by detail_contract_included_services_id) as temp1
+where temp1.total = (select max(temp2.total) from (select count(detail_contract_included_services_id) as total
+							from detail_contract
+							group by detail_contract_included_services_id) as temp2);
+
 /*Request 14: Hiển thị thông tin tất cả các Dịch vụ đi kèm chỉ mới được sử dụng một lần duy nhất. 
 Thông tin hiển thị bao gồm IDHopDong, TenLoaiDichVu, TenDichVuDiKem, SoLanSuDung.*/
 select contract.contract_id, included_services_name, type_services_name, count(detail_contract_included_services_id) as Amount
