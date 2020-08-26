@@ -76,7 +76,7 @@ create table customer (
     customer_phone varchar(45) not null,
     customer_email varchar(45) not null,
     customer_address varchar(45) not null,
-    foreign key (customer_type_id) references type_of_customer(type_customer_id) on delete cascade
+    foreign key (customer_type_id) references type_of_customer(type_customer_id) on delete cascade 
 );
 
 -- 10.create table services

@@ -41,7 +41,7 @@ inner join customer table_2
 where table_1.customer_id < table_2.customer_id
 	and table_1.customer_name = table_2.customer_name;
     
-/*Request 9: 9.	Thực hiện thống kê doanh thu theo tháng, nghĩa là tương ứng với mỗi tháng trong năm 2019 
+/*Request 9: Thực hiện thống kê doanh thu theo tháng, nghĩa là tương ứng với mỗi tháng trong năm 2019 
 thì sẽ có bao nhiêu khách hàng thực hiện đặt phòng.*/    
 select monthname(contract_date_start) as `Month`, count(contract_id) as 'Number of Customer',  sum(contract_total_money) Total
 from contract
