@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%--
   Created by IntelliJ IDEA.
   User: DELL
@@ -20,5 +21,9 @@
         <input id="discount" placeholder="Description" name="discount">
         <input type="submit" value="Calculate">
     </form>
+    <h2>c:out example</h2>
+    <c:out value="${'This is true: 10 > 1 '}" />
+    <br/>
+    Tag: <c:out value="${'<atag> , &'}"/>
 </body>
 </html>
