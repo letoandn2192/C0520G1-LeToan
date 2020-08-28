@@ -11,8 +11,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "CheckServlet",urlPatterns = "/test")
-public class CheckServlet extends HttpServlet {
+@WebServlet(name = "Servlet",urlPatterns = "/test")
+public class Servlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
@@ -30,7 +30,7 @@ public class CheckServlet extends HttpServlet {
         employeeList.add(employee_4);
         employeeList.add(employee_5);
         request.setAttribute("employeeList", employeeList);
-        request.getRequestDispatcher("display.jsp").forward(request,response);
+        request.getRequestDispatcher("index.jsp").forward(request,response);
 
 
     }
