@@ -52,4 +52,22 @@ create procedure Sp_2 (
 delimiter ; 
 
 call Sp_2(10, 10, 1, '2020-08-29', '2020-08-30', 150, 1500);
+
+/*Request 28: Tạo Store procedure Sp_3 để tìm các dịch vụ được thuê bởi khách hàng với loại dịch vụ là 
+“Room” từ đầu năm 2015 đến hết năm 2019 để xóa thông tin của các dịch vụ đó (tức là xóa các bảng ghi trong bảng DichVu) 
+và xóa những HopDong sử dụng dịch vụ liên quan (tức là phải xóa những bản gi trong bảng HopDong) và những bản liên quan khác.*/
+delimiter //
+create procedure Sp_3 () 
+	begin
+		delete from services
+        where services_id in (select * from (select services_id
+							from services
+							inner join contract on services_id = contract_services_id
+							where services_type_id = 3 and year(contract_date_start) in (2016, 2017, 2018, 2019)) as temp);
+    end //
+delimiter ;
+drop procedure Sp_3;
+call Sp_3();
+
+
  

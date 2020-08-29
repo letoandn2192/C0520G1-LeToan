@@ -106,7 +106,7 @@ create table contract (
     contract_total_money decimal(10,2) not null,
     foreign key (contract_employee_id) references employee(employee_id) on delete cascade,
     foreign key (contract_customer_id) references customer(customer_id) on delete cascade,
-    foreign key (contract_services_id) references services(services_id)
+    foreign key (contract_services_id) references services(services_id) on delete cascade
 );
 
 -- 12.create table	detail_contract
