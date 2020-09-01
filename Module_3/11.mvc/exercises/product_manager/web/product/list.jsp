@@ -23,8 +23,7 @@
         <div class="col-md-6">
             <form class="form-inline" action="/product">
                 <input class="form-control mr-3" type="text" placeholder="Search" aria-label="Search" name="search">
-                <input type="submit" value="search" name="action">
-<%--                <a href="/product?action=search&search=" role="search">Search</a>--%>
+                <input type="submit" value="search" name="action" class="btn btn-outline-dark">
             </form>
         </div>
     </div>
@@ -50,6 +49,14 @@
             </c:forEach>
         </tbody>
     </table>
+<%--    <c:if test="${message != null}">--%>
+<%--        <div class="alert alert-warning alert-dismissible fade show col-md-4" role="alert">--%>
+<%--            ${message}--%>
+<%--            <button type="button" class="close" data-dismiss="alert" aria-label="Close">--%>
+<%--                <span aria-hidden="true">&times;</span>--%>
+<%--            </button>--%>
+<%--        </div>--%>
+<%--    </c:if>--%>
 <script src="../bootstrap_4/js/jquery-3.5.1.js"></script>
 <script src="../bootstrap_4/js/bootstrap.min.js"></script>
 </body>

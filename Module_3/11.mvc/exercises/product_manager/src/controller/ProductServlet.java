@@ -155,6 +155,15 @@ public class ProductServlet extends HttpServlet {
         String producer = request.getParameter("producer");
         Product product = new Product(id, name, price, description, producer);
         productList.create(product);
+//        request.setAttribute("message", "Create Successful !!!");
+//        request.setAttribute("productList", productList.findAll());
+//        try {
+//            request.getRequestDispatcher("product/list.jsp").forward(request, response);
+//        } catch (ServletException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         try {
             response.sendRedirect("/product");
         } catch (IOException e) {
