@@ -16,6 +16,7 @@ public class UserDAOImpl implements UserDAO {
     private static final String SELECT_ALL_USER = "SELECT * FROM users";
     private static final String DELETE_USER = "DELETE FROM users WHERE id = ?;";
     private static final String UPDATE_USER = "UPDATE users SET name = ?, email= ?, address = ? WHERE id = ?;";
+    private static final String TEST = "{call test(?,'Toan', @x, @y);}";
 //    private static final String SP_INSERT_USER = "{CALL insert_user (?,?,?)}" ;
 //    private static final String SP_FIND_BY_ID = "{CALL get_user_by_id (?)}" ;
 

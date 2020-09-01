@@ -153,6 +153,11 @@ public class UserDAOImpl implements UserDAO {
         return user;
     }
 
+    @Override
+    public String[] test() {
+        return new String[0];
+    }
+
     private void printSQLException(SQLException ex) {
         for (Throwable e : ex) {
             if (e instanceof SQLException) {

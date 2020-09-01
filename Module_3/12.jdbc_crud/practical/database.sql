@@ -56,3 +56,33 @@ begin
     (`Name`, Email, Address);
 end //
 delimiter ; 
+select * from user_permission;
+
+select email
+from users
+where id =1;
+
+
+delimiter //
+create procedure test (
+	in `index` int(3),
+	in `Name` varchar(50),
+    out x varchar(50),
+    inout Address varchar(50) )
+begin
+	select email
+    into x
+    from users
+    where id = `index`;
+    
+    set Address = concat(Address, " ", `Name`);
+end //
+delimiter ; 
+drop procedure test;
+
+set @y='tian';
+call test(1,'Toan', @x, @y);
+select @x;
+select @y;
+
+

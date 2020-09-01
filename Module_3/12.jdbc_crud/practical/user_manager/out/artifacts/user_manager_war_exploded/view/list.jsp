@@ -71,9 +71,6 @@
     </tbody>
 </table>
 <c:if test="${message != null}">
-    <c:if test='${message == "Fail"}'>
-
-    </c:if>
     <div class="alert alert-success col-md-4" role="alert">
         ${message}
     </div>

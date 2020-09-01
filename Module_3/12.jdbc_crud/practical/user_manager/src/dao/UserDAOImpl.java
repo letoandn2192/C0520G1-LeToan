@@ -16,6 +16,10 @@ public class UserDAOImpl implements UserDAO {
     private static final String SELECT_ALL_USER = "SELECT * FROM users";
     private static final String DELETE_USER = "DELETE FROM users WHERE id = ?;";
     private static final String UPDATE_USER = "UPDATE users SET name = ?, email= ?, address = ? WHERE id = ?;";
+    private static final String SEARCH_BY_NAME = "SELECT * FROM users WHERE name LIKE ?;";
+    private static final String SEARCH_BY_ID = "SELECT * FROM users WHERE id LIKE ?;";
+    private static final String SEARCH_BY_ADDRESS = "SELECT * FROM users WHERE address LIKE ?;";
+    private static final String SORT_BY_NAME = "SELECT * FROM users ORDER BY name ASC";
 
     protected Connection getConnection() {
         Connection connection = null;
@@ -33,15 +37,14 @@ public class UserDAOImpl implements UserDAO {
     public void createUser(User user) {
         System.out.println(CREATE_NEW_USER);
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(CREATE_NEW_USER))
-        {
+             PreparedStatement preparedStatement = connection.prepareStatement(CREATE_NEW_USER)) {
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getEmail());
             preparedStatement.setString(3, user.getAddress());
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-             printSQLException(e);
+            printSQLException(e);
         }
     }
 
@@ -49,7 +52,7 @@ public class UserDAOImpl implements UserDAO {
     public List<User> selectAllUser() {
         List<User> userList = new ArrayList<>();
         try (Connection connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USER)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USER)) {
             System.out.println(preparedStatement);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -69,9 +72,8 @@ public class UserDAOImpl implements UserDAO {
     public boolean deleteUser(int id) throws SQLException {
         boolean rowDelete;
         try (Connection connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_USER))
-        {
-            preparedStatement.setInt(1,id);
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_USER)) {
+            preparedStatement.setInt(1, id);
             rowDelete = preparedStatement.executeUpdate() > 0;
         }
         return rowDelete;
@@ -81,8 +83,7 @@ public class UserDAOImpl implements UserDAO {
     public boolean updateUser(User user) throws SQLException {
         boolean rowUpdate;
         try (Connection connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER))
-        {
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER)) {
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getEmail());
             preparedStatement.setString(3, user.getAddress());
@@ -96,9 +97,8 @@ public class UserDAOImpl implements UserDAO {
     public User selectUserById(int id) {
         User user = null;
         try (Connection connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID))
-        {
-            preparedStatement.setInt(1,id);
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID)) {
+            preparedStatement.setInt(1, id);
             System.out.println(preparedStatement);
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -112,6 +112,65 @@ public class UserDAOImpl implements UserDAO {
             e.printStackTrace();
         }
         return user;
+    }
+
+    @Override
+    public List<User> search(String search, String searchBy) {
+        Connection connection = getConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<User> userList = new ArrayList<>();
+        if (connection != null) {
+            try {
+                switch (searchBy) {
+                    case "byName":
+                        preparedStatement = connection.prepareStatement(SEARCH_BY_NAME);
+                        break;
+                    case "byAddress":
+                        preparedStatement = connection.prepareStatement(SEARCH_BY_ADDRESS);
+                        break;
+                    default:
+                        preparedStatement = connection.prepareStatement(SEARCH_BY_ID);
+                }
+
+                preparedStatement.setString(1, "%" + search +"%");
+                resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("id");
+                    String name = resultSet.getString("name");
+                    String email = resultSet.getString("email");
+                    String address = resultSet.getString("address");
+                    userList.add(new User(id, name, email, address));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return userList;
+    }
+
+    @Override
+    public List<User> sortByName() {
+        Connection connection = getConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<User> userList = new ArrayList<>();
+        if (connection != null) {
+            try {
+                preparedStatement = connection.prepareStatement(SORT_BY_NAME);
+                resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("id");
+                    String name = resultSet.getString("name");
+                    String email = resultSet.getString("email");
+                    String address = resultSet.getString("address");
+                    userList.add(new User(id, name, email, address));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return userList;
     }
 
     private void printSQLException(SQLException ex) {

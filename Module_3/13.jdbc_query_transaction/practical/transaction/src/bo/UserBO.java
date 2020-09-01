@@ -17,4 +17,5 @@ public interface UserBO {
     User selectUserById(int id);
 
     void addUserTransaction (User user, int[] permissions);
+
 }

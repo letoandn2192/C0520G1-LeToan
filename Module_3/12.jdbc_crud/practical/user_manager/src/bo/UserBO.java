@@ -15,4 +15,8 @@ public interface UserBO {
     boolean deleteUser(int id) throws SQLException;
 
     User selectUserById(int id);
+
+    List<User> search(String search, String searchBy);
+
+    List<User> sortByName();
 }

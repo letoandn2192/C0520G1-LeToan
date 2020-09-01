@@ -34,4 +34,14 @@ public class UserBOImpl implements UserBO {
     public User selectUserById(int id) {
         return userDAO.selectUserById(id);
     }
+
+    @Override
+    public List<User> search(String search, String searchBy) {
+        return userDAO.search(search, searchBy);
+    }
+
+    @Override
+    public List<User> sortByName() {
+        return userDAO.sortByName();
+    }
 }

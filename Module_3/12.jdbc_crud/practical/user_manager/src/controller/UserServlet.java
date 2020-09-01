@@ -215,26 +215,7 @@ public class UserServlet extends HttpServlet {
     private void search (HttpServletRequest request, HttpServletResponse response) {
         String search = request.getParameter("search");
         String findBy = request.getParameter("findBy");
-        List<User> userList = new ArrayList<>();
-        if ("byId".equals(findBy)) {
-            for (User user: userBO.selectAllUser()) {
-                if (String.valueOf(user.getId()).contains(search)) {
-                    userList.add(user);
-                }
-            }
-        } else if ("byName".equals(findBy)) {
-            for (User user: userBO.selectAllUser()) {
-                if (user.getName().contains(search)) {
-                    userList.add(user);
-                }
-            }
-        } else {
-            for (User user: userBO.selectAllUser()) {
-                if (user.getAddress().contains(search)) {
-                    userList.add(user);
-                }
-            }
-        }
+        List<User> userList = userBO.search(search, findBy);
 
         request.setAttribute("userList", userList);
         try {
@@ -250,7 +231,7 @@ public class UserServlet extends HttpServlet {
         String sort = request.getParameter("sortBy");
         List<User> userList = userBO.selectAllUser();
         if ("sortName".equals(sort)) {
-            Collections.sort(userList, new SortUserByName());
+            userList = userBO.sortByName();
         }
         request.setAttribute("userList", userList);
         try {
