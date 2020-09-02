@@ -1,10 +1,10 @@
 package test;
 
+import test.hashmap.Employee;
+
 import java.io.File;
 
 public class Test {
     public static void main(String[] args) {
-        File dir = new File("dir");
-        File f = new File(dir, "f");
     }
 }

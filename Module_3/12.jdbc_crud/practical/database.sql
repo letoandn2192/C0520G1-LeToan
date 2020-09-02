@@ -80,9 +80,42 @@ end //
 delimiter ; 
 drop procedure test;
 
-set @y='tian';
-call test(1,'Toan', @x, @y);
-select @x;
-select @y;
+select * from users where `name` like '%ong%' ;
+select * from users order by name asc;
+
+delimiter //
+create procedure select_all_user ()
+begin
+	select *
+    from users;
+end //
+delimiter ;
+call select_all_user();
 
 
+delimiter //
+create procedure update_user (
+	in update_id int(3),
+    in update_name varchar(50),
+    in update_email varchar(50),
+    in update_address varchar(50)
+)
+begin
+	update users
+    set name = update_name, email = update_email, address = update_address
+    where id = update_id;
+end //
+delimiter ;
+drop procedure update_user;
+call update_user(16, 'Lê Tuấn', 'tuan@yahoo.com', 'VŨng Tàu');
+
+delimiter //
+create procedure delete_user (
+	in update_id int(3)
+)
+begin
+	delete from users
+    where id = update_id;
+end //
+delimiter ;
+call delete_user(16);

@@ -23,9 +23,6 @@ public class Student extends Person implements Comparable<Student>{
 
     @Override
     public String toString() {
-        return "Student{" +
-                "code='" + code + '\'' +
-                ", Name='" + Name + '\'' +
-                '}';
+        return "Student";
     }
 }

@@ -6,4 +6,9 @@ public class Person {
         System.out.println("sdfsd");
         return;
     }
+
+    @Override
+    public String toString() {
+        return "Person";
+    }
 }
