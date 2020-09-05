@@ -56,7 +56,7 @@ create table `user` (
 
 -- 9.create table employee
 create table employee (
-	employee_id int auto_increment primary key,
+	employee_id varchar(45) primary key,
     employee_name varchar(45) not null,
     employee_birthday date not null,
     employee_id_card varchar(45) not null,
@@ -76,11 +76,11 @@ create table employee (
 
 -- 10.create table customer
 create table customer (
-	customer_id int auto_increment primary key,
+	customer_id varchar(45) primary key,
     customer_type_id int,
     customer_name varchar(45) not null,
     customer_birthday date not null,
-    customer_gender varchar(15) not null,
+    customer_gender bit not null,
     customer_id_card varchar(45) not null,
     customer_phone varchar(45) not null,
     customer_email varchar(45) not null,
@@ -90,14 +90,13 @@ create table customer (
 
 -- 11.create table service
 create table service (
-	service_id int auto_increment primary key,
+	service_id varchar(45) primary key,
     service_name varchar(45) not null,
     service_area double not null,
     service_cost double not null,
     service_max_person int not null,
     rent_type_id int,
     service_type_id int,
-	service_floor int,
     standard_room varchar(45),
     description_other_convenience varchar(45),
     pool_area double,
@@ -113,9 +112,9 @@ create table contract (
     contract_end_date date not null,
 	contract_deposit double not null,
     contract_total_money double not null,
-    employee_id int,
-    customer_id int,
-    service_id int,
+    employee_id varchar(45),
+    customer_id varchar(45),
+    service_id varchar(45),
     foreign key (employee_id) references employee(employee_id)  on update cascade on delete cascade,
     foreign key (customer_id) references customer(customer_id)  on update cascade on delete cascade,
     foreign key (service_id) references service(service_id)  on update cascade on delete cascade

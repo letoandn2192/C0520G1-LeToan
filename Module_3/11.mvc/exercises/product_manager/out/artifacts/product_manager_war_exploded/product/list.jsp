@@ -24,7 +24,6 @@
             <form class="form-inline" action="/product">
                 <input class="form-control mr-3" type="text" placeholder="Search" aria-label="Search" name="search">
                 <input type="submit" value="search" name="action" class="btn btn-outline-dark">
-<%--                <a href="/product?action=search&search=" role="search">Search</a>--%>
             </form>
         </div>
     </div>

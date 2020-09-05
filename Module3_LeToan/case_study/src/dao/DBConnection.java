@@ -12,7 +12,7 @@ public class DBConnection {
 
     public static Connection getConnection () {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();

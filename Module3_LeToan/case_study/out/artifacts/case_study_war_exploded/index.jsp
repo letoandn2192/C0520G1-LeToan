@@ -15,42 +15,10 @@
     <link href="bootstrap_4/font/css/all.css" type="text/css" rel="stylesheet">
 </head>
 <body>
+<%@ include file="header.jsp"%>
 <div class="container-fluid">
-    <div class="col-12 row bg-info m-0 fixed-top" style="height: 100px">
-        <div class="col-2 p-0">
-            <img src="image/codegym.png" class="img-thumbnail" alt="logo" height="100" width="100">
-        </div>
-        <h2 style="margin-top: 30px">FURAMA RESORT</h2>
-    </div>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top col-12" style="top: 100px">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link text-success" href="#"><span class="fas fa-home"></span> Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-success" href="#"><span class="fas fa-people-arrows"></span> Employee</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-success" href="/customer"><span class="fas fa-user"></span> Customer</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-success" href="#"><span class="fas fa-list"></span> Service</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-success" href="#"><span class="fas fa-phone"></span> Contract</a>
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
-    </nav>
-
     <div class="body row position-relative" style="top: 160px">
-        <div class="col-2 border position-fixed" style="height: 700px; left: 15px">
+        <div class="col-2 border position-fixed" style="height: 670px; left: 15px">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="#">Item One</a>
@@ -104,12 +72,8 @@
                 khiến Furama Đà Nẵng trở thành địa điểm lý tưởng cho các nhóm MICE.</p>
         </div>
     </div>
-
-    <div class="footer col-12 bg-dark text-center fixed-bottom" style="height: 60px">
-        <p class="text-light">@CopyRight</p>
-    </div>
-
 </div>
+<%@ include file="footer.jsp"%>
 <script src="bootstrap_4/js/jquery-3.5.1.js"></script>
 <script src="bootstrap_4/js/bootstrap.min.js"></script>
 </body>
