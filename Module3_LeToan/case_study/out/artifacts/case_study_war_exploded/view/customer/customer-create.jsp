@@ -15,7 +15,7 @@
     <link href="../../bootstrap_4/font/css/all.css" type="text/css" rel="stylesheet">
 </head>
 <body>
-<%@ include file="../../header.jsp"%>
+<%@ include file="../../header.jsp" %>
 <div class="container-fluid">
     <div class="body position-relative" style="top: 160px">
         <form method="post" action="/customer">
@@ -23,15 +23,18 @@
                 <legend class="text-center">Create New Customer</legend>
                 <div class="form-group form-inline">
                     <label for="id" class="col-2 d-flex justify-content-start">Id</label>
-                    <input type="text" class="col-8 form-control" id="id" name="id" pattern="KH-\\d{4}" title="Format KH-XXXX (X is number)">
+                    <input type="text" class="col-8 form-control" id="id" name="id">
                 </div>
+                <c:if test="${messageId != null}">
+                        <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${messageId}</p>
+                </c:if>
                 <div class="form-group form-inline">
                     <label for="name" class="col-2 d-flex justify-content-start">Name</label>
-                    <input type="text" class="col-8 form-control" id="name" name="name">
+                    <input type="text" class="col-8 form-control" id="name" name="name" required>
                 </div>
                 <div class="form-group form-inline">
                     <label for="birthday" class="col-2 d-flex justify-content-start">Birthday</label>
-                    <input type="date" class="col-8 form-control" id="birthday" name="birthday">
+                    <input type="date" class="col-8 form-control" id="birthday" name="birthday" required>
                 </div>
                 <div class="form-group form-inline">
                     <label for="gender" class="col-2 d-flex justify-content-start">Gender</label>
@@ -44,17 +47,26 @@
                     <label for="idNumber" class="col-2 d-flex justify-content-start">Identify Number</label>
                     <input type="text" class="col-8 form-control" id="idNumber" name="idNumber">
                 </div>
+                <c:if test="${messageIdCard != null}">
+                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${messageIdCard}</p>
+                </c:if>
                 <div class="form-group form-inline">
                     <label for="phone" class="col-2 d-flex justify-content-start">Phone</label>
                     <input type="text" class="col-8 form-control" id="phone" name="phone">
                 </div>
+                <c:if test="${messagePhone != null}">
+                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${messagePhone}</p>
+                </c:if>
                 <div class="form-group form-inline">
                     <label for="email" class="col-2 d-flex justify-content-start">Email</label>
                     <input type="text" class="col-8 form-control" id="email" name="email">
                 </div>
+                <c:if test="${messageEmail != null}">
+                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${messageEmail}</p>
+                </c:if>
                 <div class="form-group form-inline">
                     <label for="address" class="col-2 d-flex justify-content-start">Address</label>
-                    <input type="text" class="col-8 form-control" id="address" name="address">
+                    <input type="text" class="col-8 form-control" id="address" name="address" required>
                 </div>
                 <div class="form-group form-inline">
                     <label for="typecutomer" class="col-2 d-flex justify-content-start">Customer Type</label>
@@ -69,7 +81,7 @@
 
                 <div class="form-group form-inline">
                     <div class="col-2"></div>
-                    <div class="col-8 pl-0">
+                    <div class="col-7 pl-0">
                         <input type="hidden" name="action" value="create">
                         <input type="submit" value="Create" class="btn btn-outline-dark mr-2">
                         <a class="btn btn-outline-dark" href="/customer">Back</a>
@@ -79,8 +91,15 @@
         </form>
     </div>
 </div>
-<%@ include file="../../footer.jsp"%>
+<%@ include file="../../footer.jsp" %>
 <script src="../../bootstrap_4/js/jquery-3.5.1.js"></script>
 <script src="../../bootstrap_4/js/bootstrap.min.js"></script>
+<script>
+    window.setTimeout(function() {
+        $(".alert").fadeTo(500, 0).slideUp(500, function(){
+            $(this).remove();
+        });
+    }, 4000);
+</script>
 </body>
 </html>

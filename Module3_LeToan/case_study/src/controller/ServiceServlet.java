@@ -85,9 +85,7 @@ public class ServiceServlet extends HttpServlet {
         request.setAttribute("totalPage", totalPage);
         try {
             request.getRequestDispatcher("view/service/service-list.jsp").forward(request, response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (ServletException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -110,9 +108,7 @@ public class ServiceServlet extends HttpServlet {
         }
         try {
             request.getRequestDispatcher("/view/service/service-detail.jsp").forward(request, response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (ServletException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -127,9 +123,7 @@ public class ServiceServlet extends HttpServlet {
         }
         try {
             request.getRequestDispatcher("/view/service/service-edit.jsp").forward(request, response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (ServletException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -155,9 +149,7 @@ public class ServiceServlet extends HttpServlet {
             request.setAttribute("service", service);
             try {
                 request.getRequestDispatcher("/view/service/service-detail.jsp").forward(request, response);
-            } catch (ServletException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (ServletException | IOException e) {
                 e.printStackTrace();
             }
         }
@@ -173,9 +165,7 @@ public class ServiceServlet extends HttpServlet {
         }
         try {
             request.getRequestDispatcher("/view/service/service-delete.jsp").forward(request, response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (ServletException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -234,9 +224,7 @@ public class ServiceServlet extends HttpServlet {
         request.setAttribute("action", action);
         try {
             request.getRequestDispatcher("/view/service/service-list.jsp").forward(request, response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (ServletException | IOException e) {
             e.printStackTrace();
         }
     }

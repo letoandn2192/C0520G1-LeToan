@@ -15,11 +15,12 @@
     <link href="../../bootstrap_4/font/css/all.css" type="text/css" rel="stylesheet">
 </head>
 <body>
-<%@ include file="../../header.jsp"%>
+<%@ include file="../../header.jsp" %>
 <div class="container-fluid">
-    <div class="body row position-relative" style="top: 160px">
+    <div class="body position-relative" style="top: 160px">
         <div class="text-center col-12">
-            <a href="/customer?action=create" role="button" class="btn btn-outline-dark float-left">Create New Customer</a>
+            <a href="/customer?action=create" role="button" class="btn btn-outline-dark float-left">Create New
+                Customer</a>
             <h2>List of Customer</h2>
         </div>
         <table class="table table-sm table-bordered table-hover">
@@ -47,9 +48,8 @@
                     <td>${customer.customerEmail}</td>
                     <td>${customer.customerAddress}</td>
                     <td>
-                        <a href="/customer?action=view&id=${customer.customerId}">Detail <span class="fas fa-info mr-3"></span></a>
-<%--                        <a href="/customer?action=edit&id=${customer.customerId}"><span class="fas fa-edit mr-3"></span></a>--%>
-<%--                        <a href="/customer?action=delete&id=${customer.customerId}"><span class="fas fa-eraser"></span></a>--%>
+                        <a href="/customer?action=view&id=${customer.customerId}">Detail <span
+                                class="fas fa-info mr-3"></span></a>
                     </td>
                 </tr>
             </c:forEach>
@@ -62,7 +62,8 @@
                     <li class="page-item"><a class="page-link" href="/customer?page=1&search=${search}">1</a></li>
                     <c:if test="${totalPage > 1}">
                         <c:forEach var="i" begin="2" end="${totalPage}">
-                            <li class="page-item"><a class="page-link" href="/customer?page=${i}&search=${search}">${i}</a></li>
+                            <li class="page-item"><a class="page-link" href="/customer?page=${i}&search=${search}">${i}</a>
+                            </li>
                         </c:forEach>
                     </c:if>
                         <%--                <li class="page-item"><a class="page-link" href="#">Next</a></li>--%>
@@ -74,10 +75,22 @@
                 <a class="btn btn-outline-dark" href="/customer">Back</a>
             </div>
         </c:if>
+        <c:if test="${messageInform != null}">
+            <div class="alert alert-success col-4 d-flex justify-content-center" role="alert">
+                    ${messageInform}
+            </div>
+        </c:if>
     </div>
 </div>
-<%@ include file="../../footer.jsp"%>
+<%@ include file="../../footer.jsp" %>
 <script src="../../bootstrap_4/js/jquery-3.5.1.js"></script>
 <script src="../../bootstrap_4/js/bootstrap.min.js"></script>
+<script>
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 2000);
+</script>
 </body>
 </html>

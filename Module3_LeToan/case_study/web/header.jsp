@@ -22,7 +22,7 @@
                 <a class="nav-link text-success" href="/service"><span class="fas fa-list"></span> Service</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-success" href="#"><span class="fas fa-file-contract"></span> Contract</a>
+                <a class="nav-link text-success" href="/contract"><span class="fas fa-file-contract"></span> Contract</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">

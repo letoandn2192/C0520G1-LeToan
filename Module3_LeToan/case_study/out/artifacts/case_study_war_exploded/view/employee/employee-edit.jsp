@@ -131,15 +131,15 @@
                     </select>
                 </div>
                 <div class="form-group form-inline">
+                    <label for="username" class="col-2 d-flex justify-content-start">User Name</label>
+                    <input type="text" class="col-8 form-control" id="username" name="username" value="${employee.userName}">
+                </div>
+                <div class="form-group form-inline">
                     <div class="col-2"></div>
                     <div class="col-8 pl-0">
                         <input type="submit" value="Update" class="btn btn-outline-dark mr-2">
                         <a class="btn btn-outline-dark" href="/employee?action=view&id=${employee.employeeId}">Back</a>
                     </div>
-                </div>
-                <div class="form-group form-inline">
-                    <label for="username" class="col-2 d-flex justify-content-start">User Name</label>
-                    <input type="text" class="col-8 form-control" id="username" name="username" value="${employee.userName}">
                 </div>
             </fieldset>
         </form>

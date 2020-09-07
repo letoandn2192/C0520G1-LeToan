@@ -112,6 +112,10 @@
                     <td>Management</td>
                 </c:if>
             </tr>
+            <tr>
+                <td scope="row">User Name</td>
+                <td>${employee.userName}</td>
+            </tr>
             </tbody>
         </table>
         <div class="row text-center col-12">

@@ -89,9 +89,7 @@ public class CustomerServlet extends HttpServlet {
         request.setAttribute("totalPage", totalPage);
         try {
             request.getRequestDispatcher("view/customer/customer-list.jsp").forward(request, response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (ServletException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -106,9 +104,7 @@ public class CustomerServlet extends HttpServlet {
         }
         try {
             request.getRequestDispatcher("/view/customer/customer-detail.jsp").forward(request, response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (ServletException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -123,9 +119,7 @@ public class CustomerServlet extends HttpServlet {
         }
         try {
             request.getRequestDispatcher("/view/customer/customer-edit.jsp").forward(request, response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (ServletException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -149,9 +143,7 @@ public class CustomerServlet extends HttpServlet {
             request.setAttribute("customer", customer);
             try {
                 request.getRequestDispatcher("/view/customer/customer-detail.jsp").forward(request, response);
-            } catch (ServletException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (ServletException | IOException e) {
                 e.printStackTrace();
             }
         }
@@ -167,9 +159,7 @@ public class CustomerServlet extends HttpServlet {
         }
         try {
             request.getRequestDispatcher("/view/customer/customer-delete.jsp").forward(request, response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (ServletException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -207,12 +197,33 @@ public class CustomerServlet extends HttpServlet {
         String email = request.getParameter("email");
         String address = request.getParameter("address");
         int typeId = Integer.parseInt(request.getParameter("typeId"));
-        Customer customer = new Customer(id, name, birthday, gender, idNumber, phone, email, address, typeId);
-        customerBO.create(customer);
-        try {
-            response.sendRedirect("/customer");
-        } catch (IOException e) {
-            e.printStackTrace();
+        boolean validateId = customerBO.checkValidateCustomerId(id);
+        boolean validateIdCard = customerBO.checkValidateCustomerIdNumber(idNumber);
+        boolean validatePhone = customerBO.checkValidatePhoneNumber(phone);
+        boolean validateEmail = customerBO.checkValidateEmail(email);
+        if (validateId && validatePhone && validateEmail && validateIdCard) {
+            Customer customer = new Customer(id, name, birthday, gender, idNumber, phone, email, address, typeId);
+            customerBO.create(customer);
+            request.setAttribute("messageInform", "Create Successful !!!");
+            showCustomerList(request,response);
+        } else {
+            if (!validateId) {
+                request.setAttribute("messageId", "Customer ID format KH-XXXX (X from 0-9)");
+            }
+            if (!validatePhone) {
+                request.setAttribute("messagePhone", "Phone number format...");
+            }
+            if (!validateEmail) {
+                request.setAttribute("messageEmail", "Email format abc@abc.abc");
+            }
+            if (!validateIdCard) {
+                request.setAttribute("messageIdCard", "Id Card format XXXXXXXXX (X from 0-9)");
+            }
+            try {
+                request.getRequestDispatcher("/view/customer/customer-create.jsp").forward(request, response);
+            } catch (ServletException | IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -226,9 +237,7 @@ public class CustomerServlet extends HttpServlet {
         request.setAttribute("action", action);
         try {
             request.getRequestDispatcher("/view/customer/customer-list.jsp").forward(request, response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (ServletException | IOException e) {
             e.printStackTrace();
         }
     }

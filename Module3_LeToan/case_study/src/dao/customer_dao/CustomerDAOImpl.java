@@ -24,6 +24,7 @@ public class CustomerDAOImpl implements CustomerDAO {
             "OR customer_name LIKE ?;";
     private static final String SELECT_CUSTOMER_IN_PAGE = "SELECT * FROM customer LIMIT ?,?;";
     private static final String SELECT_COUNT_CUSTOMER = "SELECT count(customer_id) FROM customer;";
+    private static final String CHECK_CUSTOMER_ID_EXISTS = "SELECT 1 FROM customer WHERE customer_id = ?;";
 
     @Override
     public List<Customer> findAllCustomer() {
@@ -75,7 +76,7 @@ public class CustomerDAOImpl implements CustomerDAO {
         if (connection != null) {
             try {
                 preparedStatement = connection.prepareStatement(SELECT_CUSTOMER_BY_ID);
-                preparedStatement.setString(1, id );
+                preparedStatement.setString(1, id);
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     int customerType = resultSet.getInt("customer_type_id");
@@ -316,5 +317,39 @@ public class CustomerDAOImpl implements CustomerDAO {
             }
         }
         return count;
+    }
+
+    @Override
+    public boolean checkCustomerIdExists(String id) {
+        boolean checkExists = false;
+        Connection connection = DBConnection.getConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        if (connection != null) {
+            try {
+                preparedStatement = connection.prepareStatement(CHECK_CUSTOMER_ID_EXISTS);
+                preparedStatement.setString(1, id);
+                resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    checkExists = true;
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (resultSet != null) {
+                        resultSet.close();
+                    }
+                    if (preparedStatement != null) {
+                        preparedStatement.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                DBConnection.close();
+            }
+        }
+        return checkExists;
     }
 }

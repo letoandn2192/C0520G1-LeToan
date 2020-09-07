@@ -20,4 +20,12 @@ public interface CustomerBO {
     public List<Customer> getCustomerByPage(int start, int offset);
 
     int getCountCustomer();
+
+    boolean checkValidateCustomerId(String id);
+
+    boolean checkValidateCustomerIdNumber(String idNumber);
+
+    boolean checkValidatePhoneNumber(String phone);
+
+    boolean checkValidateEmail(String email);
 }

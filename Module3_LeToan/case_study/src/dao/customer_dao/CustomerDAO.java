@@ -20,4 +20,6 @@ public interface CustomerDAO {
     List<Customer> getCustomerByPage(int start, int offset);
 
     int getCountCustomer();
+
+    boolean checkCustomerIdExists(String id);
 }

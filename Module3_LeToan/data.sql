@@ -124,3 +124,11 @@ values
 (6, 3, 5),
 (7, 5, 1),
 (1, 1, 2);
+
+insert into `role` (role_id, role_name) 
+values 
+(1, 'test');
+
+insert into user (username, password) 
+values 
+('username', '123456789');

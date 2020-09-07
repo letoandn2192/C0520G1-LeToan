@@ -109,7 +109,6 @@ public class ServiceDAOImpl implements ServiceDAO {
             }
         }
         return service;
-
     }
 
     @Override
@@ -144,7 +143,6 @@ public class ServiceDAOImpl implements ServiceDAO {
                 DBConnection.close();
             }
         }
-
     }
 
     @Override
@@ -207,7 +205,6 @@ public class ServiceDAOImpl implements ServiceDAO {
             }
         }
         return rowDelete;
-
     }
 
     @Override
@@ -298,8 +295,6 @@ public class ServiceDAOImpl implements ServiceDAO {
             }
         }
         return subList;
-
-
     }
 
     @Override

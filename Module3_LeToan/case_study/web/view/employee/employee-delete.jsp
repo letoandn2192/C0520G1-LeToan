@@ -31,7 +31,7 @@
                 </div>
                 <div class="form-group form-inline">
                     <label for="birthday" class="col-2 d-flex justify-content-start">Birthday</label>
-                    <input type="text" class="col-8 form-control" id="birthday" name="birthday" value="${customer.customerBirthday}">
+                    <input type="text" class="col-8 form-control" id="birthday" name="birthday" value="${employee.employeeBirthday}">
                 </div>
                 <div class="form-group form-inline">
                     <label for="idNumber" class="col-2 d-flex justify-content-start">Identify Number</label>
