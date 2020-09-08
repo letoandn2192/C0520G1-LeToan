@@ -22,6 +22,7 @@ public class EmployeeDAOImpl implements EmployeeDAO{
             "OR employee_name LIKE ?;";
     private static final String SELECT_EMPLOYEE_IN_PAGE = "SELECT * FROM employee LIMIT ?,?;";
     private static final String SELECT_COUNT_EMPLOYEE = "SELECT count(employee_id) FROM employee;";
+    private static final String CHECK_EMPLOYEE_ID_EXISTS = "SELECT 1 FROM employee WHERE employee_id = ?;";
 
     @Override
     public List<Employee> findAllEmployee() {
@@ -36,7 +37,7 @@ public class EmployeeDAOImpl implements EmployeeDAO{
                 while (resultSet.next()) {
                     String id = resultSet.getString("employee_id");
                     String name = resultSet.getString("employee_name");
-                    Date birthday = resultSet.getDate("employee_birthday");
+                    String birthday = resultSet.getString("employee_birthday");
                     String idCard = resultSet.getString("employee_id_card");
                     double salary = resultSet.getDouble("employee_salary");
                     String phone = resultSet.getString("employee_phone");
@@ -80,7 +81,7 @@ public class EmployeeDAOImpl implements EmployeeDAO{
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     String name = resultSet.getString("employee_name");
-                    Date birthday = resultSet.getDate("employee_birthday");
+                    String birthday = resultSet.getString("employee_birthday");
                     String idCard = resultSet.getString("employee_id_card");
                     double salary = resultSet.getDouble("employee_salary");
                     String phone = resultSet.getString("employee_phone");
@@ -122,7 +123,7 @@ public class EmployeeDAOImpl implements EmployeeDAO{
                 preparedStatement = connection.prepareStatement(EDIT_EMPLOYEE_INFO);
                 preparedStatement.setString(12, employee.getEmployeeId());
                 preparedStatement.setString(1, employee.getEmployeeName());
-                preparedStatement.setDate(2, employee.getEmployeeBirthday());
+                preparedStatement.setString(2, employee.getEmployeeBirthday());
                 preparedStatement.setString(3, employee.getEmployeeIdCard());
                 preparedStatement.setDouble(4, employee.getEmployeeSalary());
                 preparedStatement.setString(5, employee.getEmployeePhone());
@@ -184,7 +185,7 @@ public class EmployeeDAOImpl implements EmployeeDAO{
                 preparedStatement = connection.prepareStatement(CREATE_NEW_EMPLOYEE);
                 preparedStatement.setString(1, employee.getEmployeeId());
                 preparedStatement.setString(2, employee.getEmployeeName());
-                preparedStatement.setDate(3, employee.getEmployeeBirthday());
+                preparedStatement.setString(3, employee.getEmployeeBirthday());
                 preparedStatement.setString(4, employee.getEmployeeIdCard());
                 preparedStatement.setDouble(5, employee.getEmployeeSalary());
                 preparedStatement.setString(6, employee.getEmployeePhone());
@@ -226,7 +227,7 @@ public class EmployeeDAOImpl implements EmployeeDAO{
                 while (resultSet.next()) {
                     String id = resultSet.getString("employee_id");
                     String name = resultSet.getString("employee_name");
-                    Date birthday = resultSet.getDate("employee_birthday");
+                    String birthday = resultSet.getString("employee_birthday");
                     String idCard = resultSet.getString("employee_id_card");
                     double salary = resultSet.getDouble("employee_salary");
                     String phone = resultSet.getString("employee_phone");
@@ -273,7 +274,7 @@ public class EmployeeDAOImpl implements EmployeeDAO{
                 while (resultSet.next()) {
                     String id = resultSet.getString("employee_id");
                     String name = resultSet.getString("employee_name");
-                    Date birthday = resultSet.getDate("employee_birthday");
+                    String birthday = resultSet.getString("employee_birthday");
                     String idCard = resultSet.getString("employee_id_card");
                     double salary = resultSet.getDouble("employee_salary");
                     String phone = resultSet.getString("employee_phone");
@@ -334,5 +335,40 @@ public class EmployeeDAOImpl implements EmployeeDAO{
             }
         }
         return count;
+    }
+
+    @Override
+    public boolean checkEmployeeIdExists(String id) {
+        boolean checkExists = false;
+        Connection connection = DBConnection.getConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        if (connection != null) {
+            try {
+                preparedStatement = connection.prepareStatement(CHECK_EMPLOYEE_ID_EXISTS);
+                preparedStatement.setString(1, id);
+                resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    checkExists = true;
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (resultSet != null) {
+                        resultSet.close();
+                    }
+                    if (preparedStatement != null) {
+                        preparedStatement.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                DBConnection.close();
+            }
+        }
+        return checkExists;
+
     }
 }

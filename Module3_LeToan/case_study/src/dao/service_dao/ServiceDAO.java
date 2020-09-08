@@ -20,4 +20,6 @@ public interface ServiceDAO {
     List<Service> getServiceByPage(int start, int offset);
 
     int getCountService();
+
+    boolean checkServiceIdExists(String id);
 }

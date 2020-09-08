@@ -20,4 +20,6 @@ public interface EmployeeDAO {
     List<Employee> getEmployeeByPage(int start, int offset);
 
     int getCountEmployee();
+
+    boolean checkEmployeeIdExists(String id);
 }

@@ -21,7 +21,7 @@
         <div class="col-2 border position-fixed" style="height: 670px; left: 15px">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Item One</a>
+                    <a class="nav-link" href="/control">Item One</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Item Two</a>

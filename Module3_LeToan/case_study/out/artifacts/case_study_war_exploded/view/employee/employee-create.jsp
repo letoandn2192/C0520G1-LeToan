@@ -25,6 +25,9 @@
                     <label for="id" class="col-2 d-flex justify-content-start">Id</label>
                     <input type="text" class="col-8 form-control" id="id" name="id">
                 </div>
+                <c:if test='${errMessList.get(0) != ""}'>
+                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(0)}</p>
+                </c:if>
                 <div class="form-group form-inline">
                     <label for="name" class="col-2 d-flex justify-content-start">Name</label>
                     <input type="text" class="col-8 form-control" id="name" name="name">
@@ -37,18 +40,30 @@
                     <label for="idNumber" class="col-2 d-flex justify-content-start">Identify Number</label>
                     <input type="text" class="col-8 form-control" id="idNumber" name="idNumber">
                 </div>
+                <c:if test='${errMessList.get(1) != ""}'>
+                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(1)}</p>
+                </c:if>
                 <div class="form-group form-inline">
                     <label for="salary" class="col-2 d-flex justify-content-start">Salary</label>
                     <input type="text" class="col-8 form-control" id="salary" name="salary">
                 </div>
+                <c:if test='${errMessList.get(2) != ""}'>
+                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(2)}</p>
+                </c:if>
                 <div class="form-group form-inline">
                     <label for="phone" class="col-2 d-flex justify-content-start">Phone</label>
                     <input type="text" class="col-8 form-control" id="phone" name="phone">
                 </div>
+                <c:if test='${errMessList.get(3) != ""}'>
+                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(3)}</p>
+                </c:if>
                 <div class="form-group form-inline">
                     <label for="email" class="col-2 d-flex justify-content-start">Email</label>
                     <input type="text" class="col-8 form-control" id="email" name="email">
                 </div>
+                <c:if test='${errMessList.get(4) != ""}'>
+                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(4)}</p>
+                </c:if>
                 <div class="form-group form-inline">
                     <label for="address" class="col-2 d-flex justify-content-start">Address</label>
                     <input type="text" class="col-8 form-control" id="address" name="address">

@@ -10,11 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "ServiceServlet", urlPatterns = "/service")
 public class ServiceServlet extends HttpServlet {
     private ServiceBO serviceBO = new ServiceBOImpl();
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         if (action == null) {
@@ -102,7 +104,7 @@ public class ServiceServlet extends HttpServlet {
         String id = request.getParameter("id");
         Service service = serviceBO.findServiceById(id);
         if (service == null) {
-            request.setAttribute("message", "Not Found!!!");
+            request.setAttribute("messageInform", "Not Found!!!");
         } else {
             request.setAttribute("service", service);
         }
@@ -117,7 +119,7 @@ public class ServiceServlet extends HttpServlet {
         String id = request.getParameter("id");
         Service service = serviceBO.findServiceById(id);
         if (service == null) {
-            request.setAttribute("message", "Not Found !!!");
+            request.setAttribute("messageInform", "Not Found !!!");
         } else {
             request.setAttribute("service", service);
         }
@@ -129,28 +131,81 @@ public class ServiceServlet extends HttpServlet {
     }
 
     private void editServiceInfo(HttpServletRequest request, HttpServletResponse response) {
-        String  id = request.getParameter("id");
+        String id = request.getParameter("id");
         Service service = serviceBO.findServiceById(id);
         if (service == null) {
-            request.setAttribute("message", "Not Found !!!");
+            request.setAttribute("messageInform", "Not Found !!!");
         } else {
             service.setServiceName(request.getParameter("name"));
-            service.setServiceArea(Double.parseDouble(request.getParameter("area")));
-            service.setServiceCost(Double.parseDouble(request.getParameter("cost")));
-            service.setServiceMaxPerson(Integer.parseInt(request.getParameter("maxPerson")));
+            String area = request.getParameter("area");
+            String cost = request.getParameter("cost");
+            String maxPerson = request.getParameter("maxPerson");
             service.setRentTypeId(Integer.parseInt(request.getParameter("rentType")));
             service.setServiceTypeId(Integer.parseInt(request.getParameter("serviceType")));
             service.setStandardRoom(request.getParameter("standard"));
             service.setDescription(request.getParameter("description"));
-            service.setPoolArea(Double.parseDouble(request.getParameter("pool")));
-            service.setNumberFloor(Integer.parseInt(request.getParameter("floor")));
-
-            serviceBO.editServiceInfo(service);
-            request.setAttribute("service", service);
-            try {
-                request.getRequestDispatcher("/view/service/service-detail.jsp").forward(request, response);
-            } catch (ServletException | IOException e) {
-                e.printStackTrace();
+            int serviceType = Integer.parseInt(request.getParameter("serviceType"));
+            List<String> errMessList;
+            if (serviceType == 1) {
+                String poolArea = request.getParameter("pool");
+                String numberFloor = request.getParameter("floor");
+                errMessList = serviceBO.checkValidateService(area, cost, maxPerson, poolArea, numberFloor);
+                if (errMessList.isEmpty()) {
+                    service.setServiceArea(Double.parseDouble(area));
+                    service.setServiceCost(Double.parseDouble(cost));
+                    service.setServiceMaxPerson(Integer.parseInt(maxPerson));
+                    service.setPoolArea(Double.parseDouble(poolArea));
+                    service.setServiceMaxPerson(Integer.parseInt(numberFloor));
+                    serviceBO.editServiceInfo(service);
+                    request.setAttribute("service", service);
+                    request.setAttribute("messageInform", "Edit Successful !!!");
+                    try {
+                        request.getRequestDispatcher("/view/service/service-detail.jsp").forward(request, response);
+                    } catch (ServletException | IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } else if (serviceType == 2) {
+                String numberFloor = request.getParameter("floor");
+                errMessList = serviceBO.checkValidateService(area, cost, maxPerson, "1", numberFloor);
+                if (errMessList.isEmpty()) {
+                    service.setServiceArea(Double.parseDouble(area));
+                    service.setServiceCost(Double.parseDouble(cost));
+                    service.setServiceMaxPerson(Integer.parseInt(maxPerson));
+                    service.setNumberFloor(Integer.parseInt(numberFloor));
+                    serviceBO.editServiceInfo(service);
+                    request.setAttribute("service", service);
+                    request.setAttribute("messageInform", "Edit Successful !!!");
+                    try {
+                        request.getRequestDispatcher("/view/service/service-detail.jsp").forward(request, response);
+                    } catch (ServletException | IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } else {
+                errMessList = serviceBO.checkValidateService(area, cost, maxPerson, "1", "1");
+                if (errMessList.isEmpty()) {
+                    service.setServiceArea(Double.parseDouble(area));
+                    service.setServiceCost(Double.parseDouble(cost));
+                    service.setServiceMaxPerson(Integer.parseInt(maxPerson));
+                    serviceBO.editServiceInfo(service);
+                    request.setAttribute("service", service);
+                    request.setAttribute("messageInform", "Edit Successful !!!");
+                    try {
+                        request.getRequestDispatcher("/view/service/service-detail.jsp").forward(request, response);
+                    } catch (ServletException | IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            if (!errMessList.isEmpty()) {
+                request.setAttribute("errMessList", errMessList);
+                request.setAttribute("service", service);
+                try {
+                    request.getRequestDispatcher("/view/service/service-edit.jsp").forward(request, response);
+                } catch (ServletException | IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -159,7 +214,7 @@ public class ServiceServlet extends HttpServlet {
         String id = request.getParameter("id");
         Service service = serviceBO.findServiceById(id);
         if (service == null) {
-            request.setAttribute("message", "Not Found !!!");
+            request.setAttribute("messageInform", "Not Found !!!");
         } else {
             request.setAttribute("service", service);
         }
@@ -174,43 +229,62 @@ public class ServiceServlet extends HttpServlet {
         String id = request.getParameter("id");
         Service service = serviceBO.findServiceById(id);
         if (service == null) {
-            request.setAttribute("message", "Not Found !!!");
+            request.setAttribute("messageInform", "Not Found !!!");
         } else {
             serviceBO.deleteService(id);
+            request.setAttribute("messageInform", "Delete Successful !!!");
         }
-        try {
-            response.sendRedirect("/service");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        showServiceList(request, response);
     }
 
     private void createService(HttpServletRequest request, HttpServletResponse response) {
+        List<String> errMessList = new ArrayList<>();
         String id = request.getParameter("id");
         String name = request.getParameter("name");
-        double area = Double.parseDouble(request.getParameter("area"));
-        double cost = Double.parseDouble(request.getParameter("cost"));
-        int maxPerson = Integer.parseInt(request.getParameter("maxPerson"));
+        String area = request.getParameter("area");
+        String cost = request.getParameter("cost");
+        String maxPerson = request.getParameter("maxPerson");
         int rentType = Integer.parseInt(request.getParameter("rentType"));
         int serviceType = Integer.parseInt(request.getParameter("serviceType"));
         if (serviceType == 1) {
             String standard = request.getParameter("standard");
             String description = request.getParameter("description");
-            double pool = Double.parseDouble(request.getParameter("pool"));
-            int floor = Integer.parseInt(request.getParameter("floor"));
-            serviceBO.create(new Service(id, name, area, cost, maxPerson, rentType, serviceType, standard, description, pool, floor));
+            String pool = request.getParameter("pool");
+            String floor = request.getParameter("floor");
+            errMessList = serviceBO.checkValidateService(id, area, cost, maxPerson, pool, floor);
+            if (errMessList.isEmpty()) {
+                serviceBO.create(new Service(id, name, Double.parseDouble(area), Double.parseDouble(cost), Integer.parseInt(maxPerson),
+                        rentType, serviceType, standard, description, Double.parseDouble(pool), Integer.parseInt(floor)));
+                request.setAttribute("messageInform", "Create Successful !!!");
+                showServiceList(request, response);
+            }
         } else if (serviceType == 2) {
             String standard = request.getParameter("standard");
             String description = request.getParameter("description");
-            int floor = Integer.parseInt(request.getParameter("floor"));
-            serviceBO.create(new Service(id, name, area, cost, maxPerson, rentType, serviceType, standard, description, floor));
+            String floor = request.getParameter("floor");
+            errMessList = serviceBO.checkValidateService(id, area, cost, maxPerson, "1", floor);
+            if (errMessList.isEmpty()) {
+                serviceBO.create(new Service(id, name, Double.parseDouble(area), Double.parseDouble(cost), Integer.parseInt(maxPerson),
+                        rentType, serviceType, standard, description, Integer.parseInt(floor)));
+                request.setAttribute("messageInform", "Create Successful !!!");
+                showServiceList(request, response);
+            }
         } else {
-            serviceBO.create(new Service(id, name, area, cost, maxPerson, rentType, serviceType));
+            errMessList = serviceBO.checkValidateService(id, area, cost, maxPerson, "1", "1");
+            if (errMessList.isEmpty()) {
+                serviceBO.create(new Service(id, name, Double.parseDouble(area), Double.parseDouble(cost), Integer.parseInt(maxPerson),
+                        rentType, serviceType));
+                request.setAttribute("messageInform", "Create Successful !!!");
+                showServiceList(request, response);
+            }
         }
-        try {
-            response.sendRedirect("/service");
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (!errMessList.isEmpty()) {
+            request.setAttribute("errMessList", errMessList);
+            try {
+                request.getRequestDispatcher("/view/service/service-create.jsp").forward(request, response);
+            } catch (ServletException | IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

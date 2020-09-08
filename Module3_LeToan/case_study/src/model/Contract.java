@@ -1,21 +1,33 @@
 package model;
 
-import java.sql.Date;
 
 public class Contract {
     private int contractId;
-    private Date contractStartDate;
-    private Date contractEndDate;
+    private String contractStartDate;
+    private String contractEndDate;
     private double contractDeposit;
     private double contractTotalMoney;
     private String employeeId;
     private String customerId;
     private String serviceId;
+    private String customerName;
+    private String serviceName;
+
+    private String attachServiceName;
 
     public Contract() {
     }
 
-    public Contract(Date contractStartDate, Date contractEndDate, double contractDeposit, double contractTotalMoney, String employeeId, String customerId, String serviceId) {
+    public Contract(int contractId, String customerId, String serviceId, String customerName, String serviceName, String attachServiceName) {
+        this.contractId = contractId;
+        this.customerId = customerId;
+        this.serviceId = serviceId;
+        this.customerName = customerName;
+        this.serviceName = serviceName;
+        this.attachServiceName = attachServiceName;
+    }
+
+    public Contract(String contractStartDate, String contractEndDate, double contractDeposit, double contractTotalMoney, String employeeId, String customerId, String serviceId) {
         this.contractStartDate = contractStartDate;
         this.contractEndDate = contractEndDate;
         this.contractDeposit = contractDeposit;
@@ -25,7 +37,7 @@ public class Contract {
         this.serviceId = serviceId;
     }
 
-    public Contract(int contractId, Date contractStartDate, Date contractEndDate, double contractDeposit, double contractTotalMoney, String employeeId, String customerId, String serviceId) {
+    public Contract(int contractId, String contractStartDate, String contractEndDate, double contractDeposit, double contractTotalMoney, String employeeId, String customerId, String serviceId) {
         this.contractId = contractId;
         this.contractStartDate = contractStartDate;
         this.contractEndDate = contractEndDate;
@@ -44,19 +56,19 @@ public class Contract {
         this.contractId = contractId;
     }
 
-    public Date getContractStartDate() {
+    public String getContractStartDate() {
         return contractStartDate;
     }
 
-    public void setContractStartDate(Date contractStartDate) {
+    public void setContractStartDate(String contractStartDate) {
         this.contractStartDate = contractStartDate;
     }
 
-    public Date getContractEndDate() {
+    public String getContractEndDate() {
         return contractEndDate;
     }
 
-    public void setContractEndDate(Date contractEndDate) {
+    public void setContractEndDate(String contractEndDate) {
         this.contractEndDate = contractEndDate;
     }
 
@@ -98,5 +110,29 @@ public class Contract {
 
     public void setServiceId(String serviceId) {
         this.serviceId = serviceId;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
+
+    public String getAttachServiceName() {
+        return attachServiceName;
+    }
+
+    public void setAttachServiceName(String attachServiceName) {
+        this.attachServiceName = attachServiceName;
     }
 }

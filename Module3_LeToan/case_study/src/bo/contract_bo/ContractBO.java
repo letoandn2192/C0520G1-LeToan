@@ -20,4 +20,8 @@ public interface ContractBO {
     List<Contract> getContractByPage(int start, int offset);
 
     int getCountContract();
+
+    List<Contract> managerContract();
+
+    List<String> checkValidateContract(String area, String cost);
 }

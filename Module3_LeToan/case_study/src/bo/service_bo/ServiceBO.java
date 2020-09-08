@@ -20,4 +20,8 @@ public interface ServiceBO {
     List<Service> getServiceByPage(int start, int offset);
 
     int getCountService();
+
+    List<String> checkValidateService(String id, String area, String cost, String maxPerson, String poolArea, String numberFloor);
+
+    List<String> checkValidateService(String area, String cost, String maxPerson, String poolArea, String numberFloor);
 }

@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Customer {
     private String customerId;
     private String customerName;
-    private Date customerBirthday;
+    private String customerBirthday;
     private int customerGender;
     private String customerIdCard;
     private String customerPhone;
@@ -16,7 +16,7 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String customerName, Date customerBirthday, int customerGender, String customerIdCard, String customerPhone, String customerEmail, String customerAddress, int customerTypeId) {
+    public Customer(String customerName, String customerBirthday, int customerGender, String customerIdCard, String customerPhone, String customerEmail, String customerAddress, int customerTypeId) {
         this.customerName = customerName;
         this.customerBirthday = customerBirthday;
         this.customerGender = customerGender;
@@ -27,7 +27,7 @@ public class Customer {
         this.customerTypeId = customerTypeId;
     }
 
-    public Customer(String customerId, String customerName, Date customerBirthday, int customerGender, String customerIdCard, String customerPhone, String customerEmail, String customerAddress, int customerTypeId) {
+    public Customer(String customerId, String customerName, String customerBirthday, int customerGender, String customerIdCard, String customerPhone, String customerEmail, String customerAddress, int customerTypeId) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.customerBirthday = customerBirthday;
@@ -55,11 +55,11 @@ public class Customer {
         this.customerName = customerName;
     }
 
-    public Date getCustomerBirthday() {
+    public String getCustomerBirthday() {
         return customerBirthday;
     }
 
-    public void setCustomerBirthday(Date customerBirthday) {
+    public void setCustomerBirthday(String customerBirthday) {
         this.customerBirthday = customerBirthday;
     }
 

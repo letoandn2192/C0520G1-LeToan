@@ -1,20 +1,20 @@
 package bo.cutomer_bo;
 
+import bo.common_bo.Regex;
 import dao.customer_dao.CustomerDAO;
 import dao.customer_dao.CustomerDAOImpl;
 import model.Customer;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class CustomerBOImpl implements CustomerBO {
     public static final String REGEX_ID_CUSTOMER = "^(KH-\\d{4})$";
-    public static final String REGEX_PHONE_NUMBER_CUSTOMER = "^(090|091|\\(84\\)\\+90|\\(84\\)\\+91)\\d{7}$";
-    public static final String REGEX_EMAIL_CUSTOMER = "^(\\w{3,}@\\w+\\.\\w+)$";
-    public static final String REGEX_CUSTOMER_ID_CARD = "^\\d{9}$";
-
     CustomerDAO customerDAO = new CustomerDAOImpl();
+
+    private boolean checkValidateCustomerId(String id) {
+        return !customerDAO.checkCustomerIdExists(id) && Regex.checkRegex(REGEX_ID_CUSTOMER, id) ;
+    }
 
     @Override
     public List<Customer> findAllCustomer() {
@@ -55,26 +55,60 @@ public class CustomerBOImpl implements CustomerBO {
         return customerDAO.getCountCustomer();
     }
 
-    public boolean checkRegex(String regexPattern, String input){
-        Pattern pattern = Pattern.compile(regexPattern);
-        Matcher matcher = pattern.matcher(input);
-        return matcher.matches();
-    }
-
-    public boolean checkValidateCustomerId(String id) {
-        return !customerDAO.checkCustomerIdExists(id) && checkRegex(REGEX_ID_CUSTOMER, id) ;
-    }
-
     @Override
-    public boolean checkValidateCustomerIdNumber(String idNumber) {
-        return checkRegex(REGEX_CUSTOMER_ID_CARD, idNumber);
+    public List<String> checkValidateCustomer(String id, String idNumber, String phone, String email) {
+        List<String> errMessList = new ArrayList<>(4);
+        boolean checkValidateId = checkValidateCustomerId(id);
+        boolean checkValidateIdNumber = Regex.checkRegexIdNumber(idNumber);
+        boolean checkValidatePhone = Regex.checkRegexPhoneNumber(phone);
+        boolean checkValidateEmail = Regex.checkRegexEmail(email);
+        if (!(checkValidateId && checkValidateIdNumber && checkValidateEmail && checkValidatePhone)) {
+            if (!checkValidateId) {
+                errMessList.add( "Customer ID format KH-XXXX (X from 0-9)");
+            } else {
+                errMessList.add("");
+            }
+            if (!checkValidateIdNumber) {
+                errMessList.add( "Id Card format XXXXXXXXX (X from 0-9)");
+            } else {
+                errMessList.add("");
+            }
+            if (!checkValidatePhone) {
+                errMessList.add( "Phone number format ...");
+            } else {
+                errMessList.add("");
+            }
+            if (!checkValidateEmail) {
+                errMessList.add( "Email format abc@abc.abc");
+            } else {
+                errMessList.add("");
+            }
+        }
+        return errMessList;
     }
 
-    public boolean checkValidatePhoneNumber(String phone) {
-        return checkRegex(REGEX_PHONE_NUMBER_CUSTOMER, phone);
-    }
-
-    public boolean checkValidateEmail(String email) {
-        return checkRegex(REGEX_EMAIL_CUSTOMER, email);
+    public List<String> checkValidateCustomer(String idNumber, String phone, String email) {
+        List<String> errMessList = new ArrayList<>(3);
+        boolean checkValidateIdNumber = Regex.checkRegexIdNumber(idNumber);
+        boolean checkValidatePhone = Regex.checkRegexPhoneNumber(phone);
+        boolean checkValidateEmail = Regex.checkRegexEmail(email);
+        if (!(checkValidateIdNumber && checkValidateEmail && checkValidatePhone)) {
+            if (!checkValidateIdNumber) {
+                errMessList.add( "Id Card format XXXXXXXXX (X from 0-9)");
+            } else {
+                errMessList.add("");
+            }
+            if (!checkValidatePhone) {
+                errMessList.add( "Phone number format ...");
+            } else {
+                errMessList.add("");
+            }
+            if (!checkValidateEmail) {
+                errMessList.add( "Email format abc@abc.abc");
+            } else {
+                errMessList.add("");
+            }
+        }
+        return errMessList;
     }
 }

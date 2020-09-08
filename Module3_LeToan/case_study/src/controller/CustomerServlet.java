@@ -15,7 +15,6 @@ import java.util.List;
 
 @WebServlet(name = "CustomerServlet", urlPatterns = "/customer")
 public class CustomerServlet extends HttpServlet {
-//    private static final long serialVersionUID = 1L;
     private CustomerBO customerBO = new CustomerBOImpl();
 
 
@@ -98,7 +97,7 @@ public class CustomerServlet extends HttpServlet {
         String id = request.getParameter("id");
         Customer customer = customerBO.findCustomerById(id);
         if (customer == null) {
-            request.setAttribute("message", "Not Found!!!");
+            request.setAttribute("messageInform", "Not Found!!!");
         } else {
             request.setAttribute("customer", customer);
         }
@@ -113,7 +112,7 @@ public class CustomerServlet extends HttpServlet {
         String id = request.getParameter("id");
         Customer customer = customerBO.findCustomerById(id);
         if (customer == null) {
-            request.setAttribute("message", "Not Found !!!");
+            request.setAttribute("messageInform", "Not Found !!!");
         } else {
             request.setAttribute("customer", customer);
         }
@@ -132,19 +131,31 @@ public class CustomerServlet extends HttpServlet {
         } else {
             customer.setCustomerTypeId(Integer.parseInt(request.getParameter("typeId")));
             customer.setCustomerName(request.getParameter("name"));
-            customer.setCustomerBirthday( Date.valueOf(request.getParameter("birthday")));
+            customer.setCustomerBirthday(request.getParameter("birthday"));
             customer.setCustomerGender(Integer.parseInt(request.getParameter("gender")));
             customer.setCustomerIdCard(request.getParameter("idNumber"));
             customer.setCustomerPhone(request.getParameter("phone"));
             customer.setCustomerEmail(request.getParameter("email"));
             customer.setCustomerAddress(request.getParameter("address"));
 
-            customerBO.editCustomerInfo(customer);
-            request.setAttribute("customer", customer);
-            try {
-                request.getRequestDispatcher("/view/customer/customer-detail.jsp").forward(request, response);
-            } catch (ServletException | IOException e) {
-                e.printStackTrace();
+            List<String> errMessList = customerBO.checkValidateCustomer(customer.getCustomerIdCard(), customer.getCustomerPhone(), customer.getCustomerEmail());
+            if (errMessList.isEmpty()) {
+                customerBO.editCustomerInfo(customer);
+                request.setAttribute("messageInform", "Update Successful !!!");
+                request.setAttribute("customer", customer);
+                try {
+                    request.getRequestDispatcher("/view/customer/customer-detail.jsp").forward(request, response);
+                } catch (ServletException | IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                request.setAttribute("customer", customer);
+                request.setAttribute("errMessList", errMessList);
+                try {
+                    request.getRequestDispatcher("/view/customer/customer-edit.jsp").forward(request, response);
+                } catch (ServletException | IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -153,7 +164,7 @@ public class CustomerServlet extends HttpServlet {
         String id = request.getParameter("id");
         Customer customer = customerBO.findCustomerById(id);
         if (customer == null) {
-            request.setAttribute("message", "Not Found !!!");
+            request.setAttribute("messageInform", "Not Found !!!");
         } else {
             request.setAttribute("customer", customer);
         }
@@ -168,15 +179,12 @@ public class CustomerServlet extends HttpServlet {
         String id = request.getParameter("id");
         Customer customer = customerBO.findCustomerById(id);
         if (customer == null) {
-            request.setAttribute("message", "Not Found !!!");
+            request.setAttribute("messageInform", "Not Found !!!");
         } else {
             customerBO.deleteCustomer(id);
+            request.setAttribute("messageInform", "Delete Successful !!!");
         }
-        try {
-            response.sendRedirect("/customer");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        showCustomerList(request, response);
     }
 
     private void showCustomerCreateForm(HttpServletRequest request, HttpServletResponse response) {
@@ -190,35 +198,21 @@ public class CustomerServlet extends HttpServlet {
     private void createCustomer(HttpServletRequest request, HttpServletResponse response) {
         String id = request.getParameter("id");
         String name = request.getParameter("name");
-        Date birthday = Date.valueOf(request.getParameter("birthday"));
+        String birthday = request.getParameter("birthday");
         int gender = Integer.parseInt(request.getParameter("gender"));
         String idNumber = request.getParameter("idNumber");
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
         String address = request.getParameter("address");
         int typeId = Integer.parseInt(request.getParameter("typeId"));
-        boolean validateId = customerBO.checkValidateCustomerId(id);
-        boolean validateIdCard = customerBO.checkValidateCustomerIdNumber(idNumber);
-        boolean validatePhone = customerBO.checkValidatePhoneNumber(phone);
-        boolean validateEmail = customerBO.checkValidateEmail(email);
-        if (validateId && validatePhone && validateEmail && validateIdCard) {
+        List<String> errMessList = customerBO.checkValidateCustomer(id, idNumber, phone, email);
+        if (errMessList.isEmpty()) {
             Customer customer = new Customer(id, name, birthday, gender, idNumber, phone, email, address, typeId);
             customerBO.create(customer);
             request.setAttribute("messageInform", "Create Successful !!!");
-            showCustomerList(request,response);
+            showCustomerList(request, response);
         } else {
-            if (!validateId) {
-                request.setAttribute("messageId", "Customer ID format KH-XXXX (X from 0-9)");
-            }
-            if (!validatePhone) {
-                request.setAttribute("messagePhone", "Phone number format...");
-            }
-            if (!validateEmail) {
-                request.setAttribute("messageEmail", "Email format abc@abc.abc");
-            }
-            if (!validateIdCard) {
-                request.setAttribute("messageIdCard", "Id Card format XXXXXXXXX (X from 0-9)");
-            }
+            request.setAttribute("errMessList", errMessList);
             try {
                 request.getRequestDispatcher("/view/customer/customer-create.jsp").forward(request, response);
             } catch (ServletException | IOException e) {

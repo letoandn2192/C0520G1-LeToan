@@ -19,7 +19,8 @@
 <div class="container-fluid">
     <div class="body row position-relative" style="top: 160px">
         <div class="text-center col-12">
-            <a href="/contract?action=create" role="button" class="btn btn-outline-dark float-left">Create New Contract</a>
+            <a href="/contract?action=create" role="button" class="btn btn-outline-dark float-left mr-2">Create New Contract</a>
+            <a href="/contract?action=manager" role="button" class="btn btn-outline-dark float-left">Manager</a>
             <h2>List of Contract</h2>
         </div>
         <table class="table table-sm table-bordered table-hover">
@@ -42,7 +43,7 @@
                     <td>${contract.contractDeposit}</td>
                     <td>${contract.contractTotalMoney}</td>
                     <td>
-                        <a href="/contract?action=view&id=${contract.contractId}">Detail <span class="fas fa-info mr-3"></span></a>
+                        <a href="/contract?action=view&id=${contract.contractId}" class="btn-outline-dark btn">Detail <span class="fas fa-info mr-3"></span></a>
                     </td>
                 </tr>
             </c:forEach>
@@ -66,10 +67,22 @@
                 <a class="btn btn-outline-dark" href="/contract">Back</a>
             </div>
         </c:if>
+        <c:if test="${messageInform != null}">
+            <div class="alert alert-success col-4 d-flex justify-content-center" role="alert">
+                    ${messageInform}
+            </div>
+        </c:if>
     </div>
 </div>
 <%@ include file="../../footer.jsp"%>
 <script src="../../bootstrap_4/js/jquery-3.5.1.js"></script>
 <script src="../../bootstrap_4/js/bootstrap.min.js"></script>
+<script>
+    window.setTimeout(function() {
+        $(".alert").fadeTo(500, 0).slideUp(500, function(){
+            $(this).remove();
+        });
+    }, 4000);
+</script>
 </body>
 </html>

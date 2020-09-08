@@ -23,10 +23,10 @@
                 <legend class="text-center">Create New Customer</legend>
                 <div class="form-group form-inline">
                     <label for="id" class="col-2 d-flex justify-content-start">Id</label>
-                    <input type="text" class="col-8 form-control" id="id" name="id">
+                    <input type="text" class="col-8 form-control" id="id" name="id" >
                 </div>
-                <c:if test="${messageId != null}">
-                        <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${messageId}</p>
+                <c:if test='${errMessList.get(0) != ""}'>
+                        <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(0)}</p>
                 </c:if>
                 <div class="form-group form-inline">
                     <label for="name" class="col-2 d-flex justify-content-start">Name</label>
@@ -47,22 +47,22 @@
                     <label for="idNumber" class="col-2 d-flex justify-content-start">Identify Number</label>
                     <input type="text" class="col-8 form-control" id="idNumber" name="idNumber">
                 </div>
-                <c:if test="${messageIdCard != null}">
-                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${messageIdCard}</p>
+                <c:if test='${errMessList.get(1) != ""}'>
+                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(1)}</p>
                 </c:if>
                 <div class="form-group form-inline">
                     <label for="phone" class="col-2 d-flex justify-content-start">Phone</label>
                     <input type="text" class="col-8 form-control" id="phone" name="phone">
                 </div>
-                <c:if test="${messagePhone != null}">
-                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${messagePhone}</p>
+                <c:if test='${errMessList.get(2) != ""}'>
+                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(2)}</p>
                 </c:if>
                 <div class="form-group form-inline">
                     <label for="email" class="col-2 d-flex justify-content-start">Email</label>
                     <input type="text" class="col-8 form-control" id="email" name="email">
                 </div>
-                <c:if test="${messageEmail != null}">
-                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${messageEmail}</p>
+                <c:if test='${errMessList.get(3) != ""}'>
+                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(3)}</p>
                 </c:if>
                 <div class="form-group form-inline">
                     <label for="address" class="col-2 d-flex justify-content-start">Address</label>
@@ -94,12 +94,12 @@
 <%@ include file="../../footer.jsp" %>
 <script src="../../bootstrap_4/js/jquery-3.5.1.js"></script>
 <script src="../../bootstrap_4/js/bootstrap.min.js"></script>
-<script>
-    window.setTimeout(function() {
-        $(".alert").fadeTo(500, 0).slideUp(500, function(){
-            $(this).remove();
-        });
-    }, 4000);
-</script>
+<%--<script>--%>
+<%--    window.setTimeout(function() {--%>
+<%--        $(".alert").fadeTo(500, 0).slideUp(500, function(){--%>
+<%--            $(this).remove();--%>
+<%--        });--%>
+<%--    }, 4000);--%>
+<%--</script>--%>
 </body>
 </html>

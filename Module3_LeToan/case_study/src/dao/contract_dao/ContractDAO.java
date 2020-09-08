@@ -20,4 +20,6 @@ public interface ContractDAO {
     List<Contract> getContractByPage(int start, int offset);
 
     int getCountContract();
+
+    List<Contract> managerContract();
 }

@@ -39,7 +39,7 @@ public class CustomerDAOImpl implements CustomerDAO {
                 while (resultSet.next()) {
                     String id = resultSet.getString("customer_id");
                     String name = resultSet.getString("customer_name");
-                    Date birthday = resultSet.getDate("customer_birthday");
+                    String birthday = resultSet.getString("customer_birthday");
                     int gender = resultSet.getInt("customer_gender");
                     String idCard = resultSet.getString("customer_id_card");
                     String phone = resultSet.getString("customer_phone");
@@ -81,7 +81,7 @@ public class CustomerDAOImpl implements CustomerDAO {
                 while (resultSet.next()) {
                     int customerType = resultSet.getInt("customer_type_id");
                     String name = resultSet.getString("customer_name");
-                    Date birthday = resultSet.getDate("customer_birthday");
+                    String birthday = resultSet.getString("customer_birthday");
                     int gender = resultSet.getInt("customer_gender");
                     String idNumber = resultSet.getString("customer_id_card");
                     String phone = resultSet.getString("customer_phone");
@@ -120,7 +120,7 @@ public class CustomerDAOImpl implements CustomerDAO {
                 preparedStatement.setString(9, customer.getCustomerId());
                 preparedStatement.setInt(1, customer.getCustomerTypeId());
                 preparedStatement.setString(2, customer.getCustomerName());
-                preparedStatement.setDate(3, customer.getCustomerBirthday());
+                preparedStatement.setString(3, customer.getCustomerBirthday());
                 preparedStatement.setInt(4, customer.getCustomerGender());
                 preparedStatement.setString(5, customer.getCustomerIdCard());
                 preparedStatement.setString(6, customer.getCustomerPhone());
@@ -179,7 +179,7 @@ public class CustomerDAOImpl implements CustomerDAO {
                 preparedStatement.setString(1, customer.getCustomerId());
                 preparedStatement.setInt(2, customer.getCustomerTypeId());
                 preparedStatement.setString(3, customer.getCustomerName());
-                preparedStatement.setDate(4, customer.getCustomerBirthday());
+                preparedStatement.setString(4, customer.getCustomerBirthday());
                 preparedStatement.setInt(5, customer.getCustomerGender());
                 preparedStatement.setString(6, customer.getCustomerIdCard());
                 preparedStatement.setString(7, customer.getCustomerPhone());
@@ -216,7 +216,7 @@ public class CustomerDAOImpl implements CustomerDAO {
                 while (resultSet.next()) {
                     String id = resultSet.getString("customer_id");
                     String name = resultSet.getString("customer_name");
-                    Date birthday = resultSet.getDate("customer_birthday");
+                    String birthday = resultSet.getString("customer_birthday");
                     int gender = resultSet.getInt("customer_gender");
                     String idCard = resultSet.getString("customer_id_card");
                     String phone = resultSet.getString("customer_phone");
@@ -259,7 +259,7 @@ public class CustomerDAOImpl implements CustomerDAO {
                 while (resultSet.next()) {
                     String id = resultSet.getString("customer_id");
                     String name = resultSet.getString("customer_name");
-                    Date birthday = resultSet.getDate("customer_birthday");
+                    String birthday = resultSet.getString("customer_birthday");
                     int gender = resultSet.getInt("customer_gender");
                     String idCard = resultSet.getString("customer_id_card");
                     String phone = resultSet.getString("customer_phone");

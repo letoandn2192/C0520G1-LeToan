@@ -14,7 +14,7 @@ public class ServiceDAOImpl implements ServiceDAO {
     private static final String SELECT_SERVICE_BY_ID = "SELECT * FROM service WHERE service_id = ?;";
     private static final String EDIT_SERVICE_INFO = "UPDATE service SET service_name = ?, service_area = ?, service_cost = ?, " +
             "service_max_person = ?, rent_type_id = ?, service_type_id = ?, standard_room = ?, description_other_convenience = ?, " +
-            "pool_area, number_of_floors WHERE service_id = ?;";
+            "pool_area = ?, number_of_floors = ? WHERE service_id = ?;";
     private static final String DELETE_SERVICE_BY_ID = "DELETE FROM service WHERE service_id = ?;";
     private static final String CREATE_NEW_SERVICE = "INSERT INTO service (service_id, service_name, service_area, service_cost, " +
             "service_max_person, rent_type_id, service_type_id, standard_room, description_other_convenience, pool_area, " +
@@ -23,6 +23,7 @@ public class ServiceDAOImpl implements ServiceDAO {
             "OR service_name LIKE ?;";
     private static final String SELECT_SERVICE_IN_PAGE = "SELECT * FROM service LIMIT ?,?;";
     private static final String SELECT_COUNT_SERVICE = "SELECT count(service_id) FROM service;";
+    private static final String CHECK_SERVICE_ID_EXISTS = "SELECT 1 FROM service WHERE service_id = ?;";
 
     @Override
     public List<Service> findAllService() {
@@ -327,5 +328,40 @@ public class ServiceDAOImpl implements ServiceDAO {
             }
         }
         return count;
+    }
+
+    @Override
+    public boolean checkServiceIdExists(String id) {
+        boolean checkExists = false;
+        Connection connection = DBConnection.getConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        if (connection != null) {
+            try {
+                preparedStatement = connection.prepareStatement(CHECK_SERVICE_ID_EXISTS);
+                preparedStatement.setString(1, id);
+                resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    checkExists = true;
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (resultSet != null) {
+                        resultSet.close();
+                    }
+                    if (preparedStatement != null) {
+                        preparedStatement.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                DBConnection.close();
+            }
+        }
+        return checkExists;
+
     }
 }

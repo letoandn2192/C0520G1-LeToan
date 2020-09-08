@@ -25,6 +25,9 @@
                     <label for="id" class="col-2 d-flex justify-content-start">Id</label>
                     <input type="text" class="col-8 form-control" id="id" name="id">
                 </div>
+                <c:if test='${errMessList.get(0) != ""}'>
+                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(0)}</p>
+                </c:if>
                 <div class="form-group form-inline">
                     <label for="name" class="col-2 d-flex justify-content-start">Name</label>
                     <input type="text" class="col-8 form-control" id="name" name="name">
@@ -33,14 +36,23 @@
                     <label for="area" class="col-2 d-flex justify-content-start">Area</label>
                     <input type="text" class="col-8 form-control" id="area" name="area">
                 </div>
+                <c:if test='${errMessList.get(1) != ""}'>
+                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(1)}</p>
+                </c:if>
                 <div class="form-group form-inline">
                     <label for="cost" class="col-2 d-flex justify-content-start">Cost</label>
                     <input type="text" class="col-8 form-control" id="cost" name="cost">
                 </div>
+                <c:if test='${errMessList.get(2) != ""}'>
+                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(2)}</p>
+                </c:if>
                 <div class="form-group form-inline">
                     <label for="maxPerson" class="col-2 d-flex justify-content-start">Max Person</label>
                     <input type="text" class="col-8 form-control" id="maxPerson" name="maxPerson">
                 </div>
+                <c:if test='${errMessList.get(3) != ""}'>
+                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(3)}</p>
+                </c:if>
                 <div class="form-group form-inline">
                     <label for="rentType" class="col-2 d-flex justify-content-start">Rent Type</label>
                     <select class="col-8 form-control" id="rentType" name="rentType">
@@ -70,10 +82,16 @@
                     <label for="pool" class="col-2 d-flex justify-content-start">Pool Area</label>
                     <input type="text" class="col-8 form-control" id="pool" name="pool">
                 </div>
+                <c:if test='${errMessList.get(4) != ""}'>
+                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(4)}</p>
+                </c:if>
                 <div class="form-group form-inline" id="hidden4">
                     <label for="floor" class="col-2 d-flex justify-content-start">Floors</label>
                     <input type="text" class="col-8 form-control" id="floor" name="floor">
                 </div>
+                <c:if test='${errMessList.get(5) != ""}'>
+                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(5)}</p>
+                </c:if>
 
                 <div class="form-group form-inline">
                     <div class="col-2"></div>

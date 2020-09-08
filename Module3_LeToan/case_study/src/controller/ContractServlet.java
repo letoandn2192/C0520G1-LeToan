@@ -9,9 +9,6 @@ import bo.employee_bo.EmployeeBOImpl;
 import bo.service_bo.ServiceBO;
 import bo.service_bo.ServiceBOImpl;
 import model.Contract;
-import model.Customer;
-import model.Employee;
-import model.Service;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -70,6 +67,9 @@ public class ContractServlet extends HttpServlet {
             case "search":
                 showContractSearch(request, response);
                 break;
+            case "manager":
+                showManagerContract(request, response);
+                break;
             default:
                 showContractList(request, response);
                 break;
@@ -116,8 +116,8 @@ public class ContractServlet extends HttpServlet {
     }
 
     private void createContract(HttpServletRequest request, HttpServletResponse response) {
-        Date startDate = Date.valueOf(request.getParameter("startDate"));
-        Date endDate = Date.valueOf(request.getParameter("endDate"));
+        String startDate = request.getParameter("startDate");
+        String endDate = request.getParameter("endDate");
         double deposit = Double.parseDouble(request.getParameter("deposit"));
         double totalMoney = Double.parseDouble(request.getParameter("totalMoney"));
         String employeeId = request.getParameter("employeeId");
@@ -171,8 +171,8 @@ public class ContractServlet extends HttpServlet {
         if (contract == null) {
             request.setAttribute("message", "Not Found !!!");
         } else {
-            contract.setContractStartDate(Date.valueOf(request.getParameter("startDate")));
-            contract.setContractEndDate(Date.valueOf(request.getParameter("endDate")));
+            contract.setContractStartDate(request.getParameter("startDate"));
+            contract.setContractEndDate(request.getParameter("endDate"));
             contract.setContractDeposit(Double.parseDouble(request.getParameter("deposit")));
             contract.setContractTotalMoney(Double.parseDouble(request.getParameter("totalMoney")));
             contract.setEmployeeId(request.getParameter("employeeId"));
@@ -229,6 +229,16 @@ public class ContractServlet extends HttpServlet {
         request.setAttribute("action", action);
         try {
             request.getRequestDispatcher("/view/contract/contract-list.jsp").forward(request, response);
+        } catch (ServletException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void showManagerContract(HttpServletRequest request, HttpServletResponse response) {
+        List<Contract> contractList = contractBO.managerContract();
+        request.setAttribute("contractList", contractList);
+        try {
+            request.getRequestDispatcher("/view/contract/contract-manager.jsp").forward(request, response);
         } catch (ServletException | IOException e) {
             e.printStackTrace();
         }

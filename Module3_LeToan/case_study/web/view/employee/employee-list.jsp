@@ -69,10 +69,22 @@
                 <a class="btn btn-outline-dark" href="/employee">Back</a>
             </div>
         </c:if>
+        <c:if test="${messageInform != null}">
+            <div class="alert alert-success col-4 d-flex justify-content-center" role="alert">
+                    ${messageInform}
+            </div>
+        </c:if>
     </div>
 </div>
 <%@ include file="../../footer.jsp"%>
 <script src="../../bootstrap_4/js/jquery-3.5.1.js"></script>
 <script src="../../bootstrap_4/js/bootstrap.min.js"></script>
+<script>
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 2000);
+</script>
 </body>
 </html>

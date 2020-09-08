@@ -48,4 +48,9 @@ public class ContractBOImpl implements ContractBO {
     public int getCountContract() {
         return contractDAO.getCountContract();
     }
+
+    @Override
+    public List<Contract> managerContract() {
+        return contractDAO.managerContract();
+    }
 }

@@ -20,6 +20,12 @@ public class ContractDAOImpl implements ContractDAO {
     private static final String SEARCH_CONTRACT = "SELECT * FROM contract WHERE contract_id LIKE ?;";
     private static final String SELECT_CONTRACT_IN_PAGE = "SELECT * FROM contract LIMIT ?,?;";
     private static final String SELECT_COUNT_CONTRACT = "SELECT count(contract_id) FROM contract;";
+    private static final String MANAGER_CONTRACT = "SELECT customer.customer_name, customer.customer_id, service.service_id, " +
+            "service.service_name, contract.contract_id, attach_service.attach_service_name FROM customer " +
+            "INNER JOIN contract ON customer.customer_id = contract.customer_id " +
+            "INNER JOIN service ON service.service_id = contract.service_id " +
+            "INNER JOIN contract_detail ON contract.contract_id = contract_detail.contract_id " +
+            "INNER JOIN attach_service ON contract_detail.attach_service_id = attach_service.attach_service_id;";
 
     @Override
     public List<Contract> findAllContract() {
@@ -33,8 +39,8 @@ public class ContractDAOImpl implements ContractDAO {
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     int id = resultSet.getInt("contract_id");
-                    Date startDate = resultSet.getDate("contract_start_date");
-                    Date endDate = resultSet.getDate("contract_end_date");
+                    String startDate = resultSet.getString("contract_start_date");
+                    String endDate = resultSet.getString("contract_end_date");
                     double deposit = resultSet.getDouble("contract_deposit");
                     double totalMoney = resultSet.getDouble("contract_total_money");
                     String employeeId = resultSet.getString("employee_id");
@@ -73,8 +79,8 @@ public class ContractDAOImpl implements ContractDAO {
                 preparedStatement.setInt(1, id );
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
-                    Date startDate = resultSet.getDate("contract_start_date");
-                    Date endDate = resultSet.getDate("contract_end_date");
+                    String startDate = resultSet.getString("contract_start_date");
+                    String endDate = resultSet.getString("contract_end_date");
                     double deposit = resultSet.getDouble("contract_deposit");
                     double totalMoney = resultSet.getDouble("contract_total_money");
                     String employeeId = resultSet.getString("employee_id");
@@ -109,8 +115,8 @@ public class ContractDAOImpl implements ContractDAO {
         if (connection != null) {
             try {
                 preparedStatement = connection.prepareStatement(CREATE_NEW_CONTRACT);
-                preparedStatement.setDate(1, contract.getContractStartDate());
-                preparedStatement.setDate(2, contract.getContractEndDate());
+                preparedStatement.setString(1, contract.getContractStartDate());
+                preparedStatement.setString(2, contract.getContractEndDate());
                 preparedStatement.setDouble(3, contract.getContractDeposit());
                 preparedStatement.setDouble(4, contract.getContractTotalMoney());
                 preparedStatement.setString(5, contract.getEmployeeId());
@@ -141,8 +147,8 @@ public class ContractDAOImpl implements ContractDAO {
             try {
                 preparedStatement = connection.prepareStatement(EDIT_CONTRACT_INFO);
                 preparedStatement.setInt(8, contract.getContractId());
-                preparedStatement.setDate(1, contract.getContractStartDate());
-                preparedStatement.setDate(2, contract.getContractEndDate());
+                preparedStatement.setString(1, contract.getContractStartDate());
+                preparedStatement.setString(2, contract.getContractEndDate());
                 preparedStatement.setDouble(3, contract.getContractDeposit());
                 preparedStatement.setDouble(4, contract.getContractTotalMoney());
                 preparedStatement.setString(5, contract.getEmployeeId());
@@ -204,8 +210,8 @@ public class ContractDAOImpl implements ContractDAO {
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     int id = resultSet.getInt("contract_id");
-                    Date startDate = resultSet.getDate("contract_start_date");
-                    Date endDate = resultSet.getDate("contract_end_date");
+                    String startDate = resultSet.getString("contract_start_date");
+                    String endDate = resultSet.getString("contract_end_date");
                     double deposit = resultSet.getDouble("contract_deposit");
                     double totalMoney = resultSet.getDouble("contract_total_money");
                     String employeeId = resultSet.getString("employee_id");
@@ -246,8 +252,8 @@ public class ContractDAOImpl implements ContractDAO {
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     int id = resultSet.getInt("contract_id");
-                    Date startDate = resultSet.getDate("contract_start_date");
-                    Date endDate = resultSet.getDate("contract_end_date");
+                    String startDate = resultSet.getString("contract_start_date");
+                    String endDate = resultSet.getString("contract_end_date");
                     double deposit = resultSet.getDouble("contract_deposit");
                     double totalMoney = resultSet.getDouble("contract_total_money");
                     String employeeId = resultSet.getString("employee_id");
@@ -304,5 +310,32 @@ public class ContractDAOImpl implements ContractDAO {
             }
         }
         return count;
+    }
+
+    @Override
+    public List<Contract> managerContract() {
+        List<Contract> contractList = new ArrayList<>();
+        Connection connection = DBConnection.getConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        if (connection != null) {
+            try {
+                preparedStatement = connection.prepareStatement(MANAGER_CONTRACT);
+                resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    String customerName = resultSet.getString("customer.customer_name");
+                    String customerId = resultSet.getString("customer.customer_id");
+                    String serviceId = resultSet.getString("service.service_id");
+                    String serviceName = resultSet.getString("service.service_name");
+                    int contractId = resultSet.getInt("contract.contract_id");
+                    String attachServiceName = resultSet.getString("attach_service.attach_service_name");
+                    contractList.add(new Contract(contractId, customerId, serviceId, customerName, serviceName, attachServiceName));
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return contractList;
     }
 }

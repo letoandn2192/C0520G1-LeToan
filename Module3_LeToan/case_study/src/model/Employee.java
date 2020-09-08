@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Employee {
     private String employeeId;
     private String employeeName;
-    private Date employeeBirthday;
+    private String employeeBirthday;
     private String employeeIdCard;
     private double employeeSalary;
     private String employeePhone;
@@ -19,7 +19,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String employee_name, Date employee_birthday, String employee_id_card, double employee_salary, String employee_phone, String employee_email, String employee_address, int position_id, int education_degree_id, int division_id, String username) {
+    public Employee(String employee_name, String employee_birthday, String employee_id_card, double employee_salary, String employee_phone, String employee_email, String employee_address, int position_id, int education_degree_id, int division_id, String username) {
         this.employeeName = employee_name;
         this.employeeBirthday = employee_birthday;
         this.employeeIdCard = employee_id_card;
@@ -33,7 +33,7 @@ public class Employee {
         this.userName = username;
     }
 
-    public Employee(String employee_id, String employee_name, Date employee_birthday, String employee_id_card, double employee_salary, String employee_phone, String employee_email, String employee_address, int position_id, int education_degree_id, int division_id, String username) {
+    public Employee(String employee_id, String employee_name, String employee_birthday, String employee_id_card, double employee_salary, String employee_phone, String employee_email, String employee_address, int position_id, int education_degree_id, int division_id, String username) {
         this.employeeId = employee_id;
         this.employeeName = employee_name;
         this.employeeBirthday = employee_birthday;
@@ -64,11 +64,11 @@ public class Employee {
         this.employeeName = employeeName;
     }
 
-    public Date getEmployeeBirthday() {
+    public String getEmployeeBirthday() {
         return employeeBirthday;
     }
 
-    public void setEmployeeBirthday(Date employeeBirthday) {
+    public void setEmployeeBirthday(String employeeBirthday) {
         this.employeeBirthday = employeeBirthday;
     }
 

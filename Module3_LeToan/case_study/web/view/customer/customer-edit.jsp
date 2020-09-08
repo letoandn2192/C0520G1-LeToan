@@ -52,14 +52,23 @@
                     <label for="idNumber" class="col-2 d-flex justify-content-start">Identify Number</label>
                     <input type="text" class="col-8 form-control" id="idNumber" name="idNumber" value="${customer.customerIdCard}">
                 </div>
+                <c:if test='${errMessList.get(0) != ""}'>
+                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(0)}</p>
+                </c:if>
                 <div class="form-group form-inline">
                     <label for="phone" class="col-2 d-flex justify-content-start">Phone</label>
                     <input type="text" class="col-8 form-control" id="phone" name="phone" value="${customer.customerPhone}">
                 </div>
+                <c:if test='${errMessList.get(1) != ""}'>
+                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(1)}</p>
+                </c:if>
                 <div class="form-group form-inline">
                     <label for="email" class="col-2 d-flex justify-content-start">Email</label>
                     <input type="text" class="col-8 form-control" id="email" name="email" value="${customer.customerEmail}">
                 </div>
+                <c:if test='${errMessList.get(2) != ""}'>
+                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(2)}</p>
+                </c:if>
                 <div class="form-group form-inline">
                     <label for="address" class="col-2 d-flex justify-content-start">Address</label>
                     <input type="text" class="col-8 form-control" id="address" name="address" value="${customer.customerAddress}">

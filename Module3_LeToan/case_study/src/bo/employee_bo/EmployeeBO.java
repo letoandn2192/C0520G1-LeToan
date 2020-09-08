@@ -17,7 +17,11 @@ public interface EmployeeBO {
 
     List<Employee> search(String search);
 
-    public List<Employee> getEmployeeByPage(int start, int offset);
+    List<Employee> getEmployeeByPage(int start, int offset);
 
     int getCountEmployee();
+
+    List<String> checkValidateEmployee(String id, String idNumber, String salary, String phone, String email);
+
+    List<String> checkValidateEmployee(String idNumber, String salary, String phone, String email);
 }

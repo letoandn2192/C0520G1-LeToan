@@ -17,6 +17,7 @@ import java.util.List;
 @WebServlet(name = "EmployeeServlet", urlPatterns = "/employee")
 public class EmployeeServlet extends HttpServlet {
     EmployeeBO employeeBO = new EmployeeBOImpl();
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         if (action == null) {
@@ -64,7 +65,7 @@ public class EmployeeServlet extends HttpServlet {
         }
     }
 
-    private void showEmployeeList (HttpServletRequest request, HttpServletResponse response) {
+    private void showEmployeeList(HttpServletRequest request, HttpServletResponse response) {
         int start, offset = 5, page = 1;
 
         if (request.getParameter("page") != null) {
@@ -87,9 +88,7 @@ public class EmployeeServlet extends HttpServlet {
         request.setAttribute("totalPage", totalPage);
         try {
             request.getRequestDispatcher("view/employee/employee-list.jsp").forward(request, response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (ServletException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -104,9 +103,7 @@ public class EmployeeServlet extends HttpServlet {
         }
         try {
             request.getRequestDispatcher("/view/employee/employee-detail.jsp").forward(request, response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (ServletException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -121,21 +118,19 @@ public class EmployeeServlet extends HttpServlet {
         }
         try {
             request.getRequestDispatcher("/view/employee/employee-edit.jsp").forward(request, response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (ServletException | IOException e) {
             e.printStackTrace();
         }
     }
 
     private void editEmployeeInfo(HttpServletRequest request, HttpServletResponse response) {
-        String  id = request.getParameter("id");
+        String id = request.getParameter("id");
         Employee employee = employeeBO.findEmployeeById(id);
         if (employee == null) {
             request.setAttribute("message", "Not Found !!!");
         } else {
             employee.setEmployeeName(request.getParameter("name"));
-            employee.setEmployeeBirthday(Date.valueOf(request.getParameter("birthday")));
+            employee.setEmployeeBirthday(request.getParameter("birthday"));
             employee.setEmployeeIdCard(request.getParameter("idNumber"));
             employee.setEmployeeSalary(Double.parseDouble(request.getParameter("salary")));
             employee.setEmployeePhone(request.getParameter("phone"));
@@ -145,15 +140,26 @@ public class EmployeeServlet extends HttpServlet {
             employee.setEducationDegreeId(Integer.parseInt(request.getParameter("education")));
             employee.setDivisionId(Integer.parseInt(request.getParameter("division")));
             employee.setUserName(request.getParameter("username"));
-
-            employeeBO.editEmployeeInfo(employee);
-            request.setAttribute("employee", employee);
-            try {
-                request.getRequestDispatcher("/view/employee/employee-detail.jsp").forward(request, response);
-            } catch (ServletException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+            List<String> errMessList = employeeBO.checkValidateEmployee(employee.getEmployeeIdCard(), request.getParameter("salary"), employee.getEmployeePhone(), employee.getEmployeeEmail());
+            if (errMessList.isEmpty()) {
+                employeeBO.editEmployeeInfo(employee);
+                request.setAttribute("messageInform", "Update Successful");
+                request.setAttribute("employee", employee);
+                try {
+                    request.getRequestDispatcher("/view/employee/employee-detail.jsp").forward(request, response);
+                } catch (ServletException | IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                request.setAttribute("employee", employee);
+                request.setAttribute("errMessList", errMessList);
+                try {
+                    request.getRequestDispatcher("/view/employee/employee-edit.jsp").forward(request, response);
+                } catch (ServletException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -182,12 +188,9 @@ public class EmployeeServlet extends HttpServlet {
             request.setAttribute("message", "Not Found !!!");
         } else {
             employeeBO.deleteEmployee(id);
+            request.setAttribute("messageInform", "Delete Successful");
         }
-        try {
-            response.sendRedirect("/employee");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        showEmployeeList(request, response);
     }
 
     private void showEmployeeCreateForm(HttpServletRequest request, HttpServletResponse response) {
@@ -201,9 +204,9 @@ public class EmployeeServlet extends HttpServlet {
     private void createEmployee(HttpServletRequest request, HttpServletResponse response) {
         String id = request.getParameter("id");
         String name = request.getParameter("name");
-        Date birthday = Date.valueOf(request.getParameter("birthday"));
+        String birthday = request.getParameter("birthday");
         String idNumber = request.getParameter("idNumber");
-        double salary = Double.parseDouble(request.getParameter("salary"));
+        String salary = request.getParameter("salary");
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
         String address = request.getParameter("address");
@@ -211,12 +214,19 @@ public class EmployeeServlet extends HttpServlet {
         int education = Integer.parseInt(request.getParameter("education"));
         int division = Integer.parseInt(request.getParameter("division"));
         String username = request.getParameter("username");
-        Employee employee = new Employee(id, name, birthday, idNumber, salary, phone, email, address, position, education, division, username);
-        employeeBO.create(employee);
-        try {
-            response.sendRedirect("/employee");
-        } catch (IOException e) {
-            e.printStackTrace();
+        List<String> errMessList = employeeBO.checkValidateEmployee(id, idNumber, salary, phone, email);
+        if (errMessList.isEmpty()) {
+            Employee employee = new Employee(id, name, birthday, idNumber, Double.parseDouble(salary), phone, email, address, position, education, division, username);
+            employeeBO.create(employee);
+            request.setAttribute("messageInform", "Create Successful !!!");
+            showEmployeeList(request, response);
+        } else {
+            request.setAttribute("errMessList", errMessList);
+            try {
+                request.getRequestDispatcher("/view/employee/employee-create.jsp").forward(request, response);
+            } catch (ServletException | IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -230,9 +240,7 @@ public class EmployeeServlet extends HttpServlet {
         request.setAttribute("action", action);
         try {
             request.getRequestDispatcher("/view/employee/employee-list.jsp").forward(request, response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (ServletException | IOException e) {
             e.printStackTrace();
         }
     }

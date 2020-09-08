@@ -91,10 +91,22 @@
             <a href="/customer?action=delete&id=${customer.customerId}" role="button" class="btn btn-outline-dark mr-2">Delete <span class="fas fa-eraser"></span></a>
             <a href="/customer" role="button" class="btn btn-outline-dark float-left">Back</a>
         </div>
+        <c:if test="${messageInform != null}">
+            <div class="alert alert-success col-4 d-flex justify-content-center" role="alert">
+                    ${messageInform}
+            </div>
+        </c:if>
     </div>
 </div>
 <%@ include file="../../footer.jsp"%>
 <script src="../../bootstrap_4/js/jquery-3.5.1.js"></script>
 <script src="../../bootstrap_4/js/bootstrap.min.js"></script>
+<script>
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 2000);
+</script>
 </body>
 </html>
