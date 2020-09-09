@@ -13,7 +13,7 @@
     <title>Customer</title>
     <link type="text/css" rel="stylesheet" href="../../bootstrap_4/css/bootstrap.min.css">
     <link href="../../bootstrap_4/font/css/all.css" type="text/css" rel="stylesheet">
-<%--    <link href="../../bootstrap413/css/bootstrap.min.css" type="text/css" rel="stylesheet">--%>
+    <%--    <link href="../../bootstrap413/css/bootstrap.min.css" type="text/css" rel="stylesheet">--%>
     <link href="../../datatables/css/dataTables.bootstrap4.css" type="text/css" rel="stylesheet">
 </head>
 <body>
@@ -34,11 +34,12 @@
                 <th scope="col">Email</th>
                 <th scope="col">Address</th>
                 <th scope="col">Detail</th>
+                <th scope="col">Clear</th>
             </tr>
             </thead>
             <tbody>
             <c:forEach var="customer" items="${customerList}">
-                <tr>
+                <tr id="${customer.customerId}">
                     <td scope="row">${customer.customerId}</td>
                     <td>${customer.customerName}</td>
                     <c:if test='${customer.customerGender == 0}'>
@@ -52,6 +53,12 @@
                     <td>
                         <a href="/customer?action=view&id=${customer.customerId}">Detail <span
                                 class="fas fa-info mr-3"></span></a>
+                    </td>
+                    <td>
+                        <button id="clear1" type="button" class="btn btn-outline-dark" data-toggle="modal"
+                                data-target="#exampleModal" value="${customer.customerId}" onclick="passId(this.value)">
+                            Clear
+                        </button>
                     </td>
                 </tr>
             </c:forEach>
@@ -68,6 +75,28 @@
                     ${messageInform}
             </div>
         </c:if>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Warning</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you want to clear this customer ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input type="hidden" id="rowDelete"/>
+                <button id="clear2" type="button" class="btn btn-outline-dark" data-dismiss="modal"
+                        onclick="clearRowDelete()">Clear
+                </button>
+            </div>
+        </div>
     </div>
 </div>
 <%@ include file="../../footer.jsp" %>
@@ -88,7 +117,17 @@
             "lengthChange": false,
             "pageLength": 10
         })
-    })
+    });
+
+    function passId(id) {
+        document.getElementById("rowDelete").value = id;
+    }
+
+    function clearRowDelete() {
+        let valueRowDelete = document.getElementById("rowDelete").value;
+        document.getElementById(valueRowDelete).style.display = "none";
+    }
+
 </script>
 </body>
 </html>

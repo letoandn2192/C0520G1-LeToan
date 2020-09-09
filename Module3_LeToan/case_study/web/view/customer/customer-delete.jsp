@@ -15,7 +15,7 @@
     <link href="../../bootstrap_4/font/css/all.css" type="text/css" rel="stylesheet">
 </head>
 <body>
-<%@ include file="../../header.jsp"%>
+<%@ include file="../../header.jsp" %>
 <div class="container-fluid">
     <div class="body position-relative" style="top: 160px">
         <form method="post">
@@ -23,15 +23,18 @@
                 <legend class="text-center">Delete Information</legend>
                 <div class="form-group form-inline">
                     <label for="id" class="col-2 d-flex justify-content-start">Id</label>
-                    <input type="text" readonly class="col-8 form-control" id="id" name="id" value="${customer.customerId}">
+                    <input type="text" readonly class="col-8 form-control" id="id" name="id"
+                           value="${customer.customerId}">
                 </div>
                 <div class="form-group form-inline">
                     <label for="name" class="col-2 d-flex justify-content-start">Name</label>
-                    <input type="text" class="col-8 form-control" id="name" name="name" value="${customer.customerName}">
+                    <input type="text" class="col-8 form-control" id="name" name="name"
+                           value="${customer.customerName}">
                 </div>
                 <div class="form-group form-inline">
                     <label for="birthday" class="col-2 d-flex justify-content-start">Birthday</label>
-                    <input type="text" class="col-8 form-control" id="birthday" name="birthday" value="${customer.customerBirthday}">
+                    <input type="text" class="col-8 form-control" id="birthday" name="birthday"
+                           value="${customer.customerBirthday}">
                 </div>
                 <div class="form-group form-inline">
                     <label for="gender" class="col-2 d-flex justify-content-start">Gender</label>
@@ -44,19 +47,23 @@
                 </div>
                 <div class="form-group form-inline">
                     <label for="idNumber" class="col-2 d-flex justify-content-start">Identify Number</label>
-                    <input type="text" class="col-8 form-control" id="idNumber" name="idNumber" value="${customer.customerIdCard}">
+                    <input type="text" class="col-8 form-control" id="idNumber" name="idNumber"
+                           value="${customer.customerIdCard}">
                 </div>
                 <div class="form-group form-inline">
                     <label for="phone" class="col-2 d-flex justify-content-start">Phone</label>
-                    <input type="text" class="col-8 form-control" id="phone" name="phone" value="${customer.customerPhone}">
+                    <input type="text" class="col-8 form-control" id="phone" name="phone"
+                           value="${customer.customerPhone}">
                 </div>
                 <div class="form-group form-inline">
                     <label for="email" class="col-2 d-flex justify-content-start">Email</label>
-                    <input type="text" class="col-8 form-control" id="email" name="email" value="${customer.customerEmail}">
+                    <input type="text" class="col-8 form-control" id="email" name="email"
+                           value="${customer.customerEmail}">
                 </div>
                 <div class="form-group form-inline">
                     <label for="address" class="col-2 d-flex justify-content-start">Address</label>
-                    <input type="text" class="col-8 form-control" id="address" name="address" value="${customer.customerAddress}">
+                    <input type="text" class="col-8 form-control" id="address" name="address"
+                           value="${customer.customerAddress}">
                 </div>
                 <div class="form-group form-inline">
                     <label for="typecutomer" class="col-2 d-flex justify-content-start">Customer Type</label>
@@ -88,7 +95,7 @@
         </form>
     </div>
 </div>
-<%@ include file="../../footer.jsp"%>
+<%@ include file="../../footer.jsp" %>
 <script src="../../bootstrap_4/js/jquery-3.5.1.js"></script>
 <script src="../../bootstrap_4/js/bootstrap.min.js"></script>
 </body>

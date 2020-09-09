@@ -40,7 +40,12 @@
                     <button type="submit" class="btn btn-outline-dark">Submit</button>
                 </div>
             </div>
-            ${error}
+            <div class="form-group form-inline">
+                <div class="col-4"></div>
+                <div class="col-8 pl-0">
+                    <p class="text-danger">${error}</p>
+                </div>
+            </div>
         </fieldset>
     </form>
 </div>

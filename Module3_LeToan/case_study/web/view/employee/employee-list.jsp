@@ -33,11 +33,12 @@
                 <th scope="col">Email</th>
                 <th scope="col">Address</th>
                 <th scope="col">Detail</th>
+                <th scope="col">Clear</th>
             </tr>
             </thead>
             <tbody>
             <c:forEach var="employee" items="${employeeList}">
-                <tr>
+                <tr id="${employee.employeeId}">
                     <td scope="row">${employee.employeeId}</td>
                     <td>${employee.employeeName}</td>
                     <td>${employee.employeeBirthday}</td>
@@ -45,6 +46,12 @@
                     <td>${employee.employeeAddress}</td>
                     <td>
                         <a href="/employee?action=view&id=${employee.employeeId}">Detail <span class="fas fa-info mr-3"></span></a>
+                    </td>
+                    <td>
+                        <button id="clear1" type="button" class="btn btn-outline-dark" data-toggle="modal"
+                                data-target="#exampleModal" value="${employee.employeeId}" onclick="passId(this.value)">
+                            Clear
+                        </button>
                     </td>
                 </tr>
             </c:forEach>
@@ -60,6 +67,28 @@
                     ${messageInform}
             </div>
         </c:if>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Warning</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you want to clear this employee ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input type="hidden" id="rowDelete"/>
+                <button type="button" class="btn btn-outline-dark" data-dismiss="modal"
+                        onclick="clearRowDelete()">Clear
+                </button>
+            </div>
+        </div>
     </div>
 </div>
 <%@ include file="../../footer.jsp"%>
@@ -80,7 +109,17 @@
             "lengthChange": false,
             "pageLength": 10
         })
-    })
+    });
+
+    function passId(id) {
+        document.getElementById("rowDelete").value = id;
+    }
+
+    function clearRowDelete() {
+        let valueRowDelete = document.getElementById("rowDelete").value;
+        document.getElementById(valueRowDelete).style.display = "none";
+    }
+
 </script>
 </body>
 </html>

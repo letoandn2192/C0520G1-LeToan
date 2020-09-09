@@ -1,8 +1,14 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="col-12 row bg-info m-0 fixed-top" style="height: 100px">
     <div class="col-2 p-0">
         <img src="image/codegym.png" class="img-thumbnail" alt="logo" height="100" width="100">
     </div>
-    <h2 style="margin-top: 30px">FURAMA RESORT</h2>
+    <div class="col-8">
+        <h2 style="margin-top: 30px">FURAMA RESORT</h2>
+    </div>
+    <div class="col-2">
+        <h2>Welcome :<strong><%=session.getAttribute("userName") %></strong></h2>
+    </div>
 </div>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top col-12" style="top: 100px">

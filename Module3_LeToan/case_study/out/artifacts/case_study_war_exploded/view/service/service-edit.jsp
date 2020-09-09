@@ -141,22 +141,6 @@
 <script src="../../bootstrap_4/js/jquery-3.5.1.js"></script>
 <script src="../../bootstrap_4/js/bootstrap.min.js"></script>
 <script>
-    $(document).ready(
-        function () {
-            let check;
-            $("#serviceType").change(function () {
-                check = $("#serviceType").val();
-                if (check === "2") {
-                    $("#hidden3").hide();
-                    $("#hidden1, #hidden2, #hidden4").show();
-                } else if (check === "3") {
-                    $("#hidden1, #hidden2, #hidden3, #hidden4").hide();
-                } else {
-                    $("#hidden1, #hidden2, #hidden3, #hidden4").show();
-                }
-            });
-        }
-    );
 </script>
 </body>
 </html>

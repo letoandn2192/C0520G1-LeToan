@@ -34,12 +34,13 @@
                 <th scope="col">Deposit</th>
                 <th scope="col">Total Money</th>
                 <th scope="col">Detail</th>
+                <th scope="col">Clear</th>
 
             </tr>
             </thead>
             <tbody>
             <c:forEach var="contract" items="${contractList}">
-                <tr>
+                <tr id="${contract.contractId}">
                     <td scope="row">${contract.contractId}</td>
                     <td>${contract.contractStartDate}</td>
                     <td>${contract.contractEndDate}</td>
@@ -47,6 +48,12 @@
                     <td>${contract.contractTotalMoney}</td>
                     <td>
                         <a href="/contract?action=view&id=${contract.contractId}">Detail <span class="fas fa-info mr-3"></span></a>
+                    </td>
+                    <td>
+                        <button id="clear1" type="button" class="btn btn-outline-dark" data-toggle="modal"
+                                data-target="#exampleModal" value="${contract.contractId}" onclick="passId(this.value)">
+                            Clear
+                        </button>
                     </td>
                 </tr>
             </c:forEach>
@@ -78,6 +85,28 @@
         </c:if>
     </div>
 </div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Warning</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you want to clear this contract ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input type="hidden" id="rowDelete"/>
+                <button type="button" class="btn btn-outline-dark" data-dismiss="modal"
+                        onclick="clearRowDelete()">Clear
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <%@ include file="../../footer.jsp"%>
 <script src="../../bootstrap_4/js/jquery-3.5.1.js"></script>
 <script src="../../bootstrap_4/js/bootstrap.min.js"></script>
@@ -96,7 +125,15 @@
             "lengthChange": false,
             "pageLength": 10
         })
-    })
+    });
+    function passId(id) {
+        document.getElementById("rowDelete").value = id;
+    }
+
+    function clearRowDelete() {
+        let valueRowDelete = document.getElementById("rowDelete").value;
+        document.getElementById(valueRowDelete).style.display = "none";
+    }
 </script>
 </body>
 </html>

@@ -25,7 +25,7 @@ public class LoginServlet extends HttpServlet {
                 e.printStackTrace();
             }
         } else {
-            request.setAttribute("error", "Invalid !!!");
+            request.setAttribute("error", "Id or Password incorrect!!!");
             try {
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             } catch (ServletException | IOException e) {
