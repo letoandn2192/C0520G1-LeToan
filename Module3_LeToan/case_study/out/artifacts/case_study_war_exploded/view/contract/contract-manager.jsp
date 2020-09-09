@@ -13,6 +13,8 @@
     <title>Contract</title>
     <link type="text/css" rel="stylesheet" href="../../bootstrap_4/css/bootstrap.min.css">
     <link href="../../bootstrap_4/font/css/all.css" type="text/css" rel="stylesheet">
+    <link href="../../bootstrap413/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link href="../../datatables/css/dataTables.bootstrap4.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 <%@ include file="../../header.jsp" %>
@@ -21,7 +23,7 @@
         <div class="text-center col-12">
             <h2>Contract Manager</h2>
         </div>
-        <table class="table table-sm table-bordered table-hover">
+        <table id="tableStudent" class="table table-sm table-bordered table-hover">
             <thead class="thead-dark">
             <tr>
                 <th scope="col">Customer Id</th>
@@ -53,5 +55,14 @@
 <%@ include file="../../footer.jsp" %>
 <script src="../../bootstrap_4/js/jquery-3.5.1.js"></script>
 <script src="../../bootstrap_4/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#tableStudent").dataTable({
+            "dom": "lrtip",
+            "lengthChange": false,
+            "pageLength": 5
+        })
+    })
+</script>
 </body>
 </html>

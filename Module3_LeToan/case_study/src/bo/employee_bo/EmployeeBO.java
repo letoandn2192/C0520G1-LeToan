@@ -21,7 +21,7 @@ public interface EmployeeBO {
 
     int getCountEmployee();
 
-    List<String> checkValidateEmployee(String id, String idNumber, String salary, String phone, String email);
+    List<String> checkValidateEmployee(String id,String birthday, String idNumber, String salary, String phone, String email);
 
-    List<String> checkValidateEmployee(String idNumber, String salary, String phone, String email);
+    List<String> checkValidateEmployee(String birthday, String idNumber, String salary, String phone, String email);
 }

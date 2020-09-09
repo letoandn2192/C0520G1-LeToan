@@ -23,5 +23,5 @@ public interface ContractBO {
 
     List<Contract> managerContract();
 
-    List<String> checkValidateContract(String area, String cost);
+    List<String> checkValidateContract(String startDate, String endDate, String deposit, String totalMoney);
 }

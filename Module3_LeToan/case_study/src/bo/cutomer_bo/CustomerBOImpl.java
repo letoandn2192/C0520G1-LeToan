@@ -56,15 +56,21 @@ public class CustomerBOImpl implements CustomerBO {
     }
 
     @Override
-    public List<String> checkValidateCustomer(String id, String idNumber, String phone, String email) {
+    public List<String> checkValidateCustomer(String id, String birthday, String idNumber, String phone, String email) {
         List<String> errMessList = new ArrayList<>(4);
         boolean checkValidateId = checkValidateCustomerId(id);
+        boolean checkValidateBirthday = Regex.checkValidateDate(birthday);
         boolean checkValidateIdNumber = Regex.checkRegexIdNumber(idNumber);
         boolean checkValidatePhone = Regex.checkRegexPhoneNumber(phone);
         boolean checkValidateEmail = Regex.checkRegexEmail(email);
-        if (!(checkValidateId && checkValidateIdNumber && checkValidateEmail && checkValidatePhone)) {
+        if (!(checkValidateId && checkValidateBirthday && checkValidateIdNumber && checkValidateEmail && checkValidatePhone)) {
             if (!checkValidateId) {
                 errMessList.add( "Customer ID format KH-XXXX (X from 0-9)");
+            } else {
+                errMessList.add("");
+            }
+            if (!checkValidateBirthday) {
+                errMessList.add( "Birthday format DD/MM/YYYY");
             } else {
                 errMessList.add("");
             }
@@ -87,12 +93,18 @@ public class CustomerBOImpl implements CustomerBO {
         return errMessList;
     }
 
-    public List<String> checkValidateCustomer(String idNumber, String phone, String email) {
+    public List<String> checkValidateCustomer(String birthday, String idNumber, String phone, String email) {
         List<String> errMessList = new ArrayList<>(3);
         boolean checkValidateIdNumber = Regex.checkRegexIdNumber(idNumber);
+        boolean checkValidateBirthday = Regex.checkValidateDate(birthday);
         boolean checkValidatePhone = Regex.checkRegexPhoneNumber(phone);
         boolean checkValidateEmail = Regex.checkRegexEmail(email);
-        if (!(checkValidateIdNumber && checkValidateEmail && checkValidatePhone)) {
+        if (!(checkValidateBirthday && checkValidateIdNumber && checkValidateEmail && checkValidatePhone)) {
+            if (!checkValidateBirthday) {
+                errMessList.add( "Birthday format DD/MM/YYYY");
+            } else {
+                errMessList.add("");
+            }
             if (!checkValidateIdNumber) {
                 errMessList.add( "Id Card format XXXXXXXXX (X from 0-9)");
             } else {

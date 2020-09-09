@@ -39,6 +39,9 @@
                     <label for="quantity" class="col-2 d-flex justify-content-start">Quantity</label>
                     <input type="text" class="col-8 form-control" id="quantity" name="quantity">
                 </div>
+                <c:if test='${errMessList.get(0) != ""}'>
+                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(0)}</p>
+                </c:if>
 
                 <div class="form-group form-inline">
                     <div class="col-2"></div>

@@ -12,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer</title>
     <link type="text/css" rel="stylesheet" href="../../bootstrap_4/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="../../bootstrap_4/jquery-ui-1.12.1/jquery-ui.css">
     <link href="../../bootstrap_4/font/css/all.css" type="text/css" rel="stylesheet">
 </head>
 <body>
@@ -34,8 +35,11 @@
                 </div>
                 <div class="form-group form-inline">
                     <label for="birthday" class="col-2 d-flex justify-content-start">Birthday</label>
-                    <input type="date" class="col-8 form-control" id="birthday" name="birthday" required>
+                    <input type="text" class="col-8 form-control" id="birthday" name="birthday" required>
                 </div>
+                <c:if test='${errMessList.get(1) != ""}'>
+                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(1)}</p>
+                </c:if>
                 <div class="form-group form-inline">
                     <label for="gender" class="col-2 d-flex justify-content-start">Gender</label>
                     <select class="col-8 form-control" id="gender" name="gender">
@@ -47,22 +51,22 @@
                     <label for="idNumber" class="col-2 d-flex justify-content-start">Identify Number</label>
                     <input type="text" class="col-8 form-control" id="idNumber" name="idNumber">
                 </div>
-                <c:if test='${errMessList.get(1) != ""}'>
-                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(1)}</p>
+                <c:if test='${errMessList.get(2) != ""}'>
+                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(2)}</p>
                 </c:if>
                 <div class="form-group form-inline">
                     <label for="phone" class="col-2 d-flex justify-content-start">Phone</label>
                     <input type="text" class="col-8 form-control" id="phone" name="phone">
                 </div>
-                <c:if test='${errMessList.get(2) != ""}'>
-                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(2)}</p>
+                <c:if test='${errMessList.get(3) != ""}'>
+                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(3)}</p>
                 </c:if>
                 <div class="form-group form-inline">
                     <label for="email" class="col-2 d-flex justify-content-start">Email</label>
                     <input type="text" class="col-8 form-control" id="email" name="email">
                 </div>
-                <c:if test='${errMessList.get(3) != ""}'>
-                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(3)}</p>
+                <c:if test='${errMessList.get(4) != ""}'>
+                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(4)}</p>
                 </c:if>
                 <div class="form-group form-inline">
                     <label for="address" class="col-2 d-flex justify-content-start">Address</label>
@@ -94,12 +98,11 @@
 <%@ include file="../../footer.jsp" %>
 <script src="../../bootstrap_4/js/jquery-3.5.1.js"></script>
 <script src="../../bootstrap_4/js/bootstrap.min.js"></script>
-<%--<script>--%>
-<%--    window.setTimeout(function() {--%>
-<%--        $(".alert").fadeTo(500, 0).slideUp(500, function(){--%>
-<%--            $(this).remove();--%>
-<%--        });--%>
-<%--    }, 4000);--%>
-<%--</script>--%>
+<script src="../../bootstrap_4/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+<script>
+    $( document ).ready(function() {
+        $("#birthday").datepicker({ dateFormat: "dd/mm/yy" });
+    });
+</script>
 </body>
 </html>

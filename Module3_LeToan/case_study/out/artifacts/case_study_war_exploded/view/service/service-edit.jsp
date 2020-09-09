@@ -94,7 +94,8 @@
                         <option value="3">Room</option>
                     </select>
                 </div>
-                <c:if test="${service.serviceTypeId == 2 || service.serviceTypeId == 1}">
+                <c:set var="serviceId" value="${service.serviceTypeId}"/>
+                <c:if test="${serviceId == 2 || serviceId == 1}">
                     <div class="form-group form-inline" id="hidden1">
                         <label for="standard" class="col-2 d-flex justify-content-start">Standard Room</label>
                         <input type="text" class="col-8 form-control" id="standard" name="standard"
@@ -105,7 +106,7 @@
                         <input type="text" class="col-8 form-control" id="description" name="description"
                                value="${service.description}">
                     </div>
-                    <c:if test="${service.serviceTypeId == 1}">
+                    <c:if test="${serviceId == 1}">
                         <div class="form-group form-inline" id="hidden3">
                             <label for="pool" class="col-2 d-flex justify-content-start">Pool Area</label>
                             <input type="text" class="col-8 form-control" id="pool" name="pool"

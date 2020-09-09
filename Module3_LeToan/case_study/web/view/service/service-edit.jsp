@@ -94,19 +94,20 @@
                         <option value="3">Room</option>
                     </select>
                 </div>
-                <c:if test="${service.serviceTypeId == 2 || service.serviceTypeId == 1}">
-                    <div class="form-group form-inline">
+                <c:set var="serviceId" value="${service.serviceTypeId}"/>
+                <c:if test="${serviceId == 2 || serviceId == 1}">
+                    <div class="form-group form-inline" id="hidden1">
                         <label for="standard" class="col-2 d-flex justify-content-start">Standard Room</label>
                         <input type="text" class="col-8 form-control" id="standard" name="standard"
                                value="${service.standardRoom}">
                     </div>
-                    <div class="form-group form-inline">
+                    <div class="form-group form-inline" id="hidden2">
                         <label for="description" class="col-2 d-flex justify-content-start">Description</label>
                         <input type="text" class="col-8 form-control" id="description" name="description"
                                value="${service.description}">
                     </div>
-                    <c:if test="${service.serviceTypeId == 1}">
-                        <div class="form-group form-inline">
+                    <c:if test="${serviceId == 1}">
+                        <div class="form-group form-inline" id="hidden3">
                             <label for="pool" class="col-2 d-flex justify-content-start">Pool Area</label>
                             <input type="text" class="col-8 form-control" id="pool" name="pool"
                                    value="${service.poolArea}">
@@ -115,7 +116,7 @@
                             <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(3)}</p>
                         </c:if>
                     </c:if>
-                    <div class="form-group form-inline">
+                    <div class="form-group form-inline" id="hidden4">
                         <label for="floor" class="col-2 d-flex justify-content-start">Floors</label>
                         <input type="text" class="col-8 form-control" id="floor" name="floor"
                                value="${service.numberFloor}">
@@ -139,5 +140,23 @@
 <%@ include file="../../footer.jsp" %>
 <script src="../../bootstrap_4/js/jquery-3.5.1.js"></script>
 <script src="../../bootstrap_4/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(
+        function () {
+            let check;
+            $("#serviceType").change(function () {
+                check = $("#serviceType").val();
+                if (check === "2") {
+                    $("#hidden3").hide();
+                    $("#hidden1, #hidden2, #hidden4").show();
+                } else if (check === "3") {
+                    $("#hidden1, #hidden2, #hidden3, #hidden4").hide();
+                } else {
+                    $("#hidden1, #hidden2, #hidden3, #hidden4").show();
+                }
+            });
+        }
+    );
+</script>
 </body>
 </html>

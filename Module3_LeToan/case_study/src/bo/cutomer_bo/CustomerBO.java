@@ -21,7 +21,7 @@ public interface CustomerBO {
 
     int getCountCustomer();
 
-    List<String> checkValidateCustomer(String id, String idNumber, String phone, String email);
+    List<String> checkValidateCustomer(String id, String birthday, String idNumber, String phone, String email);
 
-    List<String> checkValidateCustomer(String idNumber, String phone, String email);
+    List<String> checkValidateCustomer(String birthday, String idNumber, String phone, String email);
 }

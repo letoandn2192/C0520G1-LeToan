@@ -1,5 +1,6 @@
 package dao.contract_dao;
 
+import bo.common_bo.Regex;
 import dao.DBConnection;
 import model.Contract;
 
@@ -39,8 +40,8 @@ public class ContractDAOImpl implements ContractDAO {
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     int id = resultSet.getInt("contract_id");
-                    String startDate = resultSet.getString("contract_start_date");
-                    String endDate = resultSet.getString("contract_end_date");
+                    String startDate = Regex.changeFormatDateDisplay(resultSet.getString("contract_start_date"));
+                    String endDate = Regex.changeFormatDateDisplay(resultSet.getString("contract_end_date"));
                     double deposit = resultSet.getDouble("contract_deposit");
                     double totalMoney = resultSet.getDouble("contract_total_money");
                     String employeeId = resultSet.getString("employee_id");
@@ -79,8 +80,8 @@ public class ContractDAOImpl implements ContractDAO {
                 preparedStatement.setInt(1, id );
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
-                    String startDate = resultSet.getString("contract_start_date");
-                    String endDate = resultSet.getString("contract_end_date");
+                    String startDate = Regex.changeFormatDateDisplay(resultSet.getString("contract_start_date"));
+                    String endDate = Regex.changeFormatDateDisplay(resultSet.getString("contract_end_date"));
                     double deposit = resultSet.getDouble("contract_deposit");
                     double totalMoney = resultSet.getDouble("contract_total_money");
                     String employeeId = resultSet.getString("employee_id");
@@ -115,8 +116,8 @@ public class ContractDAOImpl implements ContractDAO {
         if (connection != null) {
             try {
                 preparedStatement = connection.prepareStatement(CREATE_NEW_CONTRACT);
-                preparedStatement.setString(1, contract.getContractStartDate());
-                preparedStatement.setString(2, contract.getContractEndDate());
+                preparedStatement.setString(1, Regex.changeFormatDateSQL(contract.getContractStartDate()));
+                preparedStatement.setString(2, Regex.changeFormatDateSQL(contract.getContractEndDate()));
                 preparedStatement.setDouble(3, contract.getContractDeposit());
                 preparedStatement.setDouble(4, contract.getContractTotalMoney());
                 preparedStatement.setString(5, contract.getEmployeeId());
@@ -147,8 +148,8 @@ public class ContractDAOImpl implements ContractDAO {
             try {
                 preparedStatement = connection.prepareStatement(EDIT_CONTRACT_INFO);
                 preparedStatement.setInt(8, contract.getContractId());
-                preparedStatement.setString(1, contract.getContractStartDate());
-                preparedStatement.setString(2, contract.getContractEndDate());
+                preparedStatement.setString(1, Regex.changeFormatDateSQL(contract.getContractStartDate()));
+                preparedStatement.setString(2, Regex.changeFormatDateSQL(contract.getContractEndDate()));
                 preparedStatement.setDouble(3, contract.getContractDeposit());
                 preparedStatement.setDouble(4, contract.getContractTotalMoney());
                 preparedStatement.setString(5, contract.getEmployeeId());
@@ -210,8 +211,8 @@ public class ContractDAOImpl implements ContractDAO {
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     int id = resultSet.getInt("contract_id");
-                    String startDate = resultSet.getString("contract_start_date");
-                    String endDate = resultSet.getString("contract_end_date");
+                    String startDate = Regex.changeFormatDateDisplay(resultSet.getString("contract_start_date"));
+                    String endDate = Regex.changeFormatDateDisplay(resultSet.getString("contract_end_date"));
                     double deposit = resultSet.getDouble("contract_deposit");
                     double totalMoney = resultSet.getDouble("contract_total_money");
                     String employeeId = resultSet.getString("employee_id");
@@ -252,8 +253,8 @@ public class ContractDAOImpl implements ContractDAO {
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     int id = resultSet.getInt("contract_id");
-                    String startDate = resultSet.getString("contract_start_date");
-                    String endDate = resultSet.getString("contract_end_date");
+                    String startDate = Regex.changeFormatDateDisplay(resultSet.getString("contract_start_date"));
+                    String endDate = Regex.changeFormatDateDisplay(resultSet.getString("contract_end_date"));
                     double deposit = resultSet.getDouble("contract_deposit");
                     double totalMoney = resultSet.getDouble("contract_total_money");
                     String employeeId = resultSet.getString("employee_id");

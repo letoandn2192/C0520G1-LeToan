@@ -60,16 +60,22 @@ public class EmployeeBOImpl implements EmployeeBO{
     }
 
     @Override
-    public List<String> checkValidateEmployee(String id, String idNumber, String salary, String phone, String email) {
+    public List<String> checkValidateEmployee(String id, String birthday, String idNumber, String salary, String phone, String email) {
         List<String> errMessList = new ArrayList<>();
         boolean checkValidateId = checkValidateEmployeeId(id);
+        boolean checkValidateDate = Regex.checkValidateDate(birthday);
         boolean checkValidateIdNumber = Regex.checkRegexIdNumber(idNumber);
         boolean checkValidateSalary = Regex.checkRegexDoublePositive(salary);
         boolean checkValidatePhone = Regex.checkRegexPhoneNumber(phone);
         boolean checkValidateEmail = Regex.checkRegexEmail(email);
-        if (!(checkValidateId && checkValidateIdNumber && checkValidateEmail && checkValidatePhone && checkValidateSalary)) {
+        if (!(checkValidateId && checkValidateDate && checkValidateIdNumber && checkValidateEmail && checkValidatePhone && checkValidateSalary)) {
             if (!checkValidateId) {
                 errMessList.add( "Customer ID format NV-XXXX (X from 0-9)");
+            } else {
+                errMessList.add("");
+            }
+            if (!checkValidateDate) {
+                errMessList.add( "Birthday format DD/MM/YYYY");
             } else {
                 errMessList.add("");
             }
@@ -98,13 +104,19 @@ public class EmployeeBOImpl implements EmployeeBO{
     }
 
     @Override
-    public List<String> checkValidateEmployee(String idNumber, String salary, String phone, String email) {
+    public List<String> checkValidateEmployee(String birthday, String idNumber, String salary, String phone, String email) {
         List<String> errMessList = new ArrayList<>();
         boolean checkValidateIdNumber = Regex.checkRegexIdNumber(idNumber);
+        boolean checkValidateDate = Regex.checkValidateDate(birthday);
         boolean checkValidateSalary = Regex.checkRegexDoublePositive(salary);
         boolean checkValidatePhone = Regex.checkRegexPhoneNumber(phone);
         boolean checkValidateEmail = Regex.checkRegexEmail(email);
-        if (!(checkValidateIdNumber && checkValidateEmail && checkValidatePhone && checkValidateSalary)) {
+        if (!(checkValidateIdNumber && checkValidateDate && checkValidateEmail && checkValidatePhone && checkValidateSalary)) {
+            if (!checkValidateDate) {
+                errMessList.add( "Birthday format DD/MM/YYYY");
+            } else {
+                errMessList.add("");
+            }
             if (!checkValidateIdNumber) {
                 errMessList.add( "Id Card format XXXXXXXXX (X from 0-9)");
             } else {

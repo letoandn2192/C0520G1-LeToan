@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Date;
 import java.util.List;
 
 @WebServlet(name = "ContractServlet", urlPatterns = "/contract")
@@ -77,26 +76,28 @@ public class ContractServlet extends HttpServlet {
     }
 
     private void showContractList(HttpServletRequest request, HttpServletResponse response) {
-        int start, offset = 5, page = 1;
-
-        if (request.getParameter("page") != null) {
-            page = Integer.parseInt(request.getParameter("page"));
-        }
-        int totalRecord = contractBO.getCountContract();
-        int totalPage = totalRecord / offset;
-        if (totalRecord % offset != 0) {
-            totalPage = totalPage + 1;
-        }
-
-        if (totalRecord <= 5) {
-            start = 0;
-            offset = totalRecord;
-        } else {
-            start = (page - 1) * 5;
-        }
-        List<Contract> contractList = contractBO.getContractByPage(start, offset);
+//        int start, offset = 5, page = 1;
+//
+//        if (request.getParameter("page") != null) {
+//            page = Integer.parseInt(request.getParameter("page"));
+//        }
+//        int totalRecord = contractBO.getCountContract();
+//        int totalPage = totalRecord / offset;
+//        if (totalRecord % offset != 0) {
+//            totalPage = totalPage + 1;
+//        }
+//
+//        if (totalRecord <= 5) {
+//            start = 0;
+//            offset = totalRecord;
+//        } else {
+//            start = (page - 1) * 5;
+//        }
+//        List<Contract> contractList = contractBO.getContractByPage(start, offset);
+//        request.setAttribute("contractList", contractList);
+//        request.setAttribute("totalPage", totalPage);
+        List<Contract> contractList = contractBO.findAllContract();
         request.setAttribute("contractList", contractList);
-        request.setAttribute("totalPage", totalPage);
         try {
             request.getRequestDispatcher("view/contract/contract-list.jsp").forward(request, response);
         } catch (ServletException | IOException e) {
@@ -118,17 +119,26 @@ public class ContractServlet extends HttpServlet {
     private void createContract(HttpServletRequest request, HttpServletResponse response) {
         String startDate = request.getParameter("startDate");
         String endDate = request.getParameter("endDate");
-        double deposit = Double.parseDouble(request.getParameter("deposit"));
-        double totalMoney = Double.parseDouble(request.getParameter("totalMoney"));
+        String deposit = request.getParameter("deposit");
+        String totalMoney = request.getParameter("totalMoney");
         String employeeId = request.getParameter("employeeId");
         String customerId = request.getParameter("customerId");
         String serviceId = request.getParameter("serviceId");
-
-        contractBO.create(new Contract(startDate, endDate, deposit, totalMoney, employeeId, customerId, serviceId));
-        try {
-            response.sendRedirect("/contract");
-        } catch (IOException e) {
-            e.printStackTrace();
+        List<String> errMessList = contractBO.checkValidateContract(startDate, endDate, deposit, totalMoney);
+        if (errMessList.isEmpty()) {
+            contractBO.create(new Contract(startDate, endDate, Double.parseDouble(deposit), Double.parseDouble(totalMoney), employeeId, customerId, serviceId));
+            request.setAttribute("messageInform", "Create Successful !!!");
+            showContractList(request, response);
+        } else {
+            request.setAttribute("errMessList", errMessList);
+            request.setAttribute("employeeList", employeeBO.findAllEmployee());
+            request.setAttribute("customerList", customerBO.findAllCustomer());
+            request.setAttribute("serviceList", serviceBO.findAllService());
+            try {
+                request.getRequestDispatcher("view/contract/contract-create.jsp").forward(request, response);
+            } catch (ServletException | IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -171,21 +181,39 @@ public class ContractServlet extends HttpServlet {
         if (contract == null) {
             request.setAttribute("message", "Not Found !!!");
         } else {
-            contract.setContractStartDate(request.getParameter("startDate"));
-            contract.setContractEndDate(request.getParameter("endDate"));
-            contract.setContractDeposit(Double.parseDouble(request.getParameter("deposit")));
-            contract.setContractTotalMoney(Double.parseDouble(request.getParameter("totalMoney")));
+            String startDate = request.getParameter("startDate");
+            String endDate = request.getParameter("endDate");
+            String deposit = request.getParameter("deposit");
+            String totalMoney = request.getParameter("totalMoney");
             contract.setEmployeeId(request.getParameter("employeeId"));
             contract.setCustomerId(request.getParameter("customerId"));
             contract.setServiceId(request.getParameter("serviceId"));
-
-            contractBO.editContractInfo(contract);
             request.setAttribute("contract", contract);
-            try {
-                request.getRequestDispatcher("/view/contract/contract-detail.jsp").forward(request, response);
-            } catch (ServletException | IOException e) {
-                e.printStackTrace();
+            List<String> errMessList = contractBO.checkValidateContract(startDate, endDate, deposit, totalMoney);
+            if (errMessList.isEmpty()) {
+                contract.setContractStartDate(startDate);
+                contract.setContractEndDate(startDate);
+                contract.setContractDeposit(Double.parseDouble(deposit));
+                contract.setContractTotalMoney(Double.parseDouble(totalMoney));
+                contractBO.editContractInfo(contract);
+                request.setAttribute("messageInform", "Update Successful !!!");
+                try {
+                    request.getRequestDispatcher("view/contract/contract-detail.jsp").forward(request, response);
+                } catch (ServletException | IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                request.setAttribute("errMessList", errMessList);
+                request.setAttribute("employeeList", employeeBO.findAllEmployee());
+                request.setAttribute("customerList", customerBO.findAllCustomer());
+                request.setAttribute("serviceList", serviceBO.findAllService());
+                try {
+                    request.getRequestDispatcher("view/contract/contract-edit.jsp").forward(request, response);
+                } catch (ServletException | IOException e) {
+                    e.printStackTrace();
+                }
             }
+
         }
     }
 
@@ -208,15 +236,12 @@ public class ContractServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         Contract contract = contractBO.findContractById(id);
         if (contract == null) {
-            request.setAttribute("message", "Not Found !!!");
+            request.setAttribute("messageInform", "Not Found !!!");
         } else {
             contractBO.deleteContract(id);
+            request.setAttribute("messageInform", "Delete Successful !!!");
         }
-        try {
-            response.sendRedirect("/contract");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        showContractList(request, response);
     }
 
     private void showContractSearch(HttpServletRequest request, HttpServletResponse response) {

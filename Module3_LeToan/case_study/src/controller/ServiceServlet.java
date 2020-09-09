@@ -65,26 +65,28 @@ public class ServiceServlet extends HttpServlet {
     }
 
     private void showServiceList(HttpServletRequest request, HttpServletResponse response) {
-        int start, offset = 5, page = 1;
-
-        if (request.getParameter("page") != null) {
-            page = Integer.parseInt(request.getParameter("page"));
-        }
-        int totalRecord = serviceBO.getCountService();
-        int totalPage = totalRecord / offset;
-        if (totalRecord % offset != 0) {
-            totalPage = totalPage + 1;
-        }
-
-        if (totalRecord <= 5) {
-            start = 0;
-            offset = totalRecord;
-        } else {
-            start = (page - 1) * 5;
-        }
-        List<Service> serviceList = serviceBO.getServiceByPage(start, offset);
+//        int start, offset = 5, page = 1;
+//
+//        if (request.getParameter("page") != null) {
+//            page = Integer.parseInt(request.getParameter("page"));
+//        }
+//        int totalRecord = serviceBO.getCountService();
+//        int totalPage = totalRecord / offset;
+//        if (totalRecord % offset != 0) {
+//            totalPage = totalPage + 1;
+//        }
+//
+//        if (totalRecord <= 5) {
+//            start = 0;
+//            offset = totalRecord;
+//        } else {
+//            start = (page - 1) * 5;
+//        }
+//        List<Service> serviceList = serviceBO.getServiceByPage(start, offset);
+//        request.setAttribute("serviceList", serviceList);
+//        request.setAttribute("totalPage", totalPage);
+        List<Service> serviceList = serviceBO.findAllService();
         request.setAttribute("serviceList", serviceList);
-        request.setAttribute("totalPage", totalPage);
         try {
             request.getRequestDispatcher("view/service/service-list.jsp").forward(request, response);
         } catch (ServletException | IOException e) {

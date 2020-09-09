@@ -1,9 +1,11 @@
 package bo.contract_bo;
 
+import bo.common_bo.Regex;
 import dao.contract_dao.ContractDAO;
 import dao.contract_dao.ContractDAOImpl;
 import model.Contract;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ContractBOImpl implements ContractBO {
@@ -52,5 +54,37 @@ public class ContractBOImpl implements ContractBO {
     @Override
     public List<Contract> managerContract() {
         return contractDAO.managerContract();
+    }
+
+    @Override
+    public List<String> checkValidateContract(String startDate, String endDate, String deposit, String totalMoney) {
+        List<String> errMessList = new ArrayList<>();
+        boolean checkValidateStartDate = Regex.checkValidateDate(startDate);
+        boolean checkValidateEndDate = Regex.checkValidateDate(endDate);
+        boolean checkValidateDeposit = Regex.checkRegexDoublePositive(deposit);
+        boolean checkValidateTotalMoney = Regex.checkRegexDoublePositive(totalMoney);
+        if (!(checkValidateStartDate && checkValidateEndDate && checkValidateDeposit && checkValidateTotalMoney)) {
+            if (!checkValidateStartDate) {
+                errMessList.add("Date Format dd/mm/yyyy");
+            } else {
+                errMessList.add("");
+            }
+            if (!checkValidateEndDate) {
+                errMessList.add("Date Format dd/mm/yyyy");
+            } else {
+                errMessList.add("");
+            }
+            if (!checkValidateDeposit) {
+                errMessList.add("Deposit must be positive Number");
+            } else {
+                errMessList.add("");
+            }
+            if (!checkValidateTotalMoney) {
+                errMessList.add("Total money must be positive Number");
+            } else {
+                errMessList.add("");
+            }
+        }
+        return errMessList;
     }
 }

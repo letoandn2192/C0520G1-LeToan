@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Date;
 import java.util.List;
 
 @WebServlet(name = "CustomerServlet", urlPatterns = "/customer")
@@ -66,26 +65,8 @@ public class CustomerServlet extends HttpServlet {
     }
 
     private void showCustomerList (HttpServletRequest request, HttpServletResponse response) {
-        int start, offset = 5, page = 1;
-
-        if (request.getParameter("page") != null) {
-            page = Integer.parseInt(request.getParameter("page"));
-        }
-        int totalRecord = customerBO.getCountCustomer();
-        int totalPage = totalRecord / offset;
-        if (totalRecord % offset != 0) {
-            totalPage = totalPage + 1;
-        }
-
-        if (totalRecord <= 5) {
-            start = 0;
-            offset = totalRecord;
-        } else {
-            start = (page - 1) * 5;
-        }
-        List<Customer> customerList = customerBO.getCustomerByPage(start, offset);
+        List<Customer> customerList = customerBO.findAllCustomer();
         request.setAttribute("customerList", customerList);
-        request.setAttribute("totalPage", totalPage);
         try {
             request.getRequestDispatcher("view/customer/customer-list.jsp").forward(request, response);
         } catch (ServletException | IOException e) {
@@ -131,15 +112,19 @@ public class CustomerServlet extends HttpServlet {
         } else {
             customer.setCustomerTypeId(Integer.parseInt(request.getParameter("typeId")));
             customer.setCustomerName(request.getParameter("name"));
-            customer.setCustomerBirthday(request.getParameter("birthday"));
+            String birthday = request.getParameter("birthday");
             customer.setCustomerGender(Integer.parseInt(request.getParameter("gender")));
-            customer.setCustomerIdCard(request.getParameter("idNumber"));
-            customer.setCustomerPhone(request.getParameter("phone"));
-            customer.setCustomerEmail(request.getParameter("email"));
+            String idNumber = request.getParameter("idNumber");
+            String phone = request.getParameter("phone");
+            String email = request.getParameter("email");
             customer.setCustomerAddress(request.getParameter("address"));
 
-            List<String> errMessList = customerBO.checkValidateCustomer(customer.getCustomerIdCard(), customer.getCustomerPhone(), customer.getCustomerEmail());
+            List<String> errMessList = customerBO.checkValidateCustomer(birthday, idNumber, phone, email);
             if (errMessList.isEmpty()) {
+                customer.setCustomerBirthday(birthday);
+                customer.setCustomerIdCard(idNumber);
+                customer.setCustomerPhone(phone);
+                customer.setCustomerEmail(email);
                 customerBO.editCustomerInfo(customer);
                 request.setAttribute("messageInform", "Update Successful !!!");
                 request.setAttribute("customer", customer);
@@ -205,7 +190,7 @@ public class CustomerServlet extends HttpServlet {
         String email = request.getParameter("email");
         String address = request.getParameter("address");
         int typeId = Integer.parseInt(request.getParameter("typeId"));
-        List<String> errMessList = customerBO.checkValidateCustomer(id, idNumber, phone, email);
+        List<String> errMessList = customerBO.checkValidateCustomer(id, birthday, idNumber, phone, email);
         if (errMessList.isEmpty()) {
             Customer customer = new Customer(id, name, birthday, gender, idNumber, phone, email, address, typeId);
             customerBO.create(customer);

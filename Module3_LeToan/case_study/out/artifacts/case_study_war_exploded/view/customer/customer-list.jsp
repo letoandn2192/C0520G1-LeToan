@@ -13,6 +13,8 @@
     <title>Customer</title>
     <link type="text/css" rel="stylesheet" href="../../bootstrap_4/css/bootstrap.min.css">
     <link href="../../bootstrap_4/font/css/all.css" type="text/css" rel="stylesheet">
+<%--    <link href="../../bootstrap413/css/bootstrap.min.css" type="text/css" rel="stylesheet">--%>
+    <link href="../../datatables/css/dataTables.bootstrap4.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 <%@ include file="../../header.jsp" %>
@@ -23,7 +25,7 @@
                 Customer</a>
             <h2>List of Customer</h2>
         </div>
-        <table class="table table-sm table-bordered table-hover">
+        <table id="tableStudent" class="table table-sm table-bordered table-hover">
             <thead class="thead-dark">
             <tr>
                 <th scope="col">Id</th>
@@ -55,21 +57,7 @@
             </c:forEach>
             </tbody>
         </table>
-        <c:if test='${action != "search"}'>
-            <div class="col-12 d-flex justify-content-center">
-                <ul class="pagination pagination">
-                        <%--                <li class="page-item"><a class="page-link" href="#">Previous</a></li>--%>
-                    <li class="page-item"><a class="page-link" href="/customer?page=1&search=${search}">1</a></li>
-                    <c:if test="${totalPage > 1}">
-                        <c:forEach var="i" begin="2" end="${totalPage}">
-                            <li class="page-item"><a class="page-link" href="/customer?page=${i}&search=${search}">${i}</a>
-                            </li>
-                        </c:forEach>
-                    </c:if>
-                        <%--                <li class="page-item"><a class="page-link" href="#">Next</a></li>--%>
-                </ul>
-            </div>
-        </c:if>
+
         <c:if test='${action == "search"}'>
             <div class="col-12 d-flex justify-content-center">
                 <a class="btn btn-outline-dark" href="/customer">Back</a>
@@ -85,12 +73,22 @@
 <%@ include file="../../footer.jsp" %>
 <script src="../../bootstrap_4/js/jquery-3.5.1.js"></script>
 <script src="../../bootstrap_4/js/bootstrap.min.js"></script>
+<script src="../../datatables/js/jquery.dataTables.min.js"></script>
+<script src="../../datatables/js/dataTables.bootstrap4.js"></script>
 <script>
     window.setTimeout(function () {
         $(".alert").fadeTo(500, 0).slideUp(500, function () {
             $(this).remove();
         });
     }, 2000);
+
+    $(document).ready(function () {
+        $("#tableStudent").dataTable({
+            "dom": "lrtip",
+            "lengthChange": false,
+            "pageLength": 10
+        })
+    })
 </script>
 </body>
 </html>

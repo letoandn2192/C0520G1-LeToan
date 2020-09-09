@@ -66,26 +66,28 @@ public class EmployeeServlet extends HttpServlet {
     }
 
     private void showEmployeeList(HttpServletRequest request, HttpServletResponse response) {
-        int start, offset = 5, page = 1;
-
-        if (request.getParameter("page") != null) {
-            page = Integer.parseInt(request.getParameter("page"));
-        }
-        int totalRecord = employeeBO.getCountEmployee();
-        int totalPage = totalRecord / offset;
-        if (totalRecord % offset != 0) {
-            totalPage = totalPage + 1;
-        }
-
-        if (totalRecord <= 5) {
-            start = 0;
-            offset = totalRecord;
-        } else {
-            start = (page - 1) * 5;
-        }
-        List<Employee> employeeList = employeeBO.getEmployeeByPage(start, offset);
+//        int start, offset = 5, page = 1;
+//
+//        if (request.getParameter("page") != null) {
+//            page = Integer.parseInt(request.getParameter("page"));
+//        }
+//        int totalRecord = employeeBO.getCountEmployee();
+//        int totalPage = totalRecord / offset;
+//        if (totalRecord % offset != 0) {
+//            totalPage = totalPage + 1;
+//        }
+//
+//        if (totalRecord <= 5) {
+//            start = 0;
+//            offset = totalRecord;
+//        } else {
+//            start = (page - 1) * 5;
+//        }
+//        List<Employee> employeeList = employeeBO.getEmployeeByPage(start, offset);
+//        request.setAttribute("employeeList", employeeList);
+//        request.setAttribute("totalPage", totalPage);
+        List<Employee> employeeList = employeeBO.findAllEmployee();
         request.setAttribute("employeeList", employeeList);
-        request.setAttribute("totalPage", totalPage);
         try {
             request.getRequestDispatcher("view/employee/employee-list.jsp").forward(request, response);
         } catch (ServletException | IOException e) {
@@ -130,18 +132,23 @@ public class EmployeeServlet extends HttpServlet {
             request.setAttribute("message", "Not Found !!!");
         } else {
             employee.setEmployeeName(request.getParameter("name"));
-            employee.setEmployeeBirthday(request.getParameter("birthday"));
-            employee.setEmployeeIdCard(request.getParameter("idNumber"));
-            employee.setEmployeeSalary(Double.parseDouble(request.getParameter("salary")));
-            employee.setEmployeePhone(request.getParameter("phone"));
-            employee.setEmployeeEmail(request.getParameter("email"));
+            String birthday = request.getParameter("birthday");
+            String idNumber = request.getParameter("idNumber");
+            String salary = request.getParameter("salary");
+            String phone = request.getParameter("phone");
+            String email = request.getParameter("email");
             employee.setEmployeeAddress(request.getParameter("address"));
             employee.setPositionId(Integer.parseInt(request.getParameter("position")));
             employee.setEducationDegreeId(Integer.parseInt(request.getParameter("education")));
             employee.setDivisionId(Integer.parseInt(request.getParameter("division")));
             employee.setUserName(request.getParameter("username"));
-            List<String> errMessList = employeeBO.checkValidateEmployee(employee.getEmployeeIdCard(), request.getParameter("salary"), employee.getEmployeePhone(), employee.getEmployeeEmail());
+            List<String> errMessList = employeeBO.checkValidateEmployee(birthday, idNumber, salary, phone, email);
             if (errMessList.isEmpty()) {
+                employee.setEmployeeBirthday(request.getParameter("birthday"));
+                employee.setEmployeeIdCard(request.getParameter("idNumber"));
+                employee.setEmployeeSalary(Double.parseDouble(request.getParameter("salary")));
+                employee.setEmployeePhone(request.getParameter("phone"));
+                employee.setEmployeeEmail(request.getParameter("email"));
                 employeeBO.editEmployeeInfo(employee);
                 request.setAttribute("messageInform", "Update Successful");
                 request.setAttribute("employee", employee);
@@ -214,7 +221,7 @@ public class EmployeeServlet extends HttpServlet {
         int education = Integer.parseInt(request.getParameter("education"));
         int division = Integer.parseInt(request.getParameter("division"));
         String username = request.getParameter("username");
-        List<String> errMessList = employeeBO.checkValidateEmployee(id, idNumber, salary, phone, email);
+        List<String> errMessList = employeeBO.checkValidateEmployee(id, birthday, idNumber, salary, phone, email);
         if (errMessList.isEmpty()) {
             Employee employee = new Employee(id, name, birthday, idNumber, Double.parseDouble(salary), phone, email, address, position, education, division, username);
             employeeBO.create(employee);
