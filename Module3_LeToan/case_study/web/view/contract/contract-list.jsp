@@ -57,20 +57,6 @@
                     </td>
                 </tr>
             </c:forEach>
-<%--            <tr class="border-0">--%>
-<%--                <td></td>--%>
-<%--                <td></td>--%>
-<%--                <td></td>--%>
-<%--                <td></td>--%>
-<%--                <td>--%>
-<%--                    <c:set var="total" value="${0}"/>--%>
-<%--                    <c:forEach var="test" items="${contractList}">--%>
-<%--                        <c:set var="total" value="${total + test.contractTotalMoney}"/>--%>
-<%--                    </c:forEach>--%>
-<%--                    ${total}--%>
-<%--                </td>--%>
-<%--                <td></td>--%>
-<%--            </tr>--%>
             </tbody>
         </table>
         <c:if test='${action == "search"}'>

@@ -35,14 +35,16 @@
                     <input type="text" class="col-8 form-control" id="area" name="area" value="${service.serviceArea}">
                 </div>
                 <c:if test='${errMessList.get(0) != ""}'>
-                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(0)}</p>
+                    <p class="text-danger alert p-0"
+                       style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(0)}</p>
                 </c:if>
                 <div class="form-group form-inline">
                     <label for="cost" class="col-2 d-flex justify-content-start">Cost</label>
                     <input type="text" class="col-8 form-control" id="cost" name="cost" value="${service.serviceCost}">
                 </div>
                 <c:if test='${errMessList.get(1) != ""}'>
-                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(1)}</p>
+                    <p class="text-danger alert p-0"
+                       style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(1)}</p>
                 </c:if>
                 <div class="form-group form-inline">
                     <label for="maxPerson" class="col-2 d-flex justify-content-start">Max Person</label>
@@ -50,7 +52,8 @@
                            value="${service.serviceMaxPerson}">
                 </div>
                 <c:if test='${errMessList.get(2) != ""}'>
-                    <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(2)}</p>
+                    <p class="text-danger alert p-0"
+                       style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(2)}</p>
                 </c:if>
                 <div class="form-group form-inline">
                     <label for="rentType" class="col-2 d-flex justify-content-start">Rent Type</label>
@@ -77,53 +80,59 @@
                 </div>
                 <div class="form-group form-inline">
                     <label for="serviceType" class="col-2 d-flex justify-content-start">Service Type</label>
-                    <select class="col-8 form-control" id="serviceType" name="serviceType">
-                        <option value="${service.serviceTypeId}">
-                            <c:if test="${service.serviceTypeId == 1}">
-                                Villa
-                            </c:if>
-                            <c:if test="${service.serviceTypeId == 2}">
-                                House
-                            </c:if>
-                            <c:if test="${service.serviceTypeId == 3}">
-                                Room
-                            </c:if>
-                        </option>
-                        <option value="1">Villa</option>
-                        <option value="2">House</option>
-                        <option value="3">Room</option>
+
+                    <select class="col-8 form-control" id="serviceType" name="serviceType"
+                            onchange="displayHiddenItem()">
+                        <c:choose>
+                            <c:when test="${service.serviceTypeId == 1}">
+                                <option value="1" selected>Villa</option>
+                                <option value="2">House</option>
+                                <option value="3">Room</option>
+                            </c:when>
+                            <c:when test="${service.serviceTypeId == 2}">
+                                <option value="1">Villa</option>
+                                <option value="2" selected>House</option>
+                                <option value="3">Room</option>
+                            </c:when>
+                            <c:when test="${service.serviceTypeId == 3}">
+                                <option value="1">Villa</option>
+                                <option value="2">House</option>
+                                <option value="3" selected>Room</option>
+                            </c:when>
+                        </c:choose>
                     </select>
                 </div>
-                <c:set var="serviceId" value="${service.serviceTypeId}"/>
-                <c:if test="${serviceId == 2 || serviceId == 1}">
-                    <div class="form-group form-inline" id="hidden1">
-                        <label for="standard" class="col-2 d-flex justify-content-start">Standard Room</label>
-                        <input type="text" class="col-8 form-control" id="standard" name="standard"
-                               value="${service.standardRoom}">
-                    </div>
-                    <div class="form-group form-inline" id="hidden2">
-                        <label for="description" class="col-2 d-flex justify-content-start">Description</label>
-                        <input type="text" class="col-8 form-control" id="description" name="description"
-                               value="${service.description}">
-                    </div>
-                    <c:if test="${serviceId == 1}">
-                        <div class="form-group form-inline" id="hidden3">
-                            <label for="pool" class="col-2 d-flex justify-content-start">Pool Area</label>
-                            <input type="text" class="col-8 form-control" id="pool" name="pool"
-                                   value="${service.poolArea}">
-                        </div>
-                        <c:if test='${errMessList.get(3) != ""}'>
-                            <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(3)}</p>
-                        </c:if>
-                    </c:if>
-                    <div class="form-group form-inline" id="hidden4">
-                        <label for="floor" class="col-2 d-flex justify-content-start">Floors</label>
-                        <input type="text" class="col-8 form-control" id="floor" name="floor"
-                               value="${service.numberFloor}">
-                    </div>
-                    <c:if test='${errMessList.get(4) != ""}'>
-                        <p class="text-danger alert p-0" style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(4)}</p>
-                    </c:if>
+
+                <div class="form-group form-inline" id="divStandard">
+                    <label for="standard" class="col-2 d-flex justify-content-start">Standard Room</label>
+                    <input type="text" class="col-8 form-control" id="standard" name="standard"
+                           value="${service.standardRoom}">
+                </div>
+
+                <div class="form-group form-inline" id="divDescription">
+                    <label for="description" class="col-2 d-flex justify-content-start">Description</label>
+                    <input type="text" class="col-8 form-control" id="description" name="description"
+                           value="${service.description}">
+                </div>
+
+                <div class="form-group form-inline" id="divPool">
+                    <label for="pool" class="col-2 d-flex justify-content-start">Pool Area</label>
+                    <input type="text" class="col-8 form-control" id="pool" name="pool"
+                           value="${service.poolArea}">
+                </div>
+                <c:if test='${errMessList.get(3) != ""}'>
+                    <p class="text-danger alert p-0"
+                       style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(3)}</p>
+                </c:if>
+
+                <div class="form-group form-inline" id="divFloor">
+                    <label for="floor" class="col-2 d-flex justify-content-start">Floors</label>
+                    <input type="text" class="col-8 form-control" id="floor" name="floor"
+                           value="${service.numberFloor}">
+                </div>
+                <c:if test='${errMessList.get(4) != ""}'>
+                    <p class="text-danger alert p-0"
+                       style="margin-left: 16.66%; margin-bottom: 0">${errMessList.get(4)}</p>
                 </c:if>
 
                 <div class="form-group form-inline">
@@ -141,6 +150,24 @@
 <script src="../../bootstrap_4/js/jquery-3.5.1.js"></script>
 <script src="../../bootstrap_4/js/bootstrap.min.js"></script>
 <script>
+    function displayHiddenItem() {
+        let typeServiceValue = document.getElementById("serviceType").value;
+        // let divStandardItem = document.getElementById("divStandard");
+        // let divDescriptionItem = document.getElementById("divDescription");
+        // let divPoolItem = document.getElementById("divPool");
+        // let divFloorItem = document.getElementById("divFloor");
+
+        if (typeServiceValue === "1") {
+            $("#divStandard, #divDescription, #divPool, #divFloor").show();
+        } else if (typeServiceValue === "2") {
+            $("#divStandard, #divDescription, #divFloor").show();
+            $("#divPool").hide();
+        } else {
+            $("#divStandard, #divDescription, #divPool, #divFloor").hide();
+        }
+    }
+
+    displayHiddenItem();
 </script>
 </body>
 </html>

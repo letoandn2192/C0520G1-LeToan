@@ -18,7 +18,7 @@
 <%@ include file="../../header.jsp" %>
 <div class="container-fluid">
     <div class="body position-relative" style="top: 160px">
-        <form method="post">
+        <form method="post" id="formTest">
             <fieldset>
                 <legend class="text-center">Delete Information</legend>
                 <div class="form-group form-inline">
@@ -94,7 +94,11 @@
                 <div class="form-group form-inline">
                     <div class="col-2"></div>
                     <div class="col-8 pl-0">
-                        <input type="submit" value="Delete" class="btn btn-outline-dark mr-2">
+<%--                        <input type="submit" value="Delete" class="btn btn-outline-dark mr-2">--%>
+                    <button type="button" class="btn btn-outline-dark" data-toggle="modal"
+                            data-target="#exampleModal">
+                        Delete
+                    </button>
                         <a class="btn btn-outline-dark" href="/service?action=view&id=${service.serviceId}">Back</a>
                     </div>
                 </div>
@@ -102,8 +106,35 @@
         </form>
     </div>
 </div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Warning</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you want to clear this service ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input type="hidden" id="rowDelete"/>
+                <button type="button" class="btn btn-outline-dark" data-dismiss="modal"
+                        onclick="confirmDelete()">Clear
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <%@ include file="../../footer.jsp" %>
 <script src="../../bootstrap_4/js/jquery-3.5.1.js"></script>
 <script src="../../bootstrap_4/js/bootstrap.min.js"></script>
+<script>
+    function confirmDelete() {
+        document.getElementById("formTest").submit();
+    }
+</script>
 </body>
 </html>

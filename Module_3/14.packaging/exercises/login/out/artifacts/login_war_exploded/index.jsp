@@ -37,11 +37,11 @@ ${error}
   <table>
     <tr>
       <td>Username</td>
-      <td><input type="text" name="txtUsername" ></td>
+      <td><input type="text" name="txtUsername" value="<%out.print(user);%>"/></td>
     </tr>
     <tr>
       <td>Password</td>
-      <td><input type="password" name="txtPassword"/>      </td>
+      <td><input type="password" name="txtPassword" value="<%out.print(pass);%>" />      </td>
     </tr>
     <tr>
       <td> <input type="checkbox" name="chkRemember" value="ON" />Remember to me</td>
