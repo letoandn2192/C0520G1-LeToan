@@ -26,13 +26,13 @@ public class ExchangeMoney {
         return new ModelAndView("display", "vnd", vnd);
     }
 
-    @RequestMapping(value = "{usd:[0-9]+}")
-    public ModelAndView exchange2(@PathVariable("usd") String usd, @PathVariable("rate") String rate){
-        double Usd = Double.parseDouble(usd);
-        double Rate = Double.parseDouble(rate);
-        double vnd = Usd * Rate;
-        return new ModelAndView("display", "vnd", vnd);
-    }
+//    @RequestMapping(value = "{usd:[0-9]+}")
+//    public ModelAndView exchange2(@PathVariable("usd") String usd, @PathVariable("rate") String rate){
+//        double Usd = Double.parseDouble(usd);
+//        double Rate = Double.parseDouble(rate);
+//        double vnd = Usd * Rate;
+//        return new ModelAndView("display", "vnd", vnd);
+//    }
 
     @PostMapping("/exchange3")
     public ModelAndView exchange3(@ModelAttribute("exchange") Exchange exchange){

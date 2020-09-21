@@ -1,0 +1,19 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="DemoCreateSpringMvc:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/DemoCreateSpringMvc_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="DemoDependencyInjection/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="DemoDependencyInjection" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Spring-4.3.18.RELEASE" />
+          <element id="library" level="project" name="Spring MVC-4.3.18.RELEASE" />
+          <element id="file-copy" path="C:/apache-tomcat-8.5.42/webapps/examples/WEB-INF/lib/taglibs-standard-impl-1.2.5.jar" />
+          <element id="file-copy" path="C:/apache-tomcat-8.5.42/webapps/examples/WEB-INF/lib/taglibs-standard-spec-1.2.5.jar" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
