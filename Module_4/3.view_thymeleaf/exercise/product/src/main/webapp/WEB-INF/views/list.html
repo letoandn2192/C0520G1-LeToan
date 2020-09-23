@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h3>Product</h3>
+<a th:href="@{/create}" role="button" class="btn btn-outline-dark">Add New Product</a>
+<table class="table table-sm table-bordered table-hover">
+    <thead class="thead-dark">
+    <tr>
+        <td scope="col">Id</td>
+        <td scope="col">Name</td>
+        <td scope="col">Price</td>
+        <td scope="col">Quantity</td>
+        <td scope="col">Type</td>
+        <td scope="col">Producer</td>
+        <td scope="col">Action</td>
+    </tr>
+    </thead>
+    <tbody>
+        <tr th:each="product: ${productList}">
+            <td th:text="${product.getProductId()}"></td>
+            <td th:text="${product.getProductName()}"></td>
+            <td th:text="${product.getProductPrice()}"></td>
+            <td th:text="${product.getProductQuantity()}"></td>
+            <td th:text="${product.getProductType()}"></td>
+            <td th:text="${product.getProductProducer()}"></td>
+            <td>
+            <a th:href="@{/{id}/edit(id=${product.getProductId()})}">edit</a>
+            <a th:href="@{/{id}/delete(id=${product.getProductId()})}">delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div th:if="${mess}">
+    <span th:text="${mess}"></span>
+</div>
+<!--href="/css/bootstrap.min.css"-->
+<script src="/js/jquery-3.5.1.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+</body>
+</html>
