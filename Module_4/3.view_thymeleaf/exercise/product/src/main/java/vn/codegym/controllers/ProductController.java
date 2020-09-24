@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import vn.codegym.model.Product;
 import vn.codegym.service.ProductService;
-import vn.codegym.service.ProductServiceImpl;
+import vn.codegym.service.impl.ProductServiceImpl;
 
 @Controller
 public class ProductController {

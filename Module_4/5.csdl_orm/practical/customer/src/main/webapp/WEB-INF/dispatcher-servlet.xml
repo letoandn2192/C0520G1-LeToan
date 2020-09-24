@@ -3,12 +3,15 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <context:component-scan base-package="vn.codegym"/>
     <mvc:annotation-driven/>
@@ -32,28 +35,29 @@
         <property name="templateEngine" ref="engine" />
     </bean>
 
+
     <!-- DataSource -->
     <bean class="org.springframework.jdbc.datasource.DriverManagerDataSource"
           id="dataSource">
-        <property name="driverClassName" value="${database.driver}"></property>
-        <property name="url" value="${database.url}"></property>
-        <property name="username" value="${database.user}"></property>
-        <property name="password" value="${database.password}"></property>
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/cms"/>
+        <property name="username" value="root"/>
+        <property name="password" value="Toan0902872813"/>
     </bean>
 
     <!-- Hibernate SessionFactory -->
     <bean id="sessionFactory"
           class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"></property>
+        <property name="dataSource" ref="dataSource"/>
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
-                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
-                <prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
-                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.show_sql">true</prop>
             </props>
         </property>
-        <property name="packagesToScan" value="vn.codegym"></property>
+        <property name="packagesToScan" value="vn.codegym"/>
     </bean>
 
     <!-- Transaction -->
@@ -62,6 +66,6 @@
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
 
-<!--    <tx:annotation-driven transaction-manager="transactionManager" />-->
+    <tx:annotation-driven transaction-manager="transactionManager" />
 
 </beans>
