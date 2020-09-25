@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete</title>
+</head>
+<body>
+<h3>Edit Blog</h3>
+<p>
+    <a th:href="@{/}">
+        Back to blog list
+    </a>
+</p>
+<div id="form">
+    <form th:action="@{/confirm}" th:object="${blog}"
+          method="POST" novalidate="novalidate">
+        <input type="hidden" th:field="*{blogId}"/>
+        <div>
+            <label>Title</label>
+            <input type="text" th:field="*{blogTitle}"/>
+        </div>
+        <div>
+            <label>Content</label>
+            <textarea type="text" th:field="*{blogContent}" cols="100" rows="10"></textarea>
+        </div>
+        <input type="submit" value="Delete"/>
+    </form>
+</div>
+</body>
+</html>
