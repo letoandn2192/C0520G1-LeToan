@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Delete Category</title>
+    <link rel="stylesheet" type="text/css" href="../static/bootstrap_4/css/bootstrap.min.css"
+          th:href="@{/bootstrap_4/css/bootstrap.min.css}">
+</head>
+<body>
+<form method="post" action="/categories/confirm" th:object="${category}">
+    <fieldset>
+        <legend>Delete Category</legend>
+        <div  class="form-group form-inline">
+            <input type="hidden" class="col-8 form-control" id="id" th:field="*{categoryId}">
+        </div>
+        <div class="form-group form-inline">
+            <label for="name" class="col-2 d-flex justify-content-start">Name</label>
+            <input type="text" class="col-8 form-control" th:field="*{categoryName}" id="name">
+        </div>
+        <div class="form-group form-inline">
+            <div class="col-2"></div>
+            <div class="col-8 pl-0">
+                <input type="submit" value="Delete" class="btn btn-outline-dark mr-2">
+                <a class="btn btn-outline-dark" href="/categories">Back</a>
+            </div>
+        </div>
+    </fieldset>
+</form>
+</body>
+</html>

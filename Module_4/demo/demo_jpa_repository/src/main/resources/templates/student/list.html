@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:spring="http://java.sun.com/xml/ns/javaee">
+<head th:replace="~{/student/layout::header}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css">-->
+<!--</head>-->
+<body>
+<div th:if="${ok}">
+    <h1 th:text="${ok}"></h1>
+</div>
+
+<a th:href="@{/student/create}" th:text="Create"></a>
+
+<form action="/student/search">
+    <label>Input text:</label>
+    <input type="text" th:name="inputSearch">
+</form>
+<div class="container-fluid">
+<table class="table">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>address</th>
+        <th>age</th>
+        <th>Gender</th>
+        <th>Role</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr th:each="student:${studentList}">
+            <td th:text="${student.getId()}">${d}</td>
+            <td th:text="${student.getName()}"></td>
+            <td th:text="${student.getAddress()}"></td>
+            <td th:text="${student.age}"></td>
+            <td th:text="${student.gender}"></td>
+            <td th:switch="${student.getRole()}">
+                <span th:case="0">User</span>
+                <span th:case="1">admin</span>
+            </td>
+            <td ><a th:href="@{/student/edit/{id}(id=${student.id})}">edit</a></td>
+            <td ><a th:href="@{/student/delete/{id}(id=${student.id})}">delete</a></td>
+        </tr>
+    </tbody>
+</table>
+    <div>
+        <a th:href="@{'/student'(page=${studentList.number - 1})}" th:if="${studentList.hasPrevious()}">Previous</a>
+        <span th:text="${studentList.number + 1}"></span>/<span th:text="${studentList.totalPages}"></span>
+        <a th:href="@{'/student'(page=${studentList.number + 1})}" th:if="${studentList.hasNext()}">Next</a>
+    </div>
+</div>
+
+<footer th:replace="~{/student/layout::footer}">
+
+</footer>
+</body>
+</html>

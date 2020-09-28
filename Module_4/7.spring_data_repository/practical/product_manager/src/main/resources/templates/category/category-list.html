@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>List of Category</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap_4/css/bootstrap.min.css">
+</head>
+<body>
+<a role="button" class="btn btn-outline-success" href="/categories">Category</a>
+<a role="button" class="btn btn-outline-success" href="/products">Product</a>
+<a role="button" class="btn btn-outline-dark" href="/categories/create">Create New Category</a>
+<h2>List of Category</h2>
+<table class="table table-sm table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <td scope="col">Id</td>
+            <td scope="col">Name</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="category: ${categoryList}">
+            <td th:text="${category.categoryId}"></td>
+            <td th:text="${category.categoryName}"></td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

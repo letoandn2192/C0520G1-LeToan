@@ -1,17 +1,20 @@
 package vn.codegym.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import vn.codegym.model.Customer;
+import vn.codegym.model.Province;
 import vn.codegym.service.CustomerService;
+import vn.codegym.service.ProvinceService;
 
-import java.util.List;
 
 @Controller
 public class CustomerController {
@@ -19,20 +22,25 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+    @Autowired
+    private ProvinceService provinceService;
+
+    @ModelAttribute("provinces")
+    public Iterable<Province> provinces(){
+        return provinceService.findAll();
+    }
+
     @GetMapping("")
-    public ModelAndView showList() {
-        ModelAndView modelAndView = new ModelAndView("list");
-        Pageable pageable = new PageRequest(0,2);
-        Iterable<Customer> customerList = customerService.findAll(pageable);
-        int pageNum = (int) customerService.size()/2 + 1;
+    public ModelAndView showList(@PageableDefault(value = 5) Pageable pageable) {
+        ModelAndView modelAndView = new ModelAndView("customer/list");
+        Page<Customer> customerList = customerService.findAll(pageable);
         modelAndView.addObject("customerList", customerList);
-        modelAndView.addObject("pageNum", pageNum);
         return modelAndView;
     }
 
     @GetMapping("/create")
     public ModelAndView showCreateForm() {
-        ModelAndView modelAndView = new ModelAndView("create");
+        ModelAndView modelAndView = new ModelAndView("customer/create");
         modelAndView.addObject("customer", new Customer());
         return modelAndView;
     }
@@ -45,7 +53,7 @@ public class CustomerController {
 
     @GetMapping("{id}/edit")
     public ModelAndView showEditForm(@PathVariable int id) {
-        ModelAndView modelAndView = new ModelAndView("edit");
+        ModelAndView modelAndView = new ModelAndView("customer/edit");
         Customer customer = customerService.findOne(id);
         modelAndView.addObject("customer", customer);
         return modelAndView;
@@ -59,7 +67,7 @@ public class CustomerController {
 
     @GetMapping("{id}/delete")
     public ModelAndView showDeleteForm(@PathVariable int id) {
-        ModelAndView modelAndView = new ModelAndView("delete");
+        ModelAndView modelAndView = new ModelAndView("customer/delete");
         Customer customer = customerService.findOne(id);
         modelAndView.addObject("customer", customer);
         return modelAndView;

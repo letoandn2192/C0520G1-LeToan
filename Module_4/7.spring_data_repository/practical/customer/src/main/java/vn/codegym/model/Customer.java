@@ -12,20 +12,26 @@ public class Customer {
     private String email;
     private String address;
 
+    @ManyToOne
+    @JoinColumn(name = "provinceId")
+    private Province province;
+
     public Customer() {
     }
 
-    public Customer(String name, String email, String address) {
+    public Customer(String name, String email, String address, Province province) {
         this.name = name;
         this.email = email;
         this.address = address;
+        this.province = province;
     }
 
-    public Customer(int id, String name, String email, String address) {
+    public Customer(int id, String name, String email, String address, Province province) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.address = address;
+        this.province = province;
     }
 
     public int getId() {
@@ -58,6 +64,14 @@ public class Customer {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Province getProvince() {
+        return province;
+    }
+
+    public void setProvince(Province province) {
+        this.province = province;
     }
 
     @Override

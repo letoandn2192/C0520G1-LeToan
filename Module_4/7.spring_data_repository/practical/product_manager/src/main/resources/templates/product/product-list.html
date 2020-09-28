@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>List of Product</title>
+    <link rel="stylesheet" type="text/css" href="../static/bootstrap_4/css/bootstrap.min.css" th:href="@{/bootstrap_4/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" href="../static/bootstrap_4/font/css/all.css" th:href="@{/bootstrap_4/font/css/all.css}">
+    <style>
+        p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<a role="button" class="btn btn-outline-success" href="/categories">Category</a>
+<a role="button" class="btn btn-outline-success" href="/products">Product</a>
+<a role="button" class="btn btn-outline-dark" href="/products/create">Create New Product</a>
+<a role="button" class="btn btn-outline-dark" href="/products/delete-in-batch">Delete In Batch</a>
+<form action="/products/search">
+    <div class="form-row">
+        <input type="search" placeholder="Search" name="input" class="col-sm-4 form-control">
+        <input type="submit" value="Search" class="btn btn-outline-dark">
+    </div>
+</form>
+<h2>List of Product</h2>
+<form method="post" th:object="${product}" action="/products/update">
+    <table class="table table-sm table-bordered table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <td scope="col">Id</td>
+            <td scope="col">Name</td>
+            <td scope="col">Price</td>
+            <td scope="col">Quantity</td>
+            <td scope="col">Color</td>
+            <td scope="col">Description</td>
+            <td scope="col">Category</td>
+            <td scope="col">Edit</td>
+            <td scope="col">Delete</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="temp: ${productList}">
+            <td th:switch="${mode}">
+                <div th:case="'edit'">
+                    <input type="text" readonly class="form-control-sm" th:if="${temp.productId} == ${product.productId}" th:field="*{productId}">
+                    <p th:if="${temp.productId} != ${product.productId}" th:text="${temp.productId}"></p>
+                </div>
+                <p th:case="*" th:text="${temp.productId}"></p>
+            </td>
+            <td th:switch="${mode}">
+                <div th:case="'edit'">
+                    <input type="text" class="form-control-sm" th:if="${temp.productId} == ${product.productId}" th:field="*{productName}">
+                    <p th:if="${temp.productId} != ${product.productId}" th:text="${temp.productName}"></p>
+                </div>
+                <p th:case="*" th:text="${temp.productName}"></p>
+            </td>
+            <td th:switch="${mode}">
+                <div th:case="'edit'">
+                    <input type="text" class="form-control-sm" th:if="${temp.productId} == ${product.productId}" th:field="*{productPrice}">
+                    <p th:if="${temp.productId} != ${product.productId}" th:text="${temp.productPrice}"></p>
+                </div>
+                <p th:case="*" th:text="${temp.productPrice}"></p>
+            </td>
+            <td th:switch="${mode}">
+                <div th:case="'edit'">
+                    <input type="text" class="form-control-sm" th:if="${temp.productId} == ${product.productId}" th:field="*{productQuantity}">
+                    <p th:if="${temp.productId} != ${product.productId}" th:text="${temp.productQuantity}"></p>
+                </div>
+                <p th:case="*" th:text="${temp.productQuantity}"></p>
+            </td>
+            <td th:switch="${mode}">
+                <div th:case="'edit'">
+                    <input type="text" class="form-control-sm" th:if="${temp.productId} == ${product.productId}" th:field="*{productColor}">
+                    <p th:if="${temp.productId} != ${product.productId}" th:text="${temp.productColor}"></p>
+                </div>
+                <p th:case="*" th:text="${temp.productColor}"></p>
+            </td>
+            <td th:switch="${mode}">
+                <div th:case="'edit'">
+                    <input type="text" class="form-control-sm" th:if="${temp.productId} == ${product.productId}" th:field="*{productDescription}">
+                    <p th:if="${temp.productId} != ${product.productId}" th:text="${temp.productDescription}"></p>
+                </div>
+                <p th:case="*" th:text="${temp.productDescription}"></p>
+            </td>
+            <td th:switch="${mode}">
+                <div th:case="'edit'">
+                    <select class="form-control-sm" th:if="${temp.productId} == ${product.productId}" th:field="*{productCategory}">
+                        <option th:each="category: ${categories}" th:text="${category.categoryName}" th:value="${category.categoryId}"></option>
+                    </select>
+                    <p th:if="${temp.productId} != ${product.productId}" th:text="${temp.productCategory.categoryName}"></p>
+                </div>
+                <p th:case="*" th:text="${temp.productCategory.categoryName}"></p>
+            </td>
+
+            <td th:switch="${mode}" >
+                <div th:case="'edit'" >
+                    <div th:if="${temp.productId} == ${product.productId}">
+                        <a role="button" class="btn btn-sm btn-outline-dark" th:href="@{/products}">Back</a>
+                        <input type="submit" class="btn btn-sm btn-outline-dark" value="Update">
+                    </div>
+                    <a role="button" class="btn btn-sm btn-outline-success" th:href="@{/products/edit/{id}(id=${temp.productId})}" th:if="${temp.productId} != ${product.productId}"><span class="fas fa-pen"></span></a>
+                </div>
+                <a th:case="*" role="button" class="btn btn-sm btn-outline-success" th:href="@{/products/edit/{id}(id=${temp.productId})}"><span class="fas fa-pen"></span></a>
+            </td>
+
+            <td>
+                <a role="button" class="btn btn-sm btn-outline-success"
+                   th:href="@{/products/delete/{id}(id=${temp.productId})}"><span class="fas fa-trash"></span></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+<div>
+    <a th:href="@{'/products'(page=${productList.number - 1})}" th:if="${productList.hasPrevious()}">Previous</a>
+    <span th:text="${productList.number + 1}"></span>/<span th:text="${productList.totalPages}"></span>
+    <a th:href="@{'/products'(page=${productList.number + 1})}" th:if="${productList.hasNext()}">Next</a>
+</div>
+</body>
+</html>

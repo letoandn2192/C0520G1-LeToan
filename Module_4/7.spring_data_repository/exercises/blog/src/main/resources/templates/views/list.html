@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blog List</title>
+    <link rel="stylesheet" type="text/css" href="../static/bootstrap_4/css/bootstrap.min.css" th:href="@{/bootstrap_4/css/bootstrap.min.css}">
+</head>
+<body>
+<a href="/blog/create" role="button" class="btn btn-outline-dark">Create New Blog</a>
+<form class="form-inline my-2 my-lg-0" action="/blog/search">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" name="search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+</form>
+<table class="table table-sm table-bordered table-hover">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Title</th>
+        <th scope="col">Create Time</th>
+        <th scope="col">Create Date</th>
+        <th scope="col">Category</th>
+        <th scope="col">View</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="blog : ${blogList}">
+        <td th:text="${blog.blogId}" scope="row"></td>
+        <td th:text="${blog.blogTitle}"></td>
+        <td th:text="${blog.blogCreateTime}"></td>
+        <td th:text="${blog.blogCreateDate}"></td>
+        <td><a th:href="@{/blog/{id}(id=${blog.blogCategory.categoryId})}" th:text="${blog.blogCategory.categoryName}" ></a></td>
+        <td>
+            <a th:href="@{/blog/view/{id}(id=${blog.blogId})}">View</a>
+        </td>
+        <td>
+            <a th:href="@{/blog/edit/{id}(id=${blog.blogId})}">Edit</a>
+        </td>
+        <td>
+            <a th:href="@{/blog/delete/{id}(id=${blog.blogId})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
