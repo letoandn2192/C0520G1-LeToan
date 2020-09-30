@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List</title>
+</head>
+<a th:href="@{/user/create}">Add New User</a>
+<h1 th:if="${mess}" th:text="${mess}"></h1>
+<body>
+    <table>
+        <thead>
+            <td scope="col">ID</td>
+            <td scope="col">First Name</td>
+            <td scope="col">Last Name</td>
+            <td scope="col">Age</td>
+            <td scope="col">Phone Number</td>
+            <td scope="col">Email</td>
+        </thead>
+        <tbody>
+            <tr th:each="element:${userList}">
+                <td th:text="${element.userId}"></td>
+                <td th:text="${element.userFirstName}"></td>
+                <td th:text="${element.userLastName}"></td>
+                <td th:text="${element.userAge}"></td>
+                <td th:text="${element.userPhoneNumber}"></td>
+                <td th:text="${element.userEmail}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

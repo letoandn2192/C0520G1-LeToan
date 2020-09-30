@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table class="table">
+    <thead class="thead-light">
+    <tr class="table-warning">
+        <td>Id</td>
+        <td>Service Name</td>
+        <td>Day Start</td>
+        <td>Day End</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="student : ${studentList}">
+        <td th:text="${student.id}"></td>
+        <td th:text="${student.service}"></td>
+        <td th:text="${student.dayStart}"></td>
+        <td th:text="${student.dayEnd}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

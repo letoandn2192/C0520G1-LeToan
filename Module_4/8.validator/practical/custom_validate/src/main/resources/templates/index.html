@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+</head>
+<body>
+    <form method="post" action="/register" th:object="${phoneNumber}">
+<!--        <div>-->
+<!--            <label>Id</label>-->
+<!--            <input type="hidden" th:field="*{id}">-->
+<!--        </div>-->
+        <div>
+            <label>Phone Number</label>
+            <input type="text" th:field="*{number}">
+            <span style="color: red" th:field="*{#fields.hasErrors('number')}" th:errors="*{number}"></span>
+        </div>
+        <div>
+            <input type="submit" value="Create">
+        </div>
+    </form>
+</body>
+</html>

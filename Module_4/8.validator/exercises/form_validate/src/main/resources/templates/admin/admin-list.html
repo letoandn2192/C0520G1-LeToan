@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List</title>
+</head>
+<a th:href="@{/admin/create}">Add New Admin</a>
+<h1 th:if="${mess}" th:text="${mess}"></h1>
+<body>
+    <table>
+        <thead>
+            <td scope="col">ID</td>
+            <td scope="col">First Name</td>
+            <td scope="col">Last Name</td>
+            <td scope="col">Age</td>
+            <td scope="col">Phone Number</td>
+            <td scope="col">Email</td>
+        </thead>
+        <tbody>
+            <tr th:each="element:${adminList}">
+                <td th:text="${element.adminId}"></td>
+                <td th:text="${element.adminFirstName}"></td>
+                <td th:text="${element.adminLastName}"></td>
+                <td th:text="${element.adminAge}"></td>
+                <td th:text="${element.adminPhoneNumber}"></td>
+                <td th:text="${element.adminEmail}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

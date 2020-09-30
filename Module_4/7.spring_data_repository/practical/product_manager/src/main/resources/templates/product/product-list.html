@@ -48,6 +48,7 @@
                 </div>
                 <p th:case="*" th:text="${temp.productId}"></p>
             </td>
+
             <td th:switch="${mode}">
                 <div th:case="'edit'">
                     <input type="text" class="form-control-sm" th:if="${temp.productId} == ${product.productId}" th:field="*{productName}">

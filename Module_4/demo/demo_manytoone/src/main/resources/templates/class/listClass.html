@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table class="table">
+    <thead class="thead-light">
+    <tr class="table-warning">
+        <td>Id</td>
+        <td>ClassName</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="class : ${class}">
+        <td th:text="${class.idClass}"></td>
+        <td ><a th:text="${class.nameClass}"  th:href="@{class/{id}(id=${class.idClass})}"></a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
