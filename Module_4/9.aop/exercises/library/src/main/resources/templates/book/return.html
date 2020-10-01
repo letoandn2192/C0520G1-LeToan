@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View</title>
+</head>
+<body>
+<form th:object="${book}" method="post" action="/confirm">
+    <table>
+        <thead>
+        <tr>#</tr>
+        <tr>Information</tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Id</td>
+            <td>
+                <input type="text" readonly th:field="*{bookId}">
+            </td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>
+                <input type="text" readonly th:field="*{bookName}">
+            </td>
+        </tr>
+        <tr>
+            <td>Category</td>
+            <td>
+                <input type="text" readonly th:field="*{bookCategory}">
+            </td>
+        </tr>
+        <tr>
+            <td>Total</td>
+            <td>
+                <input type="text" readonly th:field="*{bookTotal}">
+            </td>
+        </tr>
+        <tr>
+            <td>Rest</td>
+            <td>
+                <input type="text" readonly th:field="*{bookRest}">
+            </td>
+        </tr>
+        <tr>
+            <td>Your Code</td>
+            <td>
+                <input type="text" name="code">
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Return">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+</body>
+</html>

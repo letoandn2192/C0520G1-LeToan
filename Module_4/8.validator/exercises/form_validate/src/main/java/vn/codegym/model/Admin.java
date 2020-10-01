@@ -84,7 +84,7 @@ public class Admin implements Validator {
         int age = admin.getAdminAge();
         if (age < 18) {
             errors.rejectValue("adminAge", "adminAge.age");
-            errors.rejectValue("adminAge", "typeMismatch.admin.adminAge");
+//            errors.rejectValue("adminAge", "typeMismatch.admin.adminAge");
         }
         String phoneNumber = admin.getAdminPhoneNumber();
         if (!phoneNumber.matches("^(090|091|\\\\(84\\\\)\\\\+90|\\\\(84\\\\)\\\\+91)\\\\d{7}$")) {

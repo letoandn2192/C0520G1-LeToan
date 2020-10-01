@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer List</title>
+    <link href="bootstrap_4/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <style>
+        table {
+            border: 1px solid #000;
+        }
+
+        th, td {
+            border: 1px dotted #555;
+        }
+    </style>
+</head>
+<body>
+<a th:href="@{/create}" role="button" class="btn btn-outline-dark">Create New Customer</a>
+<table class="table table-hover table-bordered table-sm">
+    <thead class="thead-dark">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Province</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="c : ${customerList}">
+        <td th:text="${c.id}"></td>
+        <td th:text="${c.name}"></td>
+        <td th:text="${c.email}"></td>
+        <td th:text="${c.address}"></td>
+<!--        <td th:text="${c.province.provinceName}"></td>-->
+        <td>
+            <a th:href="@{/{id}/edit(id=${c.id})}" role="button" class="btn btn-outline-dark">Edit</a>
+        </td>
+        <td>
+            <a th:href="@{/{id}/delete(id=${c.id})}" role="button" class="btn btn-outline-dark">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div class="pagination justify-content-center">
+    <a th:href="@{'/'(page=${customerList.number - 1})}" th:if="${customerList.hasPrevious()}" class="page-link">Previous</a>
+    <a th:text="${customerList.number + 1}" class="page-link"></a>
+<!--    <span th:text="${customerList.number + 1}"></span>/<span th:text="${customerList.totalPages}"></span>-->
+    <a th:href="@{'/'(page=${customerList.number + 1})}" th:if="${customerList.hasNext()}" class="page-link">Next</a>
+</div>
+<div class="d-flex justify-content-center">
+    Page <span th:text="${customerList.number + 1}"></span> of <span th:text="${customerList.totalPages}"></span>
+</div>
+</body>
+</html>

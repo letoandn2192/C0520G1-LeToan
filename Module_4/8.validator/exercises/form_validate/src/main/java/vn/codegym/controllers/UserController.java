@@ -35,6 +35,7 @@ public class UserController {
     @PostMapping("/save")
     public String saveUser(@Validated User user, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
+            bindingResult.resolveMessageCodes("typeMismatch.user", "typeMismatch.user.userAge");
             return "user/user-create";
         } else {
             userService.save(user);

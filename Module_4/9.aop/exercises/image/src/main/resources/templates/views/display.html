@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .flex-container {
+            display: flex;
+        }
+
+        p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<h1>Image of the day</h1>
+<div class="flex-container">
+    <div>
+        <img id="img-of-the-day" style="width: 300px; height: 300px"/>
+    </div>
+    <div>
+        <form style="width: 500px" th:action="@{/comment}" th:object="${comment}" method="post">
+            <fieldset>
+                <legend>EVALUATE</legend>
+                <table>
+                    <tr>
+                        <td>Rate</td>
+                        <td>
+                            <select th:field="*{commentRate}">
+                                <option th:text="1" th:value="1"></option>
+                                <option th:text="2" th:value="2"></option>
+                                <option th:text="3" th:value="3"></option>
+                                <option th:text="4" th:value="4"></option>
+                                <option th:text="5" th:value="5"></option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Author</td>
+                        <td>
+                            <input type="text" th:field="*{commentAuthor}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Feedback</td>
+                        <td>
+                            <textarea cols="30" rows="3" th:field="*{commentFeedback}"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><input type="submit" value="Comment"></td>
+                    </tr>
+                </table>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<div>
+    <h4>Top Comment</h4>
+    <hr>
+</div>
+
+<div th:each="comment: ${commentList}">
+    <p th:text="'+' + ${comment.commentRate} + ' ' + ${comment.commentAuthor}"></p>
+    <p th:text="${comment.commentFeedback}"></p>
+    <p th:text="${comment.commentLike} + ' Likes'"></p>
+    <a th:href="@{/{id}/{likes}/edit(id=${comment.id}, likes=${comment.commentLike} + 1)}">Like</a>
+    <hr>
+</div>
+<div>
+    <a th:href="@{'/'(page=${commentList.number - 1})}" th:if="${commentList.hasPrevious()}">Previous</a>
+    <span th:text="${commentList.number + 1}"></span>/<span th:text="${commentList.totalPages}"></span>
+    <a th:href="@{'/'(page=${commentList.number + 1})}" th:if="${commentList.hasNext()}">Next</a>
+</div>
+<script>
+    let query = "https://api.nasa.gov/planetary/apod?api_key=IipzqggKHg435rD6XYHMhL1ombSm0GWHKuG0EBf4";
+    let request = new XMLHttpRequest();
+    request.open('GET', query);
+    request.onload = function() {
+        if (request.status === 200) {
+            let response = JSON.parse(request.responseText);
+            document.getElementById('img-of-the-day').setAttribute('src', response.url);
+        }
+    };
+    request.send();
+</script>
+</body>
+</html>

@@ -34,6 +34,7 @@ public class AdminController {
     public String saveAdmin(@Validated Admin admin, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         new Admin().validate(admin, bindingResult);
         if (bindingResult.hasErrors()) {
+            bindingResult.resolveMessageCodes("typeMismatch.admin", "typeMismatch.admin.adminAge");
             return "admin/admin-create";
         } else {
             adminService.save(admin);
