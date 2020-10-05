@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/product/layout::header}">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="container bootstrap snippets bootdey">
+    <div class="row">
+        <div class="col-sm-6 push-bit">
+            <a href="#" class="gallery-link"><img th:src="${product.image}" th:alt="${product.name}" class="img-responsive push-bit" /></a>
+        </div>
+        <div class="col-sm-6 push-bit">
+            <div class="clearfix">
+                <div class="pull-right">
+                    <span class="h2"><strong th:text="${#numbers.formatDecimal(product.price - (product.price*product.discount/100), 0, 'COMMA', 0, 'POINT')} + ' VND'"></strong></span>
+                </div>
+                <span class="h4">
+                    <strong class="text-success" th:text="${product.name}"></strong><br />
+                    <small>15 Available</small>
+                </span>
+            </div>
+            <hr />
+            <p th:text="${product.description}"></p>
+            <p th:text="${product.description}"></p>
+            <hr />
+            <form th:action="@{/cart/add/}" class="form-inline push-bit text-right" method="post">
+                <input type="hidden" th:value="${product.id}" name="id">
+                <button type="submit" class="btn btn-danger">Add to Cart</button>
+                <a href="/product" class="btn btn-info ml-3">Shopping</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{/product/layout::footer}"></footer>
+</body>
+</html>

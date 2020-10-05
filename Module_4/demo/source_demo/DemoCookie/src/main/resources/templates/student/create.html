@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/student/layout::header}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/student/create}" method="post" th:object="${student}">
+    <br/>
+    <label>Name:</label>
+    <input type="text" th:field="*{name}">
+    <span style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+    <br/>
+    <label>Address:</label>
+    <input type="text"  th:field="*{address}">
+    <span style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+    <br/>
+    <label>Age:</label>
+    <input type="text"  th:field="*{age}">
+    <br/>
+    <label>Gender:</label>
+    <input type="radio"  th:field="*{gender}" value="Male">Male
+    <input type="radio"  th:field="*{gender}" value="Femle">Female
+    <br/>
+    <label>Role:</label>
+    <input type="text"  th:field="*{role}">
+    <span style="color: red" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"></span>
+    <br/>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>

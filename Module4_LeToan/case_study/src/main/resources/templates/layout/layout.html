@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FURAMA RESORT</title>
+    <link type="text/css" rel="stylesheet" href="../../static/bootstrap_4/css/bootstrap.min.css" th:href="@{/static/bootstrap_4/css/bootstrap.min.css}">
+    <link type="text/css" rel="stylesheet" href="../../static/bootstrap_4/jquery-ui-1.12.1/jquery-ui.css" th:href="@{/static/bootstrap_4/jquery-ui-1.12.1/jquery-ui.css}">
+    <link href="../../bootstrap_4/font/css/all.css" type="text/css" rel="stylesheet" th:href="@{/static/bootstrap_4/font/css/all.css}">
+</head>
+<body>
+<div class="col-12 row bg-info m-0 fixed-top" style="height: 100px" th:fragment="title">
+    <div class="col-2 p-0">
+        <img src="../../static/image/codegym.png" class="img-thumbnail" alt="logo" height="100" width="100">
+    </div>
+    <div class="col-8">
+        <h2 style="margin-top: 30px">FURAMA RESORT</h2>
+    </div>
+    <div class="col-2">
+        <h2>Welcome :<strong><%=session.getAttribute("userName") %></strong></h2>
+    </div>
+</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top col-12" style="top: 100px" th:fragment="navbar">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link text-success" href="home.jsp"><span class="fas fa-home"></span> Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-success" href="/employee"><span class="fas fa-people-arrows"></span>
+                    Employee</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-success" href="/customer"><span class="fas fa-user"></span> Customer</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-success" href="/service"><span class="fas fa-list"></span> Service</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-success" href="/contract"><span class="fas fa-file-contract"></span>
+                    Contract</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" value="${search}"
+                   name="search">
+            <input type="hidden" name="action" value="search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</nav>
+
+<footer th:fragment="footer">
+    <script src="../../static/bootstrap_4/js/jquery-3.5.1.js" th:href="@{/static/bootstrap_4/js/jquery-3.5.1.js}"></script>
+    <script src="../../static/bootstrap_4/js/bootstrap.min.js" th:href="@{/static/bootstrap_4/js/bootstrap.min.js}"></script>
+    <script src="../../static/bootstrap_4/jquery-ui-1.12.1/jquery-ui.min.js" th:href="@{/static/bootstrap_4/jquery-ui-1.12.1/jquery-ui.min.js}"></script>
+</footer>
+</body>
+</html>

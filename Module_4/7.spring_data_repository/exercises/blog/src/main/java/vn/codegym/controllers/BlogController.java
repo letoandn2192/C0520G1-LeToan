@@ -35,10 +35,17 @@ public class BlogController {
     }
 
     @GetMapping
-    public ModelAndView showList(@PageableDefault(value = 5, sort = {"blogCreateDate", "blogCreateTime"}, direction = Sort.Direction.DESC) Pageable pageable) {
+    public ModelAndView showList(@PageableDefault(value = 5, sort = {"blogCreateDate", "blogCreateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
+                                    @RequestParam(value = "inputSearch", defaultValue = "") String inputSearch) {
         ModelAndView modelAndView = new ModelAndView("views/list");
-        Page<Blog> blogList = blogService.findAll(pageable);
+        Page<Blog> blogList;
+        if ("".equals(inputSearch)) {
+            blogList = blogService.findAll(pageable);
+        } else {
+            blogList = blogService.findByTitle(inputSearch, pageable);
+        }
         modelAndView.addObject("blogList", blogList);
+        modelAndView.addObject("inputSearch", inputSearch);
         return modelAndView;
     }
 
@@ -94,11 +101,11 @@ public class BlogController {
         return "redirect:/blog";
     }
 
-    @GetMapping("/search")
-    public String searchBlog(@RequestParam("search") String search, Model model) {
-        model.addAttribute("blogList", blogService.findByTitle(search));
-        return "views/list";
-    }
+//    @GetMapping("/search")
+//    public String searchBlog(@RequestParam("search") String search, Model model) {
+//        model.addAttribute("blogList", blogService.findByTitle(search));
+//        return "views/list";
+//    }
 
     @GetMapping("/{id}")
     public String getBlogCategory(@PathVariable("id") int id, Model model) {

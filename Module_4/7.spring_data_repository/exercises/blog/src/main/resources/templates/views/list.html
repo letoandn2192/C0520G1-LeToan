@@ -8,8 +8,8 @@
 </head>
 <body>
 <a href="/blog/create" role="button" class="btn btn-outline-dark">Create New Blog</a>
-<form class="form-inline my-2 my-lg-0" action="/blog/search">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" name="search">
+<form class="form-inline my-2 my-lg-0" action="/blog">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" name="inputSearch" id="inputSearch" th:value="${inputSearch}">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 </form>
 <table class="table table-sm table-bordered table-hover">
@@ -44,5 +44,10 @@
     </tr>
     </tbody>
 </table>
+<div>
+    <a th:href="@{'/blog'(page=${blogList.number - 1})}" th:if="${blogList.hasPrevious()}" onclick="location.href=this.href+'&inputSearch='+document.getElementById('inputSearch').value;return false">Previous</a>
+    <span th:text="${blogList.number + 1}"></span>/<span th:text="${blogList.totalPages}"></span>
+    <a th:href="@{'/blog'(page=${blogList.number + 1})}" th:if="${blogList.hasNext()}" onclick="location.href=this.href+'&inputSearch='+document.getElementById('inputSearch').value; return false">Next</a>
+</div>
 </body>
 </html>
