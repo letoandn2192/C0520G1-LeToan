@@ -1,4 +1,94 @@
 package vn.codegym.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import vn.codegym.model.Customer;
+import vn.codegym.model.CustomerType;
+import vn.codegym.service.CustomerService;
+import vn.codegym.service.CustomerTypeService;
+
+import java.util.List;
+
+@Controller
+@RequestMapping("/customer")
 public class CustomerController {
+    @Autowired
+    private CustomerService customerService;
+
+    @Autowired
+    CustomerTypeService customerTypeService;
+
+    @ModelAttribute("customerTypeList")
+    public List<CustomerType> getCustomerTypeList() {
+        return customerTypeService.findAll();
+    }
+
+    @GetMapping
+    public String getCustomerList(@PageableDefault(size = 5) Pageable pageable,
+                                        @RequestParam(value = "inputSearch", defaultValue = "") String inputSearch ,Model model) {
+        Page<Customer> customerList;
+        if ("".equals(inputSearch)) {
+            customerList = customerService.findAll(pageable);
+        } else {
+            customerList = customerService.findByIdAndName(inputSearch, pageable);
+        }
+        model.addAttribute("customerList", customerList);
+        model.addAttribute("inputSearch", inputSearch);
+        return "customer/customer-list";
+    }
+
+    @GetMapping("/create")
+    public ModelAndView getCreateCustomerForm() {
+        ModelAndView modelAndView = new ModelAndView("customer/customer-create");
+        modelAndView.addObject("customer", new Customer());
+        return modelAndView;
+    }
+
+    @PostMapping("/save")
+    public String saveNewCustomer(Customer customer) {
+        customerService.save(customer);
+        return "redirect:/customer";
+    }
+
+    @GetMapping("/detail/{id}")
+    public ModelAndView getCustomerInformation(@PathVariable("id") String id) {
+        Customer customer = customerService.findById(id);
+        ModelAndView modelAndView = new ModelAndView("customer/customer-detail");
+        modelAndView.addObject("customer", customer);
+        return modelAndView;
+    }
+
+    @GetMapping("/edit/{id}")
+    public ModelAndView getEditCustomerForm(@PathVariable("id") String id) {
+        Customer customer = customerService.findById(id);
+        ModelAndView modelAndView = new ModelAndView("customer/customer-edit");
+        modelAndView.addObject("customer", customer);
+        return modelAndView;
+    }
+
+    @PostMapping("/update")
+    public String updateCustomerInformation(Customer customer) {
+        customerService.save(customer);
+        return "redirect:/customer";
+    }
+
+    @GetMapping("/delete/{id}")
+    public ModelAndView getDeleteCustomerForm(@PathVariable("id") String id) {
+        Customer customer = customerService.findById(id);
+        ModelAndView modelAndView = new ModelAndView("customer/customer-delete");
+        modelAndView.addObject("customer", customer);
+        return modelAndView;
+    }
+
+    @PostMapping("/confirm")
+    public String deleteCustomerInformation(Customer customer) {
+        customerService.delete(customer.getCustomerId());
+        return "redirect:/customer";
+    }
 }

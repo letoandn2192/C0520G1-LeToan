@@ -1,10 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout/layout::header}">
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Title</title>
 </head>
 <body>
-$END$
+<div th:replace="~{/layout/layout::title}"></div>
+<nav th:replace="~{/layout/layout::navbar}"></nav>
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+<div class="container-fluid">
+    <div class="body row position-relative" style="top: 160px">
+        <div class="text-center col-12">
+            <h2>Customer's Information Detail</h2>
+        </div>
+        <table class="table table-sm table-bordered table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Information</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td scope="row">ID</td>
+                <td th:text="${customer.customerId}"></td>
+            </tr>
+            <tr>
+                <td scope="row">Name</td>
+                <td th:text="${customer.customerName}"></td>
+            </tr>
+            <tr>
+                <td scope="row">Birthday</td>
+                <td th:text="${customer.customerBirthday}"></td>
+            </tr>
+            <tr>
+                <td scope="row">Gender</td>
+                <td th:if="${customer.customerGender}" th:text="Male"></td>
+                <td th:if="!${customer.customerGender}" th:text="Female"></td>
+            </tr>
+            <tr>
+                <td scope="row">Identify Number</td>
+                <td th:text="${customer.customerIdCard}"></td>
+            </tr>
+            <tr>
+                <td scope="row">Phone</td>
+                <td th:text="${customer.customerPhone}"></td>
+            </tr>
+            <tr>
+                <td scope="row">Email</td>
+                <td th:text="${customer.customerEmail}"></td>
+            </tr>
+            <tr>
+                <td scope="row">Address</td>
+                <td th:text="${customer.customerAddress}"></td>
+            </tr>
+            <tr>
+                <td scope="row">Type Customer</td>
+                <td th:text="${customer.customerType.customerTypeName}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="row text-center col-12">
+            <a th:href="@{/customer/edit/{id}(id=${customer.customerId})}" role="button" class="btn btn-outline-dark mr-2">Edit <span class="fas fa-pen"></span></a>
+            <a th:href="@{/customer/delete/{id}(id=${customer.customerId})}" role="button" class="btn btn-outline-dark mr-2">Delete <span class="fas fa-trash"></span></a>
+            <a th:href="@{/customer}" role="button" class="btn btn-outline-dark float-left">Back</a>
+        </div>
+<!--        <c:if test="${messageInform != null}">-->
+<!--            <div class="alert alert-success col-4 d-flex justify-content-center" role="alert">-->
+<!--                ${messageInform}-->
+<!--            </div>-->
+<!--        </c:if>-->
+    </div>
+</div>
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+<footer th:replace="~{/layout/layout::footer}"></footer>
 </body>
 </html>

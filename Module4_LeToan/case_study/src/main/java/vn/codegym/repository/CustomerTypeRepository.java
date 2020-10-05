@@ -1,4 +1,7 @@
 package vn.codegym.repository;
 
-public interface CustomerTypeRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import vn.codegym.model.CustomerType;
+
+public interface CustomerTypeRepository extends JpaRepository<CustomerType, Long> {
 }
