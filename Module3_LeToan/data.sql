@@ -129,6 +129,6 @@ insert into `role` (role_id, role_name)
 values 
 (1, 'test');
 
-insert into user (username, password) 
+insert into user (username, `password`) 
 values 
 ('username', '123456789');

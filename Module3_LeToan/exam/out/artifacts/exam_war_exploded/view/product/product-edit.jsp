@@ -51,8 +51,6 @@
                     <label for="categoryId" class="col-2 d-flex justify-content-start">Category Id</label>
                     <input type="text" class="col-8 form-control" id="categoryId" name="categoryId" value="${product.productCategoryId}">
                 </div>
-
-
                 <div class="form-group form-inline">
                     <div class="col-2"></div>
                     <div class="col-8 pl-0">

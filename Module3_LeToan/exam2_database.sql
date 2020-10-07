@@ -17,3 +17,5 @@ create table complex
 insert into complex (complex_id, complex_status, complex_area, complex_floor, complex_type, complex_cost, complex_start_date, complex_end_date)
 values
 ('111-11-11', 'Empty', 200, 10, 'Share Office', 1000, '2019-10-10', '2020-10-10');
+
+select * from complex;

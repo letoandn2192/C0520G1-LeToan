@@ -24,7 +24,7 @@
                 Product</a>
             <h2>List of Product</h2>
         </div>
-        <form method="post" id="mainForm">
+        <form id="mainForm" method="post">
             <table id="tableStudent" class="table table-sm table-bordered table-hover">
                 <thead class="thead-dark">
                 <tr>

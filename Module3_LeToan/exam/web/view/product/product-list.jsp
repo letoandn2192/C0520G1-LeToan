@@ -24,6 +24,7 @@
                 Product</a>
             <h2>List of Product</h2>
         </div>
+        <form id="mainForm" method="post">
             <table id="tableStudent" class="table table-sm table-bordered table-hover">
                 <thead class="thead-dark">
                 <tr>
@@ -143,6 +144,7 @@
                 </c:forEach>
                 </tbody>
             </table>
+        </form>
         <c:if test="${messageInform != null}">
             <div class="alert alert-success col-4 d-flex justify-content-center" role="alert">
                     ${messageInform}
