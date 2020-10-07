@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>View</title>
+    <link rel="stylesheet" type="text/css" href="../static/bootstrap_4/css/bootstrap.min.css" th:href="@{/bootstrap_4/css/bootstrap.min.css}">
+</head>
+<body>
+<h3>View Blog</h3>
+<table class="table table-sm">
+    <tbody>
+    <tr>
+        <td th:text="${blog.blogTitle}"></td>
+        <td th:text="${blog.blogContent}"></td>
+    </tr>
+    </tbody>
+</table>
+<a role="button" class="btn btn-outline-dark" href="/blog">Back</a>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/product/layout::header}">
+    <title>Title</title>
+</head>
+<body>
+
+
+<section class="sections random-product">
+    <div class="container-fluid">
+        <div class="container">
+            <div class="card-header bg-dark text-light mb-2">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                Product List
+                <a href="/cart" class="btn btn-danger btn-sm float-right">Cart</a>
+                <div class="clearfix"></div>
+            </div>
+            <th:block th:with="colCount=${4}">
+                <div th:each="r : ${#numbers.sequence(0, productList.size(), colCount)}"  class="row">
+                    <div th:each="c : ${#numbers.sequence(0, colCount - 1)}" th:if="${r + c &lt; productList.size()}" th:with="product = ${productList.get(r + c)}" class="col-md-3">
+                        <a th:href="@{/product/detail/{id}(id=${product.id})}">
+                        <div class="card">
+                            <img class="card-img-top h-50vh" th:src="${product.image}" alt="I phone 11">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <span class="text-decoration-none" th:text="${product.name}"></span>
+                                </h5>
+                            </div>
+                            <div class="card-footer">
+                                <div class="badge badge-danger float-right" th:text="${product.discount} + '%'"></div>
+                                <div class="float-left">
+                                    <span class="text-danger" th:text="${#numbers.formatDecimal(product.price - (product.price*product.discount/100), 0, 'COMMA', 0, 'POINT')} + ' VND'"></span>
+                                    <br>
+                                    <small class="text-muted"><del th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' VND'"></del></small>
+                                </div>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+            </th:block>
+        </div><!--.container-->
+    </div><!--.container-fluid-->
+</section>
+
+<footer th:replace="~{/product/layout::footer}"></footer>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Create</title>
+</head>
+<body>
+<div id="container">
+    <h1>Create new Smartphone</h1>
+    <div>
+        <p>Here you can create new Smartphone:</p>
+        <div id="PhoneFromResponse"></div>
+    </div>
+    <form id="newSmartphoneForm" th:object="${phone}">
+        <table>
+            <tbody>
+            <tr>
+                <td>Producer:</td>
+                <td>
+                    <select id="producer" th:field="*{phoneProducer}">
+                        <option value="NOKIA">Nokia</option>
+                        <option selected="selected" value="IPHONE">iPhone</option>
+                        <option value="HTC">HTC</option>
+                        <option value="SAMSUNG">Samsung</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Model:</td>
+                <td><input id="model" th:field="*{phoneModel}" /></td>
+            </tr>
+            <tr>
+                <td>Price:</td>
+                <td><input id="price" th:field="*{phonePrice}" /></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Create" /></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+    <a th:href="@{/smartphones}">List</a>
+</div>
+<script src="/bootstrap_4/js/jquery-ui.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#newSmartphoneForm').submit(function(event) {
+            let producer = $('#producer').val();
+            let model = $('#model').val();
+            let price = $('#price').val();
+            let json = { "producer" : producer, "model" : model, "price": price};
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                type : "POST",
+                data: JSON.stringify(json),
+                url: "/save",
+                success: function(phone) {
+                    let respContent = "";
+                    respContent += "<span class='success'>Smartphone was created: [";
+                    respContent += phone.phonePrice + " : ";
+                    respContent += phone.phoneModel + " : " ;
+                    respContent += phone.phonePrice + "]</span>";
+                    $("#PhoneFromResponse").html(respContent);
+                }
+            });
+            event.preventDefault();
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer List</title>
+    <link href="bootstrap_4/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <style>
+        table {
+            border: 1px solid #000;
+        }
+
+        th, td {
+            border: 1px dotted #555;
+        }
+    </style>
+</head>
+<body>
+Language: <a href="?lang=en_US">English (US)</a> | <a href="?lang=en_GB">English (GB)</a> | <a href="?lang=vn">Viet Nam</a>
+<a th:href="@{/create}" role="button" class="btn btn-outline-dark"><p th:text="#{customer.create}"></p></a>
+<table class="table table-hover table-bordered table-sm">
+    <thead class="thead-dark">
+    <tr>
+        <th th:text="#{customer.id}"></th>
+        <th th:text="#{customer.name}"></th>
+        <th th:text="#{customer.email}"></th>
+        <th th:text="#{customer.address}"></th>
+        <th th:text="#{customer.province}"></th>
+        <th th:text="#{customer.edit}"></th>
+        <th th:text="#{customer.delete}"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="c : ${customerList}">
+        <td th:text="${c.id}"></td>
+        <td th:text="${c.name}"></td>
+        <td th:text="${c.email}"></td>
+        <td th:text="${c.address}"></td>
+        <td th:text="${c.province.provinceName}"></td>
+        <td>
+            <a th:href="@{/{id}/edit(id=${c.id})}" role="button" class="btn btn-outline-dark"><p th:text="#{customer.edit}"></p></a>
+        </td>
+        <td>
+            <a th:href="@{/{id}/delete(id=${c.id})}" role="button" class="btn btn-outline-dark"><p th:text="#{customer.delete}"></p></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div class="pagination justify-content-center">
+    <a th:href="@{'/'(page=${customerList.number - 1})}" th:if="${customerList.hasPrevious()}" class="page-link"><p th:text="#{customer.previous}"></p></a>
+    <a th:text="${customerList.number + 1}" class="page-link"></a>
+    <a th:href="@{'/'(page=${customerList.number + 1})}" th:if="${customerList.hasNext()}" class="page-link"><p th:text="#{customer.next}"></p></a>
+</div>
+</body>
+</html>

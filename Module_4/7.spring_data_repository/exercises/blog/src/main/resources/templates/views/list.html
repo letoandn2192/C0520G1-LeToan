@@ -45,9 +45,10 @@
     </tbody>
 </table>
 <div>
-    <a th:href="@{'/blog'(page=${blogList.number - 1})}" th:if="${blogList.hasPrevious()}" onclick="location.href=this.href+'&inputSearch='+document.getElementById('inputSearch').value;return false">Previous</a>
+    <a th:href="@{'/blog'(page=${blogList.number - 1}, inputSearch=${inputSearch})}" th:if="${blogList.hasPrevious()}">Previous</a>
     <span th:text="${blogList.number + 1}"></span>/<span th:text="${blogList.totalPages}"></span>
-    <a th:href="@{'/blog'(page=${blogList.number + 1})}" th:if="${blogList.hasNext()}" onclick="location.href=this.href+'&inputSearch='+document.getElementById('inputSearch').value; return false">Next</a>
+    <a th:href="@{'/blog'(page=${blogList.number + 1}, inputSearch=${inputSearch})}" th:if="${blogList.hasNext()}">Next</a>
+<!--    <a th:href="@{'/blog'(page=${blogList.number + 1})}" th:if="${blogList.hasNext()}" onclick="location.href=this.href+'&inputSearch='+document.getElementById('inputSearch').value; return false">Next</a>-->
 </div>
 </body>
 </html>
