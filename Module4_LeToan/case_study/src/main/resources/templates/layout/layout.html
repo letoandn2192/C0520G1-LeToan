@@ -11,7 +11,7 @@
 <body>
 <div class="col-12 row bg-info m-0 fixed-top" style="height: 100px" th:fragment="title">
     <div class="col-2 p-0">
-        <img src="/image/codegym.png" th:href="@{/image/codegym.png}" class="img-thumbnail" alt="logo" height="100" width="100">
+        <img src="/image/codegym.png" th:src="@{/image/codegym.png}" class="img-thumbnail" alt="logo" height="100" width="100">
     </div>
     <div class="col-8">
         <h2 style="margin-top: 30px">FURAMA RESORT</h2>
@@ -27,23 +27,23 @@
                 <a class="nav-link text-success" href="/"><span class="fas fa-home"></span> Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-success" href="#"><span class="fas fa-people-arrows"></span>
+                <a class="nav-link text-success" href="/employee"><span class="fas fa-people-arrows"></span>
                     Employee</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-success" href="/customer"><span class="fas fa-user"></span> Customer</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-success" href="#"><span class="fas fa-list"></span> Service</a>
+                <a class="nav-link text-success" href="/service"><span class="fas fa-list"></span> Service</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-success" href="#"><span class="fas fa-file-contract"></span>
+                <a class="nav-link text-success" href="/contract"><span class="fas fa-file-contract"></span>
                     Contract</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" th:value="${inputSearch}"
-                   name="inputSearch">
+                   name="inputSearch" id="inputSearch">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>
@@ -53,9 +53,9 @@
 </nav>
 
 <footer th:fragment="footer">
-    <script src="bootstrap_4/js/jquery-3.5.1.js" th:href="@{/bootstrap_4/js/jquery-3.5.1.js}"></script>
-    <script src="bootstrap_4/js/bootstrap.min.js" th:href="@{/bootstrap_4/js/bootstrap.min.js}"></script>
-    <script src="bootstrap_4/jquery-ui-1.12.1/jquery-ui.min.js" th:href="@{/bootstrap_4/jquery-ui-1.12.1/jquery-ui.min.js}"></script>
+    <script type="text/javascript" src="bootstrap_4/js/jquery-3.5.1.js" th:src="@{/bootstrap_4/js/jquery-3.5.1.js}"></script>
+    <script type="text/javascript" src="bootstrap_4/js/bootstrap.min.js" th:src="@{/bootstrap_4/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" src="bootstrap_4/jquery-ui-1.12.1/jquery-ui.min.js" th:src="@{/bootstrap_4/jquery-ui-1.12.1/jquery-ui.min.js}"></script>
 </footer>
 </body>
 </html>

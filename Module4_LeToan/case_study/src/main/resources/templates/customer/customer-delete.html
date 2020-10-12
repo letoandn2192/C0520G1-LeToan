@@ -10,7 +10,7 @@
 <!-- ----------------------------------------------------------------------------------------------------------- -->
 <div class="container-fluid">
     <div class="body position-relative" style="top: 160px">
-        <form method="post" th:object="${customer}" th:action="@{/customer/confirm}">
+        <form method="post" th:object="${customer}" th:action="@{/customer/confirm}" id="deleteForm">
             <fieldset>
                 <legend class="text-center">Delete Information</legend>
                 <div class="form-group form-inline">
@@ -66,7 +66,10 @@
                 <div class="form-group form-inline">
                     <div class="col-2"></div>
                     <div class="col-8 pl-0">
-                        <input type="submit" value="Delete" class="btn btn-outline-dark mr-2">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            Delete
+                        </button>
                         <a class="btn btn-outline-dark" th:href="@{/customer/detail/{id}(id=${customer.customerId})}">Back</a>
                     </div>
                 </div>
@@ -74,7 +77,35 @@
         </form>
     </div>
 </div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you want to delete this customer ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="deleteCustomer()">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- ----------------------------------------------------------------------------------------------------------- -->
 <footer th:replace="~{/layout/layout::footer}"></footer>
+<script>
+    function deleteCustomer() {
+        document.getElementById("deleteForm").submit();
+    }
+</script>
 </body>
 </html>

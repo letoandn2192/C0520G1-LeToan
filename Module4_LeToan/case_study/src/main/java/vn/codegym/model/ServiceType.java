@@ -12,7 +12,7 @@ public class ServiceType {
     private String serviceTypeName;
 
     @OneToMany(mappedBy = "serviceType", cascade = CascadeType.ALL)
-    private Set<Service> services;
+    private Set<Services> services;
 
     public long getServiceTypeId() {
         return serviceTypeId;
@@ -30,11 +30,11 @@ public class ServiceType {
         this.serviceTypeName = serviceTypeName;
     }
 
-    public Set<Service> getServices() {
+    public Set<Services> getServices() {
         return services;
     }
 
-    public void setServices(Set<Service> services) {
+    public void setServices(Set<Services> services) {
         this.services = services;
     }
 }

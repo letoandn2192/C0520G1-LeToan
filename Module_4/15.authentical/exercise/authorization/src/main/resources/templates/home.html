@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+</head>
+<body>
+<h1>Welcome To My Website <span sec:authentication="name"></span></h1>
+<a th:href="@{/login}">Log in</a>
+<a th:href="@{/guest}">Guest</a>
+<a th:href="@{/member}">Member</a>
+<a th:href="@{/admin}">Admin</a>
+<a th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Log out</a>
+</body>
+</html>

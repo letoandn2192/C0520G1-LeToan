@@ -1,20 +1,40 @@
 package vn.codegym.model;
 
+import vn.codegym.common.validate_birthday.ValidateBirthdayGreater18;
+import vn.codegym.common.validate_customer_id.ValidateCustomerId;
+
 import javax.persistence.*;
-import java.util.Date;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import java.util.Set;
 
 @Entity
 @Table
 public class Customer {
+    public interface EditCheck {};
+    public interface IdCheck {};
     @Id
+    @ValidateCustomerId(groups = IdCheck.class)
     private String customerId;
+
+    @NotEmpty(message = "Name must not be empty", groups = EditCheck.class)
     private String customerName;
+
+    @ValidateBirthdayGreater18(groups = EditCheck.class)
     private String customerBirthday;
+
     private boolean customerGender;
+
+    @Pattern(regexp = "^((\\d{9})|(\\d{12}))$", message = "Id card format is XXXXXXXXX or XXXXXXXXXXXX", groups = EditCheck.class)
     private String customerIdCard;
+
+    @Pattern(regexp = "^(090|091|\\(84\\)\\+90|\\(84\\)\\+91)\\d{7}$", message = "Format is 090xxxxxxx, 091xxxxxxx, (84)+90xxxxxxx, (84)+91xxxxxxx", groups = EditCheck.class)
     private String customerPhone;
+
+    @Pattern(regexp = "^(\\w{3,}@\\w+\\.\\w+)$", message = "Email follow format abc@abc.abc", groups = EditCheck.class)
     private String customerEmail;
+
+    @NotEmpty(message = "Address not be empty!!!", groups = EditCheck.class)
     private String customerAddress;
 
     @ManyToOne

@@ -24,7 +24,7 @@ public class Contract {
 
     @ManyToOne
     @JoinColumn(name = "serviceId")
-    private Service service;
+    private Services service;
 
     @OneToMany(mappedBy = "contract", cascade = CascadeType.ALL)
     private Set<ContractDetail> contractDetails;
@@ -85,11 +85,11 @@ public class Contract {
         this.customer = customer;
     }
 
-    public Service getService() {
+    public Services getService() {
         return service;
     }
 
-    public void setService(Service service) {
+    public void setService(Services service) {
         this.service = service;
     }
 

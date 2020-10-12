@@ -6,8 +6,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.SmartValidator;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import vn.codegym.model.Customer;
 import vn.codegym.model.CustomerType;
 import vn.codegym.service.CustomerService;
@@ -22,7 +26,7 @@ public class CustomerController {
     private CustomerService customerService;
 
     @Autowired
-    CustomerTypeService customerTypeService;
+    private CustomerTypeService customerTypeService;
 
     @ModelAttribute("customerTypeList")
     public List<CustomerType> getCustomerTypeList() {
@@ -44,20 +48,25 @@ public class CustomerController {
     }
 
     @GetMapping("/create")
-    public ModelAndView getCreateCustomerForm() {
+    public ModelAndView showCreateCustomerForm() {
         ModelAndView modelAndView = new ModelAndView("customer/customer-create");
         modelAndView.addObject("customer", new Customer());
         return modelAndView;
     }
 
     @PostMapping("/save")
-    public String saveNewCustomer(Customer customer) {
-        customerService.save(customer);
-        return "redirect:/customer";
+    public String saveNewCustomer(@Validated({Customer.EditCheck.class, Customer.IdCheck.class}) Customer customer, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            return "customer/customer-create";
+        } else {
+            customerService.save(customer);
+            redirectAttributes.addFlashAttribute("messInform", "Create Successful!!!");
+            return "redirect:/customer";
+        }
     }
 
     @GetMapping("/detail/{id}")
-    public ModelAndView getCustomerInformation(@PathVariable("id") String id) {
+    public ModelAndView showCustomerInformation(@PathVariable("id") String id) {
         Customer customer = customerService.findById(id);
         ModelAndView modelAndView = new ModelAndView("customer/customer-detail");
         modelAndView.addObject("customer", customer);
@@ -65,7 +74,7 @@ public class CustomerController {
     }
 
     @GetMapping("/edit/{id}")
-    public ModelAndView getEditCustomerForm(@PathVariable("id") String id) {
+    public ModelAndView showEditCustomerForm(@PathVariable("id") String id) {
         Customer customer = customerService.findById(id);
         ModelAndView modelAndView = new ModelAndView("customer/customer-edit");
         modelAndView.addObject("customer", customer);
@@ -73,13 +82,18 @@ public class CustomerController {
     }
 
     @PostMapping("/update")
-    public String updateCustomerInformation(Customer customer) {
-        customerService.save(customer);
-        return "redirect:/customer";
+    public String updateCustomerInformation(@Validated(Customer.EditCheck.class) Customer customer, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            return "customer/customer-edit";
+        } else {
+            customerService.save(customer);
+            redirectAttributes.addFlashAttribute("messInform", "Update Successful!!!");
+            return "redirect:/customer";
+        }
     }
 
     @GetMapping("/delete/{id}")
-    public ModelAndView getDeleteCustomerForm(@PathVariable("id") String id) {
+    public ModelAndView showDeleteCustomerForm(@PathVariable("id") String id) {
         Customer customer = customerService.findById(id);
         ModelAndView modelAndView = new ModelAndView("customer/customer-delete");
         modelAndView.addObject("customer", customer);
@@ -87,8 +101,9 @@ public class CustomerController {
     }
 
     @PostMapping("/confirm")
-    public String deleteCustomerInformation(Customer customer) {
+    public String deleteCustomerInformation(Customer customer, RedirectAttributes redirectAttributes) {
         customerService.delete(customer.getCustomerId());
+        redirectAttributes.addFlashAttribute("messInform", "Delete Successful!!!");
         return "redirect:/customer";
     }
 }

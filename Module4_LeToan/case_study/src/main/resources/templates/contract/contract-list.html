@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout/layout::header}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="~{/layout/layout::title}"></div>
+<nav th:replace="~{/layout/layout::navbar}"></nav>
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+<div class="container-fluid">
+    <div class="body position-relative" style="top: 160px">
+        <div class="text-center col-12">
+            <a th:href="@{/contract/create}" role="button" class="btn btn-outline-dark float-left mr-2">Create New Contract</a>
+<!--            <a href="/contract?action=manager" role="button" class="btn btn-outline-dark float-left">Manager</a>-->
+            <h2>List of Contract</h2>
+        </div>
+        <table id="tableStudent" class="table table-sm table-bordered table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Deposit</th>
+                <th scope="col">Total Money</th>
+                <th scope="col">Detail</th>
+                <th scope="col">Delete</th>
+            </tr>
+            </thead>
+            <tbody id="myTable">
+                <tr th:each="contract: ${contractList}">
+                    <td scope="row" th:text="${contract.contractId}"></td>
+                    <td scope="row" th:text="${contract.contractStartDate}"></td>
+                    <td scope="row" th:text="${contract.contractEndDate}"></td>
+                    <td scope="row" th:text="${contract.contractDeposit}"></td>
+                    <td scope="row" th:text="${contract.contractTotalMoney}"></td>
+                    <td>
+                        <a th:href="@{/contract/detail/{id}(id=${contract.contractId})}"><span
+                                class="fas fa-eye text-warning"></span></a>
+                    </td>
+                    <td>
+                        <a th:href="@{/contract/delete/{id}(id=${contract.contractId})}"><span
+                                class="fas fa-trash text-danger"></span></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <th:block th:if="${messInform} != null">
+            <div class="alert alert-success col-4 d-flex justify-content-center" role="alert" th:text="${messInform}"></div>
+        </th:block>
+    </div>
+</div>
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+<footer th:replace="~{/layout/layout::footer}"></footer>
+<script>
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 2000);
+
+    $(document).ready(function () {
+        $('#inputSearch').on('keyup', function () {
+            let value = $(this).val().toLowerCase();
+            $('#myTable tr').filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+</body>
+</html>

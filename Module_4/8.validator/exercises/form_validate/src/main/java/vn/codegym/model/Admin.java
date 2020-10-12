@@ -87,7 +87,7 @@ public class Admin implements Validator {
 //            errors.rejectValue("adminAge", "typeMismatch.admin.adminAge");
         }
         String phoneNumber = admin.getAdminPhoneNumber();
-        if (!phoneNumber.matches("^(090|091|\\\\(84\\\\)\\\\+90|\\\\(84\\\\)\\\\+91)\\\\d{7}$")) {
+        if (!phoneNumber.matches("^(090|091|\\(84\\)\\+90|\\(84\\)\\+91)\\d{7}$")) {
             errors.rejectValue("adminPhoneNumber", "adminPhoneNumber.length");
         }
         String email = admin.getAdminEmail();

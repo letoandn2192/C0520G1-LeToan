@@ -13,7 +13,7 @@ public class RentType {
     private double rentTypeCost;
 
     @OneToMany(mappedBy = "rentType", cascade = CascadeType.ALL)
-    private Set<Service> services;
+    private Set<Services> services;
 
     public long getRentTypeId() {
         return rentTypeId;
@@ -39,11 +39,11 @@ public class RentType {
         this.rentTypeCost = rentTypeCost;
     }
 
-    public Set<Service> getServices() {
+    public Set<Services> getServices() {
         return services;
     }
 
-    public void setServices(Set<Service> services) {
+    public void setServices(Set<Services> services) {
         this.services = services;
     }
 }

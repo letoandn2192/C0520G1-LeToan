@@ -32,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .formLogin()
-//                   .loginPage("/dang-nhap")
+//                   .loginPage("/login")
                     .defaultSuccessUrl("/hello")
                     .permitAll()
                 .and()

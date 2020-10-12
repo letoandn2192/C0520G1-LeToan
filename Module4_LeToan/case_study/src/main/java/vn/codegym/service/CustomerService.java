@@ -9,6 +9,8 @@ public interface CustomerService {
 
     Page<Customer> findByIdAndName(String inputSearch, Pageable pageable);
 
+    Iterable<Customer> findAll();
+
     Customer findById(String id);
 
     void save(Customer customer);
