@@ -1,31 +1,33 @@
 package vn.codegym.model;
 
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 import vn.codegym.common.validate_future_date.ValidateFutureDate;
-import vn.codegym.common.validate_start_end_day.ValidateStartBeforeEndDate;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Positive;
+import java.time.LocalDate;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Entity
 @Table
-//@ValidateStartBeforeEndDate
-public class Contract {
+public class Contract implements Validator{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long contractId;
 
-    @ValidateFutureDate
+//    @ValidateFutureDate
     private String contractStartDate;
 
-    @ValidateFutureDate
+//    @ValidateFutureDate
     private String contractEndDate;
 
-    @Positive
+//    @Positive
     private double contractDeposit;
 
-    @Positive
+//    @Positive
     private double contractTotalMoney;
 
     @ManyToOne
@@ -113,5 +115,52 @@ public class Contract {
 
     public void setContractDetails(Set<ContractDetail> contractDetails) {
         this.contractDetails = contractDetails;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return Contract.class.isAssignableFrom(clazz);
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+        Contract contract = (Contract) target;
+        String sDate = contract.getContractStartDate();
+        String eDate = contract.getContractEndDate();
+        if (!checkValidateDate(sDate)) {
+            errors.rejectValue("contractStartDate", "contractStartDate.startDate");
+        }
+        if (!checkValidateDate(eDate)) {
+            errors.rejectValue("contractEndDate", "contractEndDate.endDate");
+        }
+        if (checkValidateDate(sDate) && checkValidateDate(eDate)) {
+            LocalDate startDate = LocalDate.parse(changeFormatDate(sDate));
+            LocalDate endDate = LocalDate.parse(changeFormatDate(eDate));
+            if (startDate.isAfter(endDate)) {
+                errors.rejectValue("contractEndDate", "contractEndDate.startDateBeforeEndDate");
+            }
+        }
+        double total = contract.getContractTotalMoney();
+        double deposit = contract.getContractDeposit();
+        if(deposit <= 0) {
+            errors.rejectValue("contractDeposit", "contractDeposit.depositPositive");
+        }
+        if(total <= 0) {
+            errors.rejectValue("contractTotalMoney", "contractTotalMoney.totalMoneyPositive");
+        }
+        if (deposit > total) {
+            errors.rejectValue("contractTotalMoney", "contractTotalMoney.totalMoney");
+        }
+    }
+
+    private String changeFormatDate(String input) {
+        String[] array = input.split("/");
+        return array[2]+'-'+array[1]+'-'+array[0];
+    }
+
+    private boolean checkValidateDate(String input) {
+        Pattern pattern = Pattern.compile("^(?=\\d{2}([-.,\\/])\\d{2}\\1\\d{4}$)(?:0[1-9]|1\\d|[2][0-8]|29(?!.02.(?!(?!(?:[02468][1-35-79]|[13579][0-13-57-9])00)\\d{2}(?:[02468][048]|[13579][26])))|30(?!.02)|31(?=.(?:0[13578]|10|12))).(?:0[1-9]|1[012]).\\d{4}$");
+        Matcher matcher = pattern.matcher(input);
+        return matcher.matches();
     }
 }

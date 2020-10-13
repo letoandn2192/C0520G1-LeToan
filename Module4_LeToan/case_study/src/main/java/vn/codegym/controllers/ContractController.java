@@ -64,9 +64,8 @@ public class ContractController {
 
     @PostMapping("/save")
     public String saveNewContract(@Validated Contract contract, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        new Contract().validate(contract, bindingResult);
         if (bindingResult.hasErrors()) {
-//            bindingResult.resolveMessageCodes("typeMismatch.contract", "typeMismatch.contract.contractDeposit");
-//            bindingResult.resolveMessageCodes("typeMismatch.contract", "typeMismatch.contract.contractTotalMoney");
             return "contract/contract-create";
         } else {
             contractService.save(contract);
@@ -93,9 +92,8 @@ public class ContractController {
 
     @PostMapping("/update")
     public String updateContractInformation(@Validated Contract contract, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        new Contract().validate(contract, bindingResult);
         if (bindingResult.hasErrors()) {
-//            bindingResult.resolveMessageCodes("typeMismatch.contract", "typeMismatch.contract.contractDeposit");
-//            bindingResult.resolveMessageCodes("typeMismatch.contract", "typeMismatch.contract.contractTotalMoney");
             return "contract/contract-edit";
         } else {
             contractService.save(contract);

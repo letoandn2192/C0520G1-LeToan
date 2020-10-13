@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.SmartValidator;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -77,11 +76,6 @@ public class ServiceController {
             validator.validate(service, bindingResult, Services.IdCheck.class, Services.RoomCheck.class);
         }
         if (bindingResult.hasErrors()) {
-//            bindingResult.resolveMessageCodes("typeMismatch.service", "typeMismatch.service.serviceArea");
-//            bindingResult.resolveMessageCodes("typeMismatch.service", "typeMismatch.service.serviceCost");
-//            bindingResult.resolveMessageCodes("typeMismatch.service", "typeMismatch.service.serviceMaxPerson");
-//            bindingResult.resolveMessageCodes("typeMismatch.service", "typeMismatch.service.servicePoolArea");
-//            bindingResult.resolveMessageCodes("typeMismatch.service", "typeMismatch.service.serviceFloor");
             return "service/service-create";
         } else {
             servicesService.save(service);
@@ -116,11 +110,6 @@ public class ServiceController {
             validator.validate(service, bindingResult, Services.RoomCheck.class);
         }
         if (bindingResult.hasErrors()) {
-//            bindingResult.resolveMessageCodes("typeMismatch.service", "typeMismatch.service.serviceArea");
-//            bindingResult.resolveMessageCodes("typeMismatch.service", "typeMismatch.service.serviceCost");
-//            bindingResult.resolveMessageCodes("typeMismatch.service", "typeMismatch.service.serviceMaxPerson");
-//            bindingResult.resolveMessageCodes("typeMismatch.service", "typeMismatch.service.servicePoolArea");
-//            bindingResult.resolveMessageCodes("typeMismatch.service", "typeMismatch.service.serviceFloor");
             return "service/service-edit";
         } else {
             servicesService.save(service);
