@@ -3,6 +3,7 @@ package vn.codegym.model;
 import vn.codegym.common.validate_service_id.ValidateServiceId;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
 import java.util.Set;
@@ -18,28 +19,30 @@ public class Services {
     @ValidateServiceId(groups = IdCheck.class)
     private String serviceId;
 
-    @NotEmpty(message = "Name not be empty!!!", groups = RoomCheck.class)
+    @NotEmpty(message = "Name not be empty!!!", groups = {VillaCheck.class, HouseCheck.class, RoomCheck.class})
     private String serviceName;
 
-    @Positive(message = "Name not be empty!!!",groups = RoomCheck.class)
+    @Positive(message = "Area must be positive!!!", groups = {VillaCheck.class, HouseCheck.class, RoomCheck.class})
+    @Min(value = 30, message = "Area at least is 30 m2", groups = {VillaCheck.class, HouseCheck.class, RoomCheck.class})
     private double serviceArea;
 
-    @Positive(message = "Name not be empty!!!",groups = RoomCheck.class)
+    @Positive(message = "Cost must be positive!!!", groups = {VillaCheck.class, HouseCheck.class, RoomCheck.class})
     private double serviceCost;
 
-    @Positive(message = "Name not be empty!!!",groups = RoomCheck.class)
+    @Positive(message = "Person must be positive!!!", groups = {VillaCheck.class, HouseCheck.class, RoomCheck.class})
     private int serviceMaxPerson;
 
-    @NotEmpty(message = "Name not be empty!!!",groups = HouseCheck.class)
+    @NotEmpty(message = "Must be not empty!!!", groups = {VillaCheck.class, HouseCheck.class})
     private String serviceStandardRoom;
 
-    @NotEmpty(message = "Name not be empty!!!",groups = HouseCheck.class)
+    @NotEmpty(message = "Must be not empty!!!", groups = {VillaCheck.class, HouseCheck.class})
     private String serviceDescription;
 
-    @Positive(message = "Name not be empty!!!",groups = VillaCheck.class)
+    @Positive(message = "Pool Area must be positive!!!", groups = VillaCheck.class)
+    @Min(value = 30, message = "Pool Area at least is 30 m2", groups = VillaCheck.class)
     private double servicePoolArea;
 
-    @Positive(message = "Name not be empty!!!",groups = HouseCheck.class)
+    @Positive(message = "Floor must be positive!!!", groups = {VillaCheck.class, HouseCheck.class})
     private int serviceFloor;
 
     @ManyToOne

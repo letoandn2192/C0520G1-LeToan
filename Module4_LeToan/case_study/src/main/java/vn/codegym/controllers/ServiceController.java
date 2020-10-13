@@ -70,13 +70,18 @@ public class ServiceController {
     @PostMapping("/save")
     public String saveNewService(@ModelAttribute("service") Services service, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (service.getServiceType().getServiceTypeId() == 1) {
-            validator.validate(service, bindingResult, Services.IdCheck.class, Services.VillaCheck.class, Services.HouseCheck.class, Services.RoomCheck.class);
+            validator.validate(service, bindingResult, Services.IdCheck.class, Services.VillaCheck.class);
         } else if (service.getServiceType().getServiceTypeId() == 2) {
-            validator.validate(service, bindingResult, Services.IdCheck.class, Services.HouseCheck.class, Services.RoomCheck.class);
+            validator.validate(service, bindingResult, Services.IdCheck.class, Services.HouseCheck.class);
         } else {
             validator.validate(service, bindingResult, Services.IdCheck.class, Services.RoomCheck.class);
         }
         if (bindingResult.hasErrors()) {
+//            bindingResult.resolveMessageCodes("typeMismatch.service", "typeMismatch.service.serviceArea");
+//            bindingResult.resolveMessageCodes("typeMismatch.service", "typeMismatch.service.serviceCost");
+//            bindingResult.resolveMessageCodes("typeMismatch.service", "typeMismatch.service.serviceMaxPerson");
+//            bindingResult.resolveMessageCodes("typeMismatch.service", "typeMismatch.service.servicePoolArea");
+//            bindingResult.resolveMessageCodes("typeMismatch.service", "typeMismatch.service.serviceFloor");
             return "service/service-create";
         } else {
             servicesService.save(service);
@@ -102,10 +107,26 @@ public class ServiceController {
     }
 
     @PostMapping("/update")
-    public String updateServiceInformation(Services service, RedirectAttributes redirectAttributes) {
-        servicesService.save(service);
-        redirectAttributes.addFlashAttribute("messInform", "Update Successful!!!");
-        return "redirect:/service";
+    public String updateServiceInformation(@ModelAttribute("service") Services service, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (service.getServiceType().getServiceTypeId() == 1) {
+            validator.validate(service, bindingResult, Services.VillaCheck.class);
+        } else if (service.getServiceType().getServiceTypeId() == 2) {
+            validator.validate(service, bindingResult, Services.HouseCheck.class);
+        } else {
+            validator.validate(service, bindingResult, Services.RoomCheck.class);
+        }
+        if (bindingResult.hasErrors()) {
+//            bindingResult.resolveMessageCodes("typeMismatch.service", "typeMismatch.service.serviceArea");
+//            bindingResult.resolveMessageCodes("typeMismatch.service", "typeMismatch.service.serviceCost");
+//            bindingResult.resolveMessageCodes("typeMismatch.service", "typeMismatch.service.serviceMaxPerson");
+//            bindingResult.resolveMessageCodes("typeMismatch.service", "typeMismatch.service.servicePoolArea");
+//            bindingResult.resolveMessageCodes("typeMismatch.service", "typeMismatch.service.serviceFloor");
+            return "service/service-edit";
+        } else {
+            servicesService.save(service);
+            redirectAttributes.addFlashAttribute("messInform", "Update Successful!!!");
+            return "redirect:/service";
+        }
     }
 
     @GetMapping("/delete/{id}")

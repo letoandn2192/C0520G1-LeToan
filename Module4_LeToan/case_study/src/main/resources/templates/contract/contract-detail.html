@@ -11,6 +11,7 @@
 <div class="container-fluid">
     <div class="body row position-relative" style="top: 160px">
         <div class="text-center col-12">
+            <a th:href="@{/contract-detail/create}" role="button" class="btn btn-outline-dark float-left mr-2">Create New Contract Detail</a>
             <h2>Contract's Information Detail</h2>
         </div>
         <table class="table table-sm table-bordered table-hover">
@@ -58,6 +59,7 @@
         <div class="row text-center col-12">
             <a th:href="@{/contract/edit/{id}(id=${contract.contractId})}" role="button" class="btn btn-outline-dark mr-2">Edit <span class="fas fa-edit"></span></a>
             <a th:href="@{/contract/delete/{id}(id=${contract.contractId})}" role="button" class="btn btn-outline-dark mr-2">Delete <span class="fas fa-eraser"></span></a>
+            <a th:href="@{/contract-detail/detail/{id}(id=${contract.contractId})}" role="button" class="btn btn-outline-dark mr-2">Contract Detail</span></a>
             <a href="/contract" role="button" class="btn btn-outline-dark float-left">Back</a>
         </div>
     </div>

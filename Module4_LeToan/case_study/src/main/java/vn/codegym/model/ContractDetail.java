@@ -2,6 +2,7 @@ package vn.codegym.model;
 
 import javax.persistence.*;
 import javax.security.auth.login.Configuration;
+import javax.validation.constraints.Positive;
 
 @Entity
 @Table
@@ -9,6 +10,8 @@ public class ContractDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long contractDetailId;
+
+    @Positive
     private int contractDetailQuantity;
 
     @ManyToOne

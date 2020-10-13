@@ -1,11 +1,12 @@
 package vn.codegym.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -62,10 +63,16 @@ public class ContractController {
     }
 
     @PostMapping("/save")
-    public String saveNewContract(Contract contract, RedirectAttributes redirectAttributes) {
-        contractService.save(contract);
-        redirectAttributes.addFlashAttribute("messInform", "Create Successful!!!");
-        return "redirect:/contract";
+    public String saveNewContract(@Validated Contract contract, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+//            bindingResult.resolveMessageCodes("typeMismatch.contract", "typeMismatch.contract.contractDeposit");
+//            bindingResult.resolveMessageCodes("typeMismatch.contract", "typeMismatch.contract.contractTotalMoney");
+            return "contract/contract-create";
+        } else {
+            contractService.save(contract);
+            redirectAttributes.addFlashAttribute("messInform", "Create Successful!!!");
+            return "redirect:/contract";
+        }
     }
 
     @GetMapping("/detail/{id}")
@@ -85,10 +92,16 @@ public class ContractController {
     }
 
     @PostMapping("/update")
-    public String updateContractInformation(Contract contract, RedirectAttributes redirectAttributes) {
-        contractService.save(contract);
-        redirectAttributes.addFlashAttribute("messInform", "Update Successful!!!");
-        return "redirect:/contract";
+    public String updateContractInformation(@Validated Contract contract, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+//            bindingResult.resolveMessageCodes("typeMismatch.contract", "typeMismatch.contract.contractDeposit");
+//            bindingResult.resolveMessageCodes("typeMismatch.contract", "typeMismatch.contract.contractTotalMoney");
+            return "contract/contract-edit";
+        } else {
+            contractService.save(contract);
+            redirectAttributes.addFlashAttribute("messInform", "Update Successful!!!");
+            return "redirect:/contract";
+        }
     }
 
     @GetMapping("delete/{id}")

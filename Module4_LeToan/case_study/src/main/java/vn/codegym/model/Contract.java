@@ -1,17 +1,31 @@
 package vn.codegym.model;
 
+import vn.codegym.common.validate_future_date.ValidateFutureDate;
+import vn.codegym.common.validate_start_end_day.ValidateStartBeforeEndDate;
+
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Positive;
 import java.util.Set;
 
 @Entity
 @Table
+//@ValidateStartBeforeEndDate
 public class Contract {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long contractId;
+
+    @ValidateFutureDate
     private String contractStartDate;
+
+    @ValidateFutureDate
     private String contractEndDate;
+
+    @Positive
     private double contractDeposit;
+
+    @Positive
     private double contractTotalMoney;
 
     @ManyToOne

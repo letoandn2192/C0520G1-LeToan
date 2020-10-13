@@ -7,4 +7,5 @@ import vn.codegym.model.Customer;
 
 public interface CustomerRepository extends JpaRepository<Customer, String> {
     Page<Customer> findCustomerByCustomerIdContainingOrCustomerNameContaining(String id, String name, Pageable pageable);
+
 }

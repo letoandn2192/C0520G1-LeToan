@@ -72,6 +72,7 @@ public class EmployeeController {
     @PostMapping("/save")
     public String saveNewEmployee(@Validated({Employee.IdCheck.class, Employee.EditCheck.class}) Employee employee, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
+//            bindingResult.resolveMessageCodes("typeMismatch.employee", "typeMismatch.employee.employeeSalary");
             return "employee/employee-create";
         } else {
             employeeService.save(employee);
@@ -99,6 +100,7 @@ public class EmployeeController {
     @PostMapping("/update")
     public String updateEmployeeInformation(@Validated(Employee.EditCheck.class) Employee employee, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
+//            bindingResult.resolveMessageCodes("typeMismatch.employee", "typeMismatch.employee.employeeSalary");
             return "employee/employee-edit";
         } else {
             employeeService.save(employee);

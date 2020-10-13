@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout/layout::header}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="~{/layout/layout::title}"></div>
+<nav th:replace="~{/layout/layout::navbar}"></nav>
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+<div class="container-fluid">
+    <div class="body position-relative" style="top: 160px">
+        <div class="text-center col-12">
+            <h2>List of Contract Detail</h2>
+        </div>
+        <table class="table table-sm table-bordered table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Contract Detail Id</th>
+                <th scope="col">Contract Id</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Attach Service</th>
+                <th scope="col">Cost</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="element: ${contractDetailList}">
+                <td scope="row" th:text="${element.contractDetailId}"></td>
+                <td th:text="${element.contract.contractId}"></td>
+                <td th:text="${element.contractDetailQuantity}"></td>
+                <td th:text="${element.attachService.attachServiceName}"></td>
+                <td th:text="${element.contractDetailQuantity * element.attachService.attachServiceCost}"></td>
+            </tr>
+            <tr  th:with="total=${contract.contractTotalMoney}, deposit=${contract.contractDeposit}">
+                <td th:text="${'Total: ' + total}" ></td>
+                <td th:text="${'Deposit: ' + deposit}"></td>
+                <td th:text="${'Attach Serive Fee: ' + attachFee}"></td>
+                <td colspan="2" th:text="${'Must Pay: ' + (total - deposit + attachFee)}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+<footer th:replace="~{/layout/layout::footer}"></footer>
+</body>
+</html>

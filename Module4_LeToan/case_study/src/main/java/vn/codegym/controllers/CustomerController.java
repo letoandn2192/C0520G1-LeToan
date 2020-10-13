@@ -12,12 +12,15 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import vn.codegym.model.Contract;
 import vn.codegym.model.Customer;
 import vn.codegym.model.CustomerType;
+import vn.codegym.service.ContractService;
 import vn.codegym.service.CustomerService;
 import vn.codegym.service.CustomerTypeService;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/customer")
@@ -27,6 +30,9 @@ public class CustomerController {
 
     @Autowired
     private CustomerTypeService customerTypeService;
+
+    @Autowired
+    private ContractService contractService;
 
     @ModelAttribute("customerTypeList")
     public List<CustomerType> getCustomerTypeList() {
@@ -105,5 +111,12 @@ public class CustomerController {
         customerService.delete(customer.getCustomerId());
         redirectAttributes.addFlashAttribute("messInform", "Delete Successful!!!");
         return "redirect:/customer";
+    }
+
+    @GetMapping("/customer-service")
+    public String getCustomerUseServiceList(@PageableDefault(size = 5) Pageable pageable,Model model) {
+        Page<Contract> contractList = contractService.findAll(pageable);
+        model.addAttribute("contractList", contractList);
+        return "customer/customerUseService-list";
     }
 }
