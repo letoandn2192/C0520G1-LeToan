@@ -19,7 +19,6 @@ import vn.codegym.service.CustomerService;
 import vn.codegym.service.CustomerTypeService;
 
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/customer")

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout/layout::header}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="~{/layout/layout::title}"></div>
+<nav th:replace="~{/layout/layout::navbar}"></nav>
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+<div class="container-fluid">
+    <div class="body position-relative" style="top: 160px">
+        <div class="text-center col-12">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-outline-dark float-left" data-toggle="modal" data-target="#CustomerModal">
+                Create New Customer
+            </button>
+            <h2>List of Customer</h2>
+        </div>
+        <table class="table table-sm table-bordered table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Email</th>
+                <th scope="col">Address</th>
+                <th scope="col">Detail</th>
+            </tr>
+            </thead>
+            <tbody id="myTable">
+            <tr th:each="customer: ${customerList}">
+                <td scope="row" th:text="${customer.customerId}"></td>
+                <td th:text="${customer.customerName}"></td>
+                <td th:if="${customer.customerGender}" th:text="Male"></td>
+                <td th:if="!${customer.customerGender}" th:text="Female"></td>
+                <td th:text="${customer.customerEmail}"></td>
+                <td th:text="${customer.customerAddress}"></td>
+                <td>
+<!--                    <a th:href="@{/modal/findOne/(id=${customer.customerId})}" class="edit-btn">Edit</a>-->
+                    <input type="button" class="edit-btn" value="Edit">
+                    <input type="hidden" th:value="${customer.customerId}">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div>
+            <a th:href="@{'/customer'(page=${customerList.number - 1}, inputSearch=${inputSearch})}"
+               th:if="${customerList.hasPrevious()}">Previous</a>
+            <span th:text="${customerList.number + 1}"></span>/<span th:text="${customerList.totalPages}"></span>
+            <a th:href="@{'/customer'(page=${customerList.number + 1}, inputSearch=${inputSearch})}"
+               th:if="${customerList.hasNext()}">Next</a>
+        </div>
+        <th:block th:if="${messInform} != null">
+            <div class="alert alert-success col-4 d-flex justify-content-center" role="alert"
+                 th:text="${messInform}"></div>
+        </th:block>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<form method="post" th:action="@{/modal/save}" id="myForm">
+    <div class="modal fade" id="CustomerModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Customer Information</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- -------------------------------------------------------------------------------------------------------------------   -->
+
+                    <div class="form-group form-inline">
+                        <label for="id" class="col-2 d-flex justify-content-start">Id</label>
+                        <input type="text" class="col-8 form-control" id="id" name="id" value="">
+                        <!--                            <span style="color: red" th:field="*{#fields.hasErrors('customerId')}" th:errors="*{customerId}"></span>-->
+                    </div>
+                    <div class="form-group form-inline">
+                        <label for="name" class="col-2 d-flex justify-content-start">Name</label>
+                        <input type="text" class="col-8 form-control" id="name" name="name" value="">
+                        <!--                            <span style="color: red" th:field="*{#fields.hasErrors('customerName')}" th:errors="*{customerName}"></span>-->
+                    </div>
+                    <div class="form-group form-inline">
+                        <label for="birthday" class="col-2 d-flex justify-content-start">Birthday</label>
+                        <input type="text" class="col-8 form-control" id="birthday" name="birthday" autocomplete="off" value="">
+                        <!--                            <span style="color: red" th:field="*{#fields.hasErrors('customerBirthday')}" th:errors="*{customerBirthday}"></span>-->
+                    </div>
+                    <div class="form-group form-inline">
+                        <label for="gender" class="col-2 d-flex justify-content-start">Gender</label>
+                        <select class="col-8 form-control" id="gender" name="gender">
+                            <option th:value="1" th:text="Male"></option>
+                            <option th:value="0" th:text="Female"></option>
+                        </select>
+                    </div>
+                    <div class="form-group form-inline">
+                        <label for="idNumber" class="col-2 d-flex justify-content-start">Identify Number</label>
+                        <input type="text" class="col-8 form-control" id="idNumber" name="idNumber" value="">
+                        <!--                            <span style="color: red" th:field="*{#fields.hasErrors('customerIdCard')}" th:errors="*{customerIdCard}"></span>-->
+                    </div>
+                    <div class="form-group form-inline">
+                        <label for="phone" class="col-2 d-flex justify-content-start">Phone</label>
+                        <input type="text" class="col-8 form-control" id="phone" name="phone" value="">
+                        <!--                            <span style="color: red" th:field="*{#fields.hasErrors('customerPhone')}", th:errors="*{customerPhone}"></span>-->
+                    </div>
+                    <div class="form-group form-inline">
+                        <label for="email" class="col-2 d-flex justify-content-start">Email</label>
+                        <input type="text" class="col-8 form-control" id="email" name="email" value="">
+                        <!--                            <span style="color: red" th:field="*{#fields.hasErrors('customerEmail')}", th:errors="*{customerEmail}"></span>-->
+                    </div>
+                    <div class="form-group form-inline">
+                        <label for="address" class="col-2 d-flex justify-content-start">Address</label>
+                        <input type="text" class="col-8 form-control" id="address" name="address" value="">
+                        <!--                            <span style="color: red" th:field="*{#fields.hasErrors('customerAddress')}", th:errors="*{customerAddress}"></span>-->
+                    </div>
+                    <div class="form-group form-inline">
+                        <label for="typeCustomer" class="col-2 d-flex justify-content-start">Customer Type</label>
+                        <select class="col-8 form-control" id="typeCustomer" name="typeCustomer">
+                            <!--                                <option th:each="type: ${customerTypeList}" th:value="${type.customerTypeId}" th:text="${type.customerTypeName}"></option>-->
+                        </select>
+                    </div>
+
+                    <!-- -------------------------------------------------------------------------------------------------------------------   -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-secondary" value="Save">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+<footer th:replace="~{/layout/layout::footer}"></footer>
+<script>
+    $(document).ready(function () {
+        let count = 0;
+        $('.table .edit-btn').unbind().on('click', function () {
+            console.log("count: "+ ++count);
+            // event.preventDefault();
+            let href = $(this).next().attr('value');
+            console.log(href);
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                url: "/modal/findOne/" + href,
+                method: "GET",
+                // data: JSON.stringify(dataJson),
+                success: function (data) {
+                    console.log(data);
+                    console.log("da update OK");
+                    $('#myForm #id').val(data.customerId);
+                },
+                error: function (error) {
+                    console.log("that bai");
+                }
+            });
+
+            $('#myForm #CustomerModal').modal();
+        })
+    });
+
+
+</script>
+</body>
+</html>

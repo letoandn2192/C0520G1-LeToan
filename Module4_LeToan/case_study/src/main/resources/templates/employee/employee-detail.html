@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <head th:replace="~{/layout/layout::header}">
     <meta charset="UTF-8">
     <title>Title</title>
@@ -72,8 +73,10 @@
             </tbody>
         </table>
         <div class="row text-center col-12">
-            <a th:href="@{/employee/edit/{id}(id=${employee.employeeId})}" role="button" class="btn btn-outline-dark mr-2">Edit <span class="fas fa-edit"></span></a>
-            <a th:href="@{/employee/delete/{id}(id=${employee.employeeId})}" role="button" class="btn btn-outline-dark mr-2">Delete <span class="fas fa-eraser"></span></a>
+            <th:block sec:authorize="hasRole('ADMIN')">
+                <a th:href="@{/employee/edit/{id}(id=${employee.employeeId})}" role="button" class="btn btn-outline-dark mr-2">Edit <span class="fas fa-edit"></span></a>
+                <a th:href="@{/employee/delete/{id}(id=${employee.employeeId})}" role="button" class="btn btn-outline-dark mr-2">Delete <span class="fas fa-eraser"></span></a>
+            </th:block>
             <a href="/employee" role="button" class="btn btn-outline-dark float-left">Back</a>
         </div>
     </div>

@@ -1,5 +1,6 @@
 package vn.codegym.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import vn.codegym.common.validate_birthday.ValidateBirthdayGreater18;
 import vn.codegym.common.validate_customer_id.ValidateCustomerId;
 
@@ -14,13 +15,13 @@ public class Customer {
     public interface EditCheck {};
     public interface IdCheck {};
     @Id
-    @ValidateCustomerId(groups = IdCheck.class)
+//    @ValidateCustomerId(groups = IdCheck.class)
     private String customerId;
 
     @NotEmpty(message = "Name must not be empty", groups = EditCheck.class)
     private String customerName;
 
-    @ValidateBirthdayGreater18(groups = EditCheck.class)
+//    @ValidateBirthdayGreater18(groups = EditCheck.class)
     private String customerBirthday;
 
     private boolean customerGender;
@@ -39,6 +40,7 @@ public class Customer {
 
     @ManyToOne
     @JoinColumn(name = "customerTypeId")
+    @JsonIgnore
     private CustomerType customerType;
 
     @OneToMany(mappedBy = "customer", cascade =  CascadeType.ALL)

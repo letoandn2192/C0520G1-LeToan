@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/product/layout::header}">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="product:${productList}">
+                    <td scope="row" th:text="${product.id}"></td>
+                    <td th:text="${product.name}"></td>
+                    <td><a th:href="@{/product/detail/{id}(id=${product.id})}"><img th:src="${product.image}"
+                                                                                    style="width: 70px; height: auto"></a>
+                    </td>
+                    <td class="description" th:text="${product.description}"></td>
+                    <td th:text="${product.price}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-4">
+            <div class="menu sticky-top" th:if="${historyProduct}">
+                <h5 class="text-primary">Top Product</h5>
+
+                <div class="card border-0">
+                    <img class="card-img-top" th:src="${historyProduct.image}" th:alt="${historyProduct.name}">
+                    <div class="card-body">
+                        <h4 class="card-title" th:text="${historyProduct.name}"></h4>
+                        <p class="card-text" th:text="${historyProduct.price} + ' VND'"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{/product/layout::footer}"></footer>
+
+
+<script>
+    $(document).ready(function () {
+
+        $(".description").click(function () {
+            let content;
+            if (!$(this).find("textarea").length) {
+                console.log("dang vao click TD");
+                content = $(this).text();
+                $(this).text("");
+                $(this).html("<textarea class='form-control' rows='4'></textarea>");
+                let textAreaElement = $(this).find("textarea");
+                textAreaElement.text(content);
+                $(textAreaElement).after("<button type=\"button\" class=\"btn btn-secondary mt-1 ml-2 btn-close\">Close</button>");
+                $(textAreaElement).after("<button type=\"button\" class=\"btn btn-success mt-1 btn-ok\">OK</button>");
+                $(textAreaElement).after("<input type=\"hidden\" value=\"\">");
+
+                $(this).find("input:hidden").val(content);
+
+            }
+        });
+
+        $(document).on("click", ".btn-close", function () {
+            let content = $(this).parent(".description").find("input:hidden").val();
+            $(this).parent(".description").empty().text(content);
+        });
+
+        $(document).on("click", ".btn-ok", function () {
+            let tdElement = $(this).parent(".description");
+
+            let idProduct = $(this).parent().parent().children(":first-child").text();
+            let content = $(this).parent(".description").find("textarea").val();
+            let field = "description";
+            let dataJson = {"id": idProduct, "content": content, "field": field}
+            console.log("id: " + idProduct)
+            console.log("content: " + content)
+
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                url: "/product/edit/",
+                method: "POST",
+                data: JSON.stringify(dataJson),
+                success: function () {
+                    console.log("da update OK");
+                    tdElement.empty().text(content);
+                },
+                error: function (error) {
+                    console.log("that bai");
+                }
+            });
+
+        });
+    })
+</script>
+</body>
+</html>

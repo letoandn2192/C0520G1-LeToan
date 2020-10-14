@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import vn.codegym.service.Impl.UserDetailServiceImpl;
 
 @Configuration
@@ -32,9 +34,17 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests().antMatchers("/", "/login", "/logout").permitAll();
-        http.authorizeRequests().antMatchers("/customer", "/contract", "/contract-detail", "/service").hasAnyRole("ADMIN", "MEMBER");
-        http.authorizeRequests().antMatchers("/employee").hasRole("ADMIN");
+        http.authorizeRequests().antMatchers("/customer", "/contract", "/contract-detail", "/service", "/employee").hasAnyRole("ADMIN", "MEMBER");
+        http.authorizeRequests().antMatchers("/employee/create", "/employee/edit/**", "/employee/delete/**").hasRole("ADMIN");
+        http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
 
         http.formLogin().defaultSuccessUrl("/").and().logout();
+        http.authorizeRequests().and().rememberMe().tokenRepository(persistentTokenRepository()).tokenValiditySeconds(24 * 60 * 60);
+    }
+
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        InMemoryTokenRepositoryImpl memory = new InMemoryTokenRepositoryImpl();
+        return memory;
     }
 }

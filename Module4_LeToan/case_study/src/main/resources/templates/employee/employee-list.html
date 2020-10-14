@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <head th:replace="~{/layout/layout::header}">
     <meta charset="UTF-8">
     <title>Title</title>
@@ -11,7 +12,9 @@
 <div class="container-fluid">
     <div class="body position-relative" style="top: 160px">
         <div class="text-center col-12">
-            <a th:href="@{/employee/create}" role="button" class="btn btn-outline-dark float-left">Create New Employee</a>
+            <th:block sec:authorize="hasRole('ADMIN')">
+                <a th:href="@{/employee/create}" role="button" class="btn btn-outline-dark float-left">Create New Employee</a>
+            </th:block>
             <h2>List of Employee</h2>
         </div>
         <table id="tableStudent" class="table table-sm table-bordered table-hover">

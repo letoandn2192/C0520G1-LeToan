@@ -21,9 +21,9 @@
             <div class="col-8">
                 <h2 style="margin-top: 30px">FURAMA RESORT</h2>
             </div>
-<!--            <div class="col-2">-->
-<!--                        <h2>Welcome :<strong th:text="${#request.userPrincipal.name}"></strong></h2>-->
-<!--            </div>-->
+            <div class="col-2" sec:authorize="isAuthenticated()">
+                <h2>Welcome :<strong th:text="${#request.userPrincipal.name}"></strong></h2>
+            </div>
         </div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top col-12" style="top: 100px"
              th:fragment="navbar">
@@ -57,6 +57,12 @@
                         <a class="nav-link text-success" href="/contract">
                             <span class="fas fa-file-contract"></span>
                             Contract
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-success" href="/modal">
+                            <span class="fas fa-file-contract"></span>
+                            Test
                         </a>
                     </li>
                 </ul>
