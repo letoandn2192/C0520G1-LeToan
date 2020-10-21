@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout/layout::header}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="~{/layout/layout::title}"></div>
+<nav th:replace="~{/layout/layout::navbar}"></nav>
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+<div class="container-fluid">
+    <div class="body position-relative" style="top: 160px">
+        <div class="text-center col-12">
+            <a th:href="@{/create}" role="button" class="btn btn-outline-dark float-left">Create New
+                Complex</a>
+            <h2>List of Complex</h2>
+        </div>
+        <table class="table table-sm table-bordered table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Status</th>
+                <th scope="col">Area</th>
+                <th scope="col">Floor</th>
+                <th scope="col">Type</th>
+                <th scope="col">Cost</th>
+                <th scope="col">Date Start</th>
+                <th scope="col">Date End</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Detail</th>
+                <th scope="col">
+                    <button class="btn btn-warning selectAll-btn">Select All</button>
+                    <button class="btn btn-danger remove-btn" style="display: none">Remove</button>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="temp: ${complexList}">
+                <td scope="row" th:text="${temp.complexCode}"></td>
+                <td th:text="${temp.complexStatus.statusName}"></td>
+                <td th:text="${temp.complexArea}"></td>
+                <td th:text="${temp.complexFloor}"></td>
+                <td th:text="${temp.complexType.typeName}"></td>
+                <td th:text="${temp.complexCost}"></td>
+                <td th:text="${temp.complexStartDate}"></td>
+                <td th:text="${temp.complexEndDate}"></td>
+                <td>
+                    <a href="#modelId" class="edit-btn" data-toggle="modal"
+                    th:data-code="${temp.complexCode}"
+                    th:data-status="${temp.complexStatus.statusId}"
+                    th:data-area="${temp.complexArea}"
+                    th:data-floor="${temp.complexFloor}"
+                    th:data-type="${temp.complexType.typeId}"
+                    th:data-cost="${temp.complexCost}"
+                    th:data-sdate="${temp.complexStartDate}"
+                    th:data-edate="${temp.complexEndDate}"
+                    >Edit</a>
+                </td>
+                <td>
+                    <a th:href="@{/detail/{id}(id=${temp.complexCode})}" class="detail-btn">Detail</a>
+                </td>
+                <td>
+                    <input type="checkbox" class="check-box check-btn">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal -->
+<form method="post" th:action="@{/update}" id="myForm" th:object="${complex}">
+    <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Information</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!--                ---------------------------------------------------------------------------------------- -->
+                    <input type="hidden" id="validateData" th:value="${#fields.hasErrors()}">
+                    <div class="form-group form-inline">
+                        <label for="id" class="col-2 d-flex justify-content-start">Id</label>
+                        <input type="text" class="col-8 form-control" id="id" name="complexCode" readonly th:field="*{complexCode}">
+                    </div>
+                    <div class="form-group form-inline">
+                        <label for="status" class="col-2 d-flex justify-content-start">Status</label>
+                        <Select class="col-8 form-control" id="status" name="complexStatus" th:field="*{complexStatus}">
+                            <option th:each="status: ${statusList}" th:value="${status.statusId}"
+                                    th:text="${status.statusName}"></option>
+                        </Select>
+                    </div>
+                    <div class="form-group form-inline">
+                        <label for="area" class="col-2 d-flex justify-content-start">Area</label>
+                        <input type="text" class="col-8 form-control" id="area" name="complexArea" th:field="*{complexArea}">
+                        <span style="color: red" th:if="${#fields.hasErrors('complexArea')}" th:errors="*{complexArea}"></span>
+                    </div>
+                    <div class="form-group form-inline">
+                        <label for="floor" class="col-2 d-flex justify-content-start">Floor</label>
+                        <input type="text" class="col-8 form-control" id="floor" name="complexFloor" th:field="*{complexFloor}">
+                        <span style="color: red" th:if="${#fields.hasErrors('complexFloor')}" th:errors="*{complexFloor}"></span>
+                    </div>
+                    <div class="form-group form-inline">
+                        <label for="type" class="col-2 d-flex justify-content-start">Type</label>
+                        <select class="col-8 form-control" id="type" name="complexType" th:field="*{complexType}">
+                            <option th:each="type: ${typeList}" th:value="${type.typeId}"
+                                    th:text="${type.typeName}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group form-inline">
+                        <label for="cost" class="col-2 d-flex justify-content-start">Cost</label>
+                        <input type="text" class="col-8 form-control" id="cost" name="complexCost" th:field="*{complexCost}">
+                        <span style="color: red" th:if="${#fields.hasErrors('complexCost')}" th:errors="*{complexCost}"></span>
+                    </div>
+                    <div class="form-group form-inline">
+                        <label for="startDate" class="col-2 d-flex justify-content-start">Start Date</label>
+                        <input type="text" class="col-8 form-control" id="startDate" name="complexStartDate" autocomplete="off" th:field="*{complexStartDate}">
+                        <span style="color: red" th:if="${#fields.hasErrors('complexStartDate')}" th:errors="*{complexStartDate}"></span>
+                    </div>
+                    <div class="form-group form-inline">
+                        <label for="endDate" class="col-2 d-flex justify-content-start">End Date</label>
+                        <input type="text" class="col-8 form-control" id="endDate" name="complexEndDate" autocomplete="off" th:field="*{complexEndDate}">
+                        <span style="color: red" th:if="${#fields.hasErrors('complexEndDate')}" th:errors="*{complexEndDate}"></span>
+                    </div>
+                </div>
+                <!--                ---------------------------------------------------------------------------------------- -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-secondary update-btn" value="Save">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<!-- Modal -->
+<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Complex Information</h5>
+            </div>
+            <div id="modal-body">
+                Body
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+<footer th:replace="~{/layout/layout::footer}"></footer>
+<script>
+    $( document ).ready(function() {
+        $("#startDate, #endDate").datepicker({ dateFormat: "dd/mm/yy", minDate: 0});
+
+        $('.selectAll-btn').click(function () {
+            let mode = $(this).text();
+            if (mode === 'Select All') {
+                $('input:checkbox').each(function () {
+                    $(this).prop("checked", true);
+                });
+                $(this).text("Unchecked");
+                $('.remove-btn').show();
+            } else {
+                $('input:checkbox').each(function () {
+                    $(this).prop("checked", false);
+                });
+                $(this).text("Select All");
+                $('.remove-btn').hide();
+            }
+        });
+        let check = false;
+        $('input:checkbox').change(function () {
+            $(this).each(function () {
+                if ($(this).prop("checked") === true ) {
+                    check = true;
+                }
+                // if ($(this).prop("checked") === false ) {
+                //     check = false;
+                //     console.log(check);
+                // }
+            });
+            if (check === true) {
+                $('.remove-btn').show();
+            } else {
+                $('.remove-btn').hide();
+            }
+        });
+
+        $('.edit-btn').click(function () {
+            // let error = $('#validateData').val();
+            // console.log(error);
+            // let mode = $(this).text();
+            // if (mode === 'Detail') {
+            //     $('.modal-title').text("Information");
+            //     $('.update-btn').hide();
+            // } else if (mode === 'Edit') {
+            //     $('.modal-title').text("Edit Information");
+            //     $('.update-btn').show();
+            // }
+
+            $("input[name='complexCode']").val($(this).data("code"));
+            $("input[name='complexArea']").val($(this).data("area"));
+            $("input[name='complexFloor']").val($(this).data("floor"));
+            $("input[name='complexCost']").val($(this).data("cost"));
+            $("input[name='complexStartDate']").val($(this).data("sdate"));
+            $("input[name='complexEndDate']").val($(this).data("edate"));
+
+
+            let status = $(this).data("status");
+            $("select[name='complexStatus'] option").each(function () {
+                if (this.value == status) {
+                    $(this).prop("selected", true);
+                    return;
+                }
+            });
+
+            let type = $(this).data("type");
+            $("select[name='complexType'] option").each(function () {
+                if (this.value == type) {
+                    $(this).prop("selected", true);
+                    return;
+                }
+            });
+        });
+
+        if ($("#validateData").val() == 'true') {
+            $("#modelId").modal("show");
+
+        }
+    });
+
+
+    $(document).ready(function () {
+        $(".detail-btn").click(function (event) {
+            console.log("OK");
+            let urlDetail = $(this).attr("href");
+            console.log(urlDetail);
+            $.ajax({
+                type: "GET",
+                url: urlDetail,
+                dataType: "HTML",
+                success: function (data) {
+                    $("#modal-body").html(data);
+                    $('#detailModal').modal('show');
+                }
+            });
+            event.preventDefault();
+        });
+    });
+</script>
+</body>
+</html>
+
+<!--<script>-->
+<!--    // This function is used for delete many-->
+<!--    function changeButton() {-->
+<!--        let size = document.getElementsByName('ids').length;-->
+<!--        let check = false;-->
+<!--        for (let i = 0; i < size; i++) {-->
+<!--            let checkBox = document.getElementsByName('ids')[i];-->
+<!--            if (checkBox.checked) {-->
+<!--                document.getElementById('select').value = 'remove';-->
+<!--                check = true;-->
+<!--                break;-->
+<!--            }-->
+<!--        }-->
+
+<!--        if (!check) {-->
+<!--            document.getElementById('select').value = 'select';-->
+<!--        }-->
+<!--    }-->
+
+<!--    // Delete many function-->
+<!--    function deleteMany(elName) {-->
+<!--        let selectButton = document.getElementById('select');-->
+<!--        if (selectButton.value === 'remove') {-->
+<!--            let list_form = document.getElementById('list-form');-->
+<!--            list_form.action = "/" + elName + "/delete-many";-->
+<!--            list_form.method = "post";-->
+<!--            list_form.submit();-->
+<!--        }-->
+<!--    }-->
+
+<!--<script>-->
+<!--    function disableErrors() {-->
+<!--        let errorBag = document.getElementsByClassName('msg');-->
+<!--        for (let i = 0; i < errorBag.length; i++) {-->
+<!--            errorBag[i].style.display = 'none';-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->

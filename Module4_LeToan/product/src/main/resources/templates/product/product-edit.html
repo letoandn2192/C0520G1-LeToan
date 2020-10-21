@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Edit Product</title>
+    <link rel="stylesheet" type="text/css" href="../static/bootstrap_4/css/bootstrap.min.css" th:href="@{/bootstrap_4/css/bootstrap.min.css}">
+</head>
+<body>
+<a role="button" class="btn btn-outline-success" href="/categories">Category</a>
+<a role="button" class="btn btn-outline-success" href="/products">Product</a>
+<form method="post" action="/product/update" th:object="${product}">
+    <fieldset>
+        <legend>Edit Product</legend>
+        <div class="form-group form-inline">
+        <label for="id" class="col-2 d-flex justify-content-start">Name</label>
+        <input type="text" readonly class="col-8 form-control" th:field="*{productId}" id="id">
+    </div>
+        <div class="form-group form-inline">
+            <label for="name" class="col-2 d-flex justify-content-start">Name</label>
+            <input type="text" class="col-8 form-control" th:field="*{productName}" id="name">
+        </div>
+        <div class="form-group form-inline">
+            <label for="price" class="col-2 d-flex justify-content-start">Price</label>
+            <input type="text" class="col-8 form-control" th:field="*{productPrice}" id="price">
+        </div>
+        <div class="form-group form-inline">
+            <label for="quantity" class="col-2 d-flex justify-content-start">Quantity</label>
+            <input type="text" class="col-8 form-control" th:field="*{productQuantity}" id="quantity">
+        </div>
+        <div class="form-group form-inline">
+            <label for="color" class="col-2 d-flex justify-content-start">Color</label>
+            <input type="text" class="col-8 form-control" th:field="*{productColor}" id="color">
+        </div>
+        <div class="form-group form-inline">
+            <label for="description" class="col-2 d-flex justify-content-start">Description</label>
+            <input type="text" class="col-8 form-control" th:field="*{productDescription}" id="description">
+        </div>
+        <div class="form-group form-inline">
+            <label for="category" class="col-2 d-flex justify-content-start">Category</label>
+            <select class="col-8 form-control" th:field="*{productCategory}" id="category">
+                <option th:each="category: ${categories}" th:text="${category.categoryName}" th:value="${category.categoryId}"></option>
+            </select>
+        </div>
+        <div class="form-group form-inline">
+            <div class="col-2"></div>
+            <div class="col-8 pl-0">
+                <input type="submit" value="Update" class="btn btn-outline-dark mr-2">
+                <a class="btn btn-outline-dark" href="/products">Back</a>
+            </div>
+        </div>
+    </fieldset>
+</form>
+<footer th:replace="~{layout/layout::footer}"></footer>
+</body>
+</html>

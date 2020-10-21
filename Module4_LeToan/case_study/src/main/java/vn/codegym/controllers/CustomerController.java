@@ -3,6 +3,7 @@ package vn.codegym.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ import vn.codegym.service.ContractService;
 import vn.codegym.service.CustomerService;
 import vn.codegym.service.CustomerTypeService;
 
+import javax.validation.constraints.Positive;
 import java.util.List;
 
 @Controller
@@ -116,5 +118,20 @@ public class CustomerController {
         Page<Contract> contractList = contractService.findAll(pageable);
         model.addAttribute("contractList", contractList);
         return "customer/customerUseService-list";
+    }
+
+    @GetMapping("/search")
+    public ModelAndView showSearchCustomerForm() {
+        ModelAndView modelAndView = new ModelAndView("customer/customer-search");
+        modelAndView.addObject("customerList", customerService.findAll());
+        return modelAndView;
+    }
+
+    @PostMapping("/search")
+    public ModelAndView searchAllField(String id, String name, String birthday, int gender, String idNumber, String email, String phone, String address, int customerType) {
+        ModelAndView modelAndView = new ModelAndView("customer/customer-search");
+        List<Customer> customerList = customerService.searchAllField(name, birthday, phone, email, address, idNumber, customerType, id);
+        modelAndView.addObject("customerList", customerList);
+        return modelAndView;
     }
 }

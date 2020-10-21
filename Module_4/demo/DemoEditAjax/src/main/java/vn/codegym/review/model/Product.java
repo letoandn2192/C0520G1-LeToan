@@ -12,12 +12,12 @@ public class Product {
     @Column(columnDefinition = "LONGBLOB")
     private String description;
     private long price;
-    private short discount;
+    private long discount;
 
     public Product() {
     }
 
-    public Product(long id, String name, String image, String description, long price, short discount) {
+    public Product(long id, String name, String image, String description, long price, long discount) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -66,11 +66,11 @@ public class Product {
         this.price = price;
     }
 
-    public short getDiscount() {
+    public long getDiscount() {
         return discount;
     }
 
-    public void setDiscount(short discount) {
+    public void setDiscount(long discount) {
         this.discount = discount;
     }
 }

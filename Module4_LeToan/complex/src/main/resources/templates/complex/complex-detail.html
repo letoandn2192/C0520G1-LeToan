@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout/layout::header}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Information</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td scope="row">Id</td>
+            <td th:text="${complex.complexCode}"></td>
+        </tr>
+        <tr>
+            <td scope="row">Status</td>
+            <td th:text="${complex.complexStatus.statusName}"></td>
+        </tr>
+        <tr>
+            <td scope="row">Area</td>
+            <td th:text="${complex.complexArea}"></td>
+        </tr>
+        <tr>
+            <td scope="row">Floor</td>
+            <td th:text="${complex.complexFloor}"></td>
+        </tr>
+        <tr>
+            <td scope="row">Type</td>
+            <td th:text="${complex.complexType.typeName}"></td>
+        </tr>
+        <tr>
+            <td scope="row">Cost</td>
+            <td th:text="${complex.complexCost}"></td>
+        </tr>
+        <tr>
+            <td scope="row">Start Date</td>
+            <td th:text="${complex.complexStartDate}"></td>
+        </tr>
+        <tr>
+            <td scope="row">End Date</td>
+            <td th:text="${complex.complexEndDate}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+<footer th:replace="~{/layout/layout::footer}"></footer>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout/layout::header}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Information</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td scope="row">Title</td>
+            <td th:text="${question.questionTitle}"></td>
+        </tr>
+        <tr>
+            <td scope="row">Content</td>
+            <td th:text="${question.questionQuestion}"></td>
+        </tr>
+        <tr>
+            <td scope="row">Feedback</td>
+            <td th:text="${question.questionAnswer}"></td>
+        </tr>
+        <tr>
+            <td scope="row">Question Type</td>
+            <td th:text="${question.questionType.questionTypeName}"></td>
+        </tr>
+        <tr>
+            <td scope="row">Created Date</td>
+            <td th:text="${question.questionDateCreate}"></td>
+        </tr>
+        <tr>
+            <td scope="row">Author</td>
+            <td th:text="${question.user.userName}"></td>
+        </tr>
+        <tr>
+            <td scope="row">Feedbacker</td>
+            <td th:text="${question.user.userName}"></td>
+        </tr>
+        <tr>
+            <td scope="row">Status</td>
+            <td th:text="${question.questionStatus}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+<footer th:replace="~{/layout/layout::footer}"></footer>
+</body>
+</html>

@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 import vn.codegym.model.Customer;
 import vn.codegym.repository.CustomerRepository;
 import vn.codegym.service.CustomerService;
+
+import java.util.List;
+
 @Service
 public class CustomerServiceImpl implements CustomerService {
     @Autowired
@@ -40,5 +43,15 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void delete(String id) {
         customerRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<Customer> search(String input, Pageable pageable) {
+        return customerRepository.search(input, pageable);
+    }
+
+    @Override
+    public List<Customer> searchAllField(String name, String birthday, String phone, String email, String address, String idCard, int type, String id) {
+        return customerRepository.searchAllField(name, birthday, phone, email, address, idCard, type, id);
     }
 }

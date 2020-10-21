@@ -2,10 +2,8 @@ package vn.codegym.model;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import vn.codegym.common.validate_future_date.ValidateFutureDate;
 
 import javax.persistence.*;
-import javax.validation.constraints.Positive;
 import java.time.LocalDate;
 import java.util.Set;
 import java.util.regex.Matcher;

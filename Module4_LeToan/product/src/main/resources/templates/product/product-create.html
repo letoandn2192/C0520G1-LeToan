@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/layout::header}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>List of Product</title>
+    <link rel="stylesheet" type="text/css" href="../static/bootstrap_4/css/bootstrap.min.css"
+          th:href="@{/bootstrap_4/css/bootstrap.min.css}">
+</head>
+<body>
+<div th:replace="~{layout/layout::title}"></div>
+<nav th:replace="~{layout/layout::navbar}"></nav>
+<div class="container-fluid">
+    <div class="body position-relative" style="top: 160px">
+        <form method="post" action="/product/save" th:object="${product}">
+            <fieldset>
+                <legend class="text-center">Add New Product</legend>
+                <div class="form-group form-inline">
+                    <input type="hidden" class="col-8 form-control" id="id" th:field="*{productId}">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="name" class="col-2 d-flex justify-content-start">Name</label>
+                    <input type="text" class="col-8 form-control" th:field="*{productName}" id="name">
+                    <span style="color: red" th:field="*{#fields.hasErrors('productName')}" th:errors="*{productName}"></span>
+                </div>
+                <div class="form-group form-inline">
+                    <label for="price" class="col-2 d-flex justify-content-start">Price</label>
+                    <input type="text" class="col-8 form-control" th:field="*{productPrice}" id="price">
+                    <span style="color: red" th:field="*{#fields.hasErrors('productPrice')}" th:errors="*{productPrice}"></span>
+                </div>
+                <div class="form-group form-inline">
+                    <label for="quantity" class="col-2 d-flex justify-content-start">Quantity</label>
+                    <input type="text" class="col-8 form-control" th:field="*{productQuantity}" id="quantity">
+                    <span style="color: red" th:field="*{#fields.hasErrors('productQuantity')}" th:errors="*{productQuantity}"></span>
+                </div>
+                <div class="form-group form-inline">
+                    <label for="color" class="col-2 d-flex justify-content-start">Color</label>
+                    <input type="text" class="col-8 form-control" th:field="*{productColor}" id="color">
+                    <span style="color: red" th:field="*{#fields.hasErrors('productColor')}" th:errors="*{productColor}"></span>
+                </div>
+                <div class="form-group form-inline">
+                    <label for="description" class="col-2 d-flex justify-content-start">Description</label>
+                    <input type="text" class="col-8 form-control" th:field="*{productDescription}" id="description">
+                    <span style="color: red" th:field="*{#fields.hasErrors('productDescription')}" th:errors="*{productDescription}"></span>
+                </div>
+                <div class="form-group form-inline">
+                    <label for="category" class="col-2 d-flex justify-content-start">Category</label>
+                    <select class="col-8 form-control" th:field="*{category}" id="category">
+                        <option th:each="category: ${categoryList}" th:text="${category.categoryName}"
+                                th:value="${category.categoryId}"></option>
+                    </select>
+                </div>
+                <div class="form-group form-inline">
+                    <div class="col-2"></div>
+                    <div class="col-8 pl-0">
+                        <input type="submit" value="Add" class="btn btn-outline-dark mr-2">
+                        <a class="btn btn-outline-dark" href="/product">Back</a>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<footer th:replace="~{layout/layout::footer}"></footer>
+</body>
+</html>

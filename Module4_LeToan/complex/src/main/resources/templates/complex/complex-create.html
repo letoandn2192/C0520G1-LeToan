@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout/layout::header}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="~{/layout/layout::title}"></div>
+<nav th:replace="~{/layout/layout::navbar}"></nav>
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+<div class="container-fluid">
+    <div class="body position-relative" style="top: 160px">
+        <form method="post" th:action="@{/save}" th:object="${complex}">
+            <fieldset>
+                <legend class="text-center">Create New Complex</legend>
+                <div class="form-group form-inline">
+                    <label for="id" class="col-2 d-flex justify-content-start">Id</label>
+                    <input type="text" class="col-8 form-control" id="id" th:field="*{complexCode}">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="status" class="col-2 d-flex justify-content-start">Status</label>
+                    <Select class="col-8 form-control" id="status" th:field="*{complexStatus}">
+                        <option th:each="status: ${statusList}" th:value="${status.statusId}" th:text="${status.statusName}"></option>
+                    </Select>
+                </div>
+                <div class="form-group form-inline">
+                    <label for="area" class="col-2 d-flex justify-content-start">Area</label>
+                    <input type="text" class="col-8 form-control" id="area" th:field="*{complexArea}">
+                    <span style="color: red" th:filed="*{#fields.hasErrors('complexArea')}" th:errors="*{complexArea}"></span>
+                </div>
+                <div class="form-group form-inline">
+                    <label for="floor" class="col-2 d-flex justify-content-start">Floor</label>
+                    <input type="text" class="col-8 form-control" id="floor" th:field="*{complexFloor}">
+                    <span style="color: red" th:filed="*{#fields.hasErrors('complexFloor')}" th:errors="*{complexFloor}"></span>
+                </div>
+                <div class="form-group form-inline">
+                    <label for="type" class="col-2 d-flex justify-content-start">Type</label>
+                    <select class="col-8 form-control" id="type" th:field="*{complexType}">
+                        <option th:each="type: ${typeList}" th:value="${type.typeId}" th:text="${type.typeName}"></option>
+                    </select>
+                </div>
+                <div class="form-group form-inline">
+                    <label for="cost" class="col-2 d-flex justify-content-start">Cost</label>
+                    <input type="text" class="col-8 form-control" id="cost" th:field="*{complexCost}">
+                    <span style="color: red" th:filed="*{#fields.hasErrors('complexCost')}" th:errors="*{complexCost}"></span>
+                </div>
+                <div class="form-group form-inline">
+                    <label for="startDate" class="col-2 d-flex justify-content-start">Start Date</label>
+                    <input type="text" class="col-8 form-control" id="startDate" th:field="*{complexStartDate}" autocomplete="off">
+                    <span style="color: red" th:filed="*{#fields.hasErrors('complexStartDate')}" th:errors="*{complexStartDate}"></span>
+                </div>
+                <div class="form-group form-inline">
+                    <label for="endDate" class="col-2 d-flex justify-content-start">End Date</label>
+                    <input type="text" class="col-8 form-control" id="endDate" th:field="*{complexEndDate}" autocomplete="off">
+                    <span style="color: red" th:filed="*{#fields.hasErrors('complexEndDate')}" th:errors="*{complexEndDate}"></span>
+                </div>
+                <div class="form-group form-inline">
+                    <div class="col-2"></div>
+                    <div class="col-8 pl-0">
+                        <input type="submit" value="Create" class="btn btn-outline-dark mr-2">
+                        <a class="btn btn-outline-dark" href="/">Back</a>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+<footer th:replace="~{/layout/layout::footer}"></footer>
+<script>
+    $( document ).ready(function() {
+        $("#startDate, #endDate").datepicker({ dateFormat: "dd/mm/yy", minDate: 0});
+    });
+</script>
+</body>
+</html>

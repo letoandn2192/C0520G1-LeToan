@@ -4,6 +4,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import vn.codegym.model.Customer;
 
+import java.util.List;
+
 public interface CustomerService {
     Page<Customer> findAll(Pageable pageable);
 
@@ -16,4 +18,8 @@ public interface CustomerService {
     void save(Customer customer);
 
     void delete(String id);
+
+    Page<Customer> search(String input, Pageable pageable);
+
+    List<Customer> searchAllField(String name, String birthday, String phone, String email, String address, String idCard, int type, String id);
 }

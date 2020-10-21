@@ -12,7 +12,8 @@
     <div class="body position-relative" style="top: 160px">
         <div class="text-center col-12">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-outline-dark float-left" data-toggle="modal" data-target="#CustomerModal">
+            <button type="button" class="btn btn-outline-dark float-left" data-toggle="modal"
+                    data-target="#CustomerModal">
                 Create New Customer
             </button>
             <h2>List of Customer</h2>
@@ -37,9 +38,9 @@
                 <td th:text="${customer.customerEmail}"></td>
                 <td th:text="${customer.customerAddress}"></td>
                 <td>
-<!--                    <a th:href="@{/modal/findOne/(id=${customer.customerId})}" class="edit-btn">Edit</a>-->
-                    <input type="button" class="edit-btn" value="Edit">
-                    <input type="hidden" th:value="${customer.customerId}">
+                    <a th:href="@{/modal/findOne/(id=${customer.customerId})}" class="edit-btn">Edit</a>
+                    <!--                    <input type="button" class="edit-btn" value="Edit">-->
+                    <!--                    <input type="hidden" th:value="${customer.customerId}">-->
                 </td>
             </tr>
             </tbody>
@@ -86,7 +87,8 @@
                     </div>
                     <div class="form-group form-inline">
                         <label for="birthday" class="col-2 d-flex justify-content-start">Birthday</label>
-                        <input type="text" class="col-8 form-control" id="birthday" name="birthday" autocomplete="off" value="">
+                        <input type="text" class="col-8 form-control" id="birthday" name="birthday" autocomplete="off"
+                               value="">
                         <!--                            <span style="color: red" th:field="*{#fields.hasErrors('customerBirthday')}" th:errors="*{customerBirthday}"></span>-->
                     </div>
                     <div class="form-group form-inline">
@@ -119,7 +121,8 @@
                     <div class="form-group form-inline">
                         <label for="typeCustomer" class="col-2 d-flex justify-content-start">Customer Type</label>
                         <select class="col-8 form-control" id="typeCustomer" name="typeCustomer">
-                            <!--                                <option th:each="type: ${customerTypeList}" th:value="${type.customerTypeId}" th:text="${type.customerTypeName}"></option>-->
+                            <option th:each="type: ${customerTypeList}" th:value="${type.customerTypeId}"
+                                    th:text="${type.customerTypeName}"></option>
                         </select>
                     </div>
 
@@ -137,34 +140,82 @@
 <footer th:replace="~{/layout/layout::footer}"></footer>
 <script>
     $(document).ready(function () {
-        let count = 0;
-        $('.table .edit-btn').unbind().on('click', function () {
-            console.log("count: "+ ++count);
-            // event.preventDefault();
-            let href = $(this).next().attr('value');
+        $('.table .edit-btn').unbind().on('click', function (event) {
+            event.preventDefault();
+            let href = $(this).attr('href');
             console.log(href);
-            $.ajax({
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                url: "/modal/findOne/" + href,
-                method: "GET",
-                // data: JSON.stringify(dataJson),
-                success: function (data) {
-                    console.log(data);
-                    console.log("da update OK");
-                    $('#myForm #id').val(data.customerId);
-                },
-                error: function (error) {
-                    console.log("that bai");
-                }
+            $.get(href, function (data) {
+                $('#myForm #id').val(data.customerId);
+                $('#myForm #name').val(data.customerName);
+                $('#myForm #birthday').val(data.customerBirthday);
+                $("select[name='gender'] option").each(function () {
+                    if (this.value == data.customerGender) {
+                        $(this).prop("selected", true);
+                        return;
+                    }
+                });
+                $('#myForm #idNumber').val(data.customerIdCard);
+                $('#myForm #phone').val(data.customerPhone);
+                $('#myForm #email').val(data.customerEmail);
+                $('#myForm #address').val(data.customerAddress);
+
+                console.log(data);
+
+                // $("select[name='typeCustomer'] option").each(function () {
+                //     if (this.value == id) {
+                //         $(this).prop("selected", true);
+                //         return;
+                //     }
+                // });
             });
+            // $.ajax({
+            //     headers: {
+            //         'Accept': 'application/json',
+            //         'Content-Type': 'application/json'
+            //     },
+            //     url: "/modal/findOne/" + href,
+            //     method: "GET",
+            //     // data: JSON.stringify(dataJson),
+            //     success: function (data) {
+            //         console.log(data);
+            //         console.log("da update OK");
+            //         $('#myForm #id').val(data.customerId);
+            //         $('#myForm #name').val(data.customerName);
+            //         $('#myForm #birthday').val(data.customerBirthday);
+            //         $('#myForm #gender').val(data.customerGender);
+            //         $('#myForm #idNumber').val(data.customerIdCard);
+            //         $('#myForm #phone').val(data.customerPhone);
+            //         $('#myForm #email').val(data.customerEmail);
+            //         $('#myForm #address').val(data.customerAddress);
+            //         $('#myForm #typeCustomer').val(data.customerType.customerTypeName);
+            //     },
+            //     error: function (error) {
+            //         console.log("that bai");
+            //     }
+            // });
 
             $('#myForm #CustomerModal').modal();
         })
     });
 
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 2000);
+
+    $(document).ready(function () {
+        $('#inputSearch').on('keyup', function () {
+            let value = $(this).val().toLowerCase();
+            $('#myTable tr').filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+
+    $(document).ready(function () {
+        $("#birthday").datepicker({dateFormat: "dd/mm/yy"});
+    });
 
 </script>
 </body>

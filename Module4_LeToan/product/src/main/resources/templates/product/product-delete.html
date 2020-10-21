@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/layout::header}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Delete Product</title>
+    <link rel="stylesheet" type="text/css" href="../static/bootstrap_4/css/bootstrap.min.css"
+          th:href="@{/bootstrap_4/css/bootstrap.min.css}">
+</head>
+<body>
+<div th:replace="~{layout/layout::title}"></div>
+<nav th:replace="~{layout/layout::navbar}"></nav>
+<div class="container-fluid">
+    <div class="body position-relative" style="top: 160px">
+        <form method="post" action="/product/confirm" th:object="${product}" id="deleteForm">
+            <fieldset>
+                <legend class="text-center">Delete Product</legend>
+                <div class="form-group form-inline">
+                    <label for="id" class="col-2 d-flex justify-content-start">Name</label>
+                    <input type="text" readonly class="col-8 form-control" th:field="*{productId}" id="id">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="name" class="col-2 d-flex justify-content-start">Name</label>
+                    <input type="text" readonly class="col-8 form-control" th:field="*{productName}" id="name">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="price" class="col-2 d-flex justify-content-start">Price</label>
+                    <input type="text" readonly class="col-8 form-control" th:field="*{productPrice}" id="price">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="quantity" class="col-2 d-flex justify-content-start">Quantity</label>
+                    <input type="text" readonly class="col-8 form-control" th:field="*{productQuantity}" id="quantity">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="color" class="col-2 d-flex justify-content-start">Color</label>
+                    <input type="text" readonly class="col-8 form-control" th:field="*{productColor}" id="color">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="description" class="col-2 d-flex justify-content-start">Description</label>
+                    <input type="text" readonly class="col-8 form-control" th:field="*{productDescription}"
+                           id="description">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="category" class="col-2 d-flex justify-content-start">Category</label>
+                    <input type="text" readonly class="col-8 form-control" th:field="*{category.categoryName}"
+                           id="category">
+                </div>
+                <div class="form-group form-inline">
+                    <div class="col-2"></div>
+                    <div class="col-8 pl-0">
+<!--                        <input type="submit" value="Delete" class="btn btn-outline-dark mr-2">-->
+                        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#modelId" th:id="${product.productId}" onclick="sendId(this.id)">
+                            Delete
+                        </button>
+                        <a class="btn btn-outline-dark" href="/product">Back</a>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+
+<!--&lt;!&ndash; Button trigger modal &ndash;&gt;-->
+<!--<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">-->
+<!--    Launch-->
+<!--</button>-->
+
+<!-- Modal -->
+<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Confirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you want to delete this customer ?
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" value="" id="modalProductId">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="deleteProduct()">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{layout/layout::footer}"></footer>
+<script>
+    function sendId(id) {
+        document.getElementById("modalProductId").value = id;
+    }
+    function deleteProduct() {
+        document.getElementById("deleteForm").submit();
+    }
+</script>
+</body>
+</html>

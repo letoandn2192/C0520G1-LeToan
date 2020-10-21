@@ -55,15 +55,21 @@ public class ModalController {
         return "modal/modal-list";
     }
 
-    @GetMapping(value = "/findOne/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+//    @GetMapping(value = "/findOne/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+//    @ResponseBody
+//    public ResponseEntity<Customer> findOneCustomer(@PathVariable("id") String id) {
+//        Customer customer = customerService.findById(id);
+//        if (customer == null) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        } else {
+//            return new ResponseEntity<>(customer, HttpStatus.OK);
+//        }
+//    }
+
+    @GetMapping(value = "/findOne")
     @ResponseBody
-    public ResponseEntity<Customer> findOneCustomer(@PathVariable("id") String id) {
-        Customer customer = customerService.findById(id);
-        if (customer == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            return new ResponseEntity<>(customer, HttpStatus.OK);
-        }
+    public Customer findOneCustomer(String id) {
+        return customerService.findById(id);
     }
 
     @GetMapping("/create")

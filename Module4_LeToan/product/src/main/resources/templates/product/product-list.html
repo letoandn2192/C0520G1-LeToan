@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/layout::header}">
+</head>
+<body>
+<div th:replace="~{layout/layout::title}"></div>
+<nav th:replace="~{layout/layout::navbar}"></nav>
+<div class="container-fluid">
+    <div class="body position-relative" style="top: 160px">
+        <div class="text-center col-12">
+            <a role="button" class="btn btn-outline-dark float-left" href="/product/create">Create New Product</a>
+            <!--<a role="button" class="btn btn-outline-dark" href="/products/delete-in-batch">Delete In Batch</a>-->
+            <h2>List of Product</h2>
+        </div>
+        <form method="post" th:object="${product}" action="/product/update">
+            <table class="table table-sm table-bordered table-hover">
+                <thead class="thead-dark">
+                <tr>
+                    <td scope="col">Id</td>
+                    <td scope="col">Name</td>
+                    <td scope="col">Price</td>
+                    <td scope="col">Quantity</td>
+                    <td scope="col">Color</td>
+                    <td scope="col">Description</td>
+                    <td scope="col">Category</td>
+                    <td scope="col">Edit</td>
+                    <td scope="col">Delete</td>
+                </tr>
+                </thead>
+                <tbody id="myTable">
+                <tr th:each="temp: ${productList}">
+                    <th:block th:switch="${mode}">
+                        <th:block th:case="'edit'">
+                            <td th:if="${temp.productId} == ${product.productId}">
+                                <input type="text" readonly class="form-control-sm" th:field="*{productId}">
+                            </td>
+                            <td th:if="${temp.productId} != ${product.productId}" th:text="${temp.productId}"></td>
+                        </th:block>
+                        <td th:case="*" th:text="${temp.productId}"></td>
+                    </th:block>
+
+                    <th:block th:switch="${mode}">
+                        <th:block th:case="'edit'" >
+                            <td th:if="${temp.productId} == ${product.productId}">
+                                <input type="text" class="form-control-sm"  th:field="*{productName}">
+                                <span style="color: red" th:field="*{#fields.hasErrors('productName')}" th:errors="*{productName}"></span>
+                            </td>
+                            <td th:if="${temp.productId} != ${product.productId}" th:text="${temp.productName}"></td>
+                        </th:block>
+                        <td th:case="*" th:text="${temp.productName}"></td>
+                    </th:block>
+
+                    <th:block th:switch="${mode}">
+                        <th:block th:case="'edit'" >
+                            <td th:if="${temp.productId} == ${product.productId}">
+                                <input type="text" class="form-control-sm"  th:field="*{productPrice}">
+                                <span style="color: red" th:field="*{#fields.hasErrors('productPrice')}" th:errors="*{productPrice}"></span>
+                            </td>
+                            <td th:if="${temp.productId} != ${product.productId}" th:text="${#numbers.formatDecimal(temp.productPrice, 0, 'COMMA', 0, 'POINT')}"></td>
+                        </th:block>
+                        <td th:case="*" th:text="${#numbers.formatDecimal(temp.productPrice, 0, 'COMMA', 0, 'POINT')}"></td>
+                    </th:block>
+
+                    <th:block th:switch="${mode}">
+                        <th:block th:case="'edit'" >
+                            <td th:if="${temp.productId} == ${product.productId}">
+                                <input type="text" class="form-control-sm"  th:field="*{productQuantity}">
+                                <span style="color: red" th:field="*{#fields.hasErrors('productQuantity')}" th:errors="*{productQuantity}"></span>
+                            </td>
+                            <td th:if="${temp.productId} != ${product.productId}" th:text="${temp.productQuantity}"></td>
+                        </th:block>
+                        <td th:case="*" th:text="${temp.productQuantity}"></td>
+                    </th:block>
+
+                    <th:block th:switch="${mode}">
+                        <th:block th:case="'edit'" >
+                            <td th:if="${temp.productId} == ${product.productId}">
+                                <input type="text" class="form-control-sm"  th:field="*{productColor}">
+                                <span style="color: red" th:field="*{#fields.hasErrors('productColor')}" th:errors="*{productColor}"></span>
+                            </td>
+                            <td th:if="${temp.productId} != ${product.productId}" th:text="${temp.productColor}"></td>
+                        </th:block>
+                        <td th:case="*" th:text="${temp.productColor}"></td>
+                    </th:block>
+
+                    <th:block th:switch="${mode}">
+                        <th:block th:case="'edit'" >
+                            <td th:if="${temp.productId} == ${product.productId}">
+                                <input type="text" class="form-control-sm" th:field="*{productDescription}">
+                                <span style="color: red" th:field="*{#fields.hasErrors('productDescription')}" th:errors="*{productDescription}"></span>
+                            </td>
+                            <td th:if="${temp.productId} != ${product.productId}" th:text="${temp.productDescription}"></td>
+                        </th:block>
+                        <td th:case="*" th:text="${temp.productDescription}"></td>
+                    </th:block>
+
+                    <th:block th:switch="${mode}">
+                        <th:block th:case="'edit'" >
+                            <td th:if="${temp.productId} == ${product.productId}">
+                                <select class="form-control-sm"  th:field="*{category}">
+                                    <option th:each="category: ${categoryList}" th:text="${category.categoryName}" th:value="${category.categoryId}"></option>
+                                </select>
+                            </td>
+                            <td th:if="${temp.productId} != ${product.productId}" th:text="${temp.category.categoryName}"></td>
+                        </th:block>
+                        <td th:case="*" th:text="${temp.category.categoryName}"></td>
+                    </th:block>
+
+                    <th:block th:switch="${mode}">
+                        <th:block th:case="'edit'" >
+                            <td th:if="${temp.productId} == ${product.productId}">
+                                <a role="button" class="btn btn-sm btn-outline-dark" th:href="@{'/product' (page=${productList.number})}">Back</a>
+                                <input type="hidden" name="page" th:value="${productList.number}">
+                                <input type="submit" class="btn btn-sm btn-outline-dark" value="Update">
+                            </td>
+                            <td th:if="${temp.productId} != ${product.productId}">
+                                <a role="button" class="btn btn-sm btn-outline-success" th:href="@{/product/edit/{id}(id=${temp.productId}, page=${productList.number})}"
+                                ><span class="fas fa-pen"></span></a>
+                            </td>
+                        </th:block>
+                        <td th:case="*">
+                            <a role="button" class="btn btn-sm btn-outline-success"
+                           th:href="@{/product/edit/{id}(id=${temp.productId}, page=${productList.number})}"><span class="fas fa-pen"></span></a>
+                        </td>
+                    </th:block>
+
+                    <td>
+                        <a role="button" class="btn btn-sm btn-outline-success"
+                           th:href="@{/product/delete/{id}(id=${temp.productId})}"><span
+                                class="fas fa-trash"></span></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+        <div>
+            <a th:href="@{'/product'(page=${productList.number - 1}, inputSearch = ${inputSearch})}"
+               th:if="${productList.hasPrevious()}">Previous</a>
+            <span th:text="${productList.number + 1}"></span>/<span th:text="${productList.totalPages}"></span>
+            <a th:href="@{'/product'(page=${productList.number + 1}, inputSearch = ${inputSearch})}"
+               th:if="${productList.hasNext()}">Next</a>
+        </div>
+        <th:block th:if="${messInform != null}">
+            <div class="alert alert-success col-4 d-flex justify-content-center" role="alert" th:text="${messInform}"></div>
+        </th:block>
+    </div>
+</div>
+<footer th:replace="~{layout/layout::footer}"></footer>
+<script>
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 2000);
+
+    $(document).ready(function () {
+
+        let value = $('#hidden').val();
+        $("select[name='select'] option").each(function () {
+            if (this.value == value) {
+                $(this).prop("selected", true)
+                return;
+            }
+        });
+    });
+
+
+    function findBy(value) {
+        console.log(value);
+        if (value === "") {
+            $('#inputSearch').on('keyup', function () {
+                let value = $(this).val().toLowerCase();
+                $('#myTable tr').filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        }
+    }
+
+    // findBy("");
+</script>
+</body>
+</html>

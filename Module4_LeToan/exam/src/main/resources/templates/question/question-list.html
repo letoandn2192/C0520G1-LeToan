@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout/layout::header}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="~{/layout/layout::title}"></div>
+<nav th:replace="~{/layout/layout::navbar}"></nav>
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+<div class="container-fluid">
+    <div class="body position-relative" style="top: 160px">
+        <div class="text-center col-12">
+            <a th:href="@{/create}" role="button" class="btn btn-outline-dark float-left">Create New
+                Question</a>
+            <h2>List of Question</h2>
+        </div>
+        <table class="table table-sm table-bordered table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Title</th>
+                <th scope="col">Question Type</th>
+                <th scope="col">Created Date</th>
+                <th scope="col">Author</th>
+                <th scope="col">Reply</th>
+                <th scope="col">Status</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Detail</th>
+                <th scope="col">Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="temp: ${questionList}">
+                <td scope="row" th:text="${temp.questionId}"></td>
+                <td th:text="${temp.questionTitle}"></td>
+                <td th:text="${temp.questionType.questionTypeName}"></td>
+                <td th:text="${temp.questionDateCreate}"></td>
+                <td th:text="${temp.user.userName}"></td>
+                <td th:text="${temp.user.userName}"></td>
+                <td th:text="${temp.questionStatus}"></td>
+                <td>
+                    <a th:href="@{/edit/{id}(id=${temp.questionId})}">Edit</a>
+                </td>
+                <td>
+                    <a th:href="@{/detail/{id}(id=${temp.questionId})}" class="detail-btn">Detail</a>
+                </td>
+                <td>
+                    <a th:href="@{/delete/{id}(id=${temp.questionId})}" >Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+<!--    <th:block th:if="${messInform != null}">-->
+<!--        <div class="alert alert-success col-4 d-flex justify-content-center" role="alert" th:text="${messInform}"></div>-->
+<!--    </th:block>-->
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Question Information</h5>
+            </div>
+            <div id="modal-body">
+                Body
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+<footer th:replace="~{/layout/layout::footer}"></footer>
+<script>
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 2000);
+
+
+    $(document).ready(function () {
+        $(".detail-btn").click(function (event) {
+            console.log("OK");
+            let urlDetail = $(this).attr("href");
+            console.log(urlDetail);
+            $.ajax({
+                type: "GET",
+                url: urlDetail,
+                dataType: "HTML",
+                success: function (data) {
+                    $("#modal-body").html(data);
+                    $('#detailModal').modal('show');
+                }
+            });
+            event.preventDefault();
+        });
+    });
+
+    $(document).ready(function () {
+
+        let value = $('#hidden').val();
+        $("select[name='select'] option").each(function () {
+            if (this.value == value) {
+                $(this).prop("selected", true)
+                return;
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -16,17 +16,20 @@
                     <th>Image</th>
                     <th>Description</th>
                     <th>Price</th>
+                    <th>Discount</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="product:${productList}">
-                    <td scope="row" th:text="${product.id}"></td>
-                    <td th:text="${product.name}"></td>
-                    <td><a th:href="@{/product/detail/{id}(id=${product.id})}"><img th:src="${product.image}"
-                                                                                    style="width: 70px; height: auto"></a>
-                    </td>
+                    <td class="id" scope="row" th:text="${product.id}"></td>
+                    <td class="name" th:text="${product.name}"></td>
+<!--                    <td class="image"><a th:href="@{/product/detail/{id}(id=${product.id})}"><img th:src="${product.image}"-->
+<!--                                                                                    style="width: 70px; height: auto"></a>-->
+<!--                    </td>-->
+                    <td class="image" th:text="${product.image}"></td>
                     <td class="description" th:text="${product.description}"></td>
-                    <td th:text="${product.price}"></td>
+                    <td class="price" th:text="${product.price}"></td>
+                    <td class="discount" th:text="${product.discount}"></td>
                 </tr>
                 </tbody>
             </table>
@@ -48,63 +51,176 @@
 </div>
 
 <footer th:replace="~{/product/layout::footer}"></footer>
-
-
 <script>
     $(document).ready(function () {
-
-        $(".description").click(function () {
-            let content;
+        $(".table tr").click(function () {
+            let contentId, contentName, contentImage, contentDescription, contentPrice, contentDiscount;
             if (!$(this).find("textarea").length) {
-                console.log("dang vao click TD");
-                content = $(this).text();
-                $(this).text("");
-                $(this).html("<textarea class='form-control' rows='4'></textarea>");
-                let textAreaElement = $(this).find("textarea");
-                textAreaElement.text(content);
-                $(textAreaElement).after("<button type=\"button\" class=\"btn btn-secondary mt-1 ml-2 btn-close\">Close</button>");
-                $(textAreaElement).after("<button type=\"button\" class=\"btn btn-success mt-1 btn-ok\">OK</button>");
-                $(textAreaElement).after("<input type=\"hidden\" value=\"\">");
+                console.log("dang vao click roi !!!");
+                contentId = $(this).children('td.id').text();
+                contentName = $(this).children('td.name').text();
+                contentImage = $(this).children('td.image').text();
+                contentDescription = $(this).children('td.description').text();
+                contentPrice = $(this).children('td.price').text();
+                contentDiscount = $(this).children('td.discount').text();
 
-                $(this).find("input:hidden").val(content);
+                // xoa noi dung
+                $(this).children('td.id').text("");
+                $(this).children('td.name').text("");
+                $(this).children('td.image').text("");
+                $(this).children('td.description').text("");
+                $(this).children('td.price').text("");
+                $(this).children('td.discount').text("");
 
+                $(this).children('td.id').html('<input class=\"form-control field1\">');
+                $(this).children('td.name').html('<input class=\"form-control field2\">')
+                $(this).children('td.image').html('<input class=\"form-control field3\">')
+                $(this).children('td.description').html('<textarea class=\'form-control\ field4\' rows=\'4\'></textarea>')
+                $(this).children('td.price').html('<input class=\"form-control field5\">')
+                $(this).children('td.discount').html('<input class=\"form-control field6\">')
+                let idElement = $(this).find(".field1");
+                let nameElement = $(this).find(".field2");
+                let imageElement = $(this).find(".field3");
+                let descriptionElement = $(this).find(".field4");
+                let priceElement = $(this).find(".field5");
+                let discountElement = $(this).find(".field6");
+                idElement.val(contentId).attr('readonly', 'readonly');
+                nameElement.val(contentName);
+                imageElement.val(contentImage);
+                descriptionElement.text(contentDescription);
+                priceElement.val(contentPrice);
+                discountElement.val(contentDiscount);
+                $(discountElement).after("<button type=\"button\" class=\"btn btn-secondary mt-1 ml-2 btn-close\">Close</button>");
+                $(discountElement).after("<button type=\"button\" class=\"btn btn-success mt-1 btn-ok\">OK</button>");
+                $(discountElement).after("<input type=\"hidden\" value=\"\" class=\'id\'>");
+                $(discountElement).after("<input type=\"hidden\" value=\"\" class=\'name\'>");
+                $(discountElement).after("<input type=\"hidden\" value=\"\" class=\'image\'>");
+                $(discountElement).after("<input type=\"hidden\" value=\"\" class=\'description\'>");
+                $(discountElement).after("<input type=\"hidden\" value=\"\" class=\'price\'>");
+                $(discountElement).after("<input type=\"hidden\" value=\"\" class=\'discount\'>");
+
+                $(this).find("input:hidden.id").val(contentId);
+                $(this).find("input:hidden.name").val(contentName);
+                $(this).find("input:hidden.image").val(contentImage);
+                $(this).find("input:hidden.description").val(contentDescription);
+                $(this).find("input:hidden.price").val(contentPrice);
+                $(this).find("input:hidden.discount").val(contentDiscount);
             }
-        });
 
-        $(document).on("click", ".btn-close", function () {
-            let content = $(this).parent(".description").find("input:hidden").val();
-            $(this).parent(".description").empty().text(content);
-        });
+                $(document).on("click", ".btn-close", function () {
+                    let contentId = $(this).parent(".discount").find("input:hidden.id").val();
+                    let contentName = $(this).parent(".discount").find("input:hidden.name").val();
+                    let contentImage = $(this).parent(".discount").find("input:hidden.image").val();
+                    let contentDescription = $(this).parent(".discount").find("input:hidden.description").val();
+                    let contentPrice = $(this).parent(".discount").find("input:hidden.price").val();
+                    let contentDiscount = $(this).parent(".discount").find("input:hidden.discount").val();
 
-        $(document).on("click", ".btn-ok", function () {
-            let tdElement = $(this).parent(".description");
+                    $(this).parent().parent().children("td.id").empty().text(contentId);
+                    $(this).parent().parent().children("td.name").empty().text(contentName);
+                    $(this).parent().parent().children("td.image").empty().text(contentImage);
+                    $(this).parent().parent().children("td.description").empty().text(contentDescription);
+                    $(this).parent().parent().children("td.price").empty().text(contentPrice);
+                    $(this).parent(".discount").empty().text(contentDiscount);
+                });
 
-            let idProduct = $(this).parent().parent().children(":first-child").text();
-            let content = $(this).parent(".description").find("textarea").val();
-            let field = "description";
-            let dataJson = {"id": idProduct, "content": content, "field": field}
-            console.log("id: " + idProduct)
-            console.log("content: " + content)
+                $(document).on("click", ".btn-ok", function () {
+                    // let idElement = $(this).parent().parent().children('.id');
+                    // let nameElement = $(this).parent().parent().children('.name');
+                    // let imageElement = $(this).parent().parent().children('.image');
+                    // let descriptionElement = $(this).parent().parent().children('.description');
+                    // let priceElement = $(this).parent().parent().children('.price');
+                    // let discountElement = $(this).parent().children('.discount');
 
-            $.ajax({
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                url: "/product/edit/",
-                method: "POST",
-                data: JSON.stringify(dataJson),
-                success: function () {
-                    console.log("da update OK");
-                    tdElement.empty().text(content);
-                },
-                error: function (error) {
-                    console.log("that bai");
-                }
-            });
+                    let idProduct = $(this).parent().parent().find(".field1").val();
+                    let nameProduct = $(this).parent().parent().find(".field2").val();
+                    let imageProduct = $(this).parent().parent().find(".field3").val();
+                    let descriptionProduct = $(this).parent().parent().find(".field4").val();
+                    let priceProduct = $(this).parent().parent().find(".field5").val();
+                    let discountProduct = $(this).parent().find(".field6").val();
+                    let dataJson = {"id": idProduct, "name": nameProduct, "image": imageProduct,
+                                    "description": descriptionProduct, "price": priceProduct, "discount" : discountProduct};
 
-        });
+                    $.ajax({
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        url: "/product/edit/",
+                        method: "POST",
+                        data: JSON.stringify(dataJson),
+                        success: function () {
+                            // console.log("da update OK");
+                            // idElement.empty().text(contentId);
+                            // nameElement.empty().text(contentName);
+                            // imageElement.empty().text(contentImage);
+                            // descriptionElement.empty().text(contentDescription);
+                            // priceElement.empty().text(contentPrice);
+                            // discountElement.empty().text(contentDiscount);
+                        },
+                        error: function (error) {
+                            console.log("that bai");
+                        }
+                    });
+
+                });
+        })
     })
+
+
+
+    // $(document).ready(function () {
+    //     $(".description").click(function () {
+    //         let content;
+    //         if (!$(this).find("textarea").length) {
+    //             console.log("dang vao click TD");
+    //             content = $(this).text();
+    //             $(this).text("");
+    //             $(this).html("<textarea class='form-control' rows='4'></textarea>");
+    //             let textAreaElement = $(this).find("textarea");
+    //             textAreaElement.text(content);
+    //             $(textAreaElement).after("<button type=\"button\" class=\"btn btn-secondary mt-1 ml-2 btn-close\">Close</button>");
+    //             $(textAreaElement).after("<button type=\"button\" class=\"btn btn-success mt-1 btn-ok\">OK</button>");
+    //             $(textAreaElement).after("<input type=\"hidden\" value=\"\">");
+    //
+    //             $(this).find("input:hidden").val(content);
+    //
+    //         }
+    //     });
+    //
+    //     $(document).on("click", ".btn-close", function () {
+    //         let content = $(this).parent(".description").find("input:hidden").val();
+    //         $(this).parent(".description").empty().text(content);
+    //     });
+    //
+    //     $(document).on("click", ".btn-ok", function () {
+    //         let tdElement = $(this).parent(".description");
+    //
+    //         let idProduct = $(this).parent().parent().children(":first-child").text();
+    //         let content = $(this).parent(".description").find("textarea").val();
+    //         let field = "description";
+    //         let dataJson = {"id": idProduct, "content": content, "field": field}
+    //         console.log("id: " + idProduct)
+    //         console.log("content: " + content)
+    //
+    //         $.ajax({
+    //             headers: {
+    //                 'Accept': 'application/json',
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             url: "/product/edit/",
+    //             method: "POST",
+    //             data: JSON.stringify(dataJson),
+    //             success: function () {
+    //                 console.log("da update OK");
+    //                 tdElement.empty().text(content);
+    //             },
+    //             error: function (error) {
+    //                 console.log("that bai");
+    //             }
+    //         });
+    //
+    //     });
+    // })
 </script>
 </body>
 </html>

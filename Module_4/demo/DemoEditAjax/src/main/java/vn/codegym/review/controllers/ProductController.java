@@ -42,19 +42,31 @@ public class ProductController {
 
     @PostMapping(value = "/edit", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity editProduct(@RequestBody ProductUpdateField updateField){
-        Product product = productService.findById(updateField.getId());
-        if(product==null){
+    public ResponseEntity editProduct(@RequestBody Product product){
+        Product currentProduct = productService.findById(product.getId());
+        if(currentProduct == null){
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         } else {
-            product.setDescription(updateField.getContent());
-//            switch (updateField.getField()){
-//                case "description": product.setDescription(updateField.getContent());
-//            }
             productService.save(product);
         }
         return new ResponseEntity(HttpStatus.OK);
     }
+
+//    @PostMapping(value = "/edit", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+//    @ResponseBody
+//    public ResponseEntity editProduct(@RequestBody ProductUpdateField updateField){
+//        Product product = productService.findById(updateField.getId());
+//        if(product==null){
+//            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+//        } else {
+//            product.setDescription(updateField.getContent());
+////            switch (updateField.getField()){
+////                case "description": product.setDescription(updateField.getContent());
+////            }
+//            productService.save(product);
+//        }
+//        return new ResponseEntity(HttpStatus.OK);
+//    }
 
 //
 //    @GetMapping("/create")
