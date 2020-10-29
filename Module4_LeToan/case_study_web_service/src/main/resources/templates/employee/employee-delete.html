@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout/layout::header}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="~{/layout/layout::title}"></div>
+<nav th:replace="~{/layout/layout::navbar}"></nav>
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+<div class="container-fluid">
+    <div class="body position-relative" style="top: 160px">
+        <form method="post" th:object="${employee}" th:action="@{/employee/confirm}" id="deleteForm">
+            <fieldset>
+                <legend class="text-center">Delete Information</legend>
+                <div class="form-group form-inline">
+                    <label for="id" class="col-2 d-flex justify-content-start">Id</label>
+                    <input type="text" readonly class="col-8 form-control" id="id" th:field="*{employeeId}">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="name" class="col-2 d-flex justify-content-start">Name</label>
+                    <input type="text" class="col-8 form-control" id="name" th:field="*{employeeName}">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="birthday" class="col-2 d-flex justify-content-start">Birthday</label>
+                    <input type="text" class="col-8 form-control" id="birthday" th:field="*{employeeBirthday}">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="idNumber" class="col-2 d-flex justify-content-start">Identify Number</label>
+                    <input type="text" class="col-8 form-control" id="idNumber" th:field="*{employeeIdCard}">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="salary" class="col-2 d-flex justify-content-start">Salary</label>
+                    <input type="text" class="col-8 form-control" id="salary" th:field="*{employeeSalary}">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="phone" class="col-2 d-flex justify-content-start">Phone</label>
+                    <input type="text" class="col-8 form-control" id="phone" th:field="*{employeePhone}">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="email" class="col-2 d-flex justify-content-start">Email</label>
+                    <input type="text" class="col-8 form-control" id="email" th:field="*{employeeEmail}">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="address" class="col-2 d-flex justify-content-start">Address</label>
+                    <input type="text" class="col-8 form-control" id="address" th:field="*{employeeAddress}">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="position" class="col-2 d-flex justify-content-start">Position</label>
+                    <input type="text" class="col-8 form-control" id="position" th:field="*{position.positionName}">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="education" class="col-2 d-flex justify-content-start">Education</label>
+                    <input type="text" class="col-8 form-control" id="education" th:field="*{educationDegree.educationDegreeName}">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="division" class="col-2 d-flex justify-content-start">Division</label>
+                    <input type="text" class="col-8 form-control" id="division" th:field="*{division.divisionName}">
+                </div>
+
+                <div class="form-group form-inline">
+                    <div class="col-2"></div>
+                    <div class="col-8 pl-0">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            Delete
+                        </button>
+                        <a class="btn btn-outline-dark" th:href="@{/employee/detail/{id}(id=${employee.employeeId})}">Back</a>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you want to delete this employee ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="deleteEmployee()">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+<footer th:replace="~{/layout/layout::footer}"></footer>
+<script>
+    function deleteEmployee() {
+        document.getElementById("deleteForm").submit();
+    }
+</script>
+</body>
+</html>

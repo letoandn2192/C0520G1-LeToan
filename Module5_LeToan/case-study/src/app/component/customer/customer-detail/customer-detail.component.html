@@ -1,0 +1,61 @@
+<div class="container-fluid">
+  <div class="body row position-relative" style="top: 160px" *ngIf="currentCustomer">
+      <div class="text-center col-12">
+        <h2>Customer's Information Detail</h2>
+      </div>
+      <table class="table table-sm table-bordered table-hover">
+        <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Information</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td scope="row">ID</td>
+          <td>{{currentCustomer.customerId}}</td>
+        </tr>
+        <tr>
+          <td scope="row">Name</td>
+          <td>{{currentCustomer.customerName}}</td>
+        </tr>
+        <tr>
+          <td scope="row">Birthday</td>
+          <td>{{currentCustomer.customerBirthday}}</td>
+        </tr>
+        <tr>
+          <td scope="row">Gender</td>
+          <td *ngIf="currentCustomer.customerGender">Male</td>
+          <td *ngIf="!currentCustomer.customerGender">Female</td>
+        </tr>
+        <tr>
+          <td scope="row">Identify Number</td>
+          <td>{{currentCustomer.customerIdCard}}</td>
+        </tr>
+        <tr>
+          <td scope="row">Phone</td>
+          <td>{{currentCustomer.customerPhone}}</td>
+        </tr>
+        <tr>
+          <td scope="row">Email</td>
+          <td>{{currentCustomer.customerEmail}}</td>
+        </tr>
+        <tr>
+          <td scope="row">Address</td>
+          <td>{{currentCustomer.customerAddress}}</td>
+        </tr>
+        <!--      <tr>-->
+        <!--        <td scope="row">Type Customer</td>-->
+        <!--        <td>{{customer.customerType.customerTypeName}}</td>-->
+        <!--      </tr>-->
+        </tbody>
+      </table>
+      <div class="row text-center col-12">
+        <a [routerLink]="['/customer/edit', currentCustomer.customerId]" role="button"
+           class="btn btn-outline-dark mr-2">Edit <span class="fas fa-pen"></span></a>
+<!--        <a [routerLink]="['/customer/delete', currentCustomer.customerId]" role="button"-->
+<!--           class="btn btn-outline-dark mr-2">Delete <span class="fas fa-trash"></span></a>-->
+        <a [routerLink]="['/customer']" role="button" class="btn btn-outline-dark float-left">Back</a>
+      </div>
+  </div>
+</div>

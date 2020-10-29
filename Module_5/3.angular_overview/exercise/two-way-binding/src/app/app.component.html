@@ -1,0 +1,79 @@
+<!--<center>-->
+<span>{{ title }} app is running!</span>
+<!--</center>-->
+<h2>Font size editor</h2>
+
+<div>
+  <label>Enter font size (px):</label>
+  <input type="range" min="10" max="40" [value]="fontSize" (change)="onChange($event.target.value)">
+</div>
+
+<p class="output" [style.fontSize.px]="fontSize">
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi cumque nostrum quibusdam. Inventore quibusdam
+  debitis, tempore error voluptatem explicabo ipsum?
+</p>
+
+
+<hr>
+<!--  ------------------------------------------------------------------------------------------------ -->
+<h2>Pet profile</h2>
+<label>
+  Pet name:
+  <input type="text" (change)="updateName($event.target.value)">
+</label>
+<br>
+<label>
+  Pet image:
+  <input type="url" (change)="updateImage($event.target.value)">
+</label>
+<br>
+<h3>Pet name: {{petName}}</h3>
+<img [src]="petImage" style="max-width: 100%">
+<hr>
+<!--  ------------------------------------------------------------------------------------------------ -->
+<h2>Calculator</h2>
+<table class="table table-borderless">
+  <tbody>
+  <tr>
+    <td scope="row"><label>First Operand:</label></td>
+    <td><input type="text" [value]="firstOperand" (change)="updateFirstOperand($event.target.value)"></td>
+  </tr>
+  <tr>
+    <td scope="row"><label>Operator</label></td>
+    <td>
+      <select (change)="updateOperator($event.target.value)">
+        <option value="*">*</option>
+        <option value="/">/</option>
+        <option value="+">+</option>
+        <option value="-">-</option>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td scope="row"><label>Second Operand:</label></td>
+    <td><input type="text" [value]="secondOperand" (change)="updateSecondOperand($event.target.value)"></td>
+  </tr>
+  <tr>
+    <td scope="row"></td>
+    <td><button class="btn btn-outline-dark" (click)="calculate()">Calculate</button></td>
+  </tr>
+  <tr>
+    <td scope="row"></td>
+    <td><label>Result: {{output}} {{error}}</label></td>
+  </tr>
+  </tbody>
+</table>
+
+<hr>
+<!--  ------------------------------------------------------------------------------------------------ -->
+<h2>Color Picker</h2>
+<div>
+  <label>Choose color:</label>
+  <input type="color" name="fontColor" [(ngModel)]="fontColor" [value]="fontColor">
+</div>
+
+<p class="output" [style.color]="fontColor">
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi cumque nostrum quibusdam. Inventore quibusdam
+  debitis, tempore error voluptatem explicabo ipsum?
+</p>
+

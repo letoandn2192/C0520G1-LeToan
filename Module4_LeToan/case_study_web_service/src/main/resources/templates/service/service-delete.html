@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout/layout::header}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="~{/layout/layout::title}"></div>
+<nav th:replace="~{/layout/layout::navbar}"></nav>
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+<div class="container-fluid">
+    <div class="body position-relative" style="top: 160px">
+        <form method="post" id="deleteForm" th:action="@{/service/confirm}" th:object="${service}">
+            <fieldset>
+                <legend class="text-center">Delete Information</legend>
+                <div class="form-group form-inline">
+                    <label for="id" class="col-2 d-flex justify-content-start">Id</label>
+                    <input type="text" readonly class="col-8 form-control" id="id" th:field="*{serviceId}">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="name" class="col-2 d-flex justify-content-start">Name</label>
+                    <input type="text" class="col-8 form-control" id="name" th:field="*{serviceName}">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="area" class="col-2 d-flex justify-content-start">Area</label>
+                    <input type="text" class="col-8 form-control" id="area" th:field="*{serviceArea}">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="cost" class="col-2 d-flex justify-content-start">Cost</label>
+                    <input type="text" class="col-8 form-control" id="cost" th:field="*{serviceCost}">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="maxPerson" class="col-2 d-flex justify-content-start">Max Person</label>
+                    <input type="text" class="col-8 form-control" id="maxPerson" th:field="*{serviceMaxPerson}">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="rentType" class="col-2 d-flex justify-content-start">Rent Type</label>
+                    <input type="text" class="col-8 form-control" id="rentType" th:field="*{rentType.rentTypeName}">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="serviceType" class="col-2 d-flex justify-content-start">Service Type</label>
+                    <input type="text" class="col-8 form-control" id="serviceType" th:field="*{serviceType.serviceTypeName}">
+                </div>
+                <th:block th:if="${service.serviceType.serviceTypeId == 2 || service.serviceType.serviceTypeId == 1}">
+                    <div class="form-group form-inline">
+                        <label for="standard" class="col-2 d-flex justify-content-start">Standard Room</label>
+                        <input type="text" class="col-8 form-control" id="standard" th:field="*{serviceStandardRoom}">
+                    </div>
+                    <div class="form-group form-inline">
+                        <label for="description" class="col-2 d-flex justify-content-start">Description</label>
+                        <input type="text" class="col-8 form-control" id="description" th:field="*{serviceDescription}">
+                    </div>
+                    <th:block th:if="${service.serviceType.serviceTypeId == 1}">
+                        <div class="form-group form-inline">
+                            <label for="pool" class="col-2 d-flex justify-content-start">Pool Area</label>
+                            <input type="text" class="col-8 form-control" id="pool" th:field="*{servicePoolArea}">
+                        </div>
+                    </th:block>
+                    <div class="form-group form-inline">
+                        <label for="floor" class="col-2 d-flex justify-content-start">Floors</label>
+                        <input type="text" class="col-8 form-control" id="floor" th:field="*{serviceFloor}">
+                    </div>
+                </th:block>
+
+                <div class="form-group form-inline">
+                    <div class="col-2"></div>
+                    <div class="col-8 pl-0">
+                        <button type="button" class="btn btn-outline-dark" data-toggle="modal"
+                                data-target="#exampleModal">
+                            Delete
+                        </button>
+                        <a class="btn btn-outline-dark" th:href="@{/service/detail/{id}(id=${service.serviceId})}">Back</a>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you want to delete this service ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="deleteCustomer()">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+<footer th:replace="~{/layout/layout::footer}"></footer>
+<script>
+    function deleteCustomer() {
+        document.getElementById("deleteForm").submit();
+    }
+</script>
+</body>
+</html>

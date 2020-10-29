@@ -12,8 +12,8 @@ public class Blog {
     private int blogId;
     private String blogTitle;
     private String blogContent;
-//    private LocalDate blogCreateDate;
-//    private LocalTime blogCreateTime;
+    private LocalDate blogCreateDate;
+    private LocalTime blogCreateTime;
 
     @ManyToOne
     @JoinColumn(name = "categoryId")
@@ -52,21 +52,21 @@ public class Blog {
         this.blogContent = blogContent;
     }
 
-//    public LocalDate getBlogCreateDate() {
-//        return blogCreateDate;
-//    }
-//
-//    public void setBlogCreateDate(LocalDate blogCreateDate) {
-//        this.blogCreateDate = blogCreateDate;
-//    }
-//
-//    public LocalTime getBlogCreateTime() {
-//        return blogCreateTime;
-//    }
-//
-//    public void setBlogCreateTime(LocalTime blogCreateTime) {
-//        this.blogCreateTime = blogCreateTime;
-//    }
+    public LocalDate getBlogCreateDate() {
+        return blogCreateDate;
+    }
+
+    public void setBlogCreateDate(LocalDate blogCreateDate) {
+        this.blogCreateDate = blogCreateDate;
+    }
+
+    public LocalTime getBlogCreateTime() {
+        return blogCreateTime;
+    }
+
+    public void setBlogCreateTime(LocalTime blogCreateTime) {
+        this.blogCreateTime = blogCreateTime;
+    }
 
     public Category getBlogCategory() {
         return blogCategory;

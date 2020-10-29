@@ -1,8 +1,5 @@
 package vn.codegym.model;
 
-import org.springframework.data.annotation.Id;
-
-import javax.persistence.Entity;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;

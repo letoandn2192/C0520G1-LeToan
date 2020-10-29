@@ -1,0 +1,18 @@
+<div *ngIf="post; else nothing">
+  <h4>
+    {{post.blogTitle}}
+  </h4>
+  <p>
+    {{post.blogContent}}
+  </p>
+  <p>
+    {{post.blogCreateDate}}
+  </p>
+  <p>
+    {{post.blogCreateTime}}
+  </p>
+</div>
+
+<ng-template #nothing>
+  <p>Nothing to show</p>
+</ng-template>

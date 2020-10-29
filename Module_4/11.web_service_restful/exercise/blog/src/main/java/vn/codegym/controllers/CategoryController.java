@@ -14,6 +14,7 @@ import vn.codegym.service.CategoryService;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/categories")
 public class CategoryController {
     @Autowired

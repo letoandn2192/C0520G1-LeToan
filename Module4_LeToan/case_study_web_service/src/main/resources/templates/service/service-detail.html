@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout/layout::header}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="~{/layout/layout::title}"></div>
+<nav th:replace="~{/layout/layout::navbar}"></nav>
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+<div class="container-fluid">
+    <div class="body row position-relative" style="top: 160px">
+        <div class="text-center col-12">
+            <h2>Service's Information Detail</h2>
+        </div>
+        <table class="table table-sm table-bordered table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Information</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td scope="row">ID</td>
+                <td th:text="${service.serviceId}"></td>
+            </tr>
+            <tr>
+                <td scope="row">Name</td>
+                <td th:text="${service.serviceName}"></td>
+            </tr>
+            <tr>
+                <td scope="row">Area</td>
+                <td th:text="${service.serviceArea}"></td>
+            </tr>
+            <tr>
+                <td scope="row">Cost</td>
+                <td th:text="${service.serviceCost}"></td>
+            </tr>
+            <tr>
+                <td scope="row">Max Person</td>
+                <td th:text="${service.serviceMaxPerson}"></td>
+            </tr>
+            <tr>
+                <td scope="row">Rent Type</td>
+                <td th:text="${service.rentType.rentTypeName}"></td>
+            </tr>
+            <tr>
+                <td scope="row">Service Type</td>
+                <td th:text="${service.serviceType.serviceTypeName}"></td>
+            </tr>
+            <th:block th:if="${service.serviceType.serviceTypeId == 1 || service.serviceType.serviceTypeId == 2}">
+                <tr>
+                    <td scope="row">Standard Room</td>
+                    <td th:text="${service.serviceStandardRoom}"></td>
+                </tr>
+                <tr>
+                    <td scope="row">Description</td>
+                    <td th:text="${service.serviceDescription}"></td>
+                </tr>
+                <th:block th:if="${service.serviceType.serviceTypeId == 1}">
+                    <tr>
+                        <td scope="row">Pool Area</td>
+                        <td th:text="${service.servicePoolArea}"></td>
+                    </tr>
+                </th:block>
+                <tr>
+                    <td scope="row">Floors</td>
+                    <td th:text="${service.serviceFloor}"></td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+        <div class="row text-center col-12">
+            <a th:href="@{/service/edit/{id}(id=${service.serviceId})}" role="button" class="btn btn-outline-dark mr-2">Edit <span class="fas fa-edit"></span></a>
+            <a th:href="@{/service/delete/{id}(id=${service.serviceId})}" role="button" class="btn btn-outline-dark mr-2">Delete <span class="fas fa-eraser"></span></a>
+            <a href="/service" role="button" class="btn btn-outline-dark float-left">Back</a>
+        </div>
+    </div>
+</div>
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+<footer th:replace="~{/layout/layout::footer}"></footer>
+</body>
+</html>

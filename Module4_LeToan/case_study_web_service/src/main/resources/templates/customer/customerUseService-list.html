@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout/layout::header}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="~{/layout/layout::title}"></div>
+<nav th:replace="~{/layout/layout::navbar}"></nav>
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+<div class="container-fluid">
+    <div class="body position-relative" style="top: 160px">
+        <div class="text-center col-12">
+            <h2>List of Customer Use Service</h2>
+        </div>
+        <table class="table table-sm table-bordered table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Customer's Name</th>
+                <th scope="col">Service's Name</th>
+                <th scope="col">Contract's Id</th>
+                <th scope="col">Attach Service</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="element: ${contractList}">
+                <td th:text="${element.customer.customerName}"></td>
+                <td th:text="${element.service.serviceName}"></td>
+                <td th:text="${element.contractId}"></td>
+                <td><a th:href="@{/contract-detail/detail/{id}(id=${element.contractId})}"><span class="fas fa-eye"></span></a></td>
+            </tr>
+            </tbody>
+        </table>
+        <div>
+            <a th:href="@{'/customer-service'(page=${contractList.number - 1})}" th:if="${contractList.hasPrevious()}">Previous</a>
+            <span th:text="${contractList.number + 1}"></span>/<span th:text="${contractList.totalPages}"></span>
+            <a th:href="@{'/customer-service'(page=${contractList.number + 1})}" th:if="${contractList.hasNext()}">Next</a>
+        </div>
+    </div>
+</div>
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+<footer th:replace="~{/layout/layout::footer}"></footer>
+</body>
+</html>

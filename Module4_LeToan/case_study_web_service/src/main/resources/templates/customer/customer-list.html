@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout/layout::header}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="~{/layout/layout::title}"></div>
+<nav th:replace="~{/layout/layout::navbar}"></nav>
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+<div class="container-fluid">
+    <div class="body position-relative" style="top: 160px">
+        <div class="text-center col-12">
+            <a href="/customer/create" role="button" class="btn btn-outline-dark float-left">Create New
+                Customer</a>
+            <h2>List of Customer</h2>
+        </div>
+        <table class="table table-sm table-bordered table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Email</th>
+                <th scope="col">Address</th>
+                <th scope="col">Detail</th>
+                <th scope="col">Delete</th>
+            </tr>
+            </thead>
+            <tbody id="myTable">
+                <tr th:each="customer: ${customerList}">
+                    <td scope="row" th:text="${customer.customerId}"></td>
+                    <td th:text="${customer.customerName}"></td>
+                    <td th:if="${customer.customerGender}" th:text="Male"></td>
+                    <td th:if="!${customer.customerGender}" th:text="Female"></td>
+                    <td th:text="${customer.customerEmail}"></td>
+                    <td th:text="${customer.customerAddress}"></td>
+                    <td>
+                        <a th:href="@{/customer/detail/{id}(id=${customer.customerId})}"><span
+                                class="fas fa-eye text-warning"></span></a>
+                    </td>
+                    <td>
+                        <a th:href="@{/customer/delete/{id}(id=${customer.customerId})}"><span
+                                class="fas fa-trash text-danger"></span></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            <a th:href="@{'/customer'(page=${customerList.number - 1}, inputSearch=${inputSearch})}" th:if="${customerList.hasPrevious()}">Previous</a>
+            <span th:text="${customerList.number + 1}"></span>/<span th:text="${customerList.totalPages}"></span>
+            <a th:href="@{'/customer'(page=${customerList.number + 1}, inputSearch=${inputSearch})}" th:if="${customerList.hasNext()}">Next</a>
+        </div>
+        <th:block th:if="${messInform} != null">
+            <div class="alert alert-success col-4 d-flex justify-content-center" role="alert" th:text="${messInform}"></div>
+        </th:block>
+    </div>
+</div>
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+<footer th:replace="~{/layout/layout::footer}"></footer>
+<script>
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 2000);
+</script>
+</body>
+</html>

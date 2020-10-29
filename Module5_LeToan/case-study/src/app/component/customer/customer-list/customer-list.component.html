@@ -1,0 +1,40 @@
+<div class="container-fluid">
+  <div class="body row position-relative" style="top: 160px">
+    <div class="text-center col-12">
+      <a class="btn btn-outline-dark float-left" role="button" [routerLink]="['/customer/create']">Create New Customer</a>
+      <h2>List of Customer</h2>
+    </div>
+    <table class="table table-sm table-bordered table-hover">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Email</th>
+        <th scope="col">Address</th>
+        <th scope="col">Detail</th>
+        <th scope="col">Delete</th>
+      </tr>
+      </thead>
+      <tbody id="myTable">
+      <tr *ngFor="let customer of customerList; index as i">
+        <td scope="row">{{customer.customerId}}</td>
+        <td>{{customer.customerName}}</td>
+        <td *ngIf="customer.customerGender">Male</td>
+        <td *ngIf="!customer.customerGender">Female</td>
+        <td>{{customer.customerEmail}}</td>
+        <td>{{customer.customerAddress}}</td>
+        <td><a [routerLink]="['/customer/detail', customer.customerId]">Detail</a></td>
+        <td>
+<!--          <button type="button" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#modelId" id="test" (click)="deleteCustomer(i)">-->
+<!--            Delete-->
+<!--          </button>-->
+          <input type="button" (click)="deleteCustomer(i)" value="Delete">
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+

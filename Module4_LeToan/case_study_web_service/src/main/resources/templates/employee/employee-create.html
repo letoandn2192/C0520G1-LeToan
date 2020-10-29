@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout/layout::header}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="~{/layout/layout::title}"></div>
+<nav th:replace="~{/layout/layout::navbar}"></nav>
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+<div class="container-fluid">
+    <div class="body position-relative" style="top: 160px">
+        <form method="post" th:action="@{/employee/save}" th:object="${employee}">
+            <fieldset>
+                <legend class="text-center">Create New Employee</legend>
+                <div class="form-group form-inline">
+                    <label for="id" class="col-2 d-flex justify-content-start">Id</label>
+                    <input type="text" class="col-8 form-control" id="id" th:field="*{employeeId}">
+                    <span style="color: red" th:field="*{#fields.hasErrors('employeeId')}" th:errors="*{employeeId}"></span>
+                </div>
+                <div class="form-group form-inline">
+                    <label for="name" class="col-2 d-flex justify-content-start">Name</label>
+                    <input type="text" class="col-8 form-control" id="name" th:field="*{employeeName}">
+                    <span style="color: red" th:field="*{#fields.hasErrors('employeeName')}" th:errors="*{employeeName}"></span>
+                </div>
+                <div class="form-group form-inline">
+                    <label for="birthday" class="col-2 d-flex justify-content-start">Birthday</label>
+                    <input type="text" class="col-8 form-control" id="birthday" th:field="*{employeeBirthday}" autocomplete="off">
+                    <span style="color: red" th:field="*{#fields.hasErrors('employeeBirthday')}" th:errors="*{employeeBirthday}"></span>
+                </div>
+                <div class="form-group form-inline">
+                    <label for="idNumber" class="col-2 d-flex justify-content-start">Identify Number</label>
+                    <input type="text" class="col-8 form-control" id="idNumber" th:field="*{employeeIdCard}">
+                    <span style="color: red" th:field="*{#fields.hasErrors('employeeBirthday')}" th:errors="*{employeeBirthday}"></span>
+                </div>
+                <div class="form-group form-inline">
+                    <label for="salary" class="col-2 d-flex justify-content-start">Salary</label>
+                    <input type="text" class="col-8 form-control" id="salary" th:field="*{employeeSalary}">
+                    <span style="color: red" th:field="*{#fields.hasErrors('employeeSalary')}" th:errors="*{employeeSalary}"></span>
+                </div>
+                <div class="form-group form-inline">
+                    <label for="phone" class="col-2 d-flex justify-content-start">Phone</label>
+                    <input type="text" class="col-8 form-control" id="phone" th:field="*{employeePhone}">
+                    <span style="color: red" th:field="*{#fields.hasErrors('employeePhone')}" th:errors="*{employeePhone}"></span>
+                </div>
+                <div class="form-group form-inline">
+                    <label for="email" class="col-2 d-flex justify-content-start">Email</label>
+                    <input type="text" class="col-8 form-control" id="email" th:field="*{employeeEmail}">
+                    <span style="color: red" th:field="*{#fields.hasErrors('employeeEmail')}" th:errors="*{employeeEmail}"></span>
+                </div>
+                <div class="form-group form-inline">
+                    <label for="address" class="col-2 d-flex justify-content-start">Address</label>
+                    <input type="text" class="col-8 form-control" id="address" th:field="*{employeeAddress}">
+                    <span style="color: red" th:field="*{#fields.hasErrors('employeeAddress')}" th:errors="*{employeeAddress}"></span>
+                </div>
+                <div class="form-group form-inline">
+                    <label for="position" class="col-2 d-flex justify-content-start">Position</label>
+                    <select class="col-8 form-control" id="position" th:field="*{position}">
+                        <option th:each="position: ${positionList}" th:text="${position.positionName}" th:value="${position.positionId}"></option>
+                    </select>
+                </div>
+                <div class="form-group form-inline">
+                    <label for="education" class="col-2 d-flex justify-content-start">Education</label>
+                    <select class="col-8 form-control" id="education" th:field="*{educationDegree}">
+                        <option th:each="education: ${educationDegreeList}" th:value="${education.educationDegreeId}" th:text="${education.educationDegreeName}"></option>
+                    </select>
+                </div>
+                <div class="form-group form-inline">
+                    <label for="division" class="col-2 d-flex justify-content-start">Division</label>
+                    <select class="col-8 form-control" id="division" th:field="*{division}">
+                        <option th:each="division: ${divisionList}" th:value="${division.divisionId}" th:text="${division.divisionName}"></option>
+                    </select>
+                </div>
+
+                <div class="form-group form-inline">
+                    <div class="col-2"></div>
+                    <div class="col-8 pl-0">
+                        <input type="submit" value="Create" class="btn btn-outline-dark mr-2">
+                        <a class="btn btn-outline-dark" href="/employee">Back</a>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+<footer th:replace="~{/layout/layout::footer}"></footer>
+<script>
+    $( document ).ready(function() {
+        $("#birthday").datepicker({ dateFormat: "dd/mm/yy" });
+    });
+</script>
+</body>
+</html>

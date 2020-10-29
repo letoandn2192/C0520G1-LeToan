@@ -1,5 +1,8 @@
 package vn.codegym.model;
 
+import com.sun.org.apache.xpath.internal.objects.XNull;
+import org.springframework.boot.context.properties.bind.DefaultValue;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -28,6 +31,10 @@ public class Question {
     @ManyToOne
     @JoinColumn(name = "UserId")
     private User user;
+
+//    @ManyToOne
+//    @JoinColumn(name = "UserId")
+//    private User feedBacker = null;
 
     public long getQuestionId() {
         return questionId;
