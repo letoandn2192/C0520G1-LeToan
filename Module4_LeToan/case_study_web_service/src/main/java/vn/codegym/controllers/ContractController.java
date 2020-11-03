@@ -3,6 +3,8 @@ package vn.codegym.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,101 +21,57 @@ import vn.codegym.service.CustomerService;
 import vn.codegym.service.EmployeeService;
 import vn.codegym.service.ServicesService;
 
-@Controller
+import java.util.List;
+
+@RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/contract")
 public class ContractController {
     @Autowired
     private ContractService contractService;
 
-    @Autowired
-    private CustomerService customerService;
-
-    @Autowired
-    private EmployeeService employeeService;
-
-    @Autowired
-    private ServicesService servicesService;
-
-    @ModelAttribute("employeeList")
-    public Iterable<Employee> getEmployeeList() {
-        return employeeService.findAll();
-    }
-
-    @ModelAttribute("customerList")
-    public Iterable<Customer> getCustomerList() {
-        return customerService.findAll();
-    }
-
-    @ModelAttribute("serviceList")
-    public Iterable<Services> getServiceList() {
-        return servicesService.findAll();
-    }
 
     @GetMapping
-    public String getContractList(@PageableDefault(value = 5)Pageable pageable, Model model) {
-        model.addAttribute("contractList", contractService.findAll(pageable));
-        return "contract/contract-list";
-    }
-
-    @GetMapping("/create")
-    public ModelAndView showCreateContractForm() {
-        ModelAndView modelAndView = new ModelAndView("contract/contract-create");
-        modelAndView.addObject("contract", new Contract());
-        return modelAndView;
-    }
-
-    @PostMapping("/save")
-    public String saveNewContract(@Validated Contract contract, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-        new Contract().validate(contract, bindingResult);
-        if (bindingResult.hasErrors()) {
-            return "contract/contract-create";
-        } else {
-            contractService.save(contract);
-            redirectAttributes.addFlashAttribute("messInform", "Create Successful!!!");
-            return "redirect:/contract";
+    public ResponseEntity<List<Contract>> getContractList() {
+        List<Contract> contractList = (List<Contract>) contractService.findAll();
+        if (contractList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
+        return new ResponseEntity<>(contractList, HttpStatus.OK);
     }
 
     @GetMapping("/detail/{id}")
-    public ModelAndView showContractInformation(@PathVariable("id") long id) {
+    public ResponseEntity<Contract> getContractInformation(@PathVariable("id") long id) {
         Contract contract = contractService.findById(id);
-        ModelAndView modelAndView = new ModelAndView("contract/contract-detail");
-        modelAndView.addObject("contract", contract);
-        return modelAndView;
-    }
-
-    @GetMapping("/edit/{id}")
-    public ModelAndView showEditContractForm(@PathVariable("id") long id) {
-        Contract contract = contractService.findById(id);
-        ModelAndView modelAndView = new ModelAndView("contract/contract-edit");
-        modelAndView.addObject("contract", contract);
-        return modelAndView;
-    }
-
-    @PostMapping("/update")
-    public String updateContractInformation(@Validated Contract contract, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-        new Contract().validate(contract, bindingResult);
-        if (bindingResult.hasErrors()) {
-            return "contract/contract-edit";
-        } else {
-            contractService.save(contract);
-            redirectAttributes.addFlashAttribute("messInform", "Update Successful!!!");
-            return "redirect:/contract";
+        if (contract == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        return new ResponseEntity<>(contract, HttpStatus.OK);
     }
 
-    @GetMapping("delete/{id}")
-    public ModelAndView showDeleteContractForm(@PathVariable("id") long id) {
+    @PostMapping("/create")
+    public ResponseEntity<Void> createNewContract(@RequestBody Contract contract) {
+        contractService.save(contract);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PatchMapping("/edit/{id}")
+    public ResponseEntity<Void> updateContract(@RequestBody Contract contract, @PathVariable("id") long id) {
+        Contract currentContract = contractService.findById(id);
+        if (currentContract == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        contractService.save(contract);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteContractInformation(@PathVariable("id") long id) {
         Contract contract = contractService.findById(id);
-        ModelAndView modelAndView = new ModelAndView("contract/contract-delete");
-        modelAndView.addObject("contract", contract);
-        return modelAndView;
-    }
-
-    @PostMapping("/confirm")
-    public String deleteContractInformation(Contract contract, RedirectAttributes redirectAttributes) {
+        if (contract == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         contractService.deleteById(contract.getContractId());
-        redirectAttributes.addFlashAttribute("messInform", "Delete Successful!!!");
-        return "redirect:/contract";
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

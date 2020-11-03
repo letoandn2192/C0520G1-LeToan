@@ -13,7 +13,7 @@
         <tbody>
         <tr>
           <td scope="row">ID</td>
-          <td>{{currentCustomer.customerId}}</td>
+          <td>{{currentCustomer.customerId | IdConvert: 'KH'}}</td>
         </tr>
         <tr>
           <td scope="row">Name</td>
@@ -44,10 +44,10 @@
           <td scope="row">Address</td>
           <td>{{currentCustomer.customerAddress}}</td>
         </tr>
-        <!--      <tr>-->
-        <!--        <td scope="row">Type Customer</td>-->
-        <!--        <td>{{customer.customerType.customerTypeName}}</td>-->
-        <!--      </tr>-->
+              <tr>
+          <td scope="row">Type Customer</td>
+          <td>{{currentCustomer.customerType.customerTypeName}}</td>
+        </tr>
         </tbody>
       </table>
       <div class="row text-center col-12">

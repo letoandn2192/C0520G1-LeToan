@@ -1,6 +1,6 @@
 import {CustomerType} from './CustomerType';
 
-export interface Customer {
+export class Customer {
   customerId: number;
   customerName: string;
   customerBirthday: string;

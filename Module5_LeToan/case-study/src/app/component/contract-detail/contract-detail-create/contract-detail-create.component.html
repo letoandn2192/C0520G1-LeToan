@@ -1,0 +1,38 @@
+<div class="container-fluid">
+  <div class="body position-relative" style="top: 160px">
+    <form [formGroup]="contractDetailCreateForm" (ngSubmit)="createContractDetail()">
+      <fieldset>
+        <legend class="text-center">Create New Contract Detail</legend>
+        <div class="form-group form-inline">
+          <label for="contract" class="col-2 d-flex justify-content-start">Contract Id</label>
+          <select class="col-8 form-control" id="contract" formControlName="contract">
+            <option value="">---Select---</option>
+            <option *ngFor="let contract of contractList" [ngValue]="contract">{{contract.contractId}}</option>
+          </select>
+        </div>
+
+        <div class="form-group form-inline">
+          <label for="quantity" class="col-2 d-flex justify-content-start">Quantity</label>
+          <input type="text" class="col-8 form-control" id="quantity" formControlName="contractDetailQuantity">
+        </div>
+
+        <div class="form-group form-inline">
+          <label for="attachService" class="col-2 d-flex justify-content-start">Attach Service</label>
+          <select class="col-8 form-control" id="attachService" formControlName="attachService">
+            <option value="">---Select---</option>
+            <option *ngFor="let attachService of attachServiceList" [ngValue]="attachService">{{attachService.attachServiceName}}</option>
+          </select>
+        </div>
+
+        <div class="form-group form-inline">
+          <div class="col-2"></div>
+          <div class="col-7 pl-0">
+            <input type="submit" value="Create" class="btn btn-outline-dark mr-2" [disabled]="contractDetailCreateForm.invalid">
+            <a class="btn btn-outline-dark" [routerLink]="['/contract']">Back</a>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+

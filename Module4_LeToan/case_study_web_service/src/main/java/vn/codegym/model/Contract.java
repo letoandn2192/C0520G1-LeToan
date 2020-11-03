@@ -1,5 +1,7 @@
 package vn.codegym.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -15,32 +17,28 @@ public class Contract implements Validator{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long contractId;
-
-//    @ValidateFutureDate
     private String contractStartDate;
-
-//    @ValidateFutureDate
     private String contractEndDate;
-
-//    @Positive
     private double contractDeposit;
-
-//    @Positive
     private double contractTotalMoney;
 
     @ManyToOne
     @JoinColumn(name = "employeeId")
+    @JsonIgnoreProperties("contracts")
     private Employee employee;
 
     @ManyToOne
     @JoinColumn(name = "customerId")
+    @JsonIgnoreProperties("contracts")
     private Customer customer;
 
     @ManyToOne
     @JoinColumn(name = "serviceId")
+    @JsonIgnoreProperties("contracts")
     private Services service;
 
     @OneToMany(mappedBy = "contract", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("contract")
     private Set<ContractDetail> contractDetails;
 
     public long getContractId() {

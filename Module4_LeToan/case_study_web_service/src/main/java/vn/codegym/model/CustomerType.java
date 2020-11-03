@@ -1,12 +1,19 @@
 package vn.codegym.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table
+//@JsonIdentityInfo(
+//        generator = ObjectIdGenerators.PropertyGenerator.class,
+//        property = "customerTypeId")
+//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class,property="@customerTypeId", scope = Customer.class)
 public class CustomerType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,7 +21,7 @@ public class CustomerType {
     private String customerTypeName;
 
     @OneToMany(mappedBy = "customerType", cascade = CascadeType.ALL)
-//    @JsonBackReference
+    @JsonIgnoreProperties("customerType")
     private Set<Customer> customers;
 
     public long getCustomerTypeId() {

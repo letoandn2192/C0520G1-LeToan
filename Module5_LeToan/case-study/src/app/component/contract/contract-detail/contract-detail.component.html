@@ -1,0 +1,54 @@
+<div class="container-fluid">
+  <div class="body row position-relative" style="top: 160px" *ngIf="currentContract">
+    <div class="text-center col-12">
+      <h2>Contract's Information Detail</h2>
+    </div>
+    <table class="table table-sm table-bordered table-hover">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Information</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td scope="row">ID</td>
+        <td>{{currentContract.contractId}}</td>
+      </tr>
+      <tr>
+        <td scope="row">Start Date</td>
+        <td>{{currentContract.contractStartDate}}</td>
+      </tr>
+      <tr>
+        <td scope="row">End Date</td>
+        <td>{{currentContract.contractEndDate}}</td>
+      </tr>
+      <tr>
+        <td scope="row">Deposit</td>
+        <td>{{currentContract.contractDeposit}}</td>
+      </tr>
+      <tr>
+        <td scope="row">Total Money</td>
+        <td>{{currentContract.contractTotalMoney}}</td>
+      </tr>
+      <tr>
+        <td scope="row">Customer</td>
+        <td>{{currentContract.customer.customerName}}</td>
+      </tr>
+      <tr>
+        <td scope="row">Employee</td>
+        <td>{{currentContract.employee.employeeName}}</td>
+      </tr>
+      <tr>
+        <td scope="row">Service</td>
+        <td>{{currentContract.service.serviceName}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="row text-center col-12">
+      <a [routerLink]="['/contract/edit', currentContract.contractId]" role="button"
+         class="btn btn-outline-dark mr-2">Edit <span class="fas fa-pen"></span></a>
+      <a [routerLink]="['/contract']" role="button" class="btn btn-outline-dark float-left">Back</a>
+    </div>
+  </div>
+</div>

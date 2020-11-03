@@ -1,5 +1,8 @@
 package vn.codegym.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -12,6 +15,7 @@ public class ServiceType {
     private String serviceTypeName;
 
     @OneToMany(mappedBy = "serviceType", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("serviceType")
     private Set<Services> services;
 
     public long getServiceTypeId() {

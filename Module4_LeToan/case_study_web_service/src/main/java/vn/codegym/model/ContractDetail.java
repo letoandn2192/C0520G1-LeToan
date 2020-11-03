@@ -1,5 +1,7 @@
 package vn.codegym.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.security.auth.login.Configuration;
 import javax.validation.constraints.Positive;
@@ -16,10 +18,12 @@ public class ContractDetail {
 
     @ManyToOne
     @JoinColumn(name = "contractId")
+    @JsonIgnoreProperties("contractDetails")
     private Contract contract;
 
     @ManyToOne
     @JoinColumn(name = "attachDetailId")
+    @JsonIgnoreProperties("contractDetailGroup")
     private AttachService attachService;
 
     public long getContractDetailId() {

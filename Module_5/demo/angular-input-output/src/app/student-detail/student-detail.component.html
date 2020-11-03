@@ -1,0 +1,18 @@
+<div class="card border-info">
+  <h3 class="card-header bg-info">Child Component</h3>
+  <div class="card-body">
+    <h4 class="card-title">Student Detail</h4>
+    <div *ngIf="studentDetail; else elseBlock">
+      <div>
+          Name: {{studentDetail.name}}
+      </div>
+      <div>
+        Age: {{studentDetail.age}}
+      </div>
+    </div>
+
+    <ng-template #elseBlock>
+      <p style="color: red">No data</p>
+    </ng-template>
+  </div>
+</div>

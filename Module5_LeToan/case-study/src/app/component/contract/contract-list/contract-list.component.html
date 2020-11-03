@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <div class="body row position-relative" style="top: 160px">
+    <div class="text-center col-12">
+      <a class="btn btn-outline-dark float-left" role="button" [routerLink]="['/contract/create']">Create New
+      Contract</a>
+      <a class="btn btn-outline-dark float-left" role="button" [routerLink]="['/contract-detail/create']">Create New
+        Contract Detail</a>
+      <h2>List of Contract</h2>
+    </div>
+    <table class="table table-sm table-bordered table-hover">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col" (click)="sort('contractId')">Id</th>
+        <th scope="col" (click)="sort('contractStartDate')">Start Date</th>
+        <th scope="col" (click)="sort('contractEndDate')">End Date</th>
+        <th scope="col" (click)="sort('contractDeposit')">Deposit</th>
+        <th scope="col" (click)="sort('contractTotalMoney')">Total Money</th>
+        <th scope="col">Detail</th>
+        <th scope="col">Delete</th>
+      </tr>
+      </thead>
+      <tbody id="myTable">
+      <tr
+        *ngFor="let contract of contractList | orderBy: key : reverse | paginate: { itemsPerPage: 5, currentPage: page }">
+        <td scope="row">{{contract.contractId}}</td>
+        <td>{{contract.contractStartDate}}</td>
+        <td>{{contract.contractEndDate}}</td>
+        <td>{{contract.contractDeposit}}</td>
+        <td>{{contract.contractTotalMoney}}</td>
+        <td><a [routerLink]="['/contract/detail', contract.contractId]"><span class="fas fa-eye"></span></a></td>
+        <td>
+          <input type="button" (click)="deleteContract(contract.contractId)" value="Delete" class="btn btn-outline-danger">
+      </tr>
+      </tbody>
+    </table>
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+  </div>
+</div>
+
+
+

@@ -1,7 +1,7 @@
 package vn.codegym.model;
 
+import com.fasterxml.jackson.annotation.*;
 import vn.codegym.common.validate_birthday.ValidateBirthdayGreater18;
-import vn.codegym.common.validate_employee_id.ValidateEmployeeId;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -16,8 +16,8 @@ public class Employee {
     public interface EditCheck {};
 
     @Id
-    @ValidateEmployeeId(groups = IdCheck.class)
-    private String employeeId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long employeeId;
 
     @NotEmpty(message = "Name not be empty!!!", groups = EditCheck.class)
     private String employeeName;
@@ -41,29 +41,34 @@ public class Employee {
     private String employeeAddress;
 
     @ManyToOne
-    @JoinColumn(name = "positionId")
-    private Position position;
-
-    @ManyToOne
     @JoinColumn(name = "divisionId")
+    @JsonIgnoreProperties("employees")
     private Division division;
 
     @ManyToOne
+    @JoinColumn(name = "positionId")
+    @JsonIgnoreProperties("employees")
+    private Position position;
+
+    @ManyToOne
     @JoinColumn(name = "educationDegreeId")
+    @JsonIgnoreProperties("employees")
     private EducationDegree educationDegree;
 
     @ManyToOne
     @JoinColumn(name = "userName")
+    @JsonIgnore
     private User user;
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("employee")
     private Set<Contract> contracts;
 
-    public String getEmployeeId() {
+    public long getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(String employeeId) {
+    public void setEmployeeId(long employeeId) {
         this.employeeId = employeeId;
     }
 

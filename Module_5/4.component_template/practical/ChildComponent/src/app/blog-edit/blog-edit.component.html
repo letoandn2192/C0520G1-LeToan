@@ -31,6 +31,7 @@
   <div *ngIf="postForm.get('blogCategory').invalid && postForm.get('blogCategory').touched" style="color: red">
     Category is required
   </div>
+  <input type="text" formControlName="blogCategory">
   <button type="submit">Submit</button>
 </form>
 

@@ -1,5 +1,7 @@
 package vn.codegym.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -15,7 +17,8 @@ public class AttachService {
     private String attachServiceStatus;
 
     @OneToMany(mappedBy = "attachService", cascade = CascadeType.ALL)
-    private Set<ContractDetail> contractDetails;
+    @JsonIgnoreProperties("attachService")
+    private Set<ContractDetail> contractDetailGroup;
 
     public long getAttachServiceId() {
         return attachServiceId;
@@ -57,11 +60,11 @@ public class AttachService {
         this.attachServiceStatus = attachServiceStatus;
     }
 
-    public Set<ContractDetail> getContractDetails() {
-        return contractDetails;
+    public Set<ContractDetail> getContractDetailGroup() {
+        return contractDetailGroup;
     }
 
-    public void setContractDetails(Set<ContractDetail> contractDetails) {
-        this.contractDetails = contractDetails;
+    public void setContractDetailGroup(Set<ContractDetail> contractDetails) {
+        this.contractDetailGroup = contractDetails;
     }
 }

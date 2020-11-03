@@ -1,0 +1,66 @@
+<div class="container-fluid">
+  <div class="body row position-relative" style="top: 160px" *ngIf="currentEmployee">
+    <div class="text-center col-12">
+      <h2>Customer's Information Detail</h2>
+    </div>
+    <table class="table table-sm table-bordered table-hover">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Information</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td scope="row">ID</td>
+        <td>{{currentEmployee.employeeId | IdConvert: 'KH'}}</td>
+      </tr>
+      <tr>
+        <td scope="row">Name</td>
+        <td>{{currentEmployee.employeeName}}</td>
+      </tr>
+      <tr>
+        <td scope="row">Birthday</td>
+        <td>{{currentEmployee.employeeBirthday}}</td>
+      </tr>
+      <tr>
+        <td scope="row">Identify Number</td>
+        <td>{{currentEmployee.employeeIdCard}}</td>
+      </tr>
+      <tr>
+        <td scope="row">Salary</td>
+        <td>{{currentEmployee.employeeSalary}}</td>
+      </tr>
+      <tr>
+        <td scope="row">Phone</td>
+        <td>{{currentEmployee.employeePhone}}</td>
+      </tr>
+      <tr>
+        <td scope="row">Email</td>
+        <td>{{currentEmployee.employeeEmail}}</td>
+      </tr>
+      <tr>
+        <td scope="row">Address</td>
+        <td>{{currentEmployee.employeeAddress}}</td>
+      </tr>
+      <tr>
+        <td scope="row">Position</td>
+        <td>{{currentEmployee.position.positionName}}</td>
+      </tr>
+      <tr>
+        <td scope="row">Education</td>
+        <td>{{currentEmployee.educationDegree.educationDegreeName}}</td>
+      </tr>
+      <tr>
+        <td scope="row">Division</td>
+        <td>{{currentEmployee.division.divisionName}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="row text-center col-12">
+      <a [routerLink]="['/employee/edit', currentEmployee.employeeId]" role="button"
+         class="btn btn-outline-dark mr-2">Edit <span class="fas fa-pen"></span></a>
+      <a [routerLink]="['/employee']" role="button" class="btn btn-outline-dark float-left">Back</a>
+    </div>
+  </div>
+</div>

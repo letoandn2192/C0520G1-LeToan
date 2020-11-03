@@ -1,7 +1,6 @@
 package vn.codegym.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 import vn.codegym.common.validate_birthday.ValidateBirthdayGreater18;
 //import vn.codegym.common.validate_customer_id.ValidateCustomerId;
 
@@ -12,6 +11,10 @@ import java.util.Set;
 
 @Entity
 @Table
+//@JsonIdentityInfo(
+//        generator = ObjectIdGenerators.PropertyGenerator.class,
+//        property = "customerId")
+//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class,property="@customerId", scope = Customer.class)
 public class Customer {
     public interface EditCheck {};
     public interface IdCheck {};
@@ -41,12 +44,11 @@ public class Customer {
 
     @ManyToOne
     @JoinColumn(name = "customerTypeId")
-//    JsonIgnore khong chuyen doi du lieu sang json
-    @JsonIgnore
-//    @JsonBackReference
+    @JsonIgnoreProperties("customers")
     private CustomerType customerType;
 
     @OneToMany(mappedBy = "customer", cascade =  CascadeType.ALL)
+    @JsonIgnoreProperties("customer")
     private Set<Contract> contracts;
 
     public long getCustomerId() {

@@ -17,5 +17,4 @@ export class CustomerDetailComponent implements OnInit {
     this.customerService.getCustomerById(id)
       .subscribe(data => this.currentCustomer = data, error => { console.log(error); this.currentCustomer = null; });
   }
-
 }

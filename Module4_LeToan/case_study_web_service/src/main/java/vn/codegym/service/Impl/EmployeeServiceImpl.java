@@ -18,17 +18,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Page<Employee> findByIdAndName(String input, Pageable pageable) {
-        return employeeRepository.findCustomerByEmployeeIdContainingOrEmployeeNameContaining(input, input, pageable);
-    }
-
-    @Override
     public Iterable<Employee> findAll() {
         return employeeRepository.findAll();
     }
 
     @Override
-    public Employee findById(String id) {
+    public Employee findById(long id) {
         return employeeRepository.findById(id).orElse(null);
     }
 
@@ -38,7 +33,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(long id) {
         employeeRepository.deleteById(id);
     }
 }

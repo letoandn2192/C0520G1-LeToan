@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <div class="body row position-relative" style="top: 160px">
+    <div class="text-center col-12">
+      <a class="btn btn-outline-dark float-left" role="button" [routerLink]="['/service/create']">Create New
+        Service</a>
+      <h2>List of Service</h2>
+    </div>
+    <table class="table table-sm table-bordered table-hover">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col" (click)="sort('serviceId')">Id</th>
+        <th scope="col" (click)="sort('serviceName')">Name</th>
+        <th scope="col" (click)="sort('serviceArea')">Area</th>
+        <th scope="col" (click)="sort('serviceCost')">Cost</th>
+        <th scope="col" (click)="sort('serviceMaxPerson')">Max Person</th>
+        <th scope="col">Detail</th>
+        <th scope="col">Delete</th>
+      </tr>
+      </thead>
+      <tbody id="myTable">
+      <tr *ngFor="let service of serviceList | orderBy: key : reverse | paginate: { itemsPerPage: 5, currentPage: page }">
+        <td scope="row">{{service.serviceId | IdConvert: 'DV'}}</td>
+        <td>{{service.serviceName}}</td>
+        <td>{{service.serviceArea}}</td>
+        <td>{{service.serviceCost}}</td>
+        <td>{{service.serviceMaxPerson}}</td>
+        <td><a [routerLink]="['/service/detail', service.serviceId]"><span class="fas fa-eye"></span></a></td>
+        <td>
+          <input type="button" (click)="deleteService(service.serviceId)" value="Delete" class="btn btn-outline-danger">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+  </div>
+</div>
+
+
+

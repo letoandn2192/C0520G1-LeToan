@@ -1,0 +1,47 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
+<!--  <legend>User Registration</legend>-->
+<!--  <fieldset>-->
+  <p *ngIf="registerForm.invalid && registerForm.touched">Please fill information</p>
+    <div>
+      <label>Email</label>
+      <input type="text" formControlName="email">
+      <p *ngIf="registerForm.controls.email.value == ''">(*)</p>
+      <p *ngIf="registerForm.controls.email.invalid && registerForm.controls.email.touched">Email is invalid</p>
+    </div>
+    <div formGroupName="pwGroup">
+    <div>
+      <label>Password</label>
+      <input type="password" formControlName="password">
+      <p *ngIf="registerForm.controls.pwGroup.invalid && registerForm.controls.pwGroup.touched">Password is invalid</p>
+    </div>
+    <div>
+      <label>Confirm Password</label>
+      <input type="password"formControlName="confirmPassword">
+      <p *ngIf="registerForm.hasError('confirmPassword')">Password is invalid</p>
+      <p *ngIf="registerForm.controls.pwGroup.invalid && registerForm.controls.pwGroup.touched">Password is invalid</p>
+    </div>
+    </div>
+    <div>
+      <label>Age</label>
+      <input type="text" formControlName="age">
+      <p *ngIf="registerForm.controls.age.invalid && registerForm.controls.age.touched">Age is invalid</p>
+    </div>
+    <div>
+      <label>Gender</label>
+      <label><input type="radio" value="male" formControlName="gender">Male</label>
+      <label><input type="radio" value="female" formControlName="gender">Female</label>
+      <p *ngIf="registerForm.controls.gender.invalid && registerForm.controls.gender.touched">Gender is invalid</p>
+    </div>
+    <div>
+      <div>
+        <label>Phone</label>
+        <input type="text" formControlName="phone">
+        <p *ngIf="registerForm.controls.phone.invalid && registerForm.controls.phone.touched">Email is invalid</p>
+      </div>
+    </div>
+    <div>
+      <button>Submit</button>
+    </div>
+<!--  </fieldset>-->
+</form>
+<!--<h2>Hello</h2>-->

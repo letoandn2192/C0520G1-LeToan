@@ -1,0 +1,37 @@
+<div class="container-fluid">
+  <div class="body row position-relative" style="top: 160px">
+    <div class="text-center col-12">
+      <a class="btn btn-outline-dark float-left" role="button" [routerLink]="['/employee/create']">Create New
+        Employee</a>
+      <h2>List of Employee</h2>
+    </div>
+    <table class="table table-sm table-bordered table-hover">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col" (click)="sort('employeeId')">Id</th>
+        <th scope="col" (click)="sort('employeeName')">Name</th>
+        <th scope="col" (click)="sort('employeeBirthday')">Birthday</th>
+        <th scope="col" (click)="sort('employeeEmail')">Email</th>
+        <th scope="col" (click)="sort('employeeAddress')">Address</th>
+        <th scope="col">Detail</th>
+        <th scope="col">Delete</th>
+      </tr>
+      </thead>
+      <tbody id="myTable">
+      <tr
+        *ngFor="let employee of employeeList | orderBy: key : reverse | paginate: { itemsPerPage: 5, currentPage: page }">
+        <td scope="row">{{employee.employeeId | IdConvert: 'NV'}}</td>
+        <td>{{employee.employeeName}}</td>
+        <td>{{employee.employeeBirthday}}</td>
+        <td>{{employee.employeeEmail}}</td>
+        <td>{{employee.employeeAddress}}</td>
+        <td><a [routerLink]="['/employee/detail', employee.employeeId]"><span class="fas fa-eye"></span></a></td>
+        <td>
+          <input type="button" (click)="deleteEmployee(employee.employeeId)" value="Delete" class="btn btn-outline-danger">
+      </tr>
+      </tbody>
+    </table>
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+  </div>
+</div>
+

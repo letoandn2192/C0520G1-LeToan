@@ -36,10 +36,9 @@ export class BlogEditComponent implements OnInit {
     this.postService.getPostById(id).subscribe(
       next => {
         this.post = next;
-        // console.log(this.post);
+        console.log(next);
         this.postForm.patchValue(this.post);
-        // this.postForm.get('blogCategory').patchValue(this.post.blogCategory);
-        // console.log(this.postForm);
+        console.log(this.postForm.value.blogCategory);
       },
       error => {
         console.log(error);

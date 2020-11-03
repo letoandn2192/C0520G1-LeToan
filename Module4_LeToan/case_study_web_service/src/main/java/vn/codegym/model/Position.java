@@ -1,5 +1,7 @@
 package vn.codegym.model;
 
+import com.fasterxml.jackson.annotation.*;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -12,6 +14,7 @@ public class Position {
     private String positionName;
 
     @OneToMany(mappedBy = "position", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("position")
     private Set<Employee> employees;
 
     public long getPositionId() {

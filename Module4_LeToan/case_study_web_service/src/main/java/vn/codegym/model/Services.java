@@ -1,6 +1,7 @@
 package vn.codegym.model;
 
-import vn.codegym.common.validate_service_id.ValidateServiceId;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -16,8 +17,8 @@ public class Services {
     public interface HouseCheck {};
     public interface VillaCheck {};
     @Id
-    @ValidateServiceId(groups = IdCheck.class)
-    private String serviceId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long serviceId;
 
     @NotEmpty(message = "Name not be empty!!!", groups = {VillaCheck.class, HouseCheck.class, RoomCheck.class})
     private String serviceName;
@@ -47,20 +48,23 @@ public class Services {
 
     @ManyToOne
     @JoinColumn(name = "serviceTypeId")
+    @JsonIgnoreProperties("services")
     private ServiceType serviceType;
 
     @ManyToOne
     @JoinColumn(name = "rentTypeId")
+    @JsonIgnoreProperties("services")
     private RentType rentType;
 
     @OneToMany(mappedBy = "service", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("service")
     private Set<Contract> contracts;
 
-    public String getServiceId() {
+    public long getServiceId() {
         return serviceId;
     }
 
-    public void setServiceId(String serviceId) {
+    public void setServiceId(long serviceId) {
         this.serviceId = serviceId;
     }
 

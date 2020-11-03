@@ -1,5 +1,7 @@
 package vn.codegym.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -13,6 +15,7 @@ public class RentType {
     private double rentTypeCost;
 
     @OneToMany(mappedBy = "rentType", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("rentType")
     private Set<Services> services;
 
     public long getRentTypeId() {

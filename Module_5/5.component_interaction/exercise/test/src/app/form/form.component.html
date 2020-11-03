@@ -1,0 +1,19 @@
+<form (ngSubmit)="onSubmit();" [formGroup]="formSignUp">
+  <input placeholder="Email" formControlName="email">
+  <br>
+  <br>
+  <input type="password" placeholder="Password" formControlName="password">
+  <br>
+  <br>
+  <select formControlName="subject">
+    <option *ngFor="let subject of subjectList" [ngValue]="subject">{{subject.subjectName}}</option>
+  </select>
+  <br>
+  <br>
+<!--  <div formGroupName="subject">-->
+<!--    <label><input type="checkbox" name="NodeJS" formControlName="nodeJS">NodeJS</label>-->
+<!--    <label><input type="checkbox" name="Angular" formControlName="angular">Angular</label>-->
+<!--    <label><input type="checkbox" name="ReactJS" formControlName="reactJS">ReactJS</label>-->
+<!--  </div>-->
+  <button>Submit</button>
+</form>

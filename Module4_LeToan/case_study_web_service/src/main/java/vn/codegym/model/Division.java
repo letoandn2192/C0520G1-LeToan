@@ -1,6 +1,6 @@
 package vn.codegym.model;
 
-import org.springframework.data.annotation.TypeAlias;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -14,6 +14,7 @@ public class Division {
     private String divisionName;
 
     @OneToMany(mappedBy = "division", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("division")
     private Set<Employee> employees;
 
     public long getDivisionId() {

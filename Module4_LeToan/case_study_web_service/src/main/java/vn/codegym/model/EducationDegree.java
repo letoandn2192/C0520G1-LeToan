@@ -1,10 +1,16 @@
 package vn.codegym.model;
 
+import com.fasterxml.jackson.annotation.*;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table
+//@JsonIdentityInfo(
+//        generator = ObjectIdGenerators.PropertyGenerator.class,
+//        property = "educationDegreeId")
+////@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class,property="@educationDegreeId", scope = EducationDegree.class)
 public class EducationDegree {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,6 +18,7 @@ public class EducationDegree {
     private String educationDegreeName;
 
     @OneToMany(mappedBy = "educationDegree", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("educationDegree")
     private Set<Employee> employees;
 
     public long getEducationDegreeId() {

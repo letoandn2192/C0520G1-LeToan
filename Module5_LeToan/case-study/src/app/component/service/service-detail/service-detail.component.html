@@ -1,0 +1,66 @@
+<div class="container-fluid">
+  <div class="body row position-relative" style="top: 160px" *ngIf="currentService">
+    <div class="text-center col-12">
+      <h2>Customer's Information Detail</h2>
+    </div>
+    <table class="table table-sm table-bordered table-hover">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Information</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td scope="row">ID</td>
+        <td>{{currentService.serviceId | IdConvert: 'DV'}}</td>
+      </tr>
+      <tr>
+        <td scope="row">Name</td>
+        <td>{{currentService.serviceName}}</td>
+      </tr>
+      <tr>
+        <td scope="row">Area</td>
+        <td>{{currentService.serviceArea}}</td>
+      </tr>
+      <tr>
+        <td scope="row">Cost</td>
+        <td>{{currentService.serviceCost}}</td>
+      </tr>
+      <tr>
+        <td scope="row">Rent Type</td>
+        <td>{{currentService.rentType.rentTypeName}}</td>
+      </tr>
+      <tr>
+        <td scope="row">Service Type</td>
+        <td>{{currentService.serviceType.serviceTypeName}}</td>
+      </tr>
+      <tr>
+        <td scope="row">Max Person</td>
+        <td>{{currentService.serviceMaxPerson}}</td>
+      </tr>
+      <tr *ngIf="currentService.serviceType.serviceTypeId === 1 || currentService.serviceType.serviceTypeId === 2">
+        <td scope="row">Standard Room</td>
+        <td>{{currentService.serviceStandardRoom}}</td>
+      </tr>
+      <tr *ngIf="currentService.serviceType.serviceTypeId === 1 || currentService.serviceType.serviceTypeId === 2">
+        <td scope="row">Description</td>
+        <td>{{currentService.serviceDescription}}</td>
+      </tr>
+      <tr *ngIf="currentService.serviceType.serviceTypeId === 1">
+        <td scope="row">Pool Area</td>
+        <td>{{currentService.servicePoolArea}}</td>
+      </tr>
+      <tr *ngIf="currentService.serviceType.serviceTypeId === 1 || currentService.serviceType.serviceTypeId === 2">
+        <td scope="row">Floor</td>
+        <td>{{currentService.serviceFloor}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="row text-center col-12">
+      <a [routerLink]="['/service/edit', currentService.serviceId]" role="button"
+         class="btn btn-outline-dark mr-2">Edit <span class="fas fa-pen"></span></a>
+      <a [routerLink]="['/service']" role="button" class="btn btn-outline-dark float-left">Back</a>
+    </div>
+  </div>
+</div>

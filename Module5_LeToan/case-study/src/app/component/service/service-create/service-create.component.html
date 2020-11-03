@@ -1,0 +1,135 @@
+<div class="container-fluid">
+  <div class="body position-relative" style="top: 160px">
+    <form [formGroup]="serviceCreateForm" (ngSubmit)="createNewService()">
+      <fieldset>
+        <legend class="text-center">Create New Service</legend>
+        <div class="form-group form-inline">
+          <label for="name" class="col-2 d-flex justify-content-start">Name</label>
+          <input type="text" class="col-8 form-control" id="name" formControlName="serviceName">
+          <p *ngIf="serviceCreateForm.get('serviceName').invalid" class="ml-2 required">(*)</p>
+        </div>
+        <div class="alert alert-warning m-0 p-0" role="alert"
+             *ngIf="serviceCreateForm.get('serviceName').invalid && serviceCreateForm.get('serviceName').dirty">
+          <strong>Name is required</strong>
+        </div>
+        <div class="form-group form-inline">
+          <label for="area" class="col-2 d-flex justify-content-start">Area</label>
+          <input type="text" class="col-8 form-control" id="area" autocomplete="off" formControlName="serviceArea">
+          <p *ngIf="serviceCreateForm.get('serviceArea').invalid" class="ml-2 required">(*)</p>
+        </div>
+        <div class="alert alert-warning m-0 p-0" role="alert"
+             *ngIf="serviceCreateForm.get('serviceArea').errors?.required && serviceCreateForm.get('serviceArea').touched">
+          <strong>Area is required</strong>
+        </div>
+
+        <div class="alert alert-warning m-0 p-0" role="alert"
+             *ngIf="serviceCreateForm.get('serviceArea').errors?.pattern && serviceCreateForm.get('serviceArea').touched">
+          <strong>Area must greater than 30</strong>
+        </div>
+        <div class="form-group form-inline">
+          <label for="cost" class="col-2 d-flex justify-content-start">Cost</label>
+          <input type="text" class="col-8 form-control" id="cost" formControlName="serviceCost">
+          <p *ngIf="serviceCreateForm.get('serviceCost').invalid" class="ml-2 required">(*)</p>
+        </div>
+        <div class="alert alert-warning m-0 p-0" role="alert"
+             *ngIf="serviceCreateForm.get('serviceCost').errors?.required && serviceCreateForm.get('serviceCost').touched">
+          <strong>Cost is required</strong>
+        </div>
+        <div class="alert alert-warning m-0 p-0" role="alert"
+             *ngIf="serviceCreateForm.get('serviceCost').errors?.pattern && serviceCreateForm.get('serviceCost').touched">
+          <strong>Cost must be positive number</strong>
+        </div>
+        <div class="form-group form-inline">
+          <label for="maxPerson" class="col-2 d-flex justify-content-start">Max Person</label>
+          <input type="text" class="col-8 form-control" id="maxPerson" formControlName="serviceMaxPerson">
+          <p *ngIf="serviceCreateForm.get('serviceMaxPerson').invalid" class="ml-2 required">(*)</p>
+        </div>
+        <div class="alert alert-warning m-0 p-0" role="alert"
+             *ngIf="serviceCreateForm.get('serviceMaxPerson').errors?.required && serviceCreateForm.get('serviceMaxPerson').touched">
+          <strong>Max Person is required</strong>
+        </div>
+        <div class="alert alert-warning m-0 p-0" role="alert"
+             *ngIf="serviceCreateForm.get('serviceMaxPerson').errors?.pattern && serviceCreateForm.get('serviceMaxPerson').touched">
+          <strong>Max person must be positive number</strong>
+        </div>
+        <div class="form-group form-inline">
+          <label for="rentType" class="col-2 d-flex justify-content-start">Rent Type</label>
+          <select class="col-8 form-control" id="rentType" formControlName="rentType">
+            <option value="" disabled>---Select---</option>
+            <option *ngFor="let rType of rentTypeList" [ngValue]="rType">{{rType.rentTypeName}}</option>
+          </select>
+          <div class="alert alert-warning m-0 p-0" role="alert"
+               *ngIf="serviceCreateForm.get('rentType').errors?.required && serviceCreateForm.get('rentType').touched">
+            <strong>Rent type is required</strong>
+          </div>
+        </div>
+        <div class="form-group form-inline">
+          <label for="serviceType" class="col-2 d-flex justify-content-start">Service Type</label>
+          <select class="col-8 form-control" id="serviceType" formControlName="serviceType"
+                  (ngModelChange)="changeService($event)">
+            <option value="" disabled>---Select---</option>
+            <option *ngFor="let sType of serviceTypeList" [ngValue]="sType">{{sType.serviceTypeName}}</option>
+          </select>
+          <div class="alert alert-warning m-0 p-0" role="alert"
+               *ngIf="serviceCreateForm.get('serviceType').errors?.required && serviceCreateForm.get('serviceType').touched">
+            <strong>Service type is required</strong>
+          </div>
+        </div>
+        <div [hidden]="!isHouse">
+          <div class="form-group form-inline">
+            <label for="standard" class="col-2 d-flex justify-content-start">Standard Room</label>
+            <input type="text" class="col-8 form-control" id="standard" formControlName="serviceStandardRoom">
+            <p *ngIf="serviceCreateForm.get('serviceStandardRoom').invalid" class="ml-2 required">(*)</p>
+          </div>
+          <div class="alert alert-warning m-0 p-0" role="alert"
+               *ngIf="serviceCreateForm.get('serviceStandardRoom').errors?.required && serviceCreateForm.get('serviceStandardRoom').touched">
+            <strong>Email is required</strong>
+          </div>
+          <div class="alert alert-warning m-0 p-0" role="alert"
+               *ngIf="serviceCreateForm.get('serviceStandardRoom').errors?.pattern && serviceCreateForm.get('serviceStandardRoom').touched">
+            <strong>Email follow format abc@abc.abc</strong>
+          </div>
+          <div class="form-group form-inline">
+            <label for="description" class="col-2 d-flex justify-content-start">Description</label>
+            <input type="text" class="col-8 form-control" id="description" formControlName="serviceDescription">
+            <p *ngIf="serviceCreateForm.get('serviceDescription').invalid" class="ml-2 required">(*)</p>
+          </div>
+          <div class="alert alert-warning m-0 p-0" role="alert"
+               *ngIf="serviceCreateForm.get('serviceDescription').errors?.required && serviceCreateForm.get('serviceDescription').touched">
+            <strong>Address is required</strong>
+          </div>
+          <div [hidden]="!isVilla">
+            <div class="form-group form-inline">
+              <label for="pool" class="col-2 d-flex justify-content-start">Pool Area</label>
+              <input type="text" class="col-8 form-control" id="pool" formControlName="servicePoolArea">
+              <p *ngIf="serviceCreateForm.get('serviceDescription').invalid" class="ml-2 required">(*)</p>
+            </div>
+            <div class="alert alert-warning m-0 p-0" role="alert"
+                 *ngIf="serviceCreateForm.get('servicePoolArea').errors?.required && serviceCreateForm.get('servicePoolArea').touched">
+              <strong>Address is required</strong>
+            </div>
+          </div>
+          <div class="form-group form-inline">
+            <label for="floor" class="col-2 d-flex justify-content-start">Floor</label>
+            <input type="text" class="col-8 form-control" id="floor" formControlName="serviceFloor">
+            <p *ngIf="serviceCreateForm.get('serviceDescription').invalid" class="ml-2 required">(*)</p>
+          </div>
+          <div class="alert alert-warning m-0 p-0" role="alert"
+               *ngIf="serviceCreateForm.get('serviceFloor').errors?.required && serviceCreateForm.get('serviceFloor').touched">
+            <strong>Address is required</strong>
+          </div>
+        </div>
+
+        <div class="form-group form-inline">
+          <div class="col-2"></div>
+          <div class="col-7 pl-0">
+            <input type="submit" value="Create" class="btn btn-outline-dark mr-2"
+                   [disabled]="serviceCreateForm.invalid">
+            <a class="btn btn-outline-dark" [routerLink]="['/service']">Back</a>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+

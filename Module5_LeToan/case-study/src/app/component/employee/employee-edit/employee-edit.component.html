@@ -1,0 +1,105 @@
+<div class="container-fluid">
+  <div class="body position-relative" style="top: 160px">
+    <form [formGroup]="employeeEditForm" (ngSubmit)="editEmployee()">
+      <fieldset>
+        <legend class="text-center">Update Employee Information</legend>
+        <div class="form-group form-inline">
+          <label for="name" class="col-2 d-flex justify-content-start">Name</label>
+          <input type="text" class="col-8 form-control" id="name" formControlName="employeeName">
+          <p *ngIf="employeeEditForm.get('employeeName').invalid" class="ml-2 required">(*)</p>
+        </div>
+        <div class="alert alert-warning m-0 p-0" role="alert" *ngIf="employeeEditForm.get('employeeName').invalid && employeeEditForm.get('employeeName').touched">
+          <strong>Name is required</strong>
+        </div>
+        <div class="form-group form-inline">
+          <label for="birthday" class="col-2 d-flex justify-content-start">Birthday</label>
+          <input type="text" class="col-8 form-control" id="birthday" autocomplete="off" formControlName="employeeBirthday">
+          <p *ngIf="employeeEditForm.get('employeeBirthday').invalid" class="ml-2 required">(*)</p>
+        </div>
+        <div class="alert alert-warning m-0 p-0" role="alert" *ngIf="employeeEditForm.get('employeeBirthday').errors?.required && employeeEditForm.get('employeeBirthday').touched">
+          <strong>Birthday is required</strong>
+        </div>
+        <div class="alert alert-warning m-0 p-0" role="alert" *ngIf="employeeEditForm.get('employeeBirthday').errors?.pattern && employeeEditForm.get('employeeBirthday').touched">
+          <strong>Birthday format dd/mm/yyyy</strong>
+        </div>
+        <div class="form-group form-inline">
+          <label for="idNumber" class="col-2 d-flex justify-content-start">Identify Number</label>
+          <input type="text" class="col-8 form-control" id="idNumber" formControlName="employeeIdCard">
+          <p *ngIf="employeeEditForm.get('employeeIdCard').invalid" class="ml-2 required">(*)</p>
+        </div>
+        <div class="alert alert-warning m-0 p-0" role="alert" *ngIf="employeeEditForm.get('employeeIdCard').errors?.required && employeeEditForm.get('employeeIdCard').touched">
+          <strong>Id Card is required</strong>
+        </div>
+        <div class="alert alert-warning m-0 p-0" role="alert" *ngIf="employeeEditForm.get('employeeIdCard').errors?.pattern && employeeEditForm.get('employeeIdCard').touched">
+          <strong>Id Card format XXXXXXXXX or XXXXXXXXXXXX(0-9)</strong>
+        </div>
+        <div class="form-group form-inline">
+          <label for="salary" class="col-2 d-flex justify-content-start">Salary</label>
+          <input type="text" class="col-8 form-control" id="salary" formControlName="employeeSalary">
+          <p *ngIf="employeeEditForm.get('employeeSalary').invalid" class="ml-2 required">(*)</p>
+        </div>
+        <div class="alert alert-warning m-0 p-0" role="alert" *ngIf="employeeEditForm.get('employeeSalary').errors?.required && employeeEditForm.get('employeeSalary').touched">
+          <strong>Salary is required</strong>
+        </div>
+        <div class="form-group form-inline">
+          <label for="phone" class="col-2 d-flex justify-content-start">Phone</label>
+          <input type="text" class="col-8 form-control" id="phone" formControlName="employeePhone">
+          <p *ngIf="employeeEditForm.get('employeePhone').invalid" class="ml-2 required">(*)</p>
+        </div>
+        <div class="alert alert-warning m-0 p-0" role="alert" *ngIf="employeeEditForm.get('employeePhone').errors?.required && employeeEditForm.get('employeePhone').touched">
+          <strong>Phone is required</strong>
+        </div>
+        <div class="alert alert-warning m-0 p-0" role="alert" *ngIf="employeeEditForm.get('employeePhone').errors?.pattern && employeeEditForm.get('employeePhone').touched">
+          <strong>Format is 090xxxxxxx, 091xxxxxxx, (84)+90xxxxxxx, (84)+91xxxxxxx</strong>
+        </div>
+        <div class="form-group form-inline">
+          <label for="email" class="col-2 d-flex justify-content-start">Email</label>
+          <input type="text" class="col-8 form-control" id="email" formControlName="employeeEmail">
+          <p *ngIf="employeeEditForm.get('employeeEmail').invalid" class="ml-2 required">(*)</p>
+        </div>
+        <div class="alert alert-warning m-0 p-0" role="alert" *ngIf="employeeEditForm.get('employeeEmail').errors?.required && employeeEditForm.get('employeeEmail').touched">
+          <strong>Email is required</strong>
+        </div>
+        <div class="alert alert-warning m-0 p-0" role="alert" *ngIf="employeeEditForm.get('employeeEmail').errors?.pattern && employeeEditForm.get('employeeEmail').touched">
+          <strong>Email follow format abc@abc.abc</strong>
+        </div>
+        <div class="form-group form-inline">
+          <label for="address" class="col-2 d-flex justify-content-start">Address</label>
+          <input type="text" class="col-8 form-control" id="address" formControlName="employeeAddress">
+          <p *ngIf="employeeEditForm.get('employeeAddress').invalid" class="ml-2 required">(*)</p>
+        </div>
+        <div class="alert alert-warning m-0 p-0" role="alert" *ngIf="employeeEditForm.get('employeeAddress').errors?.required && employeeEditForm.get('employeeAddress').touched">
+          <strong>Address is required</strong>
+        </div>
+        <div class="form-group form-inline">
+          <label for="division" class="col-2 d-flex justify-content-start">Division</label>
+          <select class="col-8 form-control" id="division" formControlName="division">
+            <option *ngFor="let division of divisionList" [ngValue]="division">{{division.divisionName}}</option>
+          </select>
+        </div>
+        <div class="form-group form-inline">
+          <label for="position" class="col-2 d-flex justify-content-start">Position</label>
+          <select class="col-8 form-control" id="position" formControlName="position">
+            <option *ngFor="let position of positionList" [ngValue]="position">{{position.positionName}}</option>
+          </select>
+        </div>
+        <div class="form-group form-inline">
+          <label for="degree" class="col-2 d-flex justify-content-start">Education Degree</label>
+          <select class="col-8 form-control" id="degree" formControlName="educationDegree">
+            <option *ngFor="let degree of educationDegreeList" [ngValue]="degree">{{degree.educationDegreeName}}</option>
+          </select>
+        </div>
+
+
+        <div class="form-group form-inline">
+          <div class="col-2"></div>
+          <div class="col-7 pl-0">
+            <input type="submit" value="Update" class="btn btn-outline-dark mr-2" [disabled]="employeeEditForm.invalid">
+            <a class="btn btn-outline-dark" [routerLink]="['/employee']">Back</a>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+

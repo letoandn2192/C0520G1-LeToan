@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CustomerType } from '../../interface/CustomerType';
-import {Customer} from '../../interface/Customer';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +12,7 @@ export class CustomerTypeService {
   constructor(private http: HttpClient) { }
   getCustomerTypeList(count = 20): Observable<CustomerType[]> {
     return this.http.get<CustomerType[]>(this.API_URL).pipe(
-      map(response => response.filter((post, i) => i < count))
+      map(response => response.filter((customerType, i) => i < count))
     );
   }
 }

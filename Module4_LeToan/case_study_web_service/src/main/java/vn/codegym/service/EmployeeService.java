@@ -7,13 +7,13 @@ import vn.codegym.model.Employee;
 public interface EmployeeService {
     Page<Employee> findAll(Pageable pageable);
 
-    Page<Employee> findByIdAndName(String input, Pageable pageable);
+//    Page<Employee> findByIdAndName(String input, Pageable pageable);
 
     Iterable<Employee> findAll();
 
-    Employee findById(String id);
+    Employee findById(long id);
 
     void save(Employee employee);
 
-    void delete(String id);
+    void delete(long id);
 }

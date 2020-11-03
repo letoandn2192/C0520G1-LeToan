@@ -7,13 +7,13 @@ import vn.codegym.model.Services;
 public interface ServicesService {
     Page<Services> findAll(Pageable pageable);
 
-    Page<Services> findByIdAndName(String input, Pageable pageable);
+//    Page<Services> findByIdAndName(String input, Pageable pageable);
 
     Iterable<Services> findAll();
 
-    Services findById(String id);
+    Services findById(long id);
 
     void save(Services services);
 
-    void deleteById(String id);
+    void deleteById(long id);
 }

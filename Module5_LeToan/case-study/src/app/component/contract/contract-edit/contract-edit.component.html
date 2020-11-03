@@ -1,0 +1,82 @@
+<div class="container-fluid">
+  <div class="body position-relative" style="top: 160px">
+    <form [formGroup]="contractEditForm" (ngSubmit)="updateContract()">
+      <fieldset>
+        <legend class="text-center">Update Contract Information</legend>
+          <div class="form-group form-inline">
+            <label for="sDate" class="col-2 d-flex justify-content-start">Start Date</label>
+            <input type="text" class="col-8 form-control" id="sDate" autocomplete="off" formControlName="contractStartDate">
+            <p *ngIf="contractEditForm.get('contractStartDate').invalid" class="ml-2 required">(*)</p>
+          </div>
+          <div class="alert alert-warning m-0 p-0" role="alert" *ngIf="contractEditForm.get('contractStartDate').invalid && contractEditForm.get('contractStartDate').touched">
+            <strong>Start date is required</strong>
+          </div>
+          <div class="alert alert-warning m-0 p-0" role="alert" *ngIf="contractEditForm.get('contractStartDate').errors?.pattern && contractEditForm.get('contractStartDate').touched">
+            <strong>Date format dd/mm/yyyy</strong>
+          </div>
+          <div class="form-group form-inline">
+            <label for="eDate" class="col-2 d-flex justify-content-start">End Date</label>
+            <input type="text" class="col-8 form-control" id="eDate" autocomplete="off" formControlName="contractEndDate">
+            <p *ngIf="contractEditForm.get('contractEndDate').invalid" class="ml-2 required">(*)</p>
+          </div>
+          <div class="alert alert-warning m-0 p-0" role="alert" *ngIf="contractEditForm.get('contractEndDate').errors?.required && contractEditForm.get('contractEndDate').touched">
+            <strong>End date is required</strong>
+          </div>
+          <div class="alert alert-warning m-0 p-0" role="alert" *ngIf="contractEditForm.get('contractEndDate').errors?.pattern && contractEditForm.get('contractEndDate').touched">
+            <strong>Date format dd/mm/yyyy</strong>
+          </div>
+
+          <div class="form-group form-inline">
+            <label for="deposit" class="col-2 d-flex justify-content-start">Deposit</label>
+            <input type="text" class="col-8 form-control" id="deposit" formControlName="contractDeposit">
+            <p *ngIf="contractEditForm.get('contractDeposit').invalid" class="ml-2 required">(*)</p>
+          </div>
+          <div class="alert alert-warning m-0 p-0" role="alert" *ngIf="contractEditForm.get('contractDeposit').errors?.required && contractEditForm.get('contractDeposit').touched">
+            <strong>Deposit is required</strong>
+          </div>
+          <div class="alert alert-warning m-0 p-0" role="alert" *ngIf="contractEditForm.get('contractDeposit').errors?.pattern && contractEditForm.get('contractDeposit').touched">
+            <strong>...</strong>
+          </div>
+          <div class="form-group form-inline">
+            <label for="totalMoney" class="col-2 d-flex justify-content-start">Total Money</label>
+            <input type="text" class="col-8 form-control" id="totalMoney" formControlName="contractTotalMoney">
+            <p *ngIf="contractEditForm.get('contractTotalMoney').invalid" class="ml-2 required">(*)</p>
+          </div>
+          <div class="alert alert-warning m-0 p-0" role="alert" *ngIf="contractEditForm.get('contractTotalMoney').errors?.required && contractEditForm.get('contractTotalMoney').touched">
+            <strong>Total money is required</strong>
+          </div>
+          <div class="alert alert-warning m-0 p-0" role="alert" *ngIf="contractEditForm.get('contractTotalMoney').errors?.pattern && contractEditForm.get('contractTotalMoney').touched">
+            <strong>...</strong>
+          </div>
+
+        <div class="form-group form-inline">
+          <label for="customer" class="col-2 d-flex justify-content-start">Customer</label>
+          <select class="col-8 form-control" id="customer" formControlName="customer">
+            <option *ngFor="let customer of customerList" [ngValue]="customer">{{customer.customerId | IdConvert: 'KH'}} - {{customer.customerName}}</option>
+          </select>
+        </div>
+        <div class="form-group form-inline">
+          <label for="employee" class="col-2 d-flex justify-content-start">Employee</label>
+          <select class="col-8 form-control" id="employee" formControlName="employee">
+            <option *ngFor="let employee of employeeList" [ngValue]="employee">{{employee.employeeId | IdConvert: 'NV'}} - {{employee.employeeName}}</option>
+          </select>
+        </div>
+        <div class="form-group form-inline">
+          <label for="service" class="col-2 d-flex justify-content-start">Service</label>
+          <select class="col-8 form-control" id="service" formControlName="service">
+            <option *ngFor="let service of serviceList" [ngValue]="service">{{service.serviceId | IdConvert: 'DV'}} - {{service.serviceName}}</option>
+          </select>
+        </div>
+
+        <div class="form-group form-inline">
+          <div class="col-2"></div>
+          <div class="col-7 pl-0">
+            <input type="submit" value="Update" class="btn btn-outline-dark mr-2" [disabled]="contractEditForm.invalid">
+            <a class="btn btn-outline-dark" [routerLink]="['/contract']">Back</a>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+

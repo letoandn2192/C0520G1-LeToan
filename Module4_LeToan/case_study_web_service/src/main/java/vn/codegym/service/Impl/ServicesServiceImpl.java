@@ -18,10 +18,10 @@ public class ServicesServiceImpl implements ServicesService {
         return serviceRepository.findAll(pageable);
     }
 
-    @Override
-    public Page<Services> findByIdAndName(String input, Pageable pageable) {
-        return serviceRepository.findServiceByServiceIdContainingOrServiceNameContaining(input, input, pageable);
-    }
+//    @Override
+//    public Page<Services> findByIdAndName(String input, Pageable pageable) {
+//        return serviceRepository.findServiceByServiceIdContainingOrServiceNameContaining(input, input, pageable);
+//    }
 
     @Override
     public Iterable<Services> findAll() {
@@ -29,7 +29,7 @@ public class ServicesServiceImpl implements ServicesService {
     }
 
     @Override
-    public Services findById(String id) {
+    public Services findById(long id) {
         return serviceRepository.findById(id).orElse(null);
     }
 
@@ -39,7 +39,7 @@ public class ServicesServiceImpl implements ServicesService {
     }
 
     @Override
-    public void deleteById(String id) {
+    public void deleteById(long id) {
         serviceRepository.deleteById(id);
     }
 }

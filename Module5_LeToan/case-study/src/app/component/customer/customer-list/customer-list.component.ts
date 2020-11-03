@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Customer} from '../../../interface/Customer';
-import {CustomerType} from '../../../interface/CustomerType';
 import {CustomerService} from '../../../service/customer/customer.service';
-import {CustomerTypeService} from '../../../service/customerType/customer-type.service';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-customer-list',
@@ -11,7 +10,11 @@ import {CustomerTypeService} from '../../../service/customerType/customer-type.s
 })
 export class CustomerListComponent implements OnInit {
   customerList: Customer[] = [];
-  constructor(private customerService: CustomerService) {
+  page = 1;
+  filter = '';
+  key = 'customerId';
+  reverse = false;
+  constructor(private customerService: CustomerService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -19,9 +22,14 @@ export class CustomerListComponent implements OnInit {
   }
 
   deleteCustomer(i: number) {
-    // const post = this.postList[i];
     this.customerService.deleteCustomer(i).subscribe(data => {
-      console.log('successful!!!');
+      this.router.navigate(['/customer']);
     }, error => console.log('error'));
+  }
+
+  sort(key){
+    console.log(this.customerList);
+    this.key = key;
+    this.reverse = !this.reverse;
   }
 }
